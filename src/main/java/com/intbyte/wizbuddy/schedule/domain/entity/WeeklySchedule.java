@@ -13,8 +13,8 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity(name = "weeklyschedule")
-@Table(name = "weeklyschedule")
+@Entity(name = "weeklySchedule")
+@Table(name = "weeklySchedule")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -23,19 +23,19 @@ public class WeeklySchedule {
 
     @Id
     @Column
-    private int ScheduleCode;
+    private int scheduleCode;
 
     @Column
-    private boolean ScheduleFlag;
+    private boolean scheduleFlag;
 
     @Column
-    private Date ScheduleStartDate;
+    private Date scheduleStartDate;
 
     @Column
-    private LocalDateTime CreatedAt;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime UpdatedAt;
+    private LocalDateTime updatedAt;
 
 
 

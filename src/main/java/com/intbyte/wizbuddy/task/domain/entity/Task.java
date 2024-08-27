@@ -11,8 +11,8 @@ import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table
+@Entity(name = "task")
+@Table(name = "task")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -21,20 +21,20 @@ public class Task {
 
     @Id
     @Column
-    private int TaskCode;
+    private int taskCode;
 
     @Column
-    private String TaskContents;
+    private String taskContents;
 
     @Column
-    private boolean TaskFlag;
+    private boolean taskFlag;
 
     @Column
-    private boolean TaskFixedState;
+    private boolean taskFixedState;
 
     @Column
-    private LocalDateTime CreatedAt;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime UpdatedAt;
+    private LocalDateTime updatedAt;
 }
