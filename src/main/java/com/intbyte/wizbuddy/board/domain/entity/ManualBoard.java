@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import java.time.LocalDateTime;
 
-@Entity(name = "manualboard")
-@Table(name = "manualboard")
+@Entity(name = "manualBoard")
+@Table(name = "manualBoard")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,28 +16,27 @@ import java.time.LocalDateTime;
 public class ManualBoard {
     @Id
     @Column
-    private int ManualCode;
+    private int manualCode;
 
     @Column
-    private String ManualTitle;
+    private String manualTitle;
 
     @Column
-    private String ManualContents;
+    private String manualContents;
 
     @Column
-    private boolean ManualFlag;
+    private boolean manualFlag;
 
     @Column
-    private String ImageURL;
+    private String imageURL;
 
     @Column
-    private LocalDateTime CreatedAt;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime UpdatedAt;
+    private LocalDateTime updatedAt;
 
-    // 외래키 어케하죠?
     @Column
-    private int ShopCode;
+    private int shopCode;
 
 }
