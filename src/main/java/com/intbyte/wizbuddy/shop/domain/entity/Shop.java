@@ -37,7 +37,7 @@ public class Shop {
     public LocalTime shopOpenTime;
 
     @Column
-    public String BusinessNum;
+    public String businessNum;
 
     @Column
     public LocalDateTime createdAt;
