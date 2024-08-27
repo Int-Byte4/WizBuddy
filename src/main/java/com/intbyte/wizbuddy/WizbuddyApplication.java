@@ -1,4 +1,4 @@
-package com.wizbuddy;
+package com.intbyte.wizbuddy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
