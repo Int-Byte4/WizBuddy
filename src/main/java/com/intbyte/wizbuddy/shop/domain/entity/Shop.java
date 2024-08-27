@@ -22,30 +22,30 @@ public class Shop {
 
     @Id
     @Column
-    public int shopCode;
+    private int shopCode;
 
     @Column
-    public String shopName;
+    private String shopName;
 
     @Column
-    public String shopLocation;
+    private String shopLocation;
 
     @Column
-    public Boolean shopFlag;
+    private Boolean shopFlag;
 
     @Column
-    public LocalTime shopOpenTime;
+    private LocalTime shopOpenTime;
 
     @Column
-    public String businessNum;
+    private String businessNum;
 
     @Column
-    public LocalDateTime createdAt;
+    private LocalDateTime createdAt;
 
     @Column
-    public LocalDateTime updatedAt;
+    private LocalDateTime updatedAt;
 
     // employeeCode -> fk
     @Column
-    public Integer employerCode;
+    private Integer employerCode;
 }
