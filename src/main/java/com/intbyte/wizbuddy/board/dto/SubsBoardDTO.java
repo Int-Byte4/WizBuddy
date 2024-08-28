@@ -1,13 +1,10 @@
 package com.intbyte.wizbuddy.board.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -19,5 +16,6 @@ public class SubsBoardDTO {
     private String imageURL;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private int employeeWorkingPartCode;
     private int shopCode;
 }
