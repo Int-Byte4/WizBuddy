@@ -2,6 +2,29 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.intbyte.wizbuddy.mapper.SubsBoardMapper">
+    <resultMap id="SubsBoardResultMap" type="com.intbyte.wizbuddy.board.dto.SubsBoardDTO">
+        <id property="subsCode" column="SUBSCODE"/>
+        <result property="subsTitle" column="SUBSTITLE"/>
+        <result property="subsContents" column="SUBSCONTENTS"/>
+        <result property="createdAt" column="CREATEDAT"/>
+        <result property="updatedAt" column="UPDATEDAT"/>
+        <result property="subsFlag" column="SUBSFLAG"/>
+        <result property="employeeWorkingPartCode" column="WORKINGPARTCODE"/>
+        <result property="shopCode" column="SHOPCODE"/>
+    </resultMap>
+
+    <select id="selectAllSubsBoard" resultMap="SubsBoardResultMap">
+        SELECT
+        SUBSCODE
+        , SUBSTITLE
+        , SUBSCONTENT
+        , CREATEDAT
+        , UPDATEDAT
+        , SUBSFLAG
+        , WORKINGPARTCODEㅁ
+        , SHOPCODE
+        FROM SUBSTITUATIONBOARD
+    </select>
 
 </mapper>
