@@ -26,16 +26,13 @@ public class SubsBoard {
     private String subsContents;
 
     @Column
-    private boolean subsFlag;
-
-    @Column
-    private String imageURL;
-
-    @Column
     private LocalDateTime createdAt;
 
     @Column
     private LocalDateTime updatedAt;
+
+    @Column
+    private boolean subsFlag;
 
     @Column
     private int employeeWorkingPartCode;
