@@ -1,4 +1,67 @@
 package com.intbyte.wizbuddy.task.service;
 
+import com.intbyte.wizbuddy.mapper.TaskMapper;
+import com.intbyte.wizbuddy.task.domain.entity.Task;
+import com.intbyte.wizbuddy.task.dto.TaskDTO;
+import com.intbyte.wizbuddy.task.repository.TaskRepository;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
 public class TaskService {
+
+    private final TaskRepository taskRepository; // jpa
+    private final TaskMapper mapper;        // mybatis
+    private final ModelMapper modelMapper; // dto <-> entity 변환
+
+    @Autowired
+    public TaskService(TaskRepository taskRepository, TaskMapper mapper, ModelMapper modelMapper) {
+        this.taskRepository = taskRepository;
+        this.mapper = mapper;
+        this.modelMapper = modelMapper;
+    }
+
+    // task는 mapper 사용하기
+    // checklist는 mapper 사용 x로 진행.
+
+    // 1. 업무 등록을 해야함. -> 사용자에게서 TaskDTO가 넘어올거임. -> 리턴도 DTO로 해야함. -> 등록은 void?
+    // void로 하지말고 dto에 등록된 업무를 보내주는게 맞을듯? dto 리턴이 맞는거같다.
+    @Transactional
+    public TaskDTO insertTask(TaskDTO taskDTO) {
+        Task insertTask = new Task(taskDTO.getTaskCode(), taskDTO.getTaskContents(), taskDTO.isTaskFlag()
+                            , taskDTO.isTaskFixedState(), taskDTO.getCreatedAt(), taskDTO.getUpdatedAt());
+
+        //        modelMapper.map(taskDTO, insertTask);
+        //        Task insertTask1 = modelMapper.map(taskDTO, Task.class); //ModelMapper는 필드명이 같다면 자동으로 매핑해주며, 복잡한 객체 매핑도 가능합니다.
+
+        taskRepository.save(insertTask);
+
+        return modelMapper.map(insertTask, TaskDTO.class);
+    }
+
+    // 2. 업무 조회 (id로 task 조회, 모든 업무 조회)
+    // 2-1. id로 1개의 task 조회
+    @Transactional
+    public TaskDTO findTaskById(int taskCode){ // by mybatis
+
+        Task findTask = mapper.findTaskById(taskCode);
+        return modelMapper.map(findTask, TaskDTO.class);
+}
+
+    // 2-2. 전체 task 조회
+    @Transactional
+    public List<TaskDTO> findAllTask(){
+
+        List<Task> findTasks = mapper.findAllTask();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }
