@@ -6,13 +6,13 @@ import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
+import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -58,6 +58,21 @@ public class ShopService {
         shop.modify(modifyShopInfo);
         shopRepository.save(shop);
     }
+
+    @Transactional
+    public void deleteShop(DeleteShopInfo deleteShopInfo) {
+        int employerCode = deleteShopInfo.getEmployerCode();
+        int shopCode = deleteShopInfo.getShopCode();
+
+        Employer employer = employerRepository.findById(employerCode).orElseThrow(EmployerNotFoundException::new);
+        Shop shop = shopRepository.findById(shopCode).orElseThrow(ShopNotFoundException::new);
+
+        validateRequest(employer, shop);
+
+        shop.removeRequest(deleteShopInfo);
+        shopRepository.save(shop);
+    }
+
 
     private void validateRequest(Employer employer, Shop shop) {
         if (employer.getEmployerCode() != shop.getEmployerCode()) {

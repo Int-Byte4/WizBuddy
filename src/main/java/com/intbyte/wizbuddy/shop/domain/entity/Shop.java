@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.shop.domain.entity;
 
+import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -53,5 +54,11 @@ public class Shop {
         this.shopLocation = editShopInfo.getShopLocation();
         this.shopOpenTime = editShopInfo.getShopOpenTime();
         this.updatedAt = editShopInfo.getUpdatedAt();
+    }
+
+    public void removeRequest(@Valid DeleteShopInfo deleteShopInfo) {
+        this.shopCode = deleteShopInfo.getShopCode();
+        this.employerCode = deleteShopInfo.getEmployerCode();
+        this.shopFlag = deleteShopInfo.isShopFlag();
     }
 }
