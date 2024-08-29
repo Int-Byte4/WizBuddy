@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.exception.EmailDuplicateException;
+import com.intbyte.wizbuddy.exception.user.EmailDuplicateException;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
