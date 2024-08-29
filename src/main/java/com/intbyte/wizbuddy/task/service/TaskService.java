@@ -64,4 +64,19 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
+    // 3. 업무 수정(id값에 해당하는 업무 수정)
+    @Transactional
+    public TaskDTO modifyTask(TaskDTO taskDTO){
+
+        int taskCode = taskDTO.getTaskCode();
+        Task task = taskRepository.findById(taskCode).orElseThrow(IllegalArgumentException::new);
+        // task를 taskdto로 수정
+
+        modelMapper.map(taskDTO, task); // task를 taskdto로 수정
+
+        Task updatedTask = taskRepository.save(task);
+
+        return modelMapper.map(updatedTask, TaskDTO.class);
+    }
+
 }
