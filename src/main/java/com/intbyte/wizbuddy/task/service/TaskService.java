@@ -79,4 +79,27 @@ public class TaskService {
         return modelMapper.map(updatedTask, TaskDTO.class);
     }
 
+    // 4. 업무 삭제 (id값에 해당하는 task 삭제)
+    @Transactional
+    public TaskDTO deleteTask(TaskDTO taskDTO){
+
+        int taskCode = taskDTO.getTaskCode();
+        Task deleteTask = taskRepository.findById(taskCode).orElseThrow(IllegalArgumentException::new);
+
+        // 1. taskDTO로 바꿔주기
+        TaskDTO deletedTaskDTO = modelMapper.map(deleteTask, TaskDTO.class);
+        deletedTaskDTO.setTaskFlag(false);
+
+        // 2. task로 바꿔주기
+        Task deleteTask2 = new Task(deletedTaskDTO.getTaskCode(), deletedTaskDTO.getTaskContents(), deletedTaskDTO.isTaskFlag(),
+                deletedTaskDTO.isTaskFixedState(), deletedTaskDTO.getCreatedAt(), deletedTaskDTO.getUpdatedAt());
+
+        taskRepository.save(deleteTask2);
+
+        return deletedTaskDTO;
+    }
+
+    // 일단 반환값과 파라미터값을 어떻게 할지 안정한거같아서 모두 통일함. (return = TaskDTO / parameter = TaskDTO)
+    // ------------
+    // 5. 체크리스트
 }
