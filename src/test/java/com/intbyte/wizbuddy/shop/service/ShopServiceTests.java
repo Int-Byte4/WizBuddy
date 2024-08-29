@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.shop.service;
 
 import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
+import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
@@ -78,6 +79,23 @@ class ShopServiceTests {
         //then
         List<Shop> newShops = shopRepository.findAll();
         assertEquals(newShops.get(0).getShopName(), editShopInfo.getShopName());
+
+        newShops.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매장 삭제 성공")
+    @Transactional
+    void testDeleteShopSuccess() {
+        //given
+        DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, 1, false);
+
+        //when
+        shopService.deleteShop(deleteShopInfo);
+
+        //then
+        List<Shop> newShops = shopRepository.findAll();
+        assertEquals(false, newShops.get(deleteShopInfo.getShopCode() - 1).getShopFlag());
 
         newShops.forEach(System.out::println);
     }
