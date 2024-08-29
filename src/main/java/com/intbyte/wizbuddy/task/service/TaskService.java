@@ -37,7 +37,7 @@ public class TaskService {
                 .taskFlag(true)
                 .taskFixedState(taskInfo.isTaskFixedState())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(taskInfo.getUpdatedAt())
+                .updatedAt(LocalDateTime.now())
                 .build();
 
         taskRepository.save(task);
