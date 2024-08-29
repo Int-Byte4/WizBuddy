@@ -1,9 +1,8 @@
 package com.intbyte.wizbuddy.task.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "task_code")
     private int taskCode;
 
@@ -34,4 +34,11 @@ public class Task {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public void modify(@Valid EditTaskInfo editTaskInfo){
+        this.taskContents = editTaskInfo.getTaskContents();
+        this.taskFlag = editTaskInfo.isTaskFlag();
+        this.taskFixedState = editTaskInfo.isTaskFixedState();
+        this.updatedAt = LocalDateTime.now();
+    }
 }
