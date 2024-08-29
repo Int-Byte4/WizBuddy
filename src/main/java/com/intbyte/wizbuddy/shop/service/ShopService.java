@@ -12,6 +12,7 @@ import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +44,7 @@ public class ShopService {
                 .updatedAt(LocalDateTime.now())
                 .employerCode(shopInfo.getEmployerCode())
                 .build();
-
+        
         shopRepository.save(shop);
     }
 

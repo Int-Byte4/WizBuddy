@@ -43,6 +43,8 @@ class ShopServiceTests {
         List<Shop> newShops = shopRepository.findAll();
         Shop shop = newShops.get(newShops.size() - 1);
 
+        newShops.forEach(System.out::println);
+
         Assertions.assertThat(shop.getBusinessNum()).isEqualTo(shopDTO.getBusinessNum());
         newShops.forEach(System.out::println);
     }
