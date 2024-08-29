@@ -25,23 +25,19 @@ public class ShopService {
     public void registerShop(ShopDTO shopInfo) {
 //        employerRepository.findById(employerCode).orElseThrow(EmployerNotFoundException::new);
 
-        String shopName = shopInfo.getShopName();
-        String shopLocation = shopInfo.getShopLocation();
-        LocalTime shopOpenTime = shopInfo.getShopOpenTime();
         String businessNum = shopInfo.getBusinessNum();
-        int employerCode = shopInfo.getEmployerCode();
 
         if (shopMapper.findByBusinessNum(businessNum) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
-                .shopName(shopName)
-                .shopLocation(shopLocation)
+                .shopName(shopInfo.getShopName())
+                .shopLocation(shopInfo.getShopLocation())
                 .shopFlag(true)
-                .shopOpenTime(shopOpenTime)
+                .shopOpenTime(shopInfo.getShopOpenTime())
                 .businessNum(businessNum)
-                .employerCode(employerCode)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
+                .employerCode(shopInfo.getEmployerCode())
                 .build();
 
         shopRepository.save(shop);
