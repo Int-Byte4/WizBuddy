@@ -7,8 +7,7 @@ import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @ToString
 public class ShopDTO {
     private int shopCode;
@@ -19,5 +18,5 @@ public class ShopDTO {
     private String businessNum;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Integer employerCode;
+    private int employerCode;
 }
