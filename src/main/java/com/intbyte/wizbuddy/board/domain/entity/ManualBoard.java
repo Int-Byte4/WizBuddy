@@ -1,42 +1,45 @@
 package com.intbyte.wizbuddy.board.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
 @Entity(name = "manualBoard")
 @Table(name = "manual_board")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class ManualBoard {
     @Id
     @Column
-    private int manualCode;
+    private int manual_code;
 
     @Column
-    private String manualTitle;
+    private String manual_title;
 
     @Column
-    private String manualContents;
+    private String manual_contents;
 
     @Column
-    private boolean manualFlag;
+    private boolean manual_flag;
 
     @Column
-    private String imageURL;
+    private String image_url;
 
     @Column
-    private LocalDateTime createdAt;
+    private LocalDateTime created_at;
 
     @Column
-    private LocalDateTime updatedAt;
+    private LocalDateTime updated_at;
 
     @Column
-    private int shopCode;
+    private int shop_code;
+
+    @Column
+    private int user_code;
 
 }
