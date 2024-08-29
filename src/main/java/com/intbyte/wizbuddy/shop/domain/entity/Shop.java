@@ -1,13 +1,10 @@
 package com.intbyte.wizbuddy.shop.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -15,37 +12,46 @@ import java.time.LocalTime;
 @Entity(name = "shop")
 @Table(name = "shop")
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Shop {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "shop_code")
     private int shopCode;
 
-    @Column
+    @Column(name = "shop_name")
     private String shopName;
 
-    @Column
+    @Column(name = "shop_location")
     private String shopLocation;
 
-    @Column
+    @Column(name = "shop_flag")
+    @ColumnDefault("true")
     private Boolean shopFlag;
 
-    @Column
+    @Column(name = "shop_open_time")
     private LocalTime shopOpenTime;
 
-    @Column
+    @Column(name = "business_num")
     private String businessNum;
 
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // employeeCode -> fk
-    @Column
+    @Column(name = "employer_code")
     private Integer employerCode;
+
+    public void modify(@Valid EditShopInfo editShopInfo) {
+        this.shopName = editShopInfo.getShopName();
+        this.shopLocation = editShopInfo.getShopLocation();
+        this.shopOpenTime = editShopInfo.getShopOpenTime();
+        this.updatedAt = editShopInfo.getUpdatedAt();
+    }
 }
