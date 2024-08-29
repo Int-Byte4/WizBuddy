@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @ToString
+@Builder
 @EqualsAndHashCode
 public class Task {
 
