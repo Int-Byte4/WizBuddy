@@ -10,12 +10,13 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class ManualBoardDTO {
-    private int manualCode;
-    private String manualTitle;
-    private String manualContents;
-    private boolean manualFlag;
-    private String imageURL;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private int shopCode;
+    private int manual_code;
+    private String manual_title;
+    private String manual_contents;
+    private boolean manual_flag;
+    private String image_url;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
+    private int shop_code;
+    private int user_code;
 }

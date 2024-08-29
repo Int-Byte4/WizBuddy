@@ -9,7 +9,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "subsBoard")
-@Table(name = "substitutionBoard")
+@Table(name = "substitution_board")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class SubsBoard {
     private String subsTitle;
 
     @Column
-    private String subsContents;
+    private String subsContent;
 
     @Column
     private LocalDateTime createdAt;

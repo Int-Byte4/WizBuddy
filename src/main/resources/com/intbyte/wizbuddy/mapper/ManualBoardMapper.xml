@@ -2,6 +2,18 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
-
+<mapper namespace="com.intbyte.wizbuddy.mapper.ManualBoardMapper">
+    <resultMap id="manualBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.ManualBoard">
+        <id property="manualCode" column="manual_code"/>
+        <result property="manualTitle" column="manual_title"/>
+        <result property="manualContents" column="manual_contents"/>
+        <result property="manualFlag" column="manual_flag"/>
+        <result property="imageURL" column="image_url"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="shopCode" column="shop_code"/>
+        <association property="users" javaType="com.intbyte.wizbuddy.user.dto.UserDTO">
+            <id property="userCode" column="user_code"/>
+        </association>
+    </resultMap>
 </mapper>
