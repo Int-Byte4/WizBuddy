@@ -4,37 +4,34 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
-
-@Entity(name = "task")
+@Entity
 @Table(name = "task")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @ToString
+@EqualsAndHashCode
 public class Task {
 
     @Id
-    @Column
+    @Column(name = "task_code")
     private int taskCode;
 
-    @Column
+    @Column(name = "task_contents")
     private String taskContents;
 
-    @Column
+    @Column(name = "task_flag")
     private boolean taskFlag;
 
-    @Column
+    @Column(name = "task_fixed_state")
     private boolean taskFixedState;
 
-    @Column
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
