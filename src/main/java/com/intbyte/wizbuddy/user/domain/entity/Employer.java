@@ -1,9 +1,6 @@
 package com.intbyte.wizbuddy.user.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,30 +15,31 @@ import java.time.LocalDateTime;
 public class Employer {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employer_code")
     private int employerCode;
 
-    @Column
+    @Column(name = "employer_name")
     private String employerName;
 
-    @Column
+    @Column(name = "employer_email")
     private String employerEmail;
 
-    @Column
+    @Column(name = "employer_password")
     private String employerPassword;
 
-    @Column
+    @Column(name = "employer_phone")
     private String employerPhone;
 
-    @Column
+    @Column(name = "employer_flag")
     private boolean employerFlag;
 
-    @Column
+    @Column(name = "employer_black_state")
     private boolean employerBlackState;
 
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 }
