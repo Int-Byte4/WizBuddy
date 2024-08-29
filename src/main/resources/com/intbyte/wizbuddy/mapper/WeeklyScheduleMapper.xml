@@ -2,6 +2,26 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
+<mapper namespace="com.intbyte.wizbuddy.mapper.WeeklyScheduleMapper">
+    <resultMap id="scheduleResultMap" type="com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO">
+        <id property="scheduleCode" column="schedule_code"/>
+        <result property="scheduleFlag" column="schedule_flag"/>
+        <result property="scheduleStartDate" column="schedule_start_date"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
 
+    <select id="selectAllSchedules" resultMap="scheduleResultMap">
+        SELECT
+               schedule_code
+             , schedule_flag
+             , schedule_start_date
+             , created_at
+             , updated_at
+          FROM weekly_schedule
+    </select>
+
+<!--    <select id="selectEmployeeSchedules" resultMap="scheduleResultMap">-->
+<!--        -->
+<!--    </select>-->
 </mapper>
