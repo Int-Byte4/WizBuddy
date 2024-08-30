@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.UserAndEmployerMapper">
+    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.domain.entity.User">
+        <id property="userCode" column="user_code"/>
+        <result property="userType" column="user_type"/>
+
+        <association property="employer" javaType="com.intbyte.wizbuddy.user.domain.entity.Employer">
+            <id property="employerCode" column="employer_code"/>
+            <result property="employerName" column="employer_name"/>
+            <result property="employerEmail" column="employer_email"/>
+            <result property="employerPassword" column="employer_password"/>
+            <result property="employerPhone" column="employer_phone"/>
+            <result property="employerFlag" column="employer_flag"/>
+            <result property="employerBlackState" column="employer_black_state"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="updatedAt" column="updated_at"/>
+        </association>
+    </resultMap>
+
+    <select id="findByEmployerCode" resultType="int" parameterType="int">
+        SELECT u.user_code
+        FROM users u
+        JOIN employer e
+        ON e.employer_code = u.user_code
+        WHERE e.employer_code = #{ employerCode }
+    </select>
+
+</mapper>

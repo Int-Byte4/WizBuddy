@@ -11,8 +11,11 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditShopInfo {
+    private int shopCode;
     private String shopName;
     private String shopLocation;
     private LocalTime shopOpenTime;
     private LocalDateTime updatedAt;
+    private int employerCode;
+
 }
