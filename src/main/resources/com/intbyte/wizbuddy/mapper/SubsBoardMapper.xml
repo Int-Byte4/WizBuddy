@@ -27,5 +27,20 @@
         FROM SUBSTITUTION_BOARD S
     </select>
 
+    <select id="selectSubsBoardById" resultMap="SubsBoardResultMap" parameterType="_int">
+        SELECT
+        S.SUBS_CODE
+        , S.SUBS_TITLE
+        , S.SUBS_CONTENT
+        , S.CREATED_AT
+        , S.UPDATED_AT
+        , S.SUBS_FLAG
+        , S.WORKING_PART_CODE
+        , S.SHOP_CODE
+        FROM SUBSTITUTION_BOARD S
+        WHERE S.SUBS_CODE = #{ subsCode }
+    </select>
+
+
 
 </mapper>
