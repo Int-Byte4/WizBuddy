@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "employee")
@@ -37,6 +38,18 @@ public class Employee {
 
     @Column
     private boolean employeeFlag;
+
+    @Column
+    private String latitude;
+
+    @Column
+    private String longitude;
+
+    @Column
+    private int employeeWage;
+
+    @Column
+    private LocalDate employeeHealthDate;
 
     @Column
     private boolean employeeBlackState;
