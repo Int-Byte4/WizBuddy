@@ -19,27 +19,27 @@ import java.time.LocalDateTime;
 public class NoticeBoard {
     @Id
     @Column
-    private int notice_code;
+    private int noticeCode;
 
     @Column
-    private String notice_title;
+    private String noticeTitle;
 
     @Column
-    private String notice_content;
+    private String noticeContent;
 
     @Column
-//    @ColumnDefault("true")
-    private boolean notice_flag;
+// @ColumnDefault("true")
+    private boolean noticeFlag;
 
     @Column
-    private String image_url;
+    private String imageUrl;
 
     @Column
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Column
-    private int shop_code;
+    private int shopCode;
 }
