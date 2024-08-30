@@ -76,7 +76,7 @@ class TaskServiceTests {
     public void id로_업무_1개_수정_테스트(){
 
         // given:
-        int taskCode = taskMapper.findAllTask().size() - 1;
+        int taskCode = taskMapper.findAllTask().size();
         EditTaskInfo editTaskInfo = new EditTaskInfo("수정된 내용", true, true,
                 LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 
