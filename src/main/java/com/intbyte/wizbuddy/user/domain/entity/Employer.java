@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.user.domain.entity;
 
+import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -42,4 +44,17 @@ public class Employer {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public void modify(EditEmployerInfo modifyEmployerInfo) {
+        this.employerName = modifyEmployerInfo.getEmployerName();
+        this.employerPassword = modifyEmployerInfo.getEmployerPassword();
+        this.employerPhone = modifyEmployerInfo.getEmployerPhone();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void removeRequest(DeleteEmployerInfo deleteEmployerInfo) {
+        this.employerCode = deleteEmployerInfo.getEmployerCode();
+        this.employerFlag = false;
+        this.updatedAt = LocalDateTime.now();
+    }
 }

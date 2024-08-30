@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.shop.domain;
+package com.intbyte.wizbuddy.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteShopInfo {
-    private int shopCode;
-    private int employerCode;
-    private boolean shopFlag;
+public class EditEmployeeInfo {
+    private int employeeCode;
+    private String employeeName;
+    private String employeePassword;
+    private String employeePhone;
     private LocalDateTime updatedAt;
 }

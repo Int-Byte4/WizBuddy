@@ -66,9 +66,6 @@ class ShopServiceTests {
     @Transactional
     void testUpdateShopSuccess() {
         //given
-        int employerCode = 1;
-        List<Shop> currentShopList = shopRepository.findAll();
-        Shop shop = currentShopList.get(0);
         EditShopInfo editShopInfo = new EditShopInfo(1, "changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now(), 1);
 
         //when
@@ -86,7 +83,7 @@ class ShopServiceTests {
     @Transactional
     void testDeleteShopSuccess() {
         //given
-        DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, 1, false);
+        DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, 1, false, LocalDateTime.now());
 
         //when
         shopService.deleteShop(deleteShopInfo);
