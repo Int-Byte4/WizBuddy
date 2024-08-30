@@ -5,16 +5,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity(name = "weeklySchedule")
-@Table(name = "weeklySchedule")
+@Table(name = "weekly_schedule")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString

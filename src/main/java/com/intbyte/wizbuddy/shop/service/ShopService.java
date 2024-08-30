@@ -5,6 +5,7 @@ import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
+import com.intbyte.wizbuddy.mapper.UserAndEmployerMapper;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
@@ -24,11 +25,12 @@ public class ShopService {
 
     private final EmployerRepository employerRepository;
     private final ShopRepository shopRepository;
+    private final UserAndEmployerMapper userAndEmployerMapper;
     private final ShopMapper shopMapper;
 
     @Transactional
     public void registerShop(ShopDTO shopInfo) {
-        employerRepository.findById(shopInfo.getEmployerCode()).orElseThrow(EmployerNotFoundException::new);
+        if (userAndEmployerMapper.findByEmployerCode(shopInfo.getEmployerCode()).isEmpty()) throw new EmployerNotFoundException();
 
         String businessNum = shopInfo.getBusinessNum();
 
@@ -49,7 +51,10 @@ public class ShopService {
     }
 
     @Transactional
-    public void modifyShop(int employerCode, int shopCode, EditShopInfo modifyShopInfo) {
+    public void modifyShop(EditShopInfo modifyShopInfo) {
+        int employerCode = modifyShopInfo.getEmployerCode();
+        int shopCode = modifyShopInfo.getShopCode();
+
         Employer employer = employerRepository.findById(employerCode).orElseThrow(EmployerNotFoundException::new);
         Shop shop = shopRepository.findById(shopCode).orElseThrow(ShopNotFoundException::new);
 
