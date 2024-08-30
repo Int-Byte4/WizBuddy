@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -83,6 +82,37 @@ class SubsBoardServiceTests {
         assertEquals(1, foundSubsBoard.getEmployeeWorkingPartCode());
         assertEquals(true, foundSubsBoard.isSubsFlag());
         assertEquals(1, foundSubsBoard.getShopCode());
+    }
+
+
+    @Test
+    @Transactional
+    void 대타게시판_수정_테스트() {
+        // given
+        int subsCode = 2;
+
+        SubsBoardDTO existingBoardDTO = subsBoardService.findSubsBoardById(subsCode);
+
+        assertNotNull(existingBoardDTO, "게시판 데이터가 존재해야 합니다.");
+
+        existingBoardDTO.setSubsTitle("추석 3일 내내 알바할사람 이리오셈티비~");
+        existingBoardDTO.setSubsContent("댓글 컴온 베베");
+        existingBoardDTO.setEmployeeWorkingPartCode(3);
+
+        // when
+        SubsBoard updatedBoard = subsBoardService.modifySubsBoards(existingBoardDTO);
+
+        System.out.println("updatedBoard = " + updatedBoard);
+
+        // then
+        SubsBoard foundBoard = subsBoardRepository.findById(subsCode)
+                .orElseThrow(() -> new IllegalArgumentException("게시판을 찾을 수 없습니다."));
+
+        assertEquals("추석 3일 내내 알바할사람 이리오셈티비~", foundBoard.getSubsTitle());
+        assertEquals("댓글 컴온 베베", foundBoard.getSubsContent());
+        assertNotNull(foundBoard.getCreatedAt());
+        assertEquals(3, foundBoard.getEmployeeWorkingPartCode());
+        assertEquals(1, foundBoard.getShopCode());
     }
 
 
