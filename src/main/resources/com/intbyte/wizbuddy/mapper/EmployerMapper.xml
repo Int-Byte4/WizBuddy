@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.intbyte.wizbuddy.user.domain.entity.Employer">
+<mapper namespace="com.intbyte.wizbuddy.mapper.EmployerMapper">
     <resultMap id="employerResultMap" type="com.intbyte.wizbuddy.user.domain.entity.Employer">
         <id property="employerCode" column="employer_code"/>
         <result property="employerName" column="employer_name"/>
@@ -13,11 +13,28 @@
         <result property="employerBlackState" column="employer_black_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
-        <association property="users" javaType="employerCode" resultMap="userResultMap"/>
     </resultMap>
 
-    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.domain.entity.User">
-        <id property="userCode" column="user_code"/>
-        <result property="userType" column="user_type"/>
-    </resultMap>
+    <select id="findEmployerByEmployerCode" resultType="int" parameterType="int">
+        SELECT e.employer_code
+          FROM employer e
+         WHERE e.employer_code = #{ employerCode }
+           AND e.employer_flag = true
+    </select>
+
+    <select id="getEmployer" resultMap="employerResultMap" parameterType="int">
+        SELECT
+               e.employer_code
+             , e.employer_name
+             , e.employer_email
+             , e.employer_password
+             , e.employer_phone
+             , e.employer_flag
+             , e.employer_black_state
+             , e.created_at
+             , e.updated_at
+          FROM employer e
+         WHERE e.employer_code = #{ employerCode }
+           AND e.employer_flag = true
+    </select>
 </mapper>
