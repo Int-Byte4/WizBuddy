@@ -75,11 +75,17 @@ public class CheckListService {
         checkListRepository.save(checkList);
     }
 
-//    체크리스트 업무 삭제
+//    체크리스트  삭제
     @Transactional
     public void deleteCheckList(int checkListCode){
         CheckList checkList = checkListMapper.findCheckListById(checkListCode);
-        EditCheckListInfo editCheckListInfo = new EditCheckListInfo();
+
+        EditCheckListInfo editCheckListInfo = new EditCheckListInfo(checkList.getCheckListTitle()
+                                                , false, LocalDateTime.now());
+
+        checkList.modify(editCheckListInfo);
+
+        checkListRepository.save(checkList);
     }
 
 //    체크리스트 업무 완료 표시
