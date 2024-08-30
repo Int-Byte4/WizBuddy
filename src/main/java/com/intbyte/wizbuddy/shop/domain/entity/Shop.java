@@ -60,5 +60,6 @@ public class Shop {
         this.shopCode = deleteShopInfo.getShopCode();
         this.employerCode = deleteShopInfo.getEmployerCode();
         this.shopFlag = deleteShopInfo.isShopFlag();
+        this.updatedAt = deleteShopInfo.getUpdatedAt();
     }
 }
