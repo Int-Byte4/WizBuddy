@@ -48,4 +48,28 @@ class CheckListServiceTests {
         CheckList checkList = checkListMapper.findCheckListById(checkListDTO.getCheckListCode());
         Assertions.assertEquals(checkListDTO.getCheckListCode(),checkList.getCheckListCode());
     }
+
+    @Test
+    @DisplayName("체크리스트 1개 조회 성공")
+    public void findCheckListByIdTest(){
+
+        // given
+        int checkListCode = checkListMapper.findAllCheckList().size() - 1;
+
+        // when
+        CheckListDTO checkList = checkListService.findCheckListById(checkListCode);
+
+        // then
+        Assertions.assertNotNull(checkList);
+    }
+
+    @Test
+    @DisplayName("체크리스트 전체 조회 성공")
+    @Transactional
+    public void findAllCheckListTest(){
+        List<CheckList> allCheckList = checkListMapper.findAllCheckList();
+        for(CheckList checklist: allCheckList){
+            assertNotNull(checklist);
+        }
+    }
 }
