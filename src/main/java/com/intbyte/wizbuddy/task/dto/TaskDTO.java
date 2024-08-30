@@ -9,17 +9,18 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@EqualsAndHashCode
 public class TaskDTO {
 
-    private int TaskCode;
+    private int taskCode;
 
-    private String TaskContents;
+    private String taskContents;
 
-    private boolean TaskFlag;
+    private boolean taskFlag;
 
-    private boolean TaskFixedState;
+    private boolean taskFixedState;
 
-    private LocalDateTime CreatedAt;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime UpdatedAt;
+    private LocalDateTime updatedAt;
 }

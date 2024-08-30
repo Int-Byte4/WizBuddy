@@ -1,9 +1,13 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.exception.EmailDuplicateException;
+import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
+import com.intbyte.wizbuddy.mapper.EmployerMapper;
+import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,35 +16,47 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class EmployerService {
-    private final EmployerRepository employerRepository;
-//    private final PasswordEncoder encoder;
 
-    // 회원가입
-    public void employerRegister(EmployerDTO info) throws Exception {
-        employerRepository.findByEmployerEmail(info.getEmployerEmail())
-                .ifPresent(employer -> {
-                    try {
-                        throw new EmailDuplicateException();
-                    } catch (EmailDuplicateException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-        Employer employer = userBuilder(info);
-        try {
-            employerRepository.save(employer);
-        } catch (Exception e) {
-            log.error("e.getMessage={}", e.getMessage());
-            throw new Exception("잘못된 요청입니다.");
-        }
+    private final EmployerRepository employerRepository;
+    private final EmployerMapper employerMapper;
+
+    // user에서 회원가입, 로그인 / employer에서는 등록만 된다.
+    @Transactional
+    public void registerEmployer(EmployerDTO employerInfo) {
+        Employer employer = Employer.builder()
+                .employerName(employerInfo.getEmployerName())
+                .employerEmail(employerInfo.getEmployerEmail())
+                .employerPhone(employerInfo.getEmployerPhone())
+                .employerFlag(employerInfo.isEmployerFlag())
+                .employerBlackState(employerInfo.isEmployerBlackState())
+                .createdAt(employerInfo.getCreatedAt())
+                .updatedAt(employerInfo.getUpdatedAt())
+                .build();
+
+        employerRepository.save(employer);
     }
 
-    private Employer userBuilder(EmployerDTO info) {
-        Employer employer = Employer.builder()
-                .employerEmail(info.getEmployerEmail())
-//                .employerPassword(encoder.encode(info.getEmployerEmail()))
-                .employerName(info.getEmployerName())
-                .employerPhone(info.getEmployerPhone())
-                .build();
-        return employer;
+    @Transactional
+    public void modifyEmployer(EditEmployerInfo modifyEmployerInfo) {
+        int employerCode = modifyEmployerInfo.getEmployerCode();
+
+        Employer employer = employerMapper.getEmployer(employerCode);
+
+        if (employer == null) throw new UserNotFoundException();
+
+        employer.modify(modifyEmployerInfo);
+        employerRepository.save(employer);
+    }
+
+    @Transactional
+    public void deleteEmployer(DeleteEmployerInfo deleteEmployerInfo) {
+        int employerCode = deleteEmployerInfo.getEmployerCode();
+
+        Employer employer = employerMapper.getEmployer(employerCode);
+
+        if (employer == null) throw new UserNotFoundException();
+
+        employer.removeRequest(deleteEmployerInfo);
+        employerRepository.save(employer);
     }
 }

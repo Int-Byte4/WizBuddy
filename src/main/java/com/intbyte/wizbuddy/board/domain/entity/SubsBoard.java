@@ -10,7 +10,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity(name = "subsBoard")
-@Table(name = "substitutionBoard")
+@Table(name = "substitution_board")
 @Getter
 @Setter
 @AllArgsConstructor

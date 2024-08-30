@@ -2,6 +2,24 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper>
-
+<mapper namespace="com.intbyte.wizbuddy.mapper.NoticeBoardMapper">
+<resultMap id="noticeBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.NoticeBoard">
+    <id property="noticeCode" column="notice_code"/>
+    <result property="noticeTitle" column="notice_title"/>
+    <result property="noticeContents" column="notice_contents"/>
+    <result property="noticeFlag" column="notice_flag"/>
+    <result property="imageURL" column="image_url"/>
+    <result property="createdAt" column="created_at"/>
+    <result property="updatedAt" column="updated_at"/>
+    <result property="shopCode" column="shop_code"/>
+</resultMap>
+<!--    <select id="selectNoticeBoardByNoticeCode" resultMap="noticeBoardResultMap" parameterType="hashmap">-->
+<!--        SELECT-->
+<!--        NOTICE_TITLE-->
+<!--        , NOTICE_CONTENTS-->
+<!--        , IMAGE_URL-->
+<!--        FROM NOTICE_BOARD-->
+<!--        WHERE NOTICE_FLAG = true-->
+<!--          AND NOTICE_CODE = #{ noticeCode }-->
+<!--    </select>-->
 </mapper>
