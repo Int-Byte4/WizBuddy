@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.checklist.service;
 
+import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.dto.CheckListDTO;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
@@ -71,5 +72,39 @@ class CheckListServiceTests {
         for(CheckList checklist: allCheckList){
             assertNotNull(checklist);
         }
+    }
+
+    @Test
+    @DisplayName("체크리스트 수정 성공")
+    @Transactional
+    public void modifyCheckListTest(){
+
+        // given
+        int checkListCode = checkListMapper.findAllCheckList().size();
+        EditCheckListInfo info = new EditCheckListInfo("수정된 체크리스트 내용"
+                             , true, LocalDateTime.now());
+
+        // when
+        checkListService.modifyCheckList(checkListCode, info);
+
+        // then
+        CheckList checkList = checkListMapper.findCheckListById(checkListCode);
+        assertEquals(info.getCheckListTitle(), checkList.getCheckListTitle());
+    }
+
+    @Test
+    @DisplayName("체크리스트 업무 삭제 성공")
+    @Transactional
+    public void deleteCheckListTest(){
+
+        // given
+        int checkListCode = checkListMapper.findAllCheckList().size();
+
+        // when
+        checkListService.deleteCheckList(checkListCode);
+
+        // then
+        CheckList checkList = checkListMapper.findCheckListById(checkListCode);
+        assertEquals(false, checkList.getCheckListFlag());
     }
 }
