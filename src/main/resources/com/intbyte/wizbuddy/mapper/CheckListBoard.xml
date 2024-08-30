@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.CheckListMapper">
+    <resultMap type="com.intbyte.wizbuddy.checklist.domain.entity.CheckList" id="checkListResultMap">
+        <id property="checkListCode" column="check_list_code"/>
+        <result property="checkListTitle" column="check_list_title"/>
+        <result property="checkListFlag" column="check_list_flag"/>
+        <result property="createdAt" column="created_at"/> <!-- column은 db 컬럼명과 동일해야함. -->
+        <result property="updatedAt" column="updated_at"/>
+        <result property="shopCode" column="shop_code"/>
+    </resultMap>
+
+    <select id="findAllCheckList" resultMap="checkListResultMap">
+        SELECT
+             A.check_list_code
+           , A.check_list_title
+           , A.check_list_flag
+           , A.created_at
+           , A.updated_at
+           , A.shop_code
+        FROM CheckList A
+    </select>
+
+    <select id="findCheckListById" resultMap="checkListResultMap" parameterType="int">
+        SELECT
+             A.check_list_code
+           , A.check_list_title
+           , A.check_list_flag
+           , A.created_at
+           , A.updated_at
+           , A.shop_code
+        FROM CheckList A
+        WHERE A.check_list_code = #{ check_list_code }
+    </select>
+
+
+
+</mapper>
