@@ -8,6 +8,7 @@ import com.intbyte.wizbuddy.mapper.SubsBoardMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,12 +18,15 @@ public class SubsBoardService {
 
     private final SubsBoardMapper subsBoardMapper;
     private final ModelMapper modelMapper;
+    private final SubsBoardRepository subsBoardRepository;
 
     @Autowired
-    public SubsBoardService(SubsBoardMapper subsBoardMapper, ModelMapper modelMapper) {
+    public SubsBoardService(SubsBoardMapper subsBoardMapper, ModelMapper modelMapper, SubsBoardRepository subsBoardRepository) {
         this.subsBoardMapper = subsBoardMapper;
         this.modelMapper = modelMapper;
+        this.subsBoardRepository = subsBoardRepository;
     }
+
 
 
     public List<SubsBoardDTO> findAllSubsBoards() {
@@ -43,6 +47,14 @@ public class SubsBoardService {
 
         return modelMapper.map(subsBoard, SubsBoardDTO.class);
     }
+
+
+    @Transactional
+    public SubsBoard registSubsBoard(SubsBoardDTO subsBoard) {
+        return subsBoardRepository.save(modelMapper.map(subsBoard, SubsBoard.class));
+    }
+
+
 
 
 
