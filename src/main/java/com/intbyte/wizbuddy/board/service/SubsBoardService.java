@@ -34,4 +34,16 @@ public class SubsBoardService {
     }
 
 
+    public SubsBoardDTO findSubsBoardById(int subsCode) {
+        SubsBoard subsBoard = subsBoardMapper.selectSubsBoardById(subsCode);
+
+        if (subsBoard == null) {
+            throw new IllegalArgumentException("해당 subsCode에 대한 게시판 항목을 찾을 수 없습니다.");
+        }
+
+        return modelMapper.map(subsBoard, SubsBoardDTO.class);
+    }
+
+
+
 }
