@@ -19,13 +19,13 @@ public class CheckList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="check_list_code")
+    @Column(name="checklist_code")
     private int checkListCode;
 
-    @Column(name="check_list_title")
+    @Column(name="checklist_title")
     private String checkListTitle;
 
-    @Column(name="check_list_flag")
+    @Column(name="checklist_flag")
     private Boolean checkListFlag;
 
     @Column(name="created_at")
