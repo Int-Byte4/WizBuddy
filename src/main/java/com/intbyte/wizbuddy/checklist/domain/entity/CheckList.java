@@ -34,7 +34,12 @@ public class CheckList {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    public void modify(@Valid EditCheckListInfo editCheckListInfo){
+    @Column(name="shop_code")
+    private int shopCode;
 
+    public void modify(@Valid EditCheckListInfo editCheckListInfo){
+        this.checkListTitle = editCheckListInfo.getCheckListTitle();
+        this.checkListFlag = editCheckListInfo.getCheckListFlag();
+        this.updatedAt = editCheckListInfo.getUpdatedAt();
     }
 }
