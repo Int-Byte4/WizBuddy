@@ -10,7 +10,8 @@ public enum StatusEnum {
     SHOP_NOT_FOUND(404, "SHOP_NOT_FOUND"),
     BUSINESS_NUM_DUPLICATE(403, "BUSINESS_NUM_DUPLICATE"),
     RESTRICTED(403, "RESTRICTED"),
-    TASK_NOT_FOUND(404, "TASK_NOT_FOUND");
+    TASK_NOT_FOUND(404, "TASK_NOT_FOUND"),
+    CHECK_LIST_NOT_FOUND(404, "CHECK_LIST_NOT_FOUND");
 
     private final int statusCode;
     private final String code;
