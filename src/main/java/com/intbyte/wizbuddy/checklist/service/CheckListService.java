@@ -38,6 +38,7 @@ public class CheckListService {
                 .checkListFlag(true)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
+                .shopCode(checkListInfo.getShopCode())
                 .build();
 
         checkListRepository.save(checkList);
