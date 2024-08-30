@@ -62,8 +62,13 @@ public class SubsBoardService {
         return subsBoard;
     }
 
-
-
+    @Transactional
+    public SubsBoard deleteSubsBoard(SubsBoardDTO deletesubsBoard) {
+        SubsBoard subsBoard = subsBoardRepository.findById(deletesubsBoard.getSubsCode()).orElseThrow(IllegalArgumentException::new);
+        subsBoard.modifyFlag();
+        subsBoardRepository.save(subsBoard);
+        return modelMapper.map(subsBoard, SubsBoard.class);
+    }
 
 
 
