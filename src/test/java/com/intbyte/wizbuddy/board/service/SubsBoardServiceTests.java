@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -115,6 +116,27 @@ class SubsBoardServiceTests {
         assertEquals(1, foundBoard.getShopCode());
     }
 
+
+
+
+    @Test
+    @Transactional
+    void 대타게시판_삭제_테스트() {
+        // Given
+        int subsCode = 1;
+
+        SubsBoardDTO subsBoard = subsBoardService.findSubsBoardById(subsCode);
+        // When
+        SubsBoard result = subsBoardService.deleteSubsBoard(subsBoard);
+
+        // Then
+        assertThat(result).isNotNull();
+        assertThat(result.isSubsFlag()).isFalse();
+
+        SubsBoard updatedSubsBoard = subsBoardRepository.findById(subsCode).orElse(null);
+        assertThat(updatedSubsBoard).isNotNull();
+        assertThat(updatedSubsBoard.isSubsFlag()).isFalse();
+    }
 
 
 }
