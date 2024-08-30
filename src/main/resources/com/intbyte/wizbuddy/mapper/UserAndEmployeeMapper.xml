@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.UserAndEmployeeMapper">
+    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.domain.entity.User">
+        <id property="userCode" column="user_code"/>
+        <result property="userType" column="user_type"/>
+
+        <association property="employee" javaType="com.intbyte.wizbuddy.user.domain.entity.Employee">
+            <id property="employeeCode" column="employee_code"/>
+            <result property="employeeName" column="employee_name"/>
+            <result property="employeeEmail" column="employee_email"/>
+            <result property="employeePassword" column="employee_password"/>
+            <result property="employeePhone" column="employee_phone"/>
+            <result property="employeeFlag" column="employee_flag"/>
+            <result property="latitude" column="latitude"/>
+            <result property="longitude" column="longitude"/>
+            <result property="employeeWage" column="employee_wage"/>
+            <result property="employeeHealthDate" column="employee_health_date"/>
+            <result property="employeeBlackState" column="employee_black_state"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="updatedAt" column="updated_at"/>
+        </association>
+
+    </resultMap>
+
+</mapper>
