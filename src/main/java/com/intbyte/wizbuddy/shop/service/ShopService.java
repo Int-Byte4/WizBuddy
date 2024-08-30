@@ -33,18 +33,15 @@ public class ShopService {
 
     @Transactional
     public void registerShop(ShopDTO shopInfo) {
-        if (employerMapper.findEmployerByEmployerCode(shopInfo.getEmployerCode()).isEmpty()) throw new EmployerNotFoundException();
-
-        String businessNum = shopInfo.getBusinessNum();
-
-        if (shopMapper.findByBusinessNum(businessNum) != null) throw new BusinessNumDuplicateException();
+        if (employerMapper.getEmployer(shopInfo.getEmployerCode()) != null) throw new EmployerNotFoundException();
+        if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
                 .shopName(shopInfo.getShopName())
                 .shopLocation(shopInfo.getShopLocation())
                 .shopFlag(true)
                 .shopOpenTime(shopInfo.getShopOpenTime())
-                .businessNum(businessNum)
+                .businessNum(shopInfo.getBusinessNum())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .employerCode(shopInfo.getEmployerCode())
