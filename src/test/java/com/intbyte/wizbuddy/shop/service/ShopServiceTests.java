@@ -18,6 +18,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class ShopServiceTests {
@@ -95,5 +96,41 @@ class ShopServiceTests {
         assertEquals(false, newShops.get(deleteShopInfo.getShopCode() - 1).getShopFlag());
 
         newShops.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매장 전체 조회 성공")
+    @Transactional
+    void testGetShopListSuccess() {
+        // given
+        int userCode = 1;
+
+        // when
+        List<ShopDTO> shopList = shopService.getAllShop(userCode);
+
+        // then
+        assertNotNull(shopList);
+        assertFalse(shopList.isEmpty());
+
+        ShopDTO shopDTO = shopList.get(0);
+        assertEquals("스타벅스 강남점", shopDTO.getShopName());
+
+        shopList.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매장 단 건 조회 성공")
+    @Transactional
+    void testGetShopSuccess() {
+        //given
+        int userCode = 1;
+        int shopCode = 1;
+
+        //when
+        Shop shop = shopService.getShop(userCode, shopCode);
+
+        //then
+        assertNotNull(shop);
+        System.out.println("shop = " + shop);
     }
 }
