@@ -54,6 +54,15 @@ public class SubsBoardService {
         return subsBoardRepository.save(modelMapper.map(subsBoard, SubsBoard.class));
     }
 
+    @Transactional
+    public SubsBoard modifySubsBoards(SubsBoardDTO modifysubsBoard) {
+        SubsBoard subsBoard = subsBoardRepository.findById(modifysubsBoard.getSubsCode()).orElseThrow(IllegalArgumentException::new);
+        subsBoard.toUpdate(modifysubsBoard);
+        subsBoardRepository.save(modelMapper.map(subsBoard, SubsBoard.class));
+        return subsBoard;
+    }
+
+
 
 
 
