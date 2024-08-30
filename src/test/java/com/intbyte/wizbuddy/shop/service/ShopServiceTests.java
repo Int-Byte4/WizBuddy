@@ -44,10 +44,7 @@ class ShopServiceTests {
         List<Shop> newShops = shopRepository.findAll();
         Shop shop = newShops.get(newShops.size() - 1);
 
-        newShops.forEach(System.out::println);
-
         Assertions.assertThat(shop.getBusinessNum()).isEqualTo(shopDTO.getBusinessNum());
-        newShops.forEach(System.out::println);
     }
 
     @Test
@@ -71,10 +68,10 @@ class ShopServiceTests {
         int employerCode = 1;
         List<Shop> currentShopList = shopRepository.findAll();
         Shop shop = currentShopList.get(0);
-        EditShopInfo editShopInfo = new EditShopInfo("changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now());
+        EditShopInfo editShopInfo = new EditShopInfo(1, "changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now(), 1);
 
         //when
-        shopService.modifyShop(employerCode, shop.getShopCode(), editShopInfo);
+        shopService.modifyShop(editShopInfo);
 
         //then
         List<Shop> newShops = shopRepository.findAll();
