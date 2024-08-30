@@ -1,16 +1,15 @@
 package com.intbyte.wizbuddy.checklist.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString
+@EqualsAndHashCode
 public class CheckListDTO {
     private int checkListCode;
 
@@ -21,4 +20,6 @@ public class CheckListDTO {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    private int shopCode;
 }

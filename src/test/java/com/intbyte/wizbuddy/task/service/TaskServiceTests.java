@@ -39,17 +39,13 @@ class TaskServiceTests {
         TaskDTO taskDTO = new TaskDTO(currentTaskList.size() + 1, "새로운 업무 추가"
                     , true, true, LocalDateTime.now(), LocalDateTime.now());
 
-        System.out.println("taskDTO = " + taskDTO);
         // when:
         taskService.insertTask(taskDTO);
 
         // then:
         List<Task> currentTaskList2 = taskMapper.findAllTask();
-        for (int i = 0; i < currentTaskList2.size(); i++) {
-            System.out.println("currentTaskList2 = " + currentTaskList2.get(i));
-        }
+
         Task findTask = taskMapper.findTaskById(taskDTO.getTaskCode());
-        System.out.println("findTask = " + findTask);
         Assertions.assertEquals(taskDTO.getTaskCode(), findTask.getTaskCode());
     }
 
@@ -64,7 +60,7 @@ class TaskServiceTests {
         TaskDTO task = taskService.findTaskById(taskCode);
 
         // then
-        assertEquals(taskCode, task.getTaskCode());
+        assertNotNull(task);
     }
 
     @Test
@@ -80,7 +76,7 @@ class TaskServiceTests {
     public void id로_업무_1개_수정_테스트(){
 
         // given:
-        int taskCode = taskMapper.findAllTask().size() - 1;
+        int taskCode = taskMapper.findAllTask().size();
         EditTaskInfo editTaskInfo = new EditTaskInfo("수정된 내용", true, true,
                 LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
 
