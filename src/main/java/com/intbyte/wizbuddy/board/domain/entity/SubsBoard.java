@@ -42,17 +42,6 @@ public class SubsBoard {
     @Column(name = "shop_code")
     private int shopCode;
 
-    public SubsBoard(SubsBoardDTO subsBoard) {
-        this.subsCode = subsBoard.getSubsCode();
-        this.subsTitle = subsBoard.getSubsTitle();
-        this.subsContent = subsBoard.getSubsContent();
-        this.createdAt = subsBoard.getCreatedAt();
-        this.updatedAt = subsBoard.getUpdatedAt();
-        this.subsFlag = subsBoard.isSubsFlag();
-        this.employeeWorkingPartCode = subsBoard.getEmployeeWorkingPartCode();
-        this.shopCode = subsBoard.getShopCode();
-    }
-
 
     public void toUpdate(SubsBoardDTO dto) {
         this.subsTitle = dto.getSubsTitle();
