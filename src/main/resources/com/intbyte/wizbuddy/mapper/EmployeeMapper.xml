@@ -17,11 +17,26 @@
         <result property="employeeBlackState" column="employee_black_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
-        <association property="users" javaType="employeeCode" resultMap="userResultMap"/>
     </resultMap>
 
-    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.domain.entity.User">
-        <id property="userCode" column="user_code"/>
-        <result property="userType" column="user_type"/>
-    </resultMap>
+    <select id="getEmployee" resultMap="employeeResultMap" parameterType="int">
+        SELECT
+               e.employee_code
+             , e.employee_name
+             , e.employee_email
+             , e.employee_password
+             , e.employee_phone
+             , e.employee_flag
+             , e.latitude
+             , e.longitude
+             , e.employee_health_date
+             , e.employee_black_state
+             , e.employee_black_state
+             , e.created_at
+             , e.updated_at
+          FROM employee e
+         WHERE e.employee_code = #{ employeeCode }
+           AND e.employee_flag = true
+    </select>
+
 </mapper>
