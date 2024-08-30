@@ -4,4 +4,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ManualBoardMapper {
+    int findUserCodeByManualCode(int manualCode);
 }
