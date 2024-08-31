@@ -32,9 +32,12 @@ class TaskPerCheckListServiceTests {
     @DisplayName("체크리스트에 업무추가 테스트 성공")
     public void insertTaskPerCheckListTest(){
 
-        UUID employeeCode = UUID.randomUUID();
+//        UUID employeeCode = UUID.randomUUID(); -> 존재하지 않는 유저로 insert 하려고 해서 생긴 오류
+        int size = employeeRepository.findAll().size();
+        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
+
         TaskPerCheckListDTO taskPerCheckListDTO = new TaskPerCheckListDTO(2, 5, true,
-                LocalDateTime.now(), LocalDateTime.now(), employeeCode.toString());
+                LocalDateTime.now(), LocalDateTime.now(), employeeCode);
 
         taskPerCheckListService.insertTaskPerCheckList(taskPerCheckListDTO);
     }
@@ -49,6 +52,7 @@ class TaskPerCheckListServiceTests {
         // when
         TaskPerCheckListDTO taskPerCheckListDTO =
                 taskPerCheckListService.findTaskPerCheckListById(taskPerChecklistId);
+
         System.out.println("taskPerCheckListDTO = " + taskPerCheckListDTO);
 
         // then
@@ -87,7 +91,10 @@ class TaskPerCheckListServiceTests {
 
         int taskCode = 1;
         int checkListCode = 1;
-        String employeeCode = UUID.randomUUID().toString();
+
+        int size = employeeRepository.findAll().size();
+        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
+
         // given
         taskPerCheckListService.insertTaskPerCheckList(
                 new TaskPerCheckListDTO(checkListCode, taskCode, false,
