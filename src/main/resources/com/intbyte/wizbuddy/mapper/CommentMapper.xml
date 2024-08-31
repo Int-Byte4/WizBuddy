@@ -5,11 +5,11 @@
 <mapper namespace="com.intbyte.wizbuddy.mapper.CommentMapper">
     <resultMap id="CommentResultMap" type="com.intbyte.wizbuddy.comment.domain.Entity.Comment">
         <id property="commentCode" column="COMMENT_CODE"/>
-        <result property="comment_contents" column="COMMENT_CONTENTS"/>
-        <result property="comment_flag" column="COMMENT_FLAG"/>
-        <result property="comment_adopted_state" column="COMMENT_ADOPTED_STATE"/>
-        <result property="created_at" column="CREATED_AT"/>
-        <result property="updated_at" column="UPDATED_AT"/>
+        <result property="commentContent" column="COMMENT_CONTENTS"/>
+        <result property="commentFlag" column="COMMENT_FLAG"/>
+        <result property="commentAdoptedState" column="COMMENT_ADOPTED_STATE"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
         <result property="subsCode" column="SUBS_CODE"/>
         <result property="employeeCode" column="EMPLOYEE_CODE"/>
     </resultMap>
@@ -22,9 +22,23 @@
         , C.COMMENT_ADOPTED_STATE
         , C.CREATED_AT
         , C.UPDATED_AT
-        , C.SHOP_CODE
+        , C.SUBS_CODE
         , C.EMPLOYEE_CODE
         FROM COMMENTS C
+    </select>
+
+    <select id="selectCommentById" resultMap="CommentResultMap" >
+        SELECT
+        C.COMMENT_CODE
+        , C.COMMENT_CONTENTS
+        , C.COMMENT_FLAG
+        , C.COMMENT_ADOPTED_STATE
+        , C.CREATED_AT
+        , C.UPDATED_AT
+        , C.SUBS_CODE
+        , C.EMPLOYEE_CODE
+        FROM COMMENTS C
+        WHERE C.COMMENT_CODE = #{ commentCode }
     </select>
 
 </mapper>

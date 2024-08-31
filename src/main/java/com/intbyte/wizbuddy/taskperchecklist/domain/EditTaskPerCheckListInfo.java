@@ -21,5 +21,6 @@ public class EditTaskPerCheckListInfo {
 
     private LocalDateTime updatedAt;
 
-    private Integer employeeCode;
+    // private Integer employeeCode;
+    private String employeeCode;
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class EmployeeDTO {
-    private int employeeCode;
+    private String employeeCode;
 
     private String employeeName;
 

@@ -11,4 +11,6 @@ public interface CheckListMapper {
     CheckList findCheckListById(int checkListCode);
 
     List<CheckList> findAllCheckList();
+
+    List<CheckList> findAllCheckListsByFlag();
 }
