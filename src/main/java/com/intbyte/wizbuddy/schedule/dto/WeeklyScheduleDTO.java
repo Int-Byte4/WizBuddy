@@ -9,8 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Getter
-@Setter
+@Getter @Setter
 public class WeeklyScheduleDTO {
 
     private int scheduleCode;

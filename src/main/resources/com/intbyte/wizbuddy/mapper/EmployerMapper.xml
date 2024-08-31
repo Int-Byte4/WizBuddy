@@ -15,13 +15,6 @@
         <result property="updatedAt" column="updated_at"/>
     </resultMap>
 
-    <select id="findEmployerByEmployerCode" resultType="int" parameterType="int">
-        SELECT e.employer_code
-          FROM employer e
-         WHERE e.employer_code = #{ employerCode }
-           AND e.employer_flag = true
-    </select>
-
     <select id="getEmployer" resultMap="employerResultMap" parameterType="int">
         SELECT
                e.employer_code

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SignInEmployerInfo {
+public class RegisterEmployerInfo {
     private int employerCode;
     private String employerName;
     private String employerEmail;

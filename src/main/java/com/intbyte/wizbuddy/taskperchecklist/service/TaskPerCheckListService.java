@@ -4,8 +4,9 @@ import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
-import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
+import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
+import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
@@ -28,6 +29,8 @@ public class TaskPerCheckListService {
 //    private final TaskPerCheckListMapper taskPerCheckListMapper;
     private final ModelMapper modelMapper;
 
+    private final TaskPerCheckListMapper taskPerCheckListMapper;
+
     private CheckListRepository checkListRepository;
 
     private TaskRepository taskRepository;
@@ -35,10 +38,11 @@ public class TaskPerCheckListService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    public TaskPerCheckListService(CheckListRepository checkListRepository, TaskPerCheckListRepository taskPerCheckListRepository, /*TaskPerCheckListMapper taskPerCheckListMapper,*/ ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository) {
+    public TaskPerCheckListService(CheckListRepository checkListRepository, TaskPerCheckListRepository taskPerCheckListRepository, /*TaskPerCheckListMapper taskPerCheckListMapper,*/ ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository, TaskPerCheckListMapper taskPerCheckListMapper) {
+
         this.checkListRepository = checkListRepository;
         this.taskPerCheckListRepository = taskPerCheckListRepository;
-//        this.taskPerCheckListMapper = taskPerCheckListMapper;
+        this.taskPerCheckListMapper = taskPerCheckListMapper;
         this.modelMapper = modelMapper;
         this.taskRepository = taskRepository;
         this.employeeRepository = employeeRepository;
@@ -60,7 +64,6 @@ public class TaskPerCheckListService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid taskCode"));
         Employee employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid employeeCode"));
-// 좀따가 생성해야함. -> employee 생성 후에
 
         System.out.println("checkList = " + checkList);
         System.out.println("task = " + task);
@@ -79,21 +82,39 @@ public class TaskPerCheckListService {
         taskPerCheckListRepository.save(taskPerCheckList);
     }
 
-//    @Transactional
-//    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerChecklistId id) {
-//
-//
-//    }
-//
-//    @Transactional
-//    public List<TaskPerCheckListDTO> findAllTaskPerCheckLists() {
-//        List<TaskPerCheckList> list = taskPerCheckListMapper.findAllTaskPerCheckList();
-//
-//        return list.stream()
-//                .map(taskPerCheckList -> taskPerCheckListMapper
-//
-//
-//    }
+    // taskPerCheckList에서 1개 조회
+    @Transactional
+    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerChecklistId taskPerChecklistId){
 
+        TaskPerCheckListMybatis findTaskPerCheckList = taskPerCheckListMapper.findTaskPerCheckListById(taskPerChecklistId.getTaskCode(), taskPerChecklistId.getCheckListCode());
 
+        return modelMapper.map(findTaskPerCheckList, TaskPerCheckListDTO.class);
+    }
+
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckList() {
+
+        List<TaskPerCheckListMybatis> findTaskPerCheckList = taskPerCheckListMapper.findAllTaskPerCheckList();
+
+        return findTaskPerCheckList.stream()
+                .map(taskPerCheckList -> modelMapper.map(taskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void modifyTaskPerCheckList(int taskCode, int checkListCode, EditTaskPerCheckListInfo info){
+
+        TaskPerChecklistId id = new TaskPerChecklistId(taskCode, checkListCode);
+
+        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
+        // employee 객체를 찾아서 넣어주기 -> employeeRepository 필요
+        Employee findEmployee = employeeRepository.findById(info.getEmployeeCode())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid employeeCode"));
+
+        // 업데이트
+        taskPerCheckList.modify(info, findEmployee);
+
+        taskPerCheckListRepository.save(taskPerCheckList);
+    }
 }

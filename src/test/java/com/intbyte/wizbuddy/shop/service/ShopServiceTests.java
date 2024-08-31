@@ -3,6 +3,7 @@ package com.intbyte.wizbuddy.shop.service;
 import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
+import com.intbyte.wizbuddy.shop.domain.RegisterShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
@@ -36,16 +37,16 @@ class ShopServiceTests {
         // given
         int employerCode = 1;
         List<Shop> currentShopList = shopRepository.findAll();
-        ShopDTO shopDTO = new ShopDTO(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "999-99-99999", LocalDateTime.now(), LocalDateTime.now(), employerCode);
+        RegisterShopInfo shopInfo = new RegisterShopInfo(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "999-99-99999", LocalDateTime.now(), LocalDateTime.now());
 
         // when
-        shopService.registerShop(shopDTO);
+        shopService.registerShop(employerCode, shopInfo);
 
         // then
         List<Shop> newShops = shopRepository.findAll();
         Shop shop = newShops.get(newShops.size() - 1);
 
-        Assertions.assertThat(shop.getBusinessNum()).isEqualTo(shopDTO.getBusinessNum());
+        Assertions.assertThat(shop.getBusinessNum()).isEqualTo(shopInfo.getBusinessNum());
     }
 
     @Test
@@ -55,10 +56,10 @@ class ShopServiceTests {
         // given
         int employerCode = 1;
         List<Shop> currentShopList = shopRepository.findAll();
-        ShopDTO shopDTO = new ShopDTO(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "123-45-67890", LocalDateTime.now(), LocalDateTime.now(), employerCode);
+        RegisterShopInfo shopInfo = new RegisterShopInfo(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "123-45-67890", LocalDateTime.now(), LocalDateTime.now());
 
         // when & then
-        assertThrows(BusinessNumDuplicateException.class, () -> shopService.registerShop(shopDTO));
+        assertThrows(BusinessNumDuplicateException.class, () -> shopService.registerShop(employerCode, shopInfo));
     }
 
     @Test
@@ -66,10 +67,11 @@ class ShopServiceTests {
     @Transactional
     void testUpdateShopSuccess() {
         //given
+        int employerCode = 1;
         EditShopInfo editShopInfo = new EditShopInfo(1, "changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now(), 1);
 
         //when
-        shopService.modifyShop(editShopInfo);
+        shopService.modifyShop(employerCode, editShopInfo);
 
         //then
         List<Shop> newShops = shopRepository.findAll();
@@ -83,10 +85,11 @@ class ShopServiceTests {
     @Transactional
     void testDeleteShopSuccess() {
         //given
+        int employerCode = 1;
         DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, 1, false, LocalDateTime.now());
 
         //when
-        shopService.deleteShop(deleteShopInfo);
+        shopService.deleteShop(employerCode, deleteShopInfo);
 
         //then
         List<Shop> newShops = shopRepository.findAll();

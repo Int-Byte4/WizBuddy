@@ -13,6 +13,6 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class TaskPerChecklistId implements Serializable {
 
-    private Integer checklistCode;
+    private Integer checkListCode;
     private Integer taskCode;
 }

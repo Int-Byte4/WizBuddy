@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -14,5 +15,6 @@ public class EditEmployeeInfo {
     private String employeeName;
     private String employeePassword;
     private String employeePhone;
+    private LocalDate employeeHealthDate;
     private LocalDateTime updatedAt;
 }

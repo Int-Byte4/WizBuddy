@@ -9,6 +9,7 @@ import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
+import com.intbyte.wizbuddy.shop.domain.RegisterShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
@@ -32,8 +33,8 @@ public class ShopService {
     private final ShopMapper shopMapper;
 
     @Transactional
-    public void registerShop(ShopDTO shopInfo) {
-        if (employerMapper.getEmployer(shopInfo.getEmployerCode()) != null) throw new EmployerNotFoundException();
+    public void registerShop(int employerCode, RegisterShopInfo shopInfo) {
+        if (employerMapper.getEmployer(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
@@ -44,17 +45,17 @@ public class ShopService {
                 .businessNum(shopInfo.getBusinessNum())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .employerCode(shopInfo.getEmployerCode())
+                .employerCode(employerCode)
                 .build();
         
         shopRepository.save(shop);
     }
 
     @Transactional
-    public void modifyShop(EditShopInfo modifyShopInfo) {
+    public void modifyShop(int employerCode, EditShopInfo modifyShopInfo) {
         int shopCode = modifyShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(modifyShopInfo.getEmployerCode());
+        Employer employer = employerMapper.getEmployer(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
@@ -64,10 +65,10 @@ public class ShopService {
     }
 
     @Transactional
-    public void deleteShop(DeleteShopInfo deleteShopInfo) {
+    public void deleteShop(int employerCode, DeleteShopInfo deleteShopInfo) {
         int shopCode = deleteShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(deleteShopInfo.getEmployerCode());
+        Employer employer = employerMapper.getEmployer(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
