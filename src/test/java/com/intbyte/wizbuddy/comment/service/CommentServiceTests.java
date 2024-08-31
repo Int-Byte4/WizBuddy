@@ -97,6 +97,22 @@ class CommentServiceTests {
         assertEquals(modifyComment.getCommentContent(),comment.getCommentContent());
     }
 
+    @Test
+    @DisplayName("댓글_삭제_테스트")
+    @Transactional
+    public void deleteCommentTest() {
+
+        // given
+        int subsCode = 1;
+        CommentDTO comment = commentService.findCommentById(subsCode);
+        // when
+        commentService.removeComment(comment);
+        // then
+        Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
+        AssertionsForClassTypes.assertThat(updatedComment).isNotNull();
+        AssertionsForClassTypes.assertThat(updatedComment.isCommentFlag()).isFalse();
+
+    }
 
 
 }
