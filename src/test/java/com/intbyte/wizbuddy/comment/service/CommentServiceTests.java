@@ -80,6 +80,22 @@ class CommentServiceTests {
 //
 //    }
 
+    @Test
+    @DisplayName("댓글_수정_테스트")
+    @Transactional
+    public void modifyCommentTest() {
+        //given
+        int commentCode = 4;
+        EditCommentInfo modifyComment = new EditCommentInfo(commentCode,
+                "사장님 저요 저요저요저 !!!!",
+                true,false,
+                LocalDateTime.now(),LocalDateTime.now());
+        //when
+        commentService.modifyComment(commentCode, modifyComment);
+        //when
+        Comment comment = commentMapper.selectCommentById(commentCode);
+        assertEquals(modifyComment.getCommentContent(),comment.getCommentContent());
+    }
 
 
 
