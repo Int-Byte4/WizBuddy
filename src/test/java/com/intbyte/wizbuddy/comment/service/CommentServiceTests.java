@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -103,8 +104,8 @@ class CommentServiceTests {
         commentService.removeComment(comment);
         // then
         Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
-        AssertionsForClassTypes.assertThat(updatedComment).isNotNull();
-        AssertionsForClassTypes.assertThat(updatedComment.isCommentFlag()).isFalse();
+        assertThat(updatedComment).isNotNull();
+        assertThat(updatedComment.isCommentFlag()).isFalse();
 
     }
 
