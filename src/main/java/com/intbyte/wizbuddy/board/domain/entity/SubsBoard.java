@@ -1,10 +1,11 @@
 package com.intbyte.wizbuddy.board.domain.entity;
 
-import com.intbyte.wizbuddy.board.dto.SubsBoardDTO;
+import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -12,10 +13,11 @@ import java.time.LocalDateTime;
 @Entity(name = "subsBoard")
 @Table(name = "substitution_board")
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
+@EqualsAndHashCode
 public class SubsBoard {
     @Id
     @Column(name = "subs_code")
@@ -43,14 +45,14 @@ public class SubsBoard {
     private int shopCode;
 
 
-    public void toUpdate(SubsBoardDTO dto) {
-        this.subsTitle = dto.getSubsTitle();
-        this.subsContent = dto.getSubsContent();
+    public void toUpdate(@Valid EditSubsBoardInfo editSubsBoardInfo) {
+        this.subsTitle = editSubsBoardInfo.getSubsTitle();
+        this.subsContent = editSubsBoardInfo.getSubsContent();
         this.updatedAt = LocalDateTime.now();
-        this.employeeWorkingPartCode = dto.getEmployeeWorkingPartCode();
+        this.employeeWorkingPartCode = editSubsBoardInfo.getEmployeeWorkingPartCode();
     }
 
-    public void modifyFlag() {
+    public void toDelete() {
         this.subsFlag = false;
     }
 

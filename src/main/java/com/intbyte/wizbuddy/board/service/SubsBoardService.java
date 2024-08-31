@@ -1,8 +1,10 @@
 package com.intbyte.wizbuddy.board.service;
 
+import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.SubsBoard;
 import com.intbyte.wizbuddy.board.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.board.repository.SubsBoardRepository;
+import com.intbyte.wizbuddy.exception.board.SubsBoardNotFoundException;
 import com.intbyte.wizbuddy.mapper.SubsBoardMapper;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +45,7 @@ public class SubsBoardService {
         SubsBoard subsBoard = subsBoardMapper.selectSubsBoardById(subsCode);
 
         if (subsBoard == null) {
-            throw new IllegalArgumentException("해당 subsCode에 대한 게시판 항목을 찾을 수 없습니다.");
+            throw new SubsBoardNotFoundException();
         }
 
         return modelMapper.map(subsBoard, SubsBoardDTO.class);
@@ -50,26 +53,33 @@ public class SubsBoardService {
 
 
     @Transactional
-    public SubsBoard registSubsBoard(SubsBoardDTO subsBoard) {
-        return subsBoardRepository.save(modelMapper.map(subsBoard, SubsBoard.class));
-    }
+    public void registSubsBoard(SubsBoardDTO subsBoards) {
+        SubsBoard subsBoard = SubsBoard.builder()
+                .subsTitle(subsBoards.getSubsTitle())
+                .subsContent(subsBoards.getSubsContent())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .subsFlag(true)
+                .employeeWorkingPartCode(subsBoards.getEmployeeWorkingPartCode())
+                .shopCode(subsBoards.getShopCode())
+                .build();
 
-    @Transactional
-    public SubsBoard modifySubsBoards(SubsBoardDTO modifysubsBoard) {
-        SubsBoard subsBoard = subsBoardRepository.findById(modifysubsBoard.getSubsCode()).orElseThrow(IllegalArgumentException::new);
-        subsBoard.toUpdate(modifysubsBoard);
-        subsBoardRepository.save(modelMapper.map(subsBoard, SubsBoard.class));
-        return subsBoard;
-    }
-
-    @Transactional
-    public SubsBoard deleteSubsBoard(SubsBoardDTO deletesubsBoard) {
-        SubsBoard subsBoard = subsBoardRepository.findById(deletesubsBoard.getSubsCode()).orElseThrow(IllegalArgumentException::new);
-        subsBoard.modifyFlag();
         subsBoardRepository.save(subsBoard);
-        return modelMapper.map(subsBoard, SubsBoard.class);
+
     }
 
+    @Transactional
+    public void modifySubsBoards(int subsCode, EditSubsBoardInfo modifysubsBoard) {
+        SubsBoard subsBoard = subsBoardRepository.findById(subsCode).orElseThrow(SubsBoardNotFoundException::new);
+        subsBoard.toUpdate(modifysubsBoard);
+        subsBoardRepository.save(subsBoard);
+    }
 
+    @Transactional
+    public void deleteSubsBoard(SubsBoardDTO deleteSubsBoard) {
+        SubsBoard subsBoard = subsBoardRepository.findById(deleteSubsBoard.getSubsCode()).orElseThrow(SubsBoardNotFoundException::new);
+        subsBoard.toDelete();
+        subsBoardRepository.save(subsBoard);
+    }
 
 }
