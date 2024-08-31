@@ -75,6 +75,16 @@ class CheckListServiceTests {
     }
 
     @Test
+    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
+    @Transactional
+    public void findAllCheckListsByFlag(){
+        List<CheckList> allCheckList = checkListMapper.findAllCheckListsByFlag();
+        for(CheckList checklist: allCheckList){
+            assertNotNull(checklist);
+        }
+    }
+
+    @Test
     @DisplayName("체크리스트 수정 성공")
     @Transactional
     public void modifyCheckListTest(){
