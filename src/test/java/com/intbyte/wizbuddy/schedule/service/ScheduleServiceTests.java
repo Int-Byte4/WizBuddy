@@ -23,14 +23,15 @@ class ScheduleServiceTests {
 
     @Autowired
     private ScheduleService scheduleService;
-    @Autowired
-    private EmployeeWorkingPartMapper employeeWorkingPartMapper;
-
 
     @Test
     @DisplayName("전체 스케줄 조회 성공")
     public void testScheduleService_select() {
+        // given
+        // when
         List<WeeklyScheduleDTO> weeklyScheduleDTOList = scheduleService.findAllSchedules();
+
+        // then
         Assertions.assertNotNull(weeklyScheduleDTOList);
         weeklyScheduleDTOList.forEach(System.out::println);
     }
@@ -38,10 +39,13 @@ class ScheduleServiceTests {
     @Test
     @DisplayName("한주의 스케줄 조회 성공")
     public void testScheduleService_select_per_employee() {
-        //given, when
-        List<EmployeeWorkingPartDTO> employeeWorkingPartList = scheduleService.findSchedule(1);
+        // given
+        int scheduleCode = 1;
 
-        //then
+        // when
+        List<EmployeeWorkingPartDTO> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
+
+        // then
         assertNotNull(employeeWorkingPartList);
         employeeWorkingPartList.forEach(System.out::println);
     }
@@ -49,8 +53,13 @@ class ScheduleServiceTests {
     @Test
     @DisplayName("직원별 스케줄 조회 성공")
     public void testScheduleService_select_employee() {
-        List<EmployeeWorkingPartDTO> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(8);
+        // given
+        int employeeCode = 8;
 
+        // when
+        List<EmployeeWorkingPartDTO> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
+
+        // then
         assertNotNull(employeeWorkPartList);
         employeeWorkPartList.forEach(System.out::println);
     }
@@ -58,44 +67,54 @@ class ScheduleServiceTests {
     @Test
     @DisplayName("스케줄 등록 성공")
     public void testScheduleService_insert() {
-        WeeklyScheduleDTO weeklyScheduleDTOList = scheduleService.registWeeklySchedule(new WeeklyScheduleDTO(4, true, new Date(), LocalDateTime.now(), LocalDateTime.now()));
-        assertNotNull(weeklyScheduleDTOList);
+        // given
+        WeeklyScheduleDTO weeklyScheduleDTO = new WeeklyScheduleDTO(2, true, new Date(), LocalDateTime.now(), LocalDateTime.now());
+
+        // when
+        WeeklyScheduleDTO savedSchedule = scheduleService.registWeeklySchedule(weeklyScheduleDTO);
+
+        // then
+        assertNotNull(savedSchedule);
     }
 
-//    @Test
-//    @DisplayName("직원 근무배치 성공")
-//    public void testScheduleService_insert_employee() {
-//        EmployeeWorkingPartDTO employeeWorkingPartDTOList = scheduleService.registSchedulePerEmployee(new EmployeeWorkingPartDTO(19, 3, 2, LocalDateTime.now(), "1T"));
-//        assertNotNull(employeeWorkingPartDTOList);
-//    }
+    @Test
+    @DisplayName("직원 근무배치 성공")
+    public void testScheduleService_insert_employee() {
+        // given
+        EmployeeWorkingPartDTO employeeWorkingPartDTO = new EmployeeWorkingPartDTO(19, 6, 2, LocalDateTime.now(), "1T");
+
+        // when
+        EmployeeWorkingPartDTO savedEmployeeWorkingPart = scheduleService.registSchedulePerEmployee(employeeWorkingPartDTO);
+
+        // then
+        assertNotNull(savedEmployeeWorkingPart);
+    }
 
     @Test
     @DisplayName("스케줄 수정 성공")
     public void testScheduleService_update() {
+        // given
         int employeeCode = 18;
-        EditScheduleInfo editScheduleInfo = new EditScheduleInfo(8, "1T");   // 코드, 파트타임이 들어감 employeeCode / workingDate / workingPartTime
+        EditScheduleInfo editScheduleInfo = new EditScheduleInfo(8, "1T");
 
+        // when
         scheduleService.EditSchedule(employeeCode, editScheduleInfo);
 
-        assertEquals(editScheduleInfo.getWorkingPartTime(),"1T");
+        // then
+        assertEquals(editScheduleInfo.getWorkingPartTime(), "1T");
     }
 
     @Test
     @DisplayName("스케줄 삭제 성공")
     public void testScheduleService_delete() {
+        // given
         int employeeCode = 18;
+
+        // when
         scheduleService.deleteSchedule(employeeCode);
-        List<EmployeeWorkingPartDTO> employeeWorkingPartDTO = scheduleService.findScheduleByEmployeeCode(18);
+        List<EmployeeWorkingPartDTO> employeeWorkingPartDTO = scheduleService.findScheduleByEmployeeCode(employeeCode);
+
+        // then
         assertTrue(employeeWorkingPartDTO.isEmpty());
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -21,11 +21,11 @@
           FROM weekly_schedule A
     </select>
 
-    <select id="selectLastScheduleCode" resultMap="scheduleResultMap">
-        SELECT
-               A.schedule_code
-          FROM weekly_schedule A
-         ORDER BY A.schedule_code DESC
-         LIMIT 1
-    </select>
+<!--    <select id="selectLastScheduleCode" resultMap="scheduleResultMap">-->
+<!--        SELECT-->
+<!--               A.schedule_code-->
+<!--          FROM weekly_schedule A-->
+<!--         ORDER BY A.schedule_code DESC-->
+<!--         LIMIT 1-->
+<!--    </select>-->
 </mapper>
