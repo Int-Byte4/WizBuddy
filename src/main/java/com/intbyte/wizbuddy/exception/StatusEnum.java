@@ -12,7 +12,8 @@ public enum StatusEnum {
     RESTRICTED(403, "RESTRICTED"),
     BOARD_NOT_FOUND(404, "BOARD_NOT_FOUND"),
     TASK_NOT_FOUND(404, "TASK_NOT_FOUND"),
-    CHECK_LIST_NOT_FOUND(404, "CHECK_LIST_NOT_FOUND");
+    CHECK_LIST_NOT_FOUND(404, "CHECK_LIST_NOT_FOUND"),
+    COMMENT_NOT_FOUND(404, "COMMENT_NOT_FOUND");
 
     private final int statusCode;
     private final String code;
