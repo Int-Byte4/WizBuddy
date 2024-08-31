@@ -31,7 +31,7 @@ class EmployeeServiceTests {
     void updateEmployerSuccess() {
         //given
         List<Employee> employees = employeeRepository.findAll();
-        int employeeCode = employees.get(0).getEmployeeCode();
+        String employeeCode = employees.get(0).getEmployeeCode();
 
         EditEmployeeInfo employeeInfo = new EditEmployeeInfo(employeeCode, "test", "test", "010-9999-9998", LocalDate.now(), LocalDateTime.now());
 
@@ -51,7 +51,7 @@ class EmployeeServiceTests {
     void testDeleteEmployeeSuccess() {
         //given
         List<Employee> employees = employeeRepository.findAll();
-        int employeeCode = employees.get(0).getEmployeeCode();
+        String employeeCode = employees.get(0).getEmployeeCode();
 
         DeleteEmployeeInfo deleteEmployeeInfo = new DeleteEmployeeInfo(employeeCode,false, LocalDateTime.now());
 

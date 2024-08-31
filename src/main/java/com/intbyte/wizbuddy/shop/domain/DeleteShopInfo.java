@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class DeleteShopInfo {
     private int shopCode;
-    private int employerCode;
+    private String employerCode;
     private boolean shopFlag;
     private LocalDateTime updatedAt;
 }

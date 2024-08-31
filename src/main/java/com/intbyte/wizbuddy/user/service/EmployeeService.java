@@ -22,7 +22,7 @@ public class EmployeeService {
 
     @Transactional
     public void modifyEmployee(EditEmployeeInfo modifyEmployeeInfo) {
-        int employeeCode = modifyEmployeeInfo.getEmployeeCode();
+        String employeeCode = modifyEmployeeInfo.getEmployeeCode();
 
         Employee employee = employeeMapper.getEmployee(employeeCode);
 
@@ -34,7 +34,7 @@ public class EmployeeService {
 
     @Transactional
     public void deleteEmployee(DeleteEmployeeInfo deleteEmployeeInfo) {
-        int employeeCode = deleteEmployeeInfo.getEmployeeCode();
+        String employeeCode = deleteEmployeeInfo.getEmployeeCode();
 
         Employee employee = employeeMapper.getEmployee(employeeCode);
 

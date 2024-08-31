@@ -22,8 +22,9 @@
     </resultMap>
 
     <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
-        INSERT INTO users(user_type)
+        INSERT INTO users(user_code, user_type)
         VALUES(
+              #{ userCode },
               #{ userType }
               )
     </insert>
