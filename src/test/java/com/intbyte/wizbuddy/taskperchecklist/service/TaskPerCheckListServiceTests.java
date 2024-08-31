@@ -1,13 +1,11 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
-import com.intbyte.wizbuddy.task.service.TaskService;
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
 import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
-import org.junit.jupiter.api.Assertions;
+import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,8 @@ class TaskPerCheckListServiceTests {
     private TaskPerCheckListService taskPerCheckListService;
     @Autowired
     private TaskPerCheckListMapper taskPerCheckListMapper;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Test
     @DisplayName("체크리스트에 업무추가 테스트 성공")
@@ -61,6 +61,23 @@ class TaskPerCheckListServiceTests {
         List<TaskPerCheckListDTO> allTaskPerCheckList = taskPerCheckListService.findAllTaskPerCheckList();
         for (int i = 0; i < allTaskPerCheckList.size(); i++) {
             System.out.println(allTaskPerCheckList.get(i));
+        }
+    }
+
+    @Test
+    @DisplayName("특정 체크리스트의 완료된 업무만 조회")
+    @Transactional
+    public void findAllTaskPerCheckListFinished(){
+
+        Integer size = employeeRepository.findAll().size();
+        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
+
+        System.out.println("employeeCode = " + employeeCode);
+        List<TaskPerCheckListDTO> finishedTask = taskPerCheckListService.findAllTaskPerCheckListFinished(employeeCode);
+        System.out.println(finishedTask.size());
+        for (int i = 0; i < finishedTask.size(); i++) {
+            System.out.println(finishedTask.get(i));
+            assertNotNull(finishedTask.get(i));
         }
     }
 
