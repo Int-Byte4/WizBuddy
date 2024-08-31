@@ -1,9 +1,11 @@
 package com.intbyte.wizbuddy.board.service;
 
+import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.SubsBoard;
 import com.intbyte.wizbuddy.board.dto.SubsBoardDTO;
 
 import com.intbyte.wizbuddy.board.repository.SubsBoardRepository;
+import com.intbyte.wizbuddy.mapper.SubsBoardMapper;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,11 +26,13 @@ class SubsBoardServiceTests {
 
     @Autowired
     private SubsBoardRepository subsBoardRepository;
-
+    @Autowired
+    private SubsBoardMapper subsBoardMapper;
 
 
     @Test
-    public void 대타게시판_전체_조회_테스트() {
+    @DisplayName("대타게시판_전체_조회_테스트")
+    public void findAllSubsBoardTest() {
         Assertions.assertDoesNotThrow(
                 () -> {
                     List<SubsBoardDTO> subsBoard = subsBoardService.findAllSubsBoards();
@@ -38,7 +42,8 @@ class SubsBoardServiceTests {
     }
 
     @Test
-    public void 매장별_대타게시판_조회_테스트() {
+    @DisplayName("대타게시판_1개_조회_테스트")
+    public void findSubsBoardByIdTest() {
         // given
         int subsCode = 1;
 
@@ -46,7 +51,7 @@ class SubsBoardServiceTests {
         SubsBoardDTO foundSubsBoard = subsBoardService.findSubsBoardById(subsCode);
 
         // then
-        assertNotNull(foundSubsBoard, "해당 subsCode에 대한 대타게시판 항목을 찾을 수 없습니다.");
+        assertNotNull(foundSubsBoard);
         assertEquals(subsCode, foundSubsBoard.getSubsCode());
 
         System.out.println("조회된 게시판 제목: " + foundSubsBoard.getSubsTitle());
@@ -56,87 +61,63 @@ class SubsBoardServiceTests {
 
     @Test
     @Transactional
-    public void 대타게시판_등록_테스트() {
+    @DisplayName("대타게시판_등록_테스트")
+    public void insertSubsBoardTest() {
         // given
-        SubsBoardDTO newSubsBoard = new SubsBoardDTO();
-        newSubsBoard.setSubsCode(3);
-        newSubsBoard.setSubsTitle("새로운 게시판 제목");
-        newSubsBoard.setSubsContent("게시판 내용");
-        newSubsBoard.setCreatedAt(LocalDateTime.now());
-        newSubsBoard.setUpdatedAt(LocalDateTime.now());
-        newSubsBoard.setEmployeeWorkingPartCode(1);
-        newSubsBoard.setSubsFlag(true);
-        newSubsBoard.setShopCode(1);
-
+        List<SubsBoard> subsBoardList = subsBoardRepository.findAll();
+        SubsBoardDTO newSubsBoard = new SubsBoardDTO(subsBoardList.size()+1,
+                "추석 3일 풀알바 뛸사람 이리오셈티비~","급여가 짭쪼롬해요?",
+                LocalDateTime.now(),LocalDateTime.now(),true,
+                1,1);
         // when
-        SubsBoard savedSubsBoard = subsBoardService.registSubsBoard(newSubsBoard);
-
+        subsBoardService.registSubsBoard(newSubsBoard);
         // then
-        assertNotNull(savedSubsBoard, "게시판 등록이 되어야 합니다.");
-        assertEquals("새로운 게시판 제목", savedSubsBoard.getSubsTitle());
-
-        SubsBoard foundSubsBoard = subsBoardRepository.findById(3)
-                .orElseThrow(() -> new IllegalArgumentException("해당 코드의 게시판이 존재하지 않습니다."));
-
-        assertEquals("새로운 게시판 제목", foundSubsBoard.getSubsTitle());
-        assertEquals("게시판 내용", foundSubsBoard.getSubsContent());
-        assertEquals(1, foundSubsBoard.getEmployeeWorkingPartCode());
-        assertEquals(true, foundSubsBoard.isSubsFlag());
-        assertEquals(1, foundSubsBoard.getShopCode());
+        List<SubsBoard> subsBoards = subsBoardRepository.findAll();
+        SubsBoard subsBoard = subsBoards.get(subsBoards.size()-1);
+        assertNotNull(subsBoard);
+        assertEquals("추석 3일 풀알바 뛸사람 이리오셈티비~", subsBoard.getSubsTitle());
+        assertEquals("급여가 짭쪼롬해요?", subsBoard.getSubsContent());
+        assertEquals(1, subsBoard.getEmployeeWorkingPartCode());
+        assertEquals(true, subsBoard.isSubsFlag());
+        assertEquals(1, subsBoard.getShopCode());
     }
 
 
     @Test
     @Transactional
-    void 대타게시판_수정_테스트() {
+    @DisplayName("대타게시판_수정_테스트")
+    void modifySubsBoardTest() {
         // given
-        int subsCode = 2;
-
-        SubsBoardDTO existingBoardDTO = subsBoardService.findSubsBoardById(subsCode);
-
-        assertNotNull(existingBoardDTO, "게시판 데이터가 존재해야 합니다.");
-
-        existingBoardDTO.setSubsTitle("추석 3일 내내 알바할사람 이리오셈티비~");
-        existingBoardDTO.setSubsContent("댓글 컴온 베베");
-        existingBoardDTO.setEmployeeWorkingPartCode(3);
-
+        int subsCode = 1;
+        SubsBoard subsBoard = subsBoardMapper.selectSubsBoardById(subsCode);
+        EditSubsBoardInfo updateSubsBoard = new EditSubsBoardInfo(
+                "9월 1일 내 생일 같이 보낼 직원분 구함", "제목이 곧 내용ㄱㄱ",
+                LocalDateTime.now(), 2);
         // when
-        SubsBoard updatedBoard = subsBoardService.modifySubsBoards(existingBoardDTO);
-
-        System.out.println("updatedBoard = " + updatedBoard);
-
+        subsBoardService.modifySubsBoards(subsBoard.getSubsCode(), updateSubsBoard);
         // then
-        SubsBoard foundBoard = subsBoardRepository.findById(subsCode)
-                .orElseThrow(() -> new IllegalArgumentException("게시판을 찾을 수 없습니다."));
-
-        assertEquals("추석 3일 내내 알바할사람 이리오셈티비~", foundBoard.getSubsTitle());
-        assertEquals("댓글 컴온 베베", foundBoard.getSubsContent());
+        SubsBoard foundBoard = subsBoardRepository.findById(subsCode).orElse(null);
+        assertEquals("9월 1일 내 생일 같이 보낼 직원분 구함", foundBoard.getSubsTitle());
+        assertEquals("제목이 곧 내용ㄱㄱ", foundBoard.getSubsContent());
         assertNotNull(foundBoard.getCreatedAt());
-        assertEquals(3, foundBoard.getEmployeeWorkingPartCode());
+        assertEquals(2, foundBoard.getEmployeeWorkingPartCode());
         assertEquals(1, foundBoard.getShopCode());
     }
 
 
-
-
     @Test
     @Transactional
-    void 대타게시판_삭제_테스트() {
-        // Given
+    @DisplayName("대타게시판_삭제_테스트")
+    void deleteSubsBoardTest() {
+        // given
         int subsCode = 1;
-
         SubsBoardDTO subsBoard = subsBoardService.findSubsBoardById(subsCode);
-        // When
-        SubsBoard result = subsBoardService.deleteSubsBoard(subsBoard);
-
-        // Then
-        assertThat(result).isNotNull();
-        assertThat(result.isSubsFlag()).isFalse();
-
+        // when
+        subsBoardService.deleteSubsBoard(subsBoard);
+        // then
         SubsBoard updatedSubsBoard = subsBoardRepository.findById(subsCode).orElse(null);
         assertThat(updatedSubsBoard).isNotNull();
         assertThat(updatedSubsBoard.isSubsFlag()).isFalse();
     }
-
 
 }
