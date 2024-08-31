@@ -11,7 +11,20 @@
         <result property="scheduleCode" column="schedule_code"/>
     </resultMap>
 
-    <select id="selectSchedule" resultMap="EmployeeAndScheduleResultMap">
+    <select id="findEmployeeByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+        SELECT
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
+             , A.working_date
+             , A.working_part_time
+             , A.schedule_code
+          FROM employee_working_part A
+         WHERE A.employee_code = #{employeeCode}
+         LIMIT 1
+    </select>
+
+    <select id="selectSchedule" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
         SELECT
                A.working_part_code
              , A.employee_code
@@ -24,11 +37,14 @@
          WHERE B.schedule_code = #{scheduleCode}
     </select>
 
-    <select id="selectScheduleByEmployeeCode" resultMap="EmployeeAndScheduleResultMap">
+    <select id="selectScheduleByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
         SELECT
-               A.employee_code
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
              , A.working_date
              , A.working_part_time
+             , A.schedule_code
           FROM employee_working_part A
           JOIN employee B ON A.employee_code = B.employee_code
          WHERE B.employee_code = #{employeeCode}
