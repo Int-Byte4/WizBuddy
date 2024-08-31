@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.board.domain.entity;
 
+import com.intbyte.wizbuddy.board.domain.DeleteManualBoardInfo;
+import com.intbyte.wizbuddy.board.domain.EditManualBoardInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,7 +10,6 @@ import java.time.LocalDateTime;
 @Entity(name = "manualBoard")
 @Table(name = "manual_board")
 @Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -16,30 +17,42 @@ import java.time.LocalDateTime;
 public class ManualBoard {
     @Id
     @Column
-    private int manual_code;
+    private int manualCode;
 
     @Column
-    private String manual_title;
+    private String manualTitle;
 
     @Column
-    private String manual_contents;
+    private String manualContents;
 
     @Column
-    private boolean manual_flag;
+    private boolean manualFlag;
 
     @Column
-    private String image_url;
+    private String imageUrl;
 
     @Column
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     @Column
-    private int shop_code;
+    private int shopCode;
 
     @Column
-    private int user_code;
+    private int userCode;
 
+
+    public void modify(EditManualBoardInfo modifyManualBoardInfo) {
+        this.manualTitle = modifyManualBoardInfo.getManualTitle();
+        this.manualContents = modifyManualBoardInfo.getManualContents();
+        this.imageUrl = modifyManualBoardInfo.getImageUrl();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void delete(DeleteManualBoardInfo deleteManualBoardInfo) {
+        this.manualFlag = false;
+        this.updatedAt = deleteManualBoardInfo.getUpdatedAt();
+    }
 }

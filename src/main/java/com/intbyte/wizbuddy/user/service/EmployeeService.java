@@ -21,23 +21,6 @@ public class EmployeeService {
     private final EmployeeMapper employeeMapper;
 
     @Transactional
-    public Employee registerEmployee(EmployeeDTO employeeInfo) {
-        Employee employee = Employee.builder()
-                .employeeName(employeeInfo.getEmployeeName())
-                .employeeEmail(employeeInfo.getEmployeeEmail())
-                .employeePassword(employeeInfo.getEmployeePassword())
-                .employeePhone(employeeInfo.getEmployeePhone())
-                .employeeFlag(employeeInfo.isEmployeeFlag())
-                // 중간에 4개 컬럼은 nullable이라 생략
-                .employeeBlackState(employeeInfo.isEmployeeBlackState())
-                .createdAt(employeeInfo.getCreatedAt())
-                .updatedAt(employeeInfo.getUpdatedAt())
-                .build();
-
-        return employeeRepository.save(employee);
-    }
-
-    @Transactional
     public void modifyEmployee(EditEmployeeInfo modifyEmployeeInfo) {
         int employeeCode = modifyEmployeeInfo.getEmployeeCode();
 

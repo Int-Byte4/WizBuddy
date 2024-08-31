@@ -2,6 +2,7 @@ package com.intbyte.wizbuddy.user.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +21,14 @@ public class EmployeeDTO {
     private String employeePhone;
 
     private boolean employeeFlag;
+
+    private String latitude;
+
+    private String longitude;
+
+    private int employeeWage;
+
+    private LocalDate employeeHealthDate;
 
     private boolean employeeBlackState;
 

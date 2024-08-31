@@ -12,12 +12,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @ToString
 public class NoticeBoardDTO {
-    private int notice_code;
-    private String notice_title;
-    private String notice_content;
-    private boolean notice_flag;
-    private String image_url;
-    private LocalDateTime created_at;
-    private LocalDateTime updated_at;
-    private int shop_code;
+    private int noticeCode;
+    private String noticeTitle;
+    private String noticeContent;
+    private boolean noticeFlag;
+    private String imageUrl;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private int shopCode;
+
 }
