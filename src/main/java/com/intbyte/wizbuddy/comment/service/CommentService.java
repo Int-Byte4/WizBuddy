@@ -3,6 +3,7 @@ package com.intbyte.wizbuddy.comment.service;
 
 import com.intbyte.wizbuddy.comment.domain.Entity.Comment;
 import com.intbyte.wizbuddy.comment.dto.CommentDTO;
+import com.intbyte.wizbuddy.exception.comment.CommentNotFoundException;
 import com.intbyte.wizbuddy.mapper.CommentMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -27,4 +28,16 @@ public class CommentService {
                 .map(comment-> modelMapper.map(comment, CommentDTO.class))
                 .collect(Collectors.toList());
     }
+
+    public CommentDTO findCommentById(int code) {
+        Comment comment = commentMapper.selectCommentById(code);
+
+        if(comment == null) {
+            throw new CommentNotFoundException();
+
+        }
+        return modelMapper.map(comment, CommentDTO.class);
+    }
+
+
 }
