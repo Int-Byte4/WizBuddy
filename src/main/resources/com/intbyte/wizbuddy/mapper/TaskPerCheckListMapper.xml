@@ -13,6 +13,7 @@
         <result property="taskFinishedState" column="task_finished_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <result property="employeeCode" column="employee_code"/>
     </resultMap>
 
     <!-- 특정 TaskPerCheckList 조회 -->
@@ -38,6 +39,19 @@
            , A.EMPLOYEE_CODE
         FROM taskperchecklist A
         WHERE TASK_CODE = #{ taskCode } AND CHECKLIST_CODE = #{ checkListCode }
+    </select>
+
+    <!-- 특정 checklist의 완료된 task 조회 -->
+    <select id="findAllTaskPerCheckListFinished" parameterType="String" resultMap="taskPerChecklistResultMap">
+        SELECT
+        A.TASK_CODE
+        , A.CHECKLIST_CODE
+        , A.TASK_FINISHED_STATE
+        , A.CREATED_AT
+        , A.UPDATED_AT
+        , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+        WHERE employee_code = #{ employeeCode } AND task_finished_state = true
     </select>
 
 

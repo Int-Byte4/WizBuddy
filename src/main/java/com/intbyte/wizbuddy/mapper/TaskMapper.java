@@ -10,4 +10,8 @@ public interface TaskMapper {
     Task findTaskById(int taskId);
 
     List<Task> findAllTask();
+
+    List<Task> findAllTaskByFixedState();
+
+    List<Task> findAllTasksByTaskFlag();
 }

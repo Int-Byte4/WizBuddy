@@ -55,7 +55,8 @@ class CheckListServiceTests {
     public void findCheckListByIdTest(){
 
         // given
-        int checkListCode = checkListMapper.findAllCheckList().size() - 1;
+        int checkListCode = checkListMapper.findAllCheckList().size();
+        System.out.println("checkListCode = " + checkListCode);
 
         // when
         CheckListDTO checkList = checkListService.findCheckListById(checkListCode);
@@ -69,6 +70,16 @@ class CheckListServiceTests {
     @Transactional
     public void findAllCheckListTest(){
         List<CheckList> allCheckList = checkListMapper.findAllCheckList();
+        for(CheckList checklist: allCheckList){
+            assertNotNull(checklist);
+        }
+    }
+
+    @Test
+    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
+    @Transactional
+    public void findAllCheckListsByFlag(){
+        List<CheckList> allCheckList = checkListMapper.findAllCheckListsByFlag();
         for(CheckList checklist: allCheckList){
             assertNotNull(checklist);
         }

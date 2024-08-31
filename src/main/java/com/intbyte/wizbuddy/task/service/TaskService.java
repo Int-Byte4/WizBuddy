@@ -61,6 +61,26 @@ public class TaskService {
     }
 
     @Transactional
+    public List<TaskDTO> findAllTaskByFixedState(){
+
+        List<Task> findTasks = taskMapper.findAllTaskByFixedState();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTasksByTaskFlag(){
+
+        List<Task> findTasks = taskMapper.findAllTasksByTaskFlag();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void modifyTask(int taskCode, EditTaskInfo modifyTaskInfo){
 
         Task task = taskRepository.findById(taskCode).orElseThrow(TaskNotFoundException::new);

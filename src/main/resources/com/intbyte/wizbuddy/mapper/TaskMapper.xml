@@ -38,5 +38,31 @@
         WHERE A.task_code = #{ taskCode }
     </select>
 
+    <!-- 고정된 업무만 find -->
+    <select id="findAllTaskByFixedState" resultMap="taskResultMap">
+             SELECT
+             A.task_code
+           , A.task_contents
+           , A.task_flag
+           , A.task_fixed_state
+           , A.created_at
+           , A.updated_at
+        FROM Task A
+        WHERE A.task_fixed_state = true
+    </select>
+
+    <!-- 존재하는 업무만 find -->
+    <select id="findAllTasksByTaskFlag" resultMap="taskResultMap">
+    SELECT
+              A.task_code
+            , A.task_contents
+            , A.task_flag
+            , A.task_fixed_state
+            , A.created_at
+            , A.updated_at
+         FROM Task A
+        WHERE A.task_flag = true
+    </select>
+
 
 </mapper>

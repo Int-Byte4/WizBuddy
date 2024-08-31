@@ -2,6 +2,8 @@ package com.intbyte.wizbuddy.taskperchecklist.service;
 
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
+import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
+import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
@@ -26,19 +28,20 @@ import java.util.stream.Collectors;
 public class TaskPerCheckListService {
 
     private final TaskPerCheckListRepository taskPerCheckListRepository;
-//    private final TaskPerCheckListMapper taskPerCheckListMapper;
+
     private final ModelMapper modelMapper;
 
     private final TaskPerCheckListMapper taskPerCheckListMapper;
 
-    private CheckListRepository checkListRepository;
+    private final CheckListRepository checkListRepository;
 
-    private TaskRepository taskRepository;
+    private final TaskRepository taskRepository;
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public TaskPerCheckListService(CheckListRepository checkListRepository, TaskPerCheckListRepository taskPerCheckListRepository, /*TaskPerCheckListMapper taskPerCheckListMapper,*/ ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository, TaskPerCheckListMapper taskPerCheckListMapper) {
+    public TaskPerCheckListService(CheckListRepository checkListRepository, TaskPerCheckListRepository taskPerCheckListRepository,
+            TaskPerCheckListMapper taskPerCheckListMapper, ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository) {
 
         this.checkListRepository = checkListRepository;
         this.taskPerCheckListRepository = taskPerCheckListRepository;
@@ -59,9 +62,9 @@ public class TaskPerCheckListService {
 
         // CheckList, Task, Employee 객체 조회
         CheckList checkList = checkListRepository.findById(taskPerCheckListDTO.getCheckListCode())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid checkListCode"));
+                .orElseThrow(CheckListNotFoundException::new);
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid taskCode"));
+                .orElseThrow(TaskNotFoundException::new);
         Employee employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid employeeCode"));
 
@@ -86,7 +89,8 @@ public class TaskPerCheckListService {
     @Transactional
     public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerChecklistId taskPerChecklistId){
 
-        TaskPerCheckListMybatis findTaskPerCheckList = taskPerCheckListMapper.findTaskPerCheckListById(taskPerChecklistId.getTaskCode(), taskPerChecklistId.getCheckListCode());
+        TaskPerCheckListMybatis findTaskPerCheckList =
+                taskPerCheckListMapper.findTaskPerCheckListById(taskPerChecklistId.getTaskCode(), taskPerChecklistId.getCheckListCode());
 
         return modelMapper.map(findTaskPerCheckList, TaskPerCheckListDTO.class);
     }
@@ -95,6 +99,17 @@ public class TaskPerCheckListService {
     public List<TaskPerCheckListDTO> findAllTaskPerCheckList() {
 
         List<TaskPerCheckListMybatis> findTaskPerCheckList = taskPerCheckListMapper.findAllTaskPerCheckList();
+
+        return findTaskPerCheckList.stream()
+                .map(taskPerCheckList -> modelMapper.map(taskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // 특정 checkList의 완료된 task만 조회
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckListFinished(String employeeCode) {
+
+        List<TaskPerCheckListMybatis> findTaskPerCheckList = taskPerCheckListMapper.findAllTaskPerCheckListFinished(employeeCode);
 
         return findTaskPerCheckList.stream()
                 .map(taskPerCheckList -> modelMapper.map(taskPerCheckList, TaskPerCheckListDTO.class))

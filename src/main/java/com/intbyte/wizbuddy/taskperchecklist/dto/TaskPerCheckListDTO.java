@@ -22,5 +22,5 @@ public class TaskPerCheckListDTO {
 
     private LocalDateTime updatedAt;
 
-    private int employeeCode;
+    private String employeeCode;
 }

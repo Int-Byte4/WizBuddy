@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.mapper;
 
 import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,4 +11,6 @@ public interface TaskPerCheckListMapper {
     TaskPerCheckListMybatis findTaskPerCheckListById(@Param("taskCode") Integer taskCode, @Param("checkListCode") Integer checkListCode);
 
     List<TaskPerCheckListMybatis> findAllTaskPerCheckList();
+
+    List<TaskPerCheckListMybatis> findAllTaskPerCheckListFinished(String employeeCode);
 }
