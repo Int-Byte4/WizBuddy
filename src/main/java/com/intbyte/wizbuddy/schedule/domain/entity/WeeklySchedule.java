@@ -1,12 +1,10 @@
 package com.intbyte.wizbuddy.schedule.domain.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.context.annotation.Scope;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity(name = "weeklySchedule")
 @Table(name = "weekly_schedule")
@@ -25,7 +23,7 @@ public class WeeklySchedule {
     private boolean scheduleFlag;
 
     @Column
-    private Date scheduleStartDate;
+    private LocalDate scheduleStartDate;
 
     @Column
     private LocalDateTime createdAt;

@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.comment.service;
 
-
 import com.intbyte.wizbuddy.comment.domain.EditCommentInfo;
 import com.intbyte.wizbuddy.comment.domain.Entity.Comment;
 import com.intbyte.wizbuddy.comment.dto.CommentDTO;
