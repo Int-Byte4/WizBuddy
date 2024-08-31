@@ -55,7 +55,8 @@ class CheckListServiceTests {
     public void findCheckListByIdTest(){
 
         // given
-        int checkListCode = checkListMapper.findAllCheckList().size() - 1;
+        int checkListCode = checkListMapper.findAllCheckList().size();
+        System.out.println("checkListCode = " + checkListCode);
 
         // when
         CheckListDTO checkList = checkListService.findCheckListById(checkListCode);
