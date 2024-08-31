@@ -5,5 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface EmployeeMapper {
-    Employee getEmployee(int employeeCode);
+    Employee getEmployee(String employeeCode);
+
+    Employee getEmployeeByEmail(String employeeEmail);
+
 }

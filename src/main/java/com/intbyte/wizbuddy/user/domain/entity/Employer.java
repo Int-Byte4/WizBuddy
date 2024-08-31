@@ -19,30 +19,30 @@ public class Employer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employer_code")
-    private int employerCode;
+    private String employerCode;
 
     @Column(name = "employer_name")
     private String employerName;
 
-    @Column(name = "employer_email")
+    @Column(nullable = false, unique = true, name = "employer_email")
     private String employerEmail;
 
-    @Column(name = "employer_password")
+    @Column(nullable = false, name = "employer_password")
     private String employerPassword;
 
-    @Column(name = "employer_phone")
+    @Column(nullable = false, name = "employer_phone")
     private String employerPhone;
 
-    @Column(name = "employer_flag")
+    @Column(nullable = false, name = "employer_flag")
     private boolean employerFlag;
 
-    @Column(name = "employer_black_state")
+    @Column(nullable = false, name = "employer_black_state")
     private boolean employerBlackState;
 
-    @Column(name = "created_at")
+    @Column(nullable = false, name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(nullable = false, name = "updated_at")
     private LocalDateTime updatedAt;
 
     public void modify(EditEmployerInfo modifyEmployerInfo) {

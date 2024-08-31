@@ -26,10 +26,11 @@
     </resultMap>
 
     <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
-        INSERT INTO users(user_type)
+        INSERT INTO users(user_code, user_type)
         VALUES(
-              #{ userType }
-              )
+        #{ userCode },
+        #{ userType }
+        )
     </insert>
 
     <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">

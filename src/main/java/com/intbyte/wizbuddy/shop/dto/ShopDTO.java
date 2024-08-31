@@ -18,5 +18,5 @@ public class ShopDTO {
     private String businessNum;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private int employerCode;
+    private String employerCode;
 }

@@ -30,7 +30,7 @@ class EmployerServiceTests {
     void updateEmployerSuccess() {
         //given
         List<Employer> employers = employerRepository.findAll();
-        int employerCode = employers.get(0).getEmployerCode();
+        String employerCode = employers.get(0).getEmployerCode();
 
         EditEmployerInfo employerInfo = new EditEmployerInfo(employerCode, "test", "test", "010-9999-9998", LocalDateTime.now());
 
@@ -50,7 +50,7 @@ class EmployerServiceTests {
     void testDeleteEmployerSuccess() {
         //given
         List<Employer> employers = employerRepository.findAll();
-        int employerCode = employers.get(0).getEmployerCode();
+        String employerCode = employers.get(0).getEmployerCode();
 
         DeleteEmployerInfo deleteEmployerInfo = new DeleteEmployerInfo(employerCode,false, LocalDateTime.now());
 
