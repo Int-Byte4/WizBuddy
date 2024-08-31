@@ -68,9 +68,33 @@ class TaskServiceTests {
     public void 전체_업무_조회_테스트(){
         List<Task> allTask = taskMapper.findAllTask();
         for (int i = 0; i < allTask.size(); i++) {
+            assertNotNull(allTask);
             System.out.println(allTask.get(i));
         }
     }
+
+
+    @Test
+    @Transactional
+    public void 고정된_전체_업무_조회_테스트(){
+        List<Task> allTask = taskMapper.findAllTaskByFixedState();
+        for (int i = 0; i < allTask.size(); i++) {
+            assertNotNull(allTask);
+            System.out.println(allTask.get(i));
+        }
+    }
+
+
+    @Test
+    @Transactional
+    public void 삭제되지않은_전체_업무_조회_테스트(){
+        List<Task> allTask = taskMapper.findAllTasksByTaskFlag();
+        for (int i = 0; i < allTask.size(); i++) {
+            assertNotNull(allTask);
+            System.out.println(allTask.get(i));
+        }
+    }
+
 
     @Test
     public void id로_업무_1개_수정_테스트(){
