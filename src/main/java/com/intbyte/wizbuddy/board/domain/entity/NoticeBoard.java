@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.board.domain.entity;
 
+import com.intbyte.wizbuddy.board.domain.DeleteNoticeBoardInfo;
+import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -42,4 +44,16 @@ public class NoticeBoard {
 
     @Column
     private int shopCode;
+
+    public void modify(EditNoticeBoardInfo modifyNoticeBoardInfo) {
+        this.noticeTitle = modifyNoticeBoardInfo.getNoticeTitle();
+        this.noticeContent = modifyNoticeBoardInfo.getNoticeContent();
+        this.imageUrl = modifyNoticeBoardInfo.getImageUrl();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void delete(DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
+        this.noticeFlag = false;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
