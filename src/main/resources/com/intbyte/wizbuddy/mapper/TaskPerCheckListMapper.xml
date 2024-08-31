@@ -13,6 +13,7 @@
         <result property="taskFinishedState" column="task_finished_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <result property="employeeCode" column="employee_code"/>
     </resultMap>
 
     <!-- 특정 TaskPerCheckList 조회 -->
