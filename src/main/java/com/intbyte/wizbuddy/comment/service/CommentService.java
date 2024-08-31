@@ -67,6 +67,11 @@ public class CommentService {
         commentRepository.save(modifycomment);
     }
 
-
-
+    @Transactional
+    public void removeComment(CommentDTO deleteComment) {
+        Comment comment = commentRepository.findById(deleteComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
+        comment.toDelete();
+        commentRepository.save(comment);
+    }
+    
 }
