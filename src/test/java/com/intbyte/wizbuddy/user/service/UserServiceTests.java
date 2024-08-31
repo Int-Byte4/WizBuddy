@@ -1,11 +1,15 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.domain.SignInEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.domain.entity.User;
+import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.dto.UserDTO;
+import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import com.intbyte.wizbuddy.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -21,6 +25,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class UserServiceTests {
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @Autowired
     private EmployerRepository employerRepository;
@@ -44,7 +51,7 @@ class UserServiceTests {
         List<Employer> currentEmployer = employerRepository.findAll();
         EmployerDTO employerDTO = new EmployerDTO(currentEmployer.size(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, false, LocalDateTime.now(), LocalDateTime.now());
 
-        SignInEmployerInfo signInEmployerInfo = new SignInEmployerInfo(
+        RegisterEmployerInfo registerEmployerInfo = new RegisterEmployerInfo(
                 employerDTO.getEmployerCode()
                 , employerDTO.getEmployerName()
                 , employerDTO.getEmployerEmail()
@@ -56,7 +63,7 @@ class UserServiceTests {
                 , employerDTO.getUpdatedAt());
 
         //when
-        userService.signInEmployer(signInUserInfo, signInEmployerInfo);
+        userService.signInEmployer(signInUserInfo, registerEmployerInfo);
 
         //then
         List<User> newUsers = userRepository.findAll();
@@ -70,5 +77,50 @@ class UserServiceTests {
 
         newUsers.forEach(System.out::println);
         newEmployers.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("직원유저 등록 성공")
+    @Transactional
+    void registerEmployeeTestSuccess() {
+        //given
+        List<User> currentUsers = userRepository.findAll();
+        UserDTO userDTO = new UserDTO(currentUsers.size(), "Employee");
+
+        SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType());
+
+        List<Employee> currentEmployee = employeeRepository.findAll();
+        EmployeeDTO employeeDTO = new EmployeeDTO(currentEmployee.size(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, null, null, 0, null, false, LocalDateTime.now(), LocalDateTime.now());
+
+        RegisterEmployeeInfo registerEmployeeInfo = new RegisterEmployeeInfo(
+                employeeDTO.getEmployeeCode()
+                , employeeDTO.getEmployeeName()
+                , employeeDTO.getEmployeeEmail()
+                , employeeDTO.getEmployeePassword()
+                , employeeDTO.getEmployeePhone()
+                , employeeDTO.isEmployeeFlag()
+                , employeeDTO.getLatitude()
+                , employeeDTO.getLongitude()
+                , employeeDTO.getEmployeeWage()
+                , employeeDTO.getEmployeeHealthDate()
+                , employeeDTO.isEmployeeBlackState()
+                , employeeDTO.getCreatedAt()
+                , employeeDTO.getUpdatedAt());
+
+        //when
+        userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
+
+        //then
+        List<User> newUsers = userRepository.findAll();
+        User user = newUsers.get(newUsers.size() - 1);
+
+        List<Employee> newEmployees = employeeRepository.findAll();
+        Employee employee = newEmployees.get(newEmployees.size() - 1);
+
+        assertTrue(newUsers.contains(user));
+        assertTrue(newEmployees.contains(employee));
+
+        newUsers.forEach(System.out::println);
+        newEmployees.forEach(System.out::println);
     }
 }

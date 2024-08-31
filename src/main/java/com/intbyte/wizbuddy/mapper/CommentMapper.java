@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-    List<Comment> selectAllCommet();
+    List<Comment> selectAllComment();
 }

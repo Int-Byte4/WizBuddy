@@ -7,7 +7,7 @@
         <id property="userCode" column="user_code"/>
         <result property="userType" column="user_type"/>
 
-        <association property="employee" javaType="com.intbyte.wizbuddy.user.domain.entity.Employee">
+        <collection property="employee" javaType="com.intbyte.wizbuddy.user.domain.entity.Employee">
             <id property="employeeCode" column="employee_code"/>
             <result property="employeeName" column="employee_name"/>
             <result property="employeeEmail" column="employee_email"/>
@@ -21,8 +21,34 @@
             <result property="employeeBlackState" column="employee_black_state"/>
             <result property="createdAt" column="created_at"/>
             <result property="updatedAt" column="updated_at"/>
-        </association>
+        </collection>
 
     </resultMap>
+
+    <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
+        INSERT INTO users(user_type)
+        VALUES(
+              #{ userType }
+              )
+    </insert>
+
+    <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">
+        INSERT INTO employee(employee_code, employee_name, employee_email, employee_password, employee_phone, employee_flag, latitude, longitude, employee_wage, employee_health_date, employee_black_state, created_at, updated_at)
+        VALUES(
+              #{ employeeCode },
+              #{ employeeName },
+              #{ employeeEmail },
+              #{ employeePassword },
+              #{ employeePhone },
+              #{ employeeFlag },
+              #{ latitude },
+              #{ longitude },
+              #{ employeeWage },
+              #{ employeeHealthDate },
+              #{ employeeBlackState },
+              #{ createdAt },
+              #{ updatedAt }
+              )
+    </insert>
 
 </mapper>

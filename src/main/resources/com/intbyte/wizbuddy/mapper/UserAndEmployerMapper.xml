@@ -28,7 +28,7 @@
               )
     </insert>
 
-    <insert id="insertEmployer" parameterType="com.intbyte.wizbuddy.user.domain.SignInEmployerInfo" useGeneratedKeys="true" keyProperty="employerCode">
+    <insert id="insertEmployer" parameterType="com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo" useGeneratedKeys="true" keyProperty="employerCode">
         INSERT INTO employer(employer_code, employer_name, employer_email, employer_password, employer_phone, employer_flag, employer_black_state, created_at, updated_at)
         VALUES(
               #{ employerCode },
@@ -42,5 +42,7 @@
               #{ updatedAt }
               )
     </insert>
+
+
 
 </mapper>

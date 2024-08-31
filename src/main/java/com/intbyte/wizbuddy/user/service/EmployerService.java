@@ -20,21 +20,8 @@ public class EmployerService {
     private final EmployerRepository employerRepository;
     private final EmployerMapper employerMapper;
 
-    // user에서 회원가입, 로그인 / employer에서는 등록만 된다.
-    @Transactional
-    public void registerEmployer(EmployerDTO employerInfo) {
-        Employer employer = Employer.builder()
-                .employerName(employerInfo.getEmployerName())
-                .employerEmail(employerInfo.getEmployerEmail())
-                .employerPhone(employerInfo.getEmployerPhone())
-                .employerFlag(employerInfo.isEmployerFlag())
-                .employerBlackState(employerInfo.isEmployerBlackState())
-                .createdAt(employerInfo.getCreatedAt())
-                .updatedAt(employerInfo.getUpdatedAt())
-                .build();
-
-        employerRepository.save(employer);
-    }
+    // user에서 회원가입하면 사장 등록까지 한 번에 처리한다.
+    // 수정, 삭제는 employer 에서
 
     @Transactional
     public void modifyEmployer(EditEmployerInfo modifyEmployerInfo) {
