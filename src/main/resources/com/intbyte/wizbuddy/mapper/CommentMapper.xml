@@ -22,7 +22,7 @@
         , C.COMMENT_ADOPTED_STATE
         , C.CREATED_AT
         , C.UPDATED_AT
-        , C.SHOP_CODE
+        , C.SUBS_CODE
         , C.EMPLOYEE_CODE
         FROM COMMENTS C
     </select>
