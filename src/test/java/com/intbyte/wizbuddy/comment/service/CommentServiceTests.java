@@ -1,14 +1,23 @@
 package com.intbyte.wizbuddy.comment.service;
 
+import com.intbyte.wizbuddy.comment.domain.EditCommentInfo;
+import com.intbyte.wizbuddy.comment.domain.Entity.Comment;
 import com.intbyte.wizbuddy.comment.dto.CommentDTO;
+import com.intbyte.wizbuddy.comment.repository.CommentRepository;
+import com.intbyte.wizbuddy.mapper.CommentMapper;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
@@ -16,6 +25,11 @@ class CommentServiceTests {
 
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private CommentMapper commentMapper;
+    @Qualifier("commentRepository")
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Test
     @DisplayName("댓글_전체_조회_테스트")
@@ -42,8 +56,31 @@ class CommentServiceTests {
         assertNotNull(comment);
         assertNotNull(comment);
         System.out.println("comment = " + comment);
-        
 
     }
+
+//    @Test
+//    @Transactional
+//    @DisplayName("댓글_등록_테스트")
+//    public void insertCommentTest() {
+//
+//        //given
+//        int susCode = 1;
+//        int empolyeeCode = 2;
+//        List<CommentDTO> commentList = commentService.findAllComment();
+//        CommentDTO comment = new CommentDTO(commentList.size() +1,"사장님 저 믿으시죠 저 가능합니다.",true,false, LocalDateTime.now(), LocalDateTime.now(),susCode,empolyeeCode);
+//
+//        //when
+//        commentService.registerComment(comment);
+//
+//        //then
+//        Comment newcomment = commentMapper.selectCommentById(comment.getCommentCode());
+//        assertNotNull(newcomment);
+//        assertEquals(comment.getCommentCode(),newcomment.getCommentCode());
+//
+//    }
+
+
+
 
 }
