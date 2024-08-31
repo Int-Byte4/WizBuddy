@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.schedule.dto;
 
-import com.intbyte.wizbuddy.schedule.domain.entity.WeeklySchedule;
 import lombok.*;
 
 import java.time.LocalDateTime;
