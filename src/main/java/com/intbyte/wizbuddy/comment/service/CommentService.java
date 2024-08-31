@@ -22,7 +22,7 @@ public class CommentService {
     }
 
     public List<CommentDTO> findAllComment() {
-        List<Comment> commentList = commentMapper.selectAllComment();
+        List<Comment> commentList = commentMapper.selectAllCommet();
         return  commentList.stream()
                 .map(comment-> modelMapper.map(comment, CommentDTO.class))
                 .collect(Collectors.toList());
