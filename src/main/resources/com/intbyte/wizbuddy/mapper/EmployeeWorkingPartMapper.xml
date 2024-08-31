@@ -13,14 +13,25 @@
 
     <select id="selectSchedule" resultMap="EmployeeAndScheduleResultMap">
         SELECT
-              A.working_part_code
-            , A.employee_code
-            , A.schedule_code
-            , A.working_date
-            , A.working_part_time
-            , A.schedule_code
-         FROM employeeWorkingPart A
-         JOIN weekly_schedule B ON A.schedule_code = B.schedule_code
-        WHERE B.schedule_code = #{scheduleCode}
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
+             , A.working_date
+             , A.working_part_time
+             , A.schedule_code
+          FROM employee_working_part A
+          JOIN weekly_schedule B ON A.schedule_code = B.schedule_code
+         WHERE B.schedule_code = #{scheduleCode}
+    </select>
+
+    <select id="selectScheduleByEmployeeCode" resultMap="EmployeeAndScheduleResultMap">
+        SELECT
+               A.employee_code
+             , A.working_date
+             , A.working_part_time
+          FROM employee_working_part A
+          JOIN employee B ON A.employee_code = B.employee_code
+         WHERE B.employee_code = #{employeeCode}
     </select>
 </mapper>
+

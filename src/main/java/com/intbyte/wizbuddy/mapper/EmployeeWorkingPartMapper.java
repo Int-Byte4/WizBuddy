@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface EmployeeWorkingPartMapper {
     List<EmployeeWorkingPartDTO> selectSchedule(int scheduleCode);
+
+    List<EmployeeWorkingPartDTO> selectScheduleByEmployeeCode(int scheduleCode);
 }
