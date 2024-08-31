@@ -5,16 +5,16 @@ import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
+import com.intbyte.wizbuddy.mapper.EmployeeMapper;
 import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
-import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
+import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import com.intbyte.wizbuddy.shop.domain.RegisterShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
-import com.intbyte.wizbuddy.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,13 +27,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ShopService {
 
-    private final UserRepository userRepository;
     private final ShopRepository shopRepository;
     private final EmployerMapper employerMapper;
     private final ShopMapper shopMapper;
+    private final EmployeeMapper employeeMapper;
 
     @Transactional
-    public void registerShop(int employerCode, RegisterShopInfo shopInfo) {
+    public void registerShop(String employerCode, RegisterShopInfo shopInfo) {
         if (employerMapper.getEmployer(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
@@ -52,7 +52,7 @@ public class ShopService {
     }
 
     @Transactional
-    public void modifyShop(int employerCode, EditShopInfo modifyShopInfo) {
+    public void modifyShop(String employerCode, EditShopInfo modifyShopInfo) {
         int shopCode = modifyShopInfo.getShopCode();
 
         Employer employer = employerMapper.getEmployer(employerCode);
@@ -65,7 +65,7 @@ public class ShopService {
     }
 
     @Transactional
-    public void deleteShop(int employerCode, DeleteShopInfo deleteShopInfo) {
+    public void deleteShop(String employerCode, DeleteShopInfo deleteShopInfo) {
         int shopCode = deleteShopInfo.getShopCode();
 
         Employer employer = employerMapper.getEmployer(employerCode);
@@ -78,15 +78,16 @@ public class ShopService {
     }
 
     @Transactional
-    public List<ShopDTO> getAllShop(int userCode) {
-        userRepository.findById(userCode).orElseThrow(UserNotFoundException::new);
+    public List<ShopDTO> getAllShop(String userCode) {
+        if (employerMapper.getEmployer(userCode) == null && employeeMapper.getEmployee(userCode) == null) throw new UserNotFoundException();
 
         return convertToShopDTO(shopRepository.findAll());
     }
 
     @Transactional
-    public Shop getShop(int userCode, int shopCode) {
-        userRepository.findById(userCode).orElseThrow(UserNotFoundException::new);
+    public Shop getShop(String userCode, int shopCode) {
+        if (employerMapper.getEmployer(userCode) == null && employeeMapper.getEmployee(userCode) == null) throw new UserNotFoundException();
+
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         if (shop == null) throw new ShopNotFoundException();
@@ -114,7 +115,7 @@ public class ShopService {
     }
 
     private void validateRequest(Employer employer, Shop shop) {
-        if (employer.getEmployerCode() != shop.getEmployerCode()) {
+        if (!employer.getEmployerCode().equals(shop.getEmployerCode())) {
             throw new ShopModifyOtherEmployerException();
         }
     }

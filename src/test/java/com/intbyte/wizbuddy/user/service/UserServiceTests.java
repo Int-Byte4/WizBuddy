@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.user.service;
 
+import com.intbyte.wizbuddy.user.UserTypeEnum;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
@@ -43,13 +44,11 @@ class UserServiceTests {
     @Transactional
     void registerEmployerTestSuccess() {
         //given
-        List<User> currentUsers = userRepository.findAll();
-        UserDTO userDTO = new UserDTO(currentUsers.size(), "Employer");
+        UserDTO userDTO = new UserDTO("test", UserTypeEnum.EMPLOYER.getType());
 
         SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType());
 
-        List<Employer> currentEmployer = employerRepository.findAll();
-        EmployerDTO employerDTO = new EmployerDTO(currentEmployer.size(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, false, LocalDateTime.now(), LocalDateTime.now());
+        EmployerDTO employerDTO = new EmployerDTO(userDTO.getUsedCode(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, false, LocalDateTime.now(), LocalDateTime.now());
 
         RegisterEmployerInfo registerEmployerInfo = new RegisterEmployerInfo(
                 employerDTO.getEmployerCode()
@@ -85,12 +84,12 @@ class UserServiceTests {
     void registerEmployeeTestSuccess() {
         //given
         List<User> currentUsers = userRepository.findAll();
-        UserDTO userDTO = new UserDTO(currentUsers.size(), "Employee");
+        UserDTO userDTO = new UserDTO("test", UserTypeEnum.EMPLOYEE.getType());
 
         SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType());
 
         List<Employee> currentEmployee = employeeRepository.findAll();
-        EmployeeDTO employeeDTO = new EmployeeDTO(currentEmployee.size(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, null, null, 0, null, false, LocalDateTime.now(), LocalDateTime.now());
+        EmployeeDTO employeeDTO = new EmployeeDTO(userDTO.getUsedCode(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, null, null, 0, null, false, LocalDateTime.now(), LocalDateTime.now());
 
         RegisterEmployeeInfo registerEmployeeInfo = new RegisterEmployeeInfo(
                 employeeDTO.getEmployeeCode()

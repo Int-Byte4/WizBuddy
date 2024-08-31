@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterEmployerInfo {
-    private int employerCode;
+    private String employerCode;
     private String employerName;
     private String employerEmail;
     private String employerPassword;

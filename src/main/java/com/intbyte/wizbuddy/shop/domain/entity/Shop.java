@@ -21,33 +21,33 @@ public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "shop_code")
+    @Column
     private int shopCode;
 
-    @Column(name = "shop_name")
+    @Column(nullable = false)
     private String shopName;
 
-    @Column(name = "shop_location")
+    @Column(nullable = false)
     private String shopLocation;
 
-    @Column(name = "shop_flag")
+    @Column(nullable = false)
     @ColumnDefault("true")
     private Boolean shopFlag;
 
-    @Column(name = "shop_open_time")
+    @Column(nullable = false)
     private LocalTime shopOpenTime;
 
-    @Column(name = "business_num")
+    @Column(nullable = false)
     private String businessNum;
 
-    @Column(name = "created_at")
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @Column(name = "employer_code")
-    private Integer employerCode;
+    @Column(nullable = false)
+    private String employerCode;
 
     public void modify(@Valid EditShopInfo editShopInfo) {
         this.shopName = editShopInfo.getShopName();

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterEmployeeInfo {
-    private int employeeCode;
+    private String employeeCode;
     private String employeeName;
     private String employeeEmail;
     private String employeePassword;

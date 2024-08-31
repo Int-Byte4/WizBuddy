@@ -3,11 +3,12 @@ package com.intbyte.wizbuddy.user.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignInUserInfo {
-    private int userCode;
+    private String userCode;
     private String userType;
 }

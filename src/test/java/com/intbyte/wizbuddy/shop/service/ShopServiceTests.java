@@ -35,7 +35,7 @@ class ShopServiceTests {
     @Transactional
     void testRegisterShopSuccess() {
         // given
-        int employerCode = 1;
+        String employerCode = "20240831-3750-4218-9aed-7eabc7c634c2";
         List<Shop> currentShopList = shopRepository.findAll();
         RegisterShopInfo shopInfo = new RegisterShopInfo(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "999-99-99999", LocalDateTime.now(), LocalDateTime.now());
 
@@ -54,7 +54,7 @@ class ShopServiceTests {
     @Transactional
     void testRegisterShopThrowsBusinessNumDuplicateException() {
         // given
-        int employerCode = 1;
+        String employerCode = "20240831-3750-4218-9aed-7eabc7c634c2";
         List<Shop> currentShopList = shopRepository.findAll();
         RegisterShopInfo shopInfo = new RegisterShopInfo(currentShopList.size() + 1, "Test Shop", "Test Location", true, LocalTime.of(9, 0), "123-45-67890", LocalDateTime.now(), LocalDateTime.now());
 
@@ -67,8 +67,8 @@ class ShopServiceTests {
     @Transactional
     void testUpdateShopSuccess() {
         //given
-        int employerCode = 1;
-        EditShopInfo editShopInfo = new EditShopInfo(1, "changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now(), 1);
+        String employerCode = "20240831-3750-4218-9aed-7eabc7c634c2";
+        EditShopInfo editShopInfo = new EditShopInfo(1, "changeShopName", "changeShopLocation", LocalTime.of(10, 0), LocalDateTime.now(), employerCode);
 
         //when
         shopService.modifyShop(employerCode, editShopInfo);
@@ -85,8 +85,8 @@ class ShopServiceTests {
     @Transactional
     void testDeleteShopSuccess() {
         //given
-        int employerCode = 1;
-        DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, 1, false, LocalDateTime.now());
+        String employerCode = "20240831-3750-4218-9aed-7eabc7c634c2";
+        DeleteShopInfo deleteShopInfo = new DeleteShopInfo(1, employerCode, false, LocalDateTime.now());
 
         //when
         shopService.deleteShop(employerCode, deleteShopInfo);
@@ -103,7 +103,7 @@ class ShopServiceTests {
     @Transactional
     void testGetShopListSuccess() {
         // given
-        int userCode = 1;
+        String userCode = "20240831-07de-4b18-95c6-564cd86a5af2";
 
         // when
         List<ShopDTO> shopList = shopService.getAllShop(userCode);
@@ -123,7 +123,7 @@ class ShopServiceTests {
     @Transactional
     void testGetShopSuccess() {
         //given
-        int userCode = 1;
+        String userCode = "20240831-5e1c-400a-8f17-df561d451480";
         int shopCode = 1;
 
         //when

@@ -16,6 +16,6 @@ public class EditShopInfo {
     private String shopLocation;
     private LocalTime shopOpenTime;
     private LocalDateTime updatedAt;
-    private int employerCode;
+    private String employerCode;
 
 }
