@@ -3,10 +3,7 @@ package com.intbyte.wizbuddy.user.domain.entity;
 import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -22,43 +19,44 @@ import java.time.LocalDateTime;
 public class Employee {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_code")
     private int employeeCode;
 
-    @Column
+    @Column(name="employee_name")
     private String employeeName;
 
-    @Column
+    @Column(name = "employee_email")
     private String employeeEmail;
 
-    @Column
+    @Column(name="employee_password")
     private String employeePassword;
 
-    @Column
+    @Column(name = "employee_phone")
     private String employeePhone;
 
-    @Column
+    @Column(name = "employee_flag")
     private boolean employeeFlag;
 
-    @Column
+    @Column(name = "latitude")
     private String latitude;
 
-    @Column
+    @Column(name = "longitude")
     private String longitude;
 
-    @Column
+    @Column(name="employee_wage")
     private int employeeWage;
 
-    @Column
+    @Column(name="employee_health_date")
     private LocalDate employeeHealthDate;
 
-    @Column
+    @Column(name = "employee_black_state")
     private boolean employeeBlackState;
 
-    @Column
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
     public void modify(EditEmployeeInfo modifyEmployeeInfo) {

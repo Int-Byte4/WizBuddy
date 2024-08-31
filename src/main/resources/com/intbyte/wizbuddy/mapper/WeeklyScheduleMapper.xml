@@ -13,15 +13,19 @@
 
     <select id="selectAllSchedules" resultMap="scheduleResultMap">
         SELECT
-               schedule_code
-             , schedule_flag
-             , schedule_start_date
-             , created_at
-             , updated_at
-          FROM weekly_schedule
+               A.schedule_code
+             , A.schedule_flag
+             , A.schedule_start_date
+             , A.created_at
+             , A.updated_at
+          FROM weekly_schedule A
     </select>
 
-<!--    <select id="selectEmployeeSchedules" resultMap="scheduleResultMap">-->
-<!--        -->
-<!--    </select>-->
+    <select id="selectLastScheduleCode" resultMap="scheduleResultMap">
+        SELECT
+               A.schedule_code
+          FROM weekly_schedule A
+         ORDER BY A.schedule_code DESC
+         LIMIT 1
+    </select>
 </mapper>
