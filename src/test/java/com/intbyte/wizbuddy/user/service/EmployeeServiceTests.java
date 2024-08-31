@@ -1,11 +1,9 @@
 package com.intbyte.wizbuddy.user.service;
 
+import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
-import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
-import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class EmployeeServiceTests {
@@ -43,6 +41,26 @@ class EmployeeServiceTests {
         //then
         List<Employee> newEmployees = employeeRepository.findAll();
         assertEquals(newEmployees.get(0).getEmployeeName(), employeeInfo.getEmployeeName());
+
+        newEmployees.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("직원 삭제 성공")
+    @Transactional
+    void testDeleteEmployeeSuccess() {
+        //given
+        List<Employee> employees = employeeRepository.findAll();
+        int employeeCode = employees.get(0).getEmployeeCode();
+
+        DeleteEmployeeInfo deleteEmployeeInfo = new DeleteEmployeeInfo(employeeCode,false, LocalDateTime.now());
+
+        //when
+        employeeService.deleteEmployee(deleteEmployeeInfo);
+
+        //then
+        List<Employee> newEmployees = employeeRepository.findAll();
+        assertEquals(false, newEmployees.get(0).isEmployeeFlag());
 
         newEmployees.forEach(System.out::println);
     }
