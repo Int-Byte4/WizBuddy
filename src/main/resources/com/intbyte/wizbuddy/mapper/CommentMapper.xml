@@ -5,11 +5,11 @@
 <mapper namespace="com.intbyte.wizbuddy.mapper.CommentMapper">
     <resultMap id="CommentResultMap" type="com.intbyte.wizbuddy.comment.domain.Entity.Comment">
         <id property="commentCode" column="COMMENT_CODE"/>
-        <result property="comment_contents" column="COMMENT_CONTENTS"/>
-        <result property="comment_flag" column="COMMENT_FLAG"/>
-        <result property="comment_adopted_state" column="COMMENT_ADOPTED_STATE"/>
-        <result property="created_at" column="CREATED_AT"/>
-        <result property="updated_at" column="UPDATED_AT"/>
+        <result property="commentContent" column="COMMENT_CONTENTS"/>
+        <result property="commentFlag" column="COMMENT_FLAG"/>
+        <result property="commentAdoptedState" column="COMMENT_ADOPTED_STATE"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
         <result property="subsCode" column="SUBS_CODE"/>
         <result property="employeeCode" column="EMPLOYEE_CODE"/>
     </resultMap>
