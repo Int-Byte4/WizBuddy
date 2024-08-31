@@ -22,18 +22,18 @@ public class NoticeBoardService {
     }
 
     public void registerNoticeBoard(NoticeBoardDTO noticeBoardInfo) {
-        int shopCode = noticeBoardInfo.getShop_code();
+        int shopCode = noticeBoardInfo.getShopCode();
 
 //        예외처리 추가 필요
 
         NoticeBoard noticeBoard = NoticeBoard.builder()
-                .notice_title(noticeBoardInfo.getNotice_title())
-                .notice_content(noticeBoardInfo.getNotice_content())
-                .notice_flag(true)
-                .image_url(noticeBoardInfo.getImage_url())
-                .created_at(LocalDateTime.now())
-                .updated_at(LocalDateTime.now())
-                .shop_code(shopCode)
+                .noticeTitle(noticeBoardInfo.getNoticeTitle())
+                .noticeContent(noticeBoardInfo.getNoticeContent())
+                .noticeFlag(true)
+                .imageUrl(noticeBoardInfo.getImageUrl())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .shopCode(shopCode)
                 .build();
 
         noticeBoardRepository.save(noticeBoard);
