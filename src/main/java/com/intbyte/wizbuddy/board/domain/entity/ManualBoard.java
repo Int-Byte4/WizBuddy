@@ -53,6 +53,6 @@ public class ManualBoard {
 
     public void delete(DeleteManualBoardInfo deleteManualBoardInfo) {
         this.manualFlag = false;
-        this.updatedAt = deleteManualBoardInfo.getUpdatedAt();
+        this.updatedAt = LocalDateTime.now();
     }
 }
