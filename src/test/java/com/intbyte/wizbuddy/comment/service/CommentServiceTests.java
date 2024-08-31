@@ -25,9 +25,10 @@ class CommentServiceTests {
 
     @Autowired
     private CommentService commentService;
+
     @Autowired
     private CommentMapper commentMapper;
-    @Qualifier("commentRepository")
+
     @Autowired
     private CommentRepository commentRepository;
 
