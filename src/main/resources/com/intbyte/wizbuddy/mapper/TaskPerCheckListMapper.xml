@@ -4,6 +4,57 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper">
+    <resultMap id="taskPerChecklistResultMap" type="com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis">
+        <!-- 복합 키 매핑 -->
+        <id property="taskCode" column="task_code"/>
+        <id property="checkListCode" column="checklist_code"/>
+
+        <!-- 나머지 필드 매핑 -->
+        <result property="taskFinishedState" column="task_finished_state"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <!-- 특정 TaskPerCheckList 조회 -->
+    <select id="findAllTaskPerCheckList" resultMap="taskPerChecklistResultMap">
+        SELECT
+             A.TASK_CODE
+           , A.CHECKLIST_CODE
+           , A.TASK_FINISHED_STATE
+           , A.CREATED_AT
+           , A.UPDATED_AT
+           , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+    </select>
+
+    <!-- 특정 TaskPerCheckList 조회 -->
+    <select id="findTaskPerCheckListById" parameterType="map" resultMap="taskPerChecklistResultMap">
+        SELECT
+             A.TASK_CODE
+           , A.CHECKLIST_CODE
+           , A.TASK_FINISHED_STATE
+           , A.CREATED_AT
+           , A.UPDATED_AT
+           , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+        WHERE TASK_CODE = #{ taskCode } AND CHECKLIST_CODE = #{ checkListCode }
+    </select>
+
+
+<!--    &lt;!&ndash; 특정 TaskPerCheckList 조회 &ndash;&gt;-->
+<!--    <select id="findTaskPerCheckListById" parameterType="map" resultMap="taskPerChecklistResultMap">-->
+<!--        SELECT-->
+<!--             A.TASK_CODE-->
+<!--           , A.CHECKLIST_CODE-->
+<!--           , A.TASK_FINISHED_STATE-->
+<!--           , A.CREATED_AT-->
+<!--           , A.UPDATED_AT-->
+<!--           , A.EMPLOYEE_CODE-->
+<!--        FROM taskperchecklist A-->
+<!--        WHERE TASK_CODE = #{ taskCode } AND CHECKLIST_CODE = #{ checkListCode }-->
+<!--    </select>-->
+
+
 <!--    <resultMap id="findAllTaskPerCheckList" type="com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList">-->
 <!--        &lt;!&ndash; 복합 키 매핑 &ndash;&gt;-->
 <!--        <id property="taskPerChecklistId.taskCode" column="TASK_CODE"/>-->

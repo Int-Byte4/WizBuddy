@@ -2,6 +2,7 @@ package com.intbyte.wizbuddy.taskperchecklist.domain.entity;
 
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
+import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,7 +23,7 @@ public class TaskPerCheckList {
     private TaskPerChecklistId taskPerChecklistId;
 
     @ManyToOne
-    @MapsId("checklistCode")
+    @MapsId("checkListCode")
     @JoinColumn(name = "checklist_code", insertable = false, updatable = false)
     // @MapsId: 이 어노테이션은 엔티티의 복합 키(@EmbeddedId)에 매핑된 외래 키 필드를 나타냅니다.
     // @MapsId("checklistCode")는 TaskPerChecklistId의 checklistCode 필드와 매핑됩니다.
@@ -46,4 +47,11 @@ public class TaskPerCheckList {
     @ManyToOne
     @JoinColumn(name = "employee_code", nullable = false)
     private Employee employee;  // 얘는 복합키는 아닌 그냥 외래키
+
+    public void modify(EditTaskPerCheckListInfo info, Employee employee) {
+
+        this.taskFinishedState = info.getTaskFinishedState();
+        this.updatedAt = info.getUpdatedAt();
+        this.employee = employee;
+    }
 }
