@@ -10,10 +10,8 @@ import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.repository.EmployeeWorkingPartRepository;
 import com.intbyte.wizbuddy.schedule.repository.WeeklyScheduleRepository;
-import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,7 +28,7 @@ public class ScheduleService {
 
 
     @Autowired
-    public ScheduleService(ModelMapper mapper, WeeklyScheduleMapper weeklyScheduleMapper, WeeklyScheduleRepository weeklyScheduleRepository, EmployeeWorkingPartMapper employeeWorkingPartMapper, @Qualifier("employeeWorkingPartRepository") EmployeeWorkingPartRepository employeeWorkingPartRepository) {
+    public ScheduleService(ModelMapper mapper, WeeklyScheduleMapper weeklyScheduleMapper, WeeklyScheduleRepository weeklyScheduleRepository, EmployeeWorkingPartMapper employeeWorkingPartMapper,EmployeeWorkingPartRepository employeeWorkingPartRepository) {
         this.mapper = mapper;
         this.weeklyScheduleMapper = weeklyScheduleMapper;
         this.weeklyScheduleRepository = weeklyScheduleRepository;
@@ -70,21 +68,14 @@ public class ScheduleService {
         return weeklySchedule;
     }
 
-//    // 2. 직원 배치? 근무일정이 등록되고난후에 직원이 배치되는 개념 weeklySchedule에 마지막으로 추가된 스케줄코드 가져와야됨 근데? 직원도 있어야됨 ㅇㅇ 직원 코드도 가져와야되네
-//    @Transactional
-//    public EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart) {
-//        WeeklySchedule lastScheduleCode = weeklyScheduleMapper.selectLastScheduleCode();
-//
-//        if (lastScheduleCode == null) {
-//            throw new IllegalStateException("마지막으로 추가된 스케줄을 찾을 수 없습니다.");
-//        }
-//
-//        EmployeeWorkingPart insertSchedulePerEmployee = new EmployeeWorkingPart(employeeWorkingPart.getWorkingPartCode(), employeeWorkingPart.getEmployeeCode(), lastScheduleCode.getScheduleCode(),employeeWorkingPart.getWorkingDate(), employeeWorkingPart.getWorkingPartTime());
-//
-//        weeklyScheduleRepository.save(mapper.map(insertSchedulePerEmployee, WeeklySchedule.class));
-//
-//        return employeeWorkingPart;
-//    }
+//     2. 직원 배치
+    @Transactional
+    public EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart) {
+        EmployeeWorkingPart insertSchedulePerEmployee = new EmployeeWorkingPart(employeeWorkingPart.getWorkingPartCode(), employeeWorkingPart.getEmployeeCode(), employeeWorkingPart.getScheduleCode(), employeeWorkingPart.getWorkingDate(), employeeWorkingPart.getWorkingPartTime());
+        employeeWorkingPartRepository.save(mapper.map(insertSchedulePerEmployee, EmployeeWorkingPart.class));
+        return employeeWorkingPart;
+    }
+
 
     // 근무일 수정 - 직원번호 받으면 해당 직원의 근무일을 수정할 수 있음
     @Transactional
