@@ -51,7 +51,6 @@ public class Comment {
     public void toUpdate(@Valid EditCommentInfo editCommentInfo) {
         this.commentContent = editCommentInfo.getCommentContent();
         this.commentAdoptedState = editCommentInfo.isCommentAdoptedState();
-        this.createdAt = editCommentInfo.getCreatedAt();
         this.updatedAt = editCommentInfo.getUpdatedAt();
     }
 

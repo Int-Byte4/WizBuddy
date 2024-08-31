@@ -45,13 +45,10 @@ class CommentServiceTests {
     @Test
     @DisplayName("댓글_1개_조회_테스트")
     public void findCommentByIdTest(){
-
         //given
         int commentCode = 1;
-        
         //when
         CommentDTO comment = commentService.findCommentById(commentCode);
-        
         //then
         assertNotNull(comment);
         assertNotNull(comment);
@@ -85,23 +82,20 @@ class CommentServiceTests {
     @Transactional
     public void modifyCommentTest() {
         //given
-        int commentCode = 4;
-        EditCommentInfo modifyComment = new EditCommentInfo(commentCode,
-                "사장님 저요 저요저요저 !!!!",
-                true,false,
-                LocalDateTime.now(),LocalDateTime.now());
-        //when
-        commentService.modifyComment(commentCode, modifyComment);
-        //when
+        int commentCode = 1;
         Comment comment = commentMapper.selectCommentById(commentCode);
-        assertEquals(modifyComment.getCommentContent(),comment.getCommentContent());
+        EditCommentInfo updateComment = new EditCommentInfo( "사장님 ㅋㅋ 저할거랑께요?", false, LocalDateTime.now());
+        //when
+        commentService.modifyComment(comment.getCommentCode(), updateComment);
+        //when
+        Comment newcomment = commentRepository.findById(commentCode).orElse(null);
+        assertEquals(updateComment.getCommentContent(),newcomment.getCommentContent());
     }
 
     @Test
     @DisplayName("댓글_삭제_테스트")
     @Transactional
     public void deleteCommentTest() {
-
         // given
         int subsCode = 1;
         CommentDTO comment = commentService.findCommentById(subsCode);

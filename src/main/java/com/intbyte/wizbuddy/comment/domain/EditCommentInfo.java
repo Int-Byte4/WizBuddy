@@ -10,10 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditCommentInfo {
-    private int commentCode;
     private String commentContent;
-    private boolean commentFlag;
     private boolean commentAdoptedState;
-    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
