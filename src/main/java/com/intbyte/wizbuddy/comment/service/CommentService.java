@@ -60,5 +60,13 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    @Transactional
+    public void modifyComment(int commentCode, EditCommentInfo modifyCommentInfo) {
+        Comment modifycomment = commentRepository.findById(commentCode).orElseThrow(CommentNotFoundException::new);
+        modifycomment.toUpdate(modifyCommentInfo);
+        commentRepository.save(modifycomment);
+    }
+
+
 
 }
