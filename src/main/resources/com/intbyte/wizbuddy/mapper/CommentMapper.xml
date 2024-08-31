@@ -27,4 +27,18 @@
         FROM COMMENTS C
     </select>
 
+    <select id="selectCommentById" resultMap="CommentResultMap" >
+        SELECT
+        C.COMMENT_CODE
+        , C.COMMENT_CONTENTS
+        , C.COMMENT_FLAG
+        , C.COMMENT_ADOPTED_STATE
+        , C.CREATED_AT
+        , C.UPDATED_AT
+        , C.SUBS_CODE
+        , C.EMPLOYEE_CODE
+        FROM COMMENTS C
+        WHERE C.COMMENT_CODE = #{ commentCode }
+    </select>
+
 </mapper>
