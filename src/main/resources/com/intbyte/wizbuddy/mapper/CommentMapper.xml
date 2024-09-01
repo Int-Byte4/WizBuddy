@@ -25,6 +25,7 @@
         , C.SUBS_CODE
         , C.EMPLOYEE_CODE
         FROM COMMENTS C
+        ORDER BY C.CREATED_AT DESC
     </select>
 
     <select id="selectCommentById" resultMap="CommentResultMap" >
@@ -40,5 +41,42 @@
         FROM COMMENTS C
         WHERE C.COMMENT_CODE = #{ commentCode }
     </select>
+
+
+    <select id="selectCommentByEmployeeCode" resultMap="CommentResultMap" parameterType="String">
+        SELECT
+        C.COMMENT_CODE
+        , C.COMMENT_CONTENTS
+        , C.COMMENT_FLAG
+        , C.COMMENT_ADOPTED_STATE
+        , C.CREATED_AT
+        , C.UPDATED_AT
+        , C.SUBS_CODE
+        , C.EMPLOYEE_CODE
+        FROM COMMENTS C
+        JOIN EMPLOYEE E ON C.EMPLOYEE_CODE = E.EMPLOYEE_CODE
+        WHERE E.EMPLOYEE_CODE = #{employeeCode}
+        AND C.COMMENT_FLAG = TRUE
+        ORDER BY C.CREATED_AT DESC
+    </select>
+
+
+    <select id="selectCommentBySubsCode" resultMap="CommentResultMap" parameterType="int">
+        SELECT
+        C.COMMENT_CODE
+        , C.COMMENT_CONTENTS
+        , C.COMMENT_FLAG
+        , C.COMMENT_ADOPTED_STATE
+        , C.CREATED_AT
+        , C.UPDATED_AT
+        , C.SUBS_CODE
+        , C.EMPLOYEE_CODE
+        FROM COMMENTS C
+        JOIN SUBSTITUTION_BOARD S ON C.SUBS_CODE = S.SUBS_CODE
+        WHERE S.SUBS_CODE = #{subsCode}
+        AND C.COMMENT_FLAG = TRUE
+        ORDER BY C.CREATED_AT DESC
+    </select>
+
 
 </mapper>
