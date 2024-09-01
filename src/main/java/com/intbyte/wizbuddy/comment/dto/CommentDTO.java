@@ -26,5 +26,5 @@ public class CommentDTO {
 
     private int subsCode;
 
-    private int employeeCode;
+    private String employeeCode;
 }

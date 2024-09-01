@@ -57,26 +57,27 @@ class CommentServiceTests {
 
     }
 
-//    @Test
-//    @Transactional
-//    @DisplayName("댓글_등록_테스트")
-//    public void insertCommentTest() {
-//
-//        //given
-//        int susCode = 1;
-//        int empolyeeCode = 2;
-//        List<CommentDTO> commentList = commentService.findAllComment();
-//        CommentDTO comment = new CommentDTO(commentList.size() +1,"사장님 저 믿으시죠 저 가능합니다.",true,false, LocalDateTime.now(), LocalDateTime.now(),susCode,empolyeeCode);
-//
-//        //when
-//        commentService.registerComment(comment);
-//
-//        //then
-//        Comment newcomment = commentMapper.selectCommentById(comment.getCommentCode());
-//        assertNotNull(newcomment);
-//        assertEquals(comment.getCommentCode(),newcomment.getCommentCode());
-//
-//    }
+    @Test
+    @Transactional
+    @DisplayName("댓글_등록_테스트")
+    public void insertCommentTest() {
+
+        //given
+        List<Comment> commentList = commentRepository.findAll();
+        CommentDTO comment = new CommentDTO(commentList.size() +1,"사장님 저 믿으시죠 저 가능합니다.",true,false, LocalDateTime.now(), LocalDateTime.now(),1,"20240831-f409-40b1-a03d-4d14d52fa13a");
+
+        //when
+        System.out.println("comment = " + comment);
+        commentService.registerComment(comment);
+
+        //then
+        List<Comment> newcomments = commentRepository.findAll();
+        Comment newcomment = newcomments.get(newcomments.size()-1);
+        System.out.println("newcomment = " + newcomment);
+        assertNotNull(newcomment);
+        assertEquals(comment.getCommentCode(),newcomment.getCommentCode());
+
+    }
 
     @Test
     @DisplayName("댓글_수정_테스트")
