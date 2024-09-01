@@ -13,16 +13,10 @@ import java.time.LocalDateTime;
 public class TaskDTO {
 
     private int taskCode;
-
     private String taskContents;
-
     private boolean taskFlag;
-
     private boolean taskFixedState;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
     private int shopCode;
 }

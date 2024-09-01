@@ -1,19 +1,20 @@
 package com.intbyte.wizbuddy.task.vo.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 
 import java.time.LocalDateTime;
 @AllArgsConstructor
-@NoArgsConstructor
 @Getter
+@Builder
 public class ResponseFindTaskVO {
-    private int taskCode;
-    private String taskContents;
-    private boolean taskFlag;
-    private boolean taskFixedState;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private final int taskCode;
+    private final String taskContents;
+    private final boolean taskFlag;
+    private final boolean taskFixedState;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
+    private final int shopCode;
 }

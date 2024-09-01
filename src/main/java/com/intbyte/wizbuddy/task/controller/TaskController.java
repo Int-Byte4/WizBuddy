@@ -8,12 +8,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/shop/{shopCode}")
 public class TaskController {
 
     private final TaskService taskService;
@@ -25,32 +26,81 @@ public class TaskController {
         this.modelMapper = modelMapper;
     }
 
+    // 특정 매장의 모든 task 조회
+    @GetMapping("task") // '/'를 붙이면 requestMapping 적용 x
+    public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShop(@PathVariable("shopCode") int shopCode){
 
-    @GetMapping("task/{taskCode}")
+        List<TaskDTO> taskDTOList = taskService.findAllTaskByShopCode(shopCode);
+
+        List<ResponseFindTaskVO> responseTasks = taskDTOList
+                .stream()
+                .map(taskDTO -> ResponseFindTaskVO.builder()
+                        .taskCode(taskDTO.getTaskCode())
+                        .taskContents(taskDTO.getTaskContents())
+                        .taskFlag(taskDTO.isTaskFlag())
+                        .taskFixedState(taskDTO.isTaskFixedState())
+                        .createdAt(taskDTO.getCreatedAt())
+                        .updatedAt(taskDTO.getUpdatedAt())
+                        .shopCode(taskDTO.getShopCode())
+                        .build()
+                )
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseTasks);
+    }
+
+    // 특정 매장의 TASK 중 QueryParam에 따라 fixed or nonfixed task 찾아주기
+    @GetMapping("task")
+    public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixed(
+            @PathVariable("shopCode") int shopCode,
+            @RequestParam(name = "fixed") boolean fixed){
+
+        List<TaskDTO> taskDTOList = null;
+        if(fixed){ // 고정 task 찾아주기
+            taskDTOList = taskService.findAllTaskByShopCodeByFixedState(shopCode);
+        }else{ // 고정 안된 task 찾아주기
+            taskDTOList = taskService.findAllTaskByShopCodeByNonFixedState(shopCode);
+        }
+
+        List<ResponseFindTaskVO> responseTasks = taskDTOList
+                .stream()
+                .map(taskDTO -> ResponseFindTaskVO.builder()
+                        .taskCode(taskDTO.getTaskCode())
+                        .taskContents(taskDTO.getTaskContents())
+                        .taskFlag(taskDTO.isTaskFlag())
+                        .taskFixedState(taskDTO.isTaskFixedState())
+                        .createdAt(taskDTO.getCreatedAt())
+                        .updatedAt(taskDTO.getUpdatedAt())
+                        .shopCode(taskDTO.getShopCode())
+                        .build()
+                )
+                .collect(Collectors.toList());
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseTasks);
+    }
+
+
+
+    // 특정 task 조회
+    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
     public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
 
         TaskDTO taskDTO = taskService.findTaskById(taskCode);
 
-        // 생각해보니까 자기 매장꺼만 알아야하네?
-        // -> 근데 이건 ㄱㅊ을듯. 해당 task를 누르면 그 task의 code를 통해서 접속할테니
-
-        ResponseFindTaskVO findTask = modelMapper.map(taskDTO, ResponseFindTaskVO.class);
-        // modelMapper는 내부적으로 setter로 매핑하는데 setter가 vo에는 없잖아... 일단 ㅇㅋ
+        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
+                .taskCode(taskDTO.getTaskCode())
+                .taskContents(taskDTO.getTaskContents())
+                .taskFlag(taskDTO.isTaskFlag())
+                .taskFixedState(taskDTO.isTaskFixedState())
+                .createdAt(taskDTO.getCreatedAt())
+                .updatedAt(taskDTO.getUpdatedAt())
+                .shopCode(taskDTO.getShopCode())
+                .build();
 
         return ResponseEntity.status(HttpStatus.OK).body(findTask);
     }
 
-    // 이전에 자기 매장에 있는 모든 업무 조회하는 과정이 좀 힘드네
-    // task 테이블에는 매장 번호가 없으니까 결국 join을 해서 매장을 가지고와야함.
-    // 그렇게 하려면 1. 체크리스트별 업무 테이블과 조인하고 그걸 체크리스트와 조인?
-    // 아닌듯 그냥 taskperchecklist에서 join 한번을 통해서 가져오면 될거같을거 같기도?
 
-
-    @PostMapping("task")
-    public ResponseEntity<ResponseFindTaskVO> insertTask(){
-
-        return null;
-    }
 
 
 }
