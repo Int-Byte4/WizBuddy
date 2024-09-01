@@ -6,6 +6,7 @@ import com.intbyte.wizbuddy.comment.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.repository.CommentRepository;
 import com.intbyte.wizbuddy.exception.comment.CommentNotFoundException;
 import com.intbyte.wizbuddy.mapper.CommentMapper;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,17 +16,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class CommentService {
 
     private final CommentMapper commentMapper;
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
 
-    public CommentService(CommentMapper commentMapper, ModelMapper modelMapper,CommentRepository commentRepository) {
-        this.commentMapper = commentMapper;
-        this.modelMapper = modelMapper;
-        this.commentRepository = commentRepository;
-    }
 
     public List<CommentDTO> findAllComment() {
         List<Comment> commentList = commentMapper.selectAllComment();
