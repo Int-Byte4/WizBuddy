@@ -126,11 +126,15 @@ public class ScheduleService {
         employeeWorkingPartRepository.deleteById(employeeCode);
     }
 
-//    // 대타게시글에 달린 댓글을 선택해서 근무일정 수정하기
-//    @Transactional
-//    public void selectCommentToEdit() {
-//
-//    }
+    // 대타게시글에 달린 댓글을 선택해서 근무일정 수정하기
+    @Transactional
+    public void selectCommentToEdit(int subsCode, int commentCode) {
+        int foundSchedule = employeeWorkingPartMapper.updateScheduleByComment(subsCode, commentCode);
+        if (foundSchedule == 0) {
+//            throw new SomeAppropriateException("No rows were updated");
+        }
+
+    }
 
 
 

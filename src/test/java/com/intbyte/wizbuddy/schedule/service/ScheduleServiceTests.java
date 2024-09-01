@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.schedule.service;
 
+import com.intbyte.wizbuddy.mapper.EmployeeWorkingPartMapper;
 import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
@@ -26,6 +27,8 @@ class ScheduleServiceTests {
 
     @Autowired
     private EmployeeWorkingPartRepository employeeWorkingPartRepository;
+
+    private EmployeeWorkingPartDTO employeeWorkingPartDTO;
 
     @Test
     @DisplayName("전체 스케줄 조회 성공")
@@ -129,6 +132,23 @@ class ScheduleServiceTests {
         // then
         boolean isDeleted = !employeeWorkingPartRepository.existsById(employeeCode);
         assertTrue(isDeleted);
+    }
+
+    @Test
+    @DisplayName("대타 게시판에 달린 댓글 선택해서 근무일정 수정 성공")
+    public void testScheduleService_update_By_Comment_SuccessTest() {
+        // given
+        int subsCode = 1;
+        int commentCode = 3;
+
+        // when
+        scheduleService.selectCommentToEdit(subsCode, commentCode);
+
+        // then
+        assertDoesNotThrow(() -> {
+            scheduleService.selectCommentToEdit(subsCode, commentCode);
+        });
+
     }
 
 //    @Test
