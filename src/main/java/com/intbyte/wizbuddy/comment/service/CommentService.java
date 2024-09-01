@@ -84,4 +84,11 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
+    @Transactional
+    public void adoptComment(CommentDTO adoptComment) {
+        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
+        comment.toAdopt();
+        commentRepository.save(comment);
+    }
+
 }
