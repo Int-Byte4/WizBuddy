@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.mapper;
 
+import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -7,11 +8,17 @@ import java.util.List;
 
 @Mapper
 public interface TaskMapper {
-    Task findTaskById(int taskId);
+    TaskMybatis findTaskById(int taskId);
 
-    List<Task> findAllTask();
+    List<TaskMybatis> findAllTask();
 
-    List<Task> findAllTaskByFixedState();
+    List<TaskMybatis> findAllTaskByFixedState();
 
-    List<Task> findAllTasksByTaskFlag();
+    List<TaskMybatis> findAllTasksByTaskFlag();
+
+    List<TaskMybatis> findAllTaskByShopCode(int shopCode);
+
+    List<TaskMybatis> findAllTaskByShopCodeByFixedState(int shopCode);
+
+    List<TaskMybatis> findAllTaskByShopCodeByNonFixedState(int shopCode);
 }

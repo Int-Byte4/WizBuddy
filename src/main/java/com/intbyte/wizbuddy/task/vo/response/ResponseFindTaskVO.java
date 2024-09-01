@@ -1,28 +1,19 @@
-package com.intbyte.wizbuddy.task.dto;
+package com.intbyte.wizbuddy.task.vo.response;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDateTime;
-
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-@Setter
-@ToString
-@EqualsAndHashCode
-public class TaskDTO {
-
+public class ResponseFindTaskVO {
     private int taskCode;
-
     private String taskContents;
-
     private boolean taskFlag;
-
     private boolean taskFixedState;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
-    private int shopCode;
 }

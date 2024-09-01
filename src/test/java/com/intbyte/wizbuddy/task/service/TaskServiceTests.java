@@ -2,6 +2,7 @@ package com.intbyte.wizbuddy.task.service;
 
 import com.intbyte.wizbuddy.mapper.TaskMapper;
 import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
+import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
@@ -35,17 +36,17 @@ class TaskServiceTests {
     @Test
     public void 업무_1개_추가_테스트() {
         // given:
-        List<Task> currentTaskList = taskMapper.findAllTask();
+        List<TaskMybatis> currentTaskList = taskMapper.findAllTask();
         TaskDTO taskDTO = new TaskDTO(currentTaskList.size() + 1, "새로운 업무 추가"
-                    , true, true, LocalDateTime.now(), LocalDateTime.now());
+                    , true, true, LocalDateTime.now(), LocalDateTime.now(), 2);
 
         // when:
         taskService.insertTask(taskDTO);
 
         // then:
-        List<Task> currentTaskList2 = taskMapper.findAllTask();
+        List<TaskMybatis> currentTaskList2 = taskMapper.findAllTask();
 
-        Task findTask = taskMapper.findTaskById(taskDTO.getTaskCode());
+        TaskMybatis findTask = taskMapper.findTaskById(taskDTO.getTaskCode());
         Assertions.assertEquals(taskDTO.getTaskCode(), findTask.getTaskCode());
     }
 
@@ -66,7 +67,7 @@ class TaskServiceTests {
     @Test
     @Transactional
     public void 전체_업무_조회_테스트(){
-        List<Task> allTask = taskMapper.findAllTask();
+        List<TaskMybatis> allTask = taskMapper.findAllTask();
         for (int i = 0; i < allTask.size(); i++) {
             assertNotNull(allTask);
             System.out.println(allTask.get(i));
@@ -77,7 +78,7 @@ class TaskServiceTests {
     @Test
     @Transactional
     public void 고정된_전체_업무_조회_테스트(){
-        List<Task> allTask = taskMapper.findAllTaskByFixedState();
+        List<TaskMybatis> allTask = taskMapper.findAllTaskByFixedState();
         for (int i = 0; i < allTask.size(); i++) {
             assertNotNull(allTask);
             System.out.println(allTask.get(i));
@@ -88,7 +89,7 @@ class TaskServiceTests {
     @Test
     @Transactional
     public void 삭제되지않은_전체_업무_조회_테스트(){
-        List<Task> allTask = taskMapper.findAllTasksByTaskFlag();
+        List<TaskMybatis> allTask = taskMapper.findAllTasksByTaskFlag();
         for (int i = 0; i < allTask.size(); i++) {
             assertNotNull(allTask);
             System.out.println(allTask.get(i));
@@ -108,22 +109,70 @@ class TaskServiceTests {
         taskService.modifyTask(taskCode, editTaskInfo);
 
         // then:
-        Task findTask = taskMapper.findTaskById(taskCode);
+        TaskMybatis findTask = taskMapper.findTaskById(taskCode);
         Assertions.assertEquals(findTask.getTaskContents(), editTaskInfo.getTaskContents());
     }
 
     @Test
-    @Transactional
     public void id_로_업무_1개_삭제_테스트(){
 
         // given: 전체 업무 개수
-        List<Task> currentTaskList = taskMapper.findAllTask();
-        Task task = currentTaskList.get(currentTaskList.size() - 1);
+        List<TaskMybatis> currentTaskList = taskMapper.findAllTask();
+        TaskMybatis task = currentTaskList.get(currentTaskList.size() - 1);
 
         // when: 마지막 업무 삭제(taskFlag가 false)
         taskService.deleteTask(task.getTaskCode());
 
         // then:
         Assertions.assertEquals(false, taskService.findTaskById(task.getTaskCode()).isTaskFlag());
+    }
+
+    @Test
+    @Transactional
+    public void 매장_id로_모든_업무_조회(){
+
+        // given
+        int shopCode = 1;
+
+        // when
+        List<TaskDTO> allTaskByShopCode = taskService.findAllTaskByShopCode(shopCode);
+
+        // then
+        for (int i = 0; i < allTaskByShopCode.size(); i++) {
+            System.out.println(allTaskByShopCode.get(i));
+            assertNotNull(allTaskByShopCode.get(i));
+        }
+    }
+
+    @Test
+    @Transactional
+    public void 매장_id로_고전된_모든_업무_조회(){
+        // given
+        int shopCode = 1;
+
+        // when
+        List<TaskDTO> allTaskByShopCode = taskService.findAllTaskByShopCodeByFixedState(shopCode);
+
+        // then
+        for (int i = 0; i < allTaskByShopCode.size(); i++) {
+            System.out.println(allTaskByShopCode.get(i));
+            assertNotNull(allTaskByShopCode.get(i));
+        }
+    }
+
+    @Test
+    @Transactional
+    public void 매장_id로_고정_안된_모든_업무_조회(){
+        // given
+        int shopCode = 2;
+
+        // when
+        List<TaskDTO> allTaskByShopCode = taskService.findAllTaskByShopCodeByNonFixedState(shopCode);
+
+        // then
+        for (int i = 0; i < allTaskByShopCode.size(); i++) {
+            System.out.println(allTaskByShopCode.get(i));
+            assertNotNull(allTaskByShopCode.get(i));
+        }
     }
 }
