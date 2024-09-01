@@ -1,9 +1,12 @@
 package com.intbyte.wizbuddy.board.service;
 
+import com.intbyte.wizbuddy.board.domain.DeleteManualBoardInfo;
+import com.intbyte.wizbuddy.board.domain.EditManualBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.ManualBoard;
 import com.intbyte.wizbuddy.board.dto.ManualBoardDTO;
 import com.intbyte.wizbuddy.board.repository.ManualBoardRepository;
 import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,40 @@ class ManualBoardServiceTests {
 
         assertEquals(newLastNum, manualBoardRepository.findAll().size());
 
+        newManualBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매뉴얼 게시글 수정 성공")
+    @Transactional
+    public void testModifyManualBoardSuccess() {
+        // given
+        int userCode = 1;
+        EditManualBoardInfo editManualBoardInfo = new EditManualBoardInfo(1, "제목 수정", "내용 수정", null, LocalDateTime.now(), 1);
+
+        // when
+        manualBoardService.modifyManualBoard(userCode, editManualBoardInfo.getUserCode(), editManualBoardInfo);
+
+        // then
+        List<ManualBoard> newManualBoards = manualBoardRepository.findAll();
+        assertEquals(newManualBoards.get(0).getManualTitle(), editManualBoardInfo.getManualTitle());
+
+        newManualBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매뉴얼 게시글 삭제 성공")
+    @Transactional
+    public void testDeleteManualBoardSuccess() {
+        // given
+        DeleteManualBoardInfo deleteManualBoardInfo = new DeleteManualBoardInfo(1, false, LocalDateTime.now(), 1);
+
+        // when
+        manualBoardService.deleteManualBoard(1, 1, deleteManualBoardInfo);
+
+        // then
+        List<ManualBoard> newManualBoards = manualBoardRepository.findAll();
+        Assertions.assertEquals(false, newManualBoards.get(0).equals(deleteManualBoardInfo));
         newManualBoards.forEach(System.out::println);
     }
 }
