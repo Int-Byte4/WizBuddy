@@ -11,7 +11,6 @@
     <result property="imageURL" column="image_url"/>
     <result property="createdAt" column="created_at"/>
     <result property="updatedAt" column="updated_at"/>
-    <result property="shopCode" column="shop_code"/>
     <association property="shop" javaType="com.intbyte.wizbuddy.shop.dto.ShopDTO">
         <id property="shopCode" column="shop_code"/>
     </association>
@@ -19,10 +18,10 @@
 
     <select id="findEmployerCodeByNoticeCode" resultType="int">
         SELECT
-               N.employerCode
+               N.employer_code
           FROM notice_board N
          WHERE N.notice_code = #{ noticeCode }
-               N.shop_code + #{ shopCode }
+           AND N.shop_code = #{ shopCode }
            AND N.notice_flag = true
     </select>
 </mapper>

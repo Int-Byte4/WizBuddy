@@ -16,4 +16,5 @@ public class EditNoticeBoardInfo {
     private String imageUrl;
     private LocalDateTime updatedAt;
     private int shopCode;
+    private int employerCode;
 }

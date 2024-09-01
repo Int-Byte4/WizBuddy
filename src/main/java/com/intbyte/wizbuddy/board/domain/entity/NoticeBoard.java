@@ -30,7 +30,7 @@ public class NoticeBoard {
     private String noticeContent;
 
     @Column
-// @ColumnDefault("true")
+    @ColumnDefault("true")
     private boolean noticeFlag;
 
     @Column
