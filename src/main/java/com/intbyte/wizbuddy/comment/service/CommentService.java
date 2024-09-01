@@ -26,6 +26,7 @@ public class CommentService {
 
     public List<CommentDTO> findAllComment() {
         List<Comment> commentList = commentMapper.selectAllComment();
+        if(commentList == null || commentList.isEmpty()) {throw new CommentNotFoundException();}
         return  commentList.stream()
                 .map(comment-> modelMapper.map(comment, CommentDTO.class))
                 .collect(Collectors.toList());
@@ -33,11 +34,24 @@ public class CommentService {
 
     public CommentDTO findCommentById(int code) {
         Comment comment = commentMapper.selectCommentById(code);
-        if(comment == null) {
-            throw new CommentNotFoundException();
-
-        }
+        if(comment == null) {throw new CommentNotFoundException();}
         return modelMapper.map(comment, CommentDTO.class);
+    }
+
+    public List<CommentDTO> getCommentsBySubsCode(int subsCode) {
+        List<Comment> comments = commentMapper.selectCommentBySubsCode(subsCode);
+        if(comments == null || comments.isEmpty()) {throw new CommentNotFoundException();}
+        return comments.stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<CommentDTO> getCommentsByEmployeeCode(String employeeCode) {
+        List<Comment> comments = commentMapper.selectCommentByEmployeeCode(employeeCode);
+        if(comments == null || comments.isEmpty()) {throw new CommentNotFoundException();}
+        return comments.stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional
