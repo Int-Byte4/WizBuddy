@@ -25,9 +25,9 @@ public class EmployerService {
 
     @Transactional
     public void modifyEmployer(EditEmployerInfo modifyEmployerInfo) {
-        int employerCode = modifyEmployerInfo.getEmployerCode();
+        String employerId = modifyEmployerInfo.getEmployerCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        Employer employer = employerMapper.getEmployer(employerId);
 
         if (employer == null) throw new UserNotFoundException();
 
@@ -37,9 +37,9 @@ public class EmployerService {
 
     @Transactional
     public void deleteEmployer(DeleteEmployerInfo deleteEmployerInfo) {
-        int employerCode = deleteEmployerInfo.getEmployerCode();
+        String employerId = deleteEmployerInfo.getEmployerCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        Employer employer = employerMapper.getEmployer(employerId);
 
         if (employer == null) throw new UserNotFoundException();
 

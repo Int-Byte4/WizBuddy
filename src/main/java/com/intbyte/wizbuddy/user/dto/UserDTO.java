@@ -8,6 +8,6 @@ import lombok.*;
 @Setter
 @ToString
 public class UserDTO {
-    private int usedCode;
+    private String usedCode;
     private String userType;
 }

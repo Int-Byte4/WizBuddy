@@ -21,21 +21,21 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_code")
-    private int employeeCode;
+    private String employeeCode;
 
     @Column(name="employee_name")
     private String employeeName;
 
-    @Column(name = "employee_email")
+    @Column(nullable = false, unique = true, name = "employee_email")
     private String employeeEmail;
 
-    @Column(name="employee_password")
+    @Column(nullable = false, name="employee_password")
     private String employeePassword;
 
-    @Column(name = "employee_phone")
+    @Column(nullable = false, name = "employee_phone")
     private String employeePhone;
 
-    @Column(name = "employee_flag")
+    @Column(nullable = false, name = "employee_flag")
     private boolean employeeFlag;
 
     @Column(name = "latitude")
@@ -50,13 +50,13 @@ public class Employee {
     @Column(name="employee_health_date")
     private LocalDate employeeHealthDate;
 
-    @Column(name = "employee_black_state")
+    @Column(nullable = false, name = "employee_black_state")
     private boolean employeeBlackState;
 
-    @Column(name="created_at")
+    @Column(nullable = false, name="created_at")
     private LocalDateTime createdAt;
 
-    @Column(name="updated_at")
+    @Column(nullable = false, name="updated_at")
     private LocalDateTime updatedAt;
 
     public void modify(EditEmployeeInfo modifyEmployeeInfo) {

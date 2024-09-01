@@ -2,22 +2,20 @@ package com.intbyte.wizbuddy.schedule.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Getter
-@Setter
+@Getter @Setter
 public class WeeklyScheduleDTO {
 
     private int scheduleCode;
 
     private boolean scheduleFlag;
 
-    private Date scheduleStartDate;
+    private LocalDate scheduleStartDate;
 
     private LocalDateTime createdAt;
 

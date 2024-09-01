@@ -52,9 +52,20 @@ public class CheckListService {
         return modelMapper.map(checkList, CheckListDTO.class);
     }
 
+    // 존재하는 모든 체크리스트 조회
     @Transactional
     public List<CheckListDTO> findAllCheckList(){
         List<CheckList> checkListList = checkListMapper.findAllCheckList();
+
+        return checkListList.stream()
+                .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // flag가 true인 모든 체크리스트 조회
+    @Transactional
+    public List<CheckListDTO> findAllCheckListsByFlag(){
+        List<CheckList> checkListList = checkListMapper.findAllCheckListsByFlag();
 
         return checkListList.stream()
                 .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
@@ -87,6 +98,4 @@ public class CheckListService {
 
         checkListRepository.save(checkList);
     }
-
-//    체크리스트 업무 완료 표시
 }

@@ -14,15 +14,15 @@ public class CommentDTO {
 
     private int commentCode;
 
-    private String comment_contents;
+    private String commentContent;
 
-    private boolean comment_flag;
+    private boolean commentFlag;
 
-    private boolean comment_adopted_state;
+    private boolean commentAdoptedState;
 
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    private LocalDateTime updated_at;
+    private LocalDateTime updatedAt;
 
     private int subsCode;
 

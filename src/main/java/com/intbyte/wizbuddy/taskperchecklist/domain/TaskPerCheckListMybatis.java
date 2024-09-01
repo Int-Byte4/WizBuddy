@@ -3,6 +3,7 @@ package com.intbyte.wizbuddy.taskperchecklist.domain;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -19,5 +20,5 @@ public class TaskPerCheckListMybatis {
 
     private LocalDateTime updatedAt;
 
-    private Integer employeeCode;
+    private String employeeCode;
 }

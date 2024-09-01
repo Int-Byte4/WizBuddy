@@ -7,6 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface EmployeeWorkingPartMapper {
+    EmployeeWorkingPartDTO findEmployeeByEmployeeCode(int employeeCode);
+
     List<EmployeeWorkingPartDTO> selectSchedule(int scheduleCode);
 
     List<EmployeeWorkingPartDTO> selectScheduleByEmployeeCode(int scheduleCode);
