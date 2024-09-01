@@ -1,14 +1,15 @@
-package com.intbyte.wizbuddy.vo.response;
+package com.intbyte.wizbuddy.user.vo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class ResponseFindEmployerVO {
     private String employerCode;
     private String employerName;

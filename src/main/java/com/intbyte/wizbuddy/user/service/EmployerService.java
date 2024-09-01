@@ -5,9 +5,7 @@ import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
-import com.intbyte.wizbuddy.user.domain.entity.User;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
-import com.intbyte.wizbuddy.user.dto.UserDTO;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import com.intbyte.wizbuddy.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -53,14 +51,13 @@ public class EmployerService {
         employerRepository.save(employer);
     }
 
-    public UserDTO getByEmployerCode(String employerCode) {
+    public EmployerDTO getByEmployerCode(String employerCode) {
         Employer employer = employerMapper.getEmployer(employerCode);
 
         if (employer == null) throw new UserNotFoundException();
 
-        User user = userRepository.findByUserCode(employerCode);
-        UserDTO userDTO = mapper.map(user, UserDTO.class);
+        EmployerDTO employerDTO = mapper.map(employer, EmployerDTO.class);
 
-        return userDTO;
+        return employerDTO;
     }
 }
