@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.UserTypeEnum;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
@@ -25,7 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class UserServiceTests {
+class UserServiceImplTests {
 
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -37,18 +36,18 @@ class UserServiceTests {
     private UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @Test
     @DisplayName("사장유저 등록 성공")
     @Transactional
     void registerEmployerTestSuccess() {
         //given
-        UserDTO userDTO = new UserDTO("test", UserTypeEnum.EMPLOYER.getType());
+        UserDTO userDTO = new UserDTO("test", "EMPLOYER", "test@test.com", "testPassword");
 
-        SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType());
+        SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType(), userDTO.getUserEmail(), userDTO.getUserPassword());
 
-        EmployerDTO employerDTO = new EmployerDTO(userDTO.getUsedCode(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, false, LocalDateTime.now(), LocalDateTime.now());
+        EmployerDTO employerDTO = new EmployerDTO(userDTO.getUsedCode(), "test", userDTO.getUserEmail(), userDTO.getUserPassword(), "010-8888-8888:", true, false, LocalDateTime.now(), LocalDateTime.now());
 
         RegisterEmployerInfo registerEmployerInfo = new RegisterEmployerInfo(
                 employerDTO.getEmployerCode()
@@ -62,7 +61,7 @@ class UserServiceTests {
                 , employerDTO.getUpdatedAt());
 
         //when
-        userService.signInEmployer(signInUserInfo, registerEmployerInfo);
+        userServiceImpl.signInEmployer(signInUserInfo, registerEmployerInfo);
 
         //then
         List<User> newUsers = userRepository.findAll();
@@ -83,13 +82,11 @@ class UserServiceTests {
     @Transactional
     void registerEmployeeTestSuccess() {
         //given
-        List<User> currentUsers = userRepository.findAll();
-        UserDTO userDTO = new UserDTO("test", UserTypeEnum.EMPLOYEE.getType());
+        UserDTO userDTO = new UserDTO("test", "EMPLOYEE", "test@test.com", "testPassword");
 
-        SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType());
+        SignInUserInfo signInUserInfo = new SignInUserInfo(userDTO.getUsedCode(), userDTO.getUserType(), userDTO.getUserEmail(), userDTO.getUserPassword());
 
-        List<Employee> currentEmployee = employeeRepository.findAll();
-        EmployeeDTO employeeDTO = new EmployeeDTO(userDTO.getUsedCode(), "test", "test@test.com", "testPassword", "010-8888-8888:", true, null, null, 0, null, false, LocalDateTime.now(), LocalDateTime.now());
+        EmployeeDTO employeeDTO = new EmployeeDTO(userDTO.getUsedCode(), "test",  userDTO.getUserEmail(), userDTO.getUserPassword(), "010-8888-8888:", true, null, null, 0, null, false, LocalDateTime.now(), LocalDateTime.now());
 
         RegisterEmployeeInfo registerEmployeeInfo = new RegisterEmployeeInfo(
                 employeeDTO.getEmployeeCode()
@@ -107,7 +104,7 @@ class UserServiceTests {
                 , employeeDTO.getUpdatedAt());
 
         //when
-        userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
+        userServiceImpl.signInEmployee(signInUserInfo, registerEmployeeInfo);
 
         //then
         List<User> newUsers = userRepository.findAll();
