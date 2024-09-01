@@ -12,4 +12,6 @@ public interface EmployeeWorkingPartMapper {
     List<EmployeeWorkingPartDTO> selectSchedule(int scheduleCode);
 
     List<EmployeeWorkingPartDTO> selectScheduleByEmployeeCode(int scheduleCode);
+
+    int updateScheduleByComment(int subsCode, int commentCode);
 }
