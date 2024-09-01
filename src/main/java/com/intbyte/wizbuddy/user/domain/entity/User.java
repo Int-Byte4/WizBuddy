@@ -19,4 +19,10 @@ public class User {
 
     @Column(nullable = false, name = "user_type")
     private String userType;
+
+    @Column(nullable = false, name = "user_email")
+    private String userEmail;
+
+    @Column(nullable = false, name = "user_password")
+    private String userPassword;
 }

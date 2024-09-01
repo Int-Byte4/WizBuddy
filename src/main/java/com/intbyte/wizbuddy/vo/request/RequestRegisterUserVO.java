@@ -1,14 +1,13 @@
-package com.intbyte.wizbuddy.user.domain;
+package com.intbyte.wizbuddy.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class SignInUserInfo {
+@NoArgsConstructor
+@Getter
+public class RequestRegisterUserVO {
     private String userCode;
     private String userType;
     private String userEmail;
