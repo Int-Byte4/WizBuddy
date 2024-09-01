@@ -20,19 +20,19 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class SubsBoardServiceTests {
 
-
     @Autowired
     private SubsBoardService subsBoardService;
 
     @Autowired
     private SubsBoardRepository subsBoardRepository;
+
     @Autowired
     private SubsBoardMapper subsBoardMapper;
-
 
     @Test
     @DisplayName("대타게시판_전체_조회_테스트")
     public void findAllSubsBoardTest() {
+
         Assertions.assertDoesNotThrow(
                 () -> {
                     List<SubsBoardDTO> subsBoard = subsBoardService.findAllSubsBoards();
@@ -44,25 +44,38 @@ class SubsBoardServiceTests {
     @Test
     @DisplayName("대타게시판_1개_조회_테스트")
     public void findSubsBoardByIdTest() {
+
         // given
         int subsCode = 1;
-
         // when
         SubsBoardDTO foundSubsBoard = subsBoardService.findSubsBoardById(subsCode);
-
         // then
         assertNotNull(foundSubsBoard);
         assertEquals(subsCode, foundSubsBoard.getSubsCode());
-
         System.out.println("조회된 게시판 제목: " + foundSubsBoard.getSubsTitle());
         System.out.println("조회된 게시판 내용: " + foundSubsBoard.getSubsContent());
+
     }
 
+    @Test
+    @DisplayName("매장별_조회_테스트")
+    public void findSubsBoardByShopCodeTest() {
+
+        // given
+        int shopCode = 1;
+        // when
+        List<SubsBoardDTO> subsBoards = subsBoardService.getSubsBoardsByShopCode(shopCode);
+        // then
+        assertNotNull(subsBoards);
+        assertTrue(!subsBoards.isEmpty());
+
+    }
 
     @Test
     @Transactional
     @DisplayName("대타게시판_등록_테스트")
     public void insertSubsBoardTest() {
+
         // given
         List<SubsBoard> subsBoardList = subsBoardRepository.findAll();
         SubsBoardDTO newSubsBoard = new SubsBoardDTO(subsBoardList.size()+1,
@@ -80,13 +93,14 @@ class SubsBoardServiceTests {
         assertEquals(1, subsBoard.getEmployeeWorkingPartCode());
         assertEquals(true, subsBoard.isSubsFlag());
         assertEquals(1, subsBoard.getShopCode());
-    }
 
+    }
 
     @Test
     @Transactional
     @DisplayName("대타게시판_수정_테스트")
     void modifySubsBoardTest() {
+
         // given
         int subsCode = 1;
         SubsBoard subsBoard = subsBoardMapper.selectSubsBoardById(subsCode);
@@ -102,13 +116,14 @@ class SubsBoardServiceTests {
         assertNotNull(foundBoard.getCreatedAt());
         assertEquals(2, foundBoard.getEmployeeWorkingPartCode());
         assertEquals(1, foundBoard.getShopCode());
-    }
 
+    }
 
     @Test
     @Transactional
     @DisplayName("대타게시판_삭제_테스트")
     void deleteSubsBoardTest() {
+
         // given
         int subsCode = 1;
         SubsBoardDTO subsBoard = subsBoardService.findSubsBoardById(subsCode);
@@ -118,6 +133,7 @@ class SubsBoardServiceTests {
         SubsBoard updatedSubsBoard = subsBoardRepository.findById(subsCode).orElse(null);
         assertThat(updatedSubsBoard).isNotNull();
         assertThat(updatedSubsBoard.isSubsFlag()).isFalse();
+
     }
 
 }
