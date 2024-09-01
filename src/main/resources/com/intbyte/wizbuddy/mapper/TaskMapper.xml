@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.TaskMapper">
+    <resultMap type="com.intbyte.wizbuddy.task.domain.entity.Task" id="taskResultMap">
+        <id property="taskCode" column="task_code"/>
+        <result property="taskContents" column="task_contents"/>
+        <result property="taskFlag" column="task_flag"/>
+        <result property="taskFixedState" column="task_fixed_state"/> <!-- column은 db 컬럼명과 동일해야함. -->
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <!-- parameterType이 뭔지 알아보기
+    parameterType : 비즈니스 로직으로부터 전달 받은, SQL 구문에 사용될 매개변수의 자료형
+    이 속성은 이 쿼리가 실행될 때 전달받는 파라미터의 타입을 명시-->
+    <select id="findAllTask" resultMap="taskResultMap">
+        SELECT
+              A.task_code
+            , A.task_contents
+            , A.task_flag
+            , A.task_fixed_state
+            , A.created_at
+            , A.updated_at
+         FROM Task A
+    </select>
+
+    <select id="findTaskById" resultMap="taskResultMap" parameterType="int">
+        SELECT
+              A.task_code
+            , A.task_contents
+            , A.task_flag
+            , A.task_fixed_state
+            , A.created_at
+            , A.updated_at
+         FROM Task A
+        WHERE A.task_code = #{ taskCode }
+    </select>
+
+
+</mapper>

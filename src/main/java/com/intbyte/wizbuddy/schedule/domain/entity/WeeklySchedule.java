@@ -1,20 +1,15 @@
 package com.intbyte.wizbuddy.schedule.domain.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Entity(name = "weeklyschedule")
-@Table(name = "weeklyschedule")
+@Entity(name = "weeklySchedule")
+@Table(name = "weekly_schedule")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -22,20 +17,21 @@ import java.util.Date;
 public class WeeklySchedule {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int ScheduleCode;
+    private int scheduleCode;
 
     @Column
-    private boolean ScheduleFlag;
+    private boolean scheduleFlag;
 
     @Column
-    private Date ScheduleStartDate;
+    private Date scheduleStartDate;
 
     @Column
-    private LocalDateTime CreatedAt;
+    private LocalDateTime createdAt;
 
     @Column
-    private LocalDateTime UpdatedAt;
+    private LocalDateTime updatedAt;
 
 
 

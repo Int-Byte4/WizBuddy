@@ -1,36 +1,45 @@
 package com.intbyte.wizbuddy.checklist.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
+import jakarta.persistence.*;
+import jakarta.validation.Valid;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "checkList")
-@Table(name = "checkList")
+@Entity(name = "check_list")
+@Table(name = "check_list")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@ToString
+@Builder
+@EqualsAndHashCode
 public class CheckList {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="checklist_code")
     private int checkListCode;
 
-    @Column
+    @Column(name="checklist_title")
     private String checkListTitle;
 
-    @Column
+    @Column(name="checklist_flag")
     private Boolean checkListFlag;
 
-    @Column
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name="shop_code")
+    private int shopCode;
+
+    public void modify(@Valid EditCheckListInfo editCheckListInfo){
+        this.checkListTitle = editCheckListInfo.getCheckListTitle();
+        this.checkListFlag = editCheckListInfo.getCheckListFlag();
+        this.updatedAt = editCheckListInfo.getUpdatedAt();
+    }
 }
