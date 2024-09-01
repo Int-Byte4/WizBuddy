@@ -25,26 +25,27 @@ public class SubsBoardService {
     private final SubsBoardRepository subsBoardRepository;
 
 
-
     public List<SubsBoardDTO> findAllSubsBoards() {
         List<SubsBoard> subsBoardList = subsBoardMapper.selectAllSubsBoard();
-
+        if (subsBoardList == null || subsBoardList.isEmpty() ) {throw new SubsBoardNotFoundException();}
         return subsBoardList.stream()
                 .map(subsBoard -> modelMapper.map(subsBoard, SubsBoardDTO.class))
                 .collect(Collectors.toList());
     }
 
-
     public SubsBoardDTO findSubsBoardById(int subsCode) {
         SubsBoard subsBoard = subsBoardMapper.selectSubsBoardById(subsCode);
-
-        if (subsBoard == null) {
-            throw new SubsBoardNotFoundException();
-        }
-
+        if (subsBoard == null) {throw new SubsBoardNotFoundException();}
         return modelMapper.map(subsBoard, SubsBoardDTO.class);
     }
 
+    public List<SubsBoardDTO> getSubsBoardsByShopCode(int shopCode) {
+        List<SubsBoard> subsBoards = subsBoardMapper.selectSubsBoardByShopCode(shopCode);
+        if (subsBoards == null || subsBoards.isEmpty()) {throw new SubsBoardNotFoundException();}
+        return subsBoards.stream()
+                .map(subsBoard -> modelMapper.map(subsBoard, SubsBoardDTO.class))
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public void registSubsBoard(SubsBoardDTO subsBoards) {
