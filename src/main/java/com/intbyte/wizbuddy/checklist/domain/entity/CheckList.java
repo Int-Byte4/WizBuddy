@@ -36,7 +36,7 @@ public class CheckList {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @Column(name="shop_code")
+    @JoinColumn(name="shop_code")
     private Shop shopCode;
 
     public void modify(@Valid EditCheckListInfo editCheckListInfo){
