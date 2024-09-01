@@ -131,7 +131,7 @@ class CommentServiceTests {
     public void deleteCommentTest() {
 
         // given
-        int subsCode = 1;
+        int subsCode = 2;
         CommentDTO comment = commentService.findCommentById(subsCode);
         // when
         commentService.removeComment(comment);
@@ -139,6 +139,23 @@ class CommentServiceTests {
         Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
         assertThat(updatedComment).isNotNull();
         assertThat(updatedComment.isCommentFlag()).isFalse();
+
+    }
+
+    @Test
+    @DisplayName("댓글_채택_테스트")
+    @Transactional
+    public void adoptCommentTest() {
+
+        // given
+        int subsCode = 2;
+        CommentDTO comment = commentService.findCommentById(subsCode);
+        // when
+        commentService.adoptComment(comment);
+        // then
+        Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
+        assertThat(updatedComment).isNotNull();
+        assertThat(updatedComment.isCommentAdoptedState()).isTrue();
 
     }
 
