@@ -85,8 +85,8 @@ class CommentServiceTests {
     }
 
     @Test
-    @Transactional
     @DisplayName("댓글_등록_테스트")
+    @Transactional
     public void insertCommentTest() {
 
         //given
@@ -103,7 +103,7 @@ class CommentServiceTests {
         Comment newcomment = newcomments.get(newcomments.size()-1);
         System.out.println("newcomment = " + newcomment);
         assertNotNull(newcomment);
-        assertEquals(comment.getCommentCode(),newcomment.getCommentCode());
+        assertEquals(comment.getCommentContent(),newcomment.getCommentContent());
 
     }
 
