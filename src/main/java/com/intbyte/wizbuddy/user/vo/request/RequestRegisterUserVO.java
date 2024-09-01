@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.vo.request;
+package com.intbyte.wizbuddy.user.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
