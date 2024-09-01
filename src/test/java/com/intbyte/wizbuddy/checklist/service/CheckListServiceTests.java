@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.checklist.service;
 
+import com.intbyte.wizbuddy.checklist.domain.CheckListMybatis;
 import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.dto.CheckListDTO;
@@ -38,7 +39,7 @@ class CheckListServiceTests {
     public void insertCheckListTest(){
         // given:
         int shopCode = 1;
-        List<CheckList> currentCheckListList = checkListMapper.findAllCheckList();
+        List<CheckListMybatis> currentCheckListList = checkListMapper.findAllCheckList();
         CheckListDTO checkListDTO = new CheckListDTO(currentCheckListList.size() + 1,
                 "새로운 체크리스트 추가", true, LocalDateTime.now(), LocalDateTime.now(), shopCode);
 
@@ -46,7 +47,7 @@ class CheckListServiceTests {
         checkListService.insertCheckList(checkListDTO);
 
         // then:
-        CheckList checkList = checkListMapper.findCheckListById(checkListDTO.getCheckListCode());
+        CheckListMybatis checkList = checkListMapper.findCheckListById(checkListDTO.getCheckListCode());
         Assertions.assertEquals(checkListDTO.getCheckListCode(),checkList.getCheckListCode());
     }
 
@@ -69,8 +70,8 @@ class CheckListServiceTests {
     @DisplayName("체크리스트 전체 조회 성공")
     @Transactional
     public void findAllCheckListTest(){
-        List<CheckList> allCheckList = checkListMapper.findAllCheckList();
-        for(CheckList checklist: allCheckList){
+        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckList();
+        for(CheckListMybatis checklist: allCheckList){
             assertNotNull(checklist);
         }
     }
@@ -79,8 +80,8 @@ class CheckListServiceTests {
     @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
     @Transactional
     public void findAllCheckListsByFlag(){
-        List<CheckList> allCheckList = checkListMapper.findAllCheckListsByFlag();
-        for(CheckList checklist: allCheckList){
+        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
+        for(CheckListMybatis checklist: allCheckList){
             assertNotNull(checklist);
         }
     }
@@ -99,7 +100,7 @@ class CheckListServiceTests {
         checkListService.modifyCheckList(checkListCode, info);
 
         // then
-        CheckList checkList = checkListMapper.findCheckListById(checkListCode);
+        CheckListMybatis checkList = checkListMapper.findCheckListById(checkListCode);
         assertEquals(info.getCheckListTitle(), checkList.getCheckListTitle());
     }
 
@@ -115,7 +116,7 @@ class CheckListServiceTests {
         checkListService.deleteCheckList(checkListCode);
 
         // then
-        CheckList checkList = checkListMapper.findCheckListById(checkListCode);
+        CheckListMybatis checkList = checkListMapper.findCheckListById(checkListCode);
         assertEquals(false, checkList.getCheckListFlag());
     }
 }
