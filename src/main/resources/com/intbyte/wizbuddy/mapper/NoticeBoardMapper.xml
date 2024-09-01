@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.NoticeBoardMapper">
+<resultMap id="noticeBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.NoticeBoard">
+    <id property="noticeCode" column="notice_code"/>
+    <result property="noticeTitle" column="notice_title"/>
+    <result property="noticeContents" column="notice_contents"/>
+    <result property="noticeFlag" column="notice_flag"/>
+    <result property="imageURL" column="image_url"/>
+    <result property="createdAt" column="created_at"/>
+    <result property="updatedAt" column="updated_at"/>
+    <association property="shop" javaType="com.intbyte.wizbuddy.shop.dto.ShopDTO">
+        <id property="shopCode" column="shop_code"/>
+    </association>
+</resultMap>
+
+    <select id="findEmployerCodeByNoticeCode" resultType="int">
+        SELECT
+               N.employer_code
+          FROM notice_board N
+         WHERE N.notice_code = #{ noticeCode }
+           AND N.shop_code = #{ shopCode }
+           AND N.notice_flag = true
+    </select>
+</mapper>

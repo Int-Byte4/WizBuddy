@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.intbyte.wizbuddy.mapper.ShopMapper">
+    <resultMap type="com.intbyte.wizbuddy.shop.domain.entity.Shop" id="shopResultMap">
+        <id property="shopCode" column="shop_code"/>
+        <result property="shopName" column="shop_name"/>
+        <result property="shopLocation" column="shop_location"/>
+        <result property="shopFlag" column="shop_flag"/>
+        <result property="shopOpenTime" column="shop_open_time"/>
+        <result property="businessNum" column="business_num"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="employerCode" column="employer_code"/>
+    </resultMap>
+
+
+    <select id="findByBusinessNum" resultType="string" parameterType="string">
+        SELECT
+               S.business_num
+          FROM shop S
+         WHERE S.business_num = #{ businessNum }
+           AND S.shop_flag = true
+    </select>
+
+    <select id="findShopByShopCode" resultMap="shopResultMap" parameterType="int">
+        SELECT
+               S.shop_code
+             , S.shop_name
+             , S.shop_location
+             , S.shop_flag
+             , S.shop_open_time
+             , S.business_num
+             , S.created_at
+             , S.updated_at
+             , S.employer_code
+          FROM shop S
+         WHERE S.shop_code = #{ shopCode }
+           AND S.shop_flag = true
+    </select>
+</mapper>

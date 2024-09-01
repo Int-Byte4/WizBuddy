@@ -7,17 +7,16 @@ import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 @ToString
 public class ShopDTO {
-    public int shopCode;
-    public String shopName;
-    public String shopLocation;
-    public Boolean shopFlag;
-    public LocalTime shopOpenTime;
-    public String businessNum;
-    public LocalDateTime createdAt;
-    public LocalDateTime updatedAt;
-    public Integer employerCode;
+    private int shopCode;
+    private String shopName;
+    private String shopLocation;
+    private Boolean shopFlag;
+    private LocalTime shopOpenTime;
+    private String businessNum;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String employerCode;
 }

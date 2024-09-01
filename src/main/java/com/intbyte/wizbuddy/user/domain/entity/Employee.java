@@ -1,14 +1,12 @@
 package com.intbyte.wizbuddy.user.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity(name = "employee")
@@ -17,33 +15,60 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class Employee {
 
     @Id
-    @Column
-    private int employeeCode;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_code")
+    private String employeeCode;
 
-    @Column
+    @Column(name="employee_name")
     private String employeeName;
 
-    @Column
+    @Column(nullable = false, unique = true, name = "employee_email")
     private String employeeEmail;
 
-    @Column
+    @Column(nullable = false, name="employee_password")
     private String employeePassword;
 
-    @Column
+    @Column(nullable = false, name = "employee_phone")
     private String employeePhone;
 
-    @Column
+    @Column(nullable = false, name = "employee_flag")
     private boolean employeeFlag;
 
-    @Column
+    @Column(name = "latitude")
+    private String latitude;
+
+    @Column(name = "longitude")
+    private String longitude;
+
+    @Column(name="employee_wage")
+    private int employeeWage;
+
+    @Column(name="employee_health_date")
+    private LocalDate employeeHealthDate;
+
+    @Column(nullable = false, name = "employee_black_state")
     private boolean employeeBlackState;
 
-    @Column
+    @Column(nullable = false, name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(nullable = false, name="updated_at")
     private LocalDateTime updatedAt;
+
+    public void modify(EditEmployeeInfo modifyEmployeeInfo) {
+        this.employeeName = modifyEmployeeInfo.getEmployeeName();
+        this.employeePassword = modifyEmployeeInfo.getEmployeePassword();
+        this.employeePhone = modifyEmployeeInfo.getEmployeePhone();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void removeRequest(DeleteEmployeeInfo deleteEmployeeInfo) {
+        this.employeeCode = deleteEmployeeInfo.getEmployeeCode();
+        this.employeeFlag = false;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
