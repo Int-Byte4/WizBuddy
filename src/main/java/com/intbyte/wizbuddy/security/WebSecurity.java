@@ -26,10 +26,7 @@ public class WebSecurity {
     private JwtUtil jwtUtil;
 
     @Autowired
-    public WebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder
-            , UserService userService
-            , Environment env
-            , JwtUtil jwtUtil) {
+    public WebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService, Environment env, JwtUtil jwtUtil) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userService = userService;
         this.env = env;
@@ -52,9 +49,10 @@ public class WebSecurity {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         http.authorizeHttpRequests((authz) ->
-                        authz.requestMatchers(new AntPathRequestMatcher("/users/employer/", "GET")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/users/employee/", "GET")).hasRole("EMPLOYEE")
-                                .requestMatchers(new AntPathRequestMatcher("/users/**", "POST")).permitAll()
+                        authz
+                                .requestMatchers(new AntPathRequestMatcher("/users/employee", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/users/employer", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/users/employer/", "GET")).hasRole("EMPLOYER")
                                 .anyRequest().authenticated()
                 )
                 /* 설명. authenticationManager 등록(UserDetails를 상속받는 Service 계층 + BCrypt 암호화) */

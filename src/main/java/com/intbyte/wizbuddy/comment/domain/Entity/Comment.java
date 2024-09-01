@@ -46,7 +46,7 @@ public class Comment {
     private int subsCode;
 
     @Column(name = "employee_code")
-    private int employeeCode;
+    private String employeeCode;
 
     public void toUpdate(@Valid EditCommentInfo editCommentInfo) {
         this.commentContent = editCommentInfo.getCommentContent();
