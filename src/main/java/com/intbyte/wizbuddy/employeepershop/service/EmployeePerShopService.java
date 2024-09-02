@@ -80,10 +80,17 @@ public class EmployeePerShopService {
         EmployeePerShopId id = new EmployeePerShopId(shopCode, employeeCode);
 
         EmployeePerShop employeePerShop = employeePerShopRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        Employee findEmployee = employeeRepository.findById(info.getEmployeeCode()).orElseThrow(EmployeeCodeNotFoundException::new);
+        Employee findEmployee = employeeRepository.findById(id.getEmployeeCode()).orElseThrow(EmployeeCodeNotFoundException::new);
 
         employeePerShop.modify(info, findEmployee);
 
         employeePerShopRepository.save(employeePerShop);
+    }
+
+    @Transactional
+    public void deleteEmployeePerShopById(EmployeePerShopId employee) {
+        EmployeePerShop employeePerShop = employeePerShopRepository.findById(employee).orElseThrow(IllegalArgumentException::new);
+
+        employeePerShopRepository.delete(employeePerShop);
     }
 }
