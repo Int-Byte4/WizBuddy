@@ -74,7 +74,7 @@ public class UserController {
 
     @GetMapping("/employee/{employeeCode}")
     public ResponseEntity<ResponseFindEmployeeVO> getEmployee(@PathVariable("employeeCode") String employeeCode) {
-        EmployeeDTO employeeDTO = employeeService.getByEmployerCode(employeeCode);
+        EmployeeDTO employeeDTO = employeeService.getByEmployeeCode(employeeCode);
 
         ResponseFindEmployeeVO findUser = modelMapper.map(employeeDTO, ResponseFindEmployeeVO.class);
 
