@@ -13,7 +13,7 @@ public class EmployeeWorkingPartDTO {
 
     private int workingPartCode;
 
-    private int employeeCode;
+    private String employeeCode;
 
     private int scheduleCode;
 

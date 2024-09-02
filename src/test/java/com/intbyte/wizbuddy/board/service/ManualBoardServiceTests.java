@@ -79,4 +79,32 @@ class ManualBoardServiceTests {
         Assertions.assertEquals(false, newManualBoards.get(0).equals(deleteManualBoardInfo));
         newManualBoards.forEach(System.out::println);
     }
+
+    @Test
+    @DisplayName("매뉴얼 게시글 전체 조회")
+    @Transactional
+    public void testFindAllManualBoards() {
+
+        // given, when
+        int shopCode = 1;
+
+        // then
+        List<ManualBoardDTO> manualBoards = manualBoardService.findAllManualBoards(shopCode);
+
+        manualBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매뉴얼 게시글 단 건 조회")
+    @Transactional
+    public void testFindManualBoard() {
+
+        // given, when
+        int manualCode = 3;
+
+        // then
+        ManualBoardDTO manualBoard = manualBoardService.findManualBoard(manualCode);
+
+        System.out.println(manualBoard);
+    }
 }

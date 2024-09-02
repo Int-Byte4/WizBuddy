@@ -2,16 +2,24 @@ package com.intbyte.wizbuddy.board.service;
 
 import com.intbyte.wizbuddy.board.domain.DeleteNoticeBoardInfo;
 import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
+import com.intbyte.wizbuddy.board.domain.entity.ManualBoard;
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoard;
+import com.intbyte.wizbuddy.board.dto.ManualBoardDTO;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.repository.NoticeBoardRepository;
 import com.intbyte.wizbuddy.exception.noticeboard.NoticeBoardModifyOtherUserException;
 import com.intbyte.wizbuddy.exception.noticeboard.NoticeBoardNotFoundException;
+import com.intbyte.wizbuddy.mapper.EmployerMapper;
+import com.intbyte.wizbuddy.mapper.ManualBoardMapper;
 import com.intbyte.wizbuddy.mapper.NoticeBoardMapper;
+import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -19,10 +27,13 @@ public class NoticeBoardService {
 
     private final NoticeBoardMapper noticeBoardMapper;
     private final NoticeBoardRepository noticeBoardRepository;
+    private final ModelMapper modelMapper;
 
-    public NoticeBoardService(NoticeBoardRepository noticeBoardRepository, NoticeBoardMapper noticeBoardMapper) {
+
+    public NoticeBoardService(NoticeBoardRepository noticeBoardRepository, NoticeBoardMapper noticeBoardMapper, ModelMapper modelMapper) {
         this.noticeBoardRepository = noticeBoardRepository;
         this.noticeBoardMapper = noticeBoardMapper;
+        this.modelMapper = modelMapper;
     }
 
     /* 기능. 1. 공지사항 게시판 게시글 등록 */
@@ -76,5 +87,25 @@ public class NoticeBoardService {
 
         // 변경된 객체를 repository에 저장
         noticeBoardRepository.save(noticeBoard);
+    }
+
+    /* 기능. 4. 전체 공지사항 게시글 조회 */
+    @Transactional
+    public List<NoticeBoardDTO> findAllNoticeBoards(int shopCode) {
+        List<NoticeBoard> noticeBoardList = noticeBoardMapper.findAllNoticeBoards(shopCode);
+
+        return noticeBoardList.stream()
+                .map(noticeBoard -> modelMapper.map(noticeBoard, NoticeBoardDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    /* 기능 5. 공지사항 게시글 단 건 조회 */
+    @Transactional
+    public NoticeBoardDTO findNoticeBoard(int noticeCode) {
+        NoticeBoard noticeBoard = noticeBoardMapper.findNoticeBoard(noticeCode);
+
+        NoticeBoardDTO noticeBoardDTO = modelMapper.map(noticeBoard, NoticeBoardDTO.class);
+
+        return noticeBoardDTO;
     }
 }
