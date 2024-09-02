@@ -12,9 +12,7 @@
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
         <result property="shopCode" column="shop_code"/>
-        <association property="users" javaType="com.intbyte.wizbuddy.user.dto.UserDTO">
-            <id property="userCode" column="user_code"/>
-        </association>
+        <result property="userCode" column="user_code"/>
     </resultMap>
 
     <select id="findUserCodeByManualCode" resultType="int">
@@ -24,5 +22,35 @@
          WHERE M.manual_code = #{ manualCode }
            AND M.manual_flag = true
     </select>
-
+    <select id="findAllManualBoards" resultMap="manualBoardResultMap" resultType="hashMap">
+        SELECT
+               M.manual_code
+             , M.manual_title
+             , M.manual_contents
+             , M.manual_flag
+             , M.image_url
+             , M.created_at
+             , M.updated_at
+             , M.shop_code
+             , M.user_code
+          FROM manual_board M
+         WHERE M.shop_code = #{ shopCode }
+           AND M.manual_flag = true
+         ORDER BY created_at DESC
+    </select>
+    <select id="findManualBoard" resultMap="manualBoardResultMap" parameterType="int">
+        SELECT
+               M.manual_code
+             , M.manual_title
+             , M.manual_contents
+             , M.manual_flag
+             , M.image_url
+             , M.created_at
+             , M.updated_at
+             , M.shop_code
+             , M.user_code
+          FROM manual_board M
+         WHERE M.manual_code = #{ manual_code }
+           AND M.manual_flag = true
+    </select>
 </mapper>
