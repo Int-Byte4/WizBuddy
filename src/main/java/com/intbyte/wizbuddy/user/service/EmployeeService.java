@@ -7,6 +7,8 @@ import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
+import com.intbyte.wizbuddy.user.vo.response.ResponseDeleteEmployeeVO;
+import com.intbyte.wizbuddy.user.vo.response.ResponseEditEmployeeVO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +25,7 @@ public class EmployeeService {
     private final ModelMapper mapper;
 
     @Transactional
-    public void modifyEmployee(EditEmployeeInfo modifyEmployeeInfo) {
+    public ResponseEditEmployeeVO modifyEmployee(EditEmployeeInfo modifyEmployeeInfo) {
         String employeeCode = modifyEmployeeInfo.getEmployeeCode();
 
         Employee employee = employeeMapper.getEmployee(employeeCode);
@@ -32,10 +34,14 @@ public class EmployeeService {
 
         employee.modify(modifyEmployeeInfo);
         employeeRepository.save(employee);
+
+        ResponseEditEmployeeVO responseEditEmployeeVO = mapper.map(modifyEmployeeInfo, ResponseEditEmployeeVO.class);
+
+        return responseEditEmployeeVO;
     }
 
     @Transactional
-    public void deleteEmployee(DeleteEmployeeInfo deleteEmployeeInfo) {
+    public ResponseDeleteEmployeeVO deleteEmployee(DeleteEmployeeInfo deleteEmployeeInfo) {
         String employeeCode = deleteEmployeeInfo.getEmployeeCode();
 
         Employee employee = employeeMapper.getEmployee(employeeCode);
@@ -44,6 +50,10 @@ public class EmployeeService {
 
         employee.removeRequest(deleteEmployeeInfo);
         employeeRepository.save(employee);
+
+        ResponseDeleteEmployeeVO responseDeleteEmployeeVO = mapper.map(deleteEmployeeInfo, ResponseDeleteEmployeeVO.class);
+
+        return responseDeleteEmployeeVO;
     }
 
     public EmployeeDTO getByEmployeeCode(String employeeCode) {
