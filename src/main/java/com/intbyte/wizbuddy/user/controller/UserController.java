@@ -1,14 +1,13 @@
 package com.intbyte.wizbuddy.user.controller;
 
 import com.intbyte.wizbuddy.security.JwtUtil;
-import com.intbyte.wizbuddy.user.domain.*;
+import com.intbyte.wizbuddy.user.domain.info.*;
 import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.service.EmployeeService;
 import com.intbyte.wizbuddy.user.service.EmployerService;
 import com.intbyte.wizbuddy.user.service.UserService;
 import com.intbyte.wizbuddy.user.vo.request.*;
-import com.intbyte.wizbuddy.user.vo.response.ResponseEditEmployeeVO;
 import com.intbyte.wizbuddy.user.vo.response.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,21 +38,21 @@ public class UserController {
     }
 
     @PostMapping("/employer")
-    public ResponseEntity<ResponseRegisterEmployerVO> registerEmployer(@RequestBody RegisterEmployerRequest request) {
+    public ResponseEntity<ResponseInsertEmployerVO> registerEmployer(@RequestBody RequestInsertEmployerVO request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployerInfo registerEmployerInfo = modelMapper.map(request.getNewEmployer(), RegisterEmployerInfo.class);
 
-        ResponseRegisterEmployerVO responseUser = userService.signInEmployer(signInUserInfo, registerEmployerInfo);
+        ResponseInsertEmployerVO responseUser = userService.signInEmployer(signInUserInfo, registerEmployerInfo);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
     @PostMapping("/employee")
-    public ResponseEntity<ResponseRegisterEmployeeVO> registerEmployee(@RequestBody RegisterEmployeeRequest request) {
+    public ResponseEntity<ResponseInsertEmployeeVO> registerEmployee(@RequestBody RequestInsertEmployeeVO request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployeeInfo registerEmployeeInfo = modelMapper.map(request.getNewEmployee(), RegisterEmployeeInfo.class);
 
-        ResponseRegisterEmployeeVO responseUser =  userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
+        ResponseInsertEmployeeVO responseUser =  userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
@@ -77,38 +76,38 @@ public class UserController {
     }
 
     @PatchMapping("/employer/edit")
-    public ResponseEntity<ResponseEditEmployerVO> modifyEmployer(@RequestBody RequestEditEmployerVO request) {
+    public ResponseEntity<Void> modifyEmployer(@RequestBody RequestEditEmployerVO request) {
         EditEmployerInfo editEmployerInfo = modelMapper.map(request, EditEmployerInfo.class);
 
-        ResponseEditEmployerVO responseUser =  employerService.modifyEmployer(editEmployerInfo);
+        employerService.modifyEmployer(editEmployerInfo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PatchMapping("/employee/edit")
-    public ResponseEntity<ResponseEditEmployeeVO> modifyEmployer(@RequestBody RequestEditEmployeeVO request) {
+    public ResponseEntity<Void> modifyEmployer(@RequestBody RequestEditEmployeeVO request) {
         EditEmployeeInfo editEmployeeInfo = modelMapper.map(request, EditEmployeeInfo.class);
 
-        ResponseEditEmployeeVO responseUser =  employeeService.modifyEmployee(editEmployeeInfo);
+        employeeService.modifyEmployee(editEmployeeInfo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PatchMapping("/employer/delete")
-    public ResponseEntity<ResponseDeleteEmployerVO> deleteEmployer(@RequestBody RequestDeleteEmployerVO request) {
+    public ResponseEntity<Void> deleteEmployer(@RequestBody RequestDeleteEmployerVO request) {
         DeleteEmployerInfo deleteEmployerInfo = modelMapper.map(request, DeleteEmployerInfo.class);
 
-        ResponseDeleteEmployerVO responseUser =  employerService.deleteEmployer(deleteEmployerInfo);
+        employerService.deleteEmployer(deleteEmployerInfo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PatchMapping("/employee/delete")
-    public ResponseEntity<ResponseDeleteEmployeeVO> deleteEmployer(@RequestBody RequestDeleteEmployeeVO request) {
+    public ResponseEntity<Void> deleteEmployer(@RequestBody RequestDeleteEmployeeVO request) {
         DeleteEmployeeInfo deleteEmployeeInfo = modelMapper.map(request, DeleteEmployeeInfo.class);
 
-        ResponseDeleteEmployeeVO responseUser =  employeeService.deleteEmployee(deleteEmployeeInfo);
+        employeeService.deleteEmployee(deleteEmployeeInfo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseUser);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

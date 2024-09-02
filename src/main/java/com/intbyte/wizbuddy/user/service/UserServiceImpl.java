@@ -5,12 +5,12 @@ import com.intbyte.wizbuddy.mapper.EmployeeMapper;
 import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.mapper.UserAndEmployeeMapper;
 import com.intbyte.wizbuddy.mapper.UserAndEmployerMapper;
-import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.SignInUserInfo;
 import com.intbyte.wizbuddy.user.repository.UserRepository;
-import com.intbyte.wizbuddy.user.vo.response.ResponseRegisterEmployeeVO;
-import com.intbyte.wizbuddy.user.vo.response.ResponseRegisterEmployerVO;
+import com.intbyte.wizbuddy.user.vo.response.ResponseInsertEmployeeVO;
+import com.intbyte.wizbuddy.user.vo.response.ResponseInsertEmployerVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public ResponseRegisterEmployerVO signInEmployer(SignInUserInfo signInUserInfo, RegisterEmployerInfo registerEmployerInfo) {
+    public ResponseInsertEmployerVO signInEmployer(SignInUserInfo signInUserInfo, RegisterEmployerInfo registerEmployerInfo) {
         String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String uuid = UUID.randomUUID().toString();
         String customUserCode = currentDate + uuid.substring(8);
@@ -67,14 +67,14 @@ public class UserServiceImpl implements UserService {
 
         userAndEmployerMapper.insertEmployer(registerEmployerInfo);
 
-        ResponseRegisterEmployerVO registerEmployerVO = new ResponseRegisterEmployerVO(signInUserInfo, registerEmployerInfo);
+        ResponseInsertEmployerVO registerEmployerVO = new ResponseInsertEmployerVO(signInUserInfo, registerEmployerInfo);
 
         return registerEmployerVO;
     }
 
     @Transactional
     @Override
-    public ResponseRegisterEmployeeVO signInEmployee(SignInUserInfo signInUserInfo, RegisterEmployeeInfo registerEmployeeInfo) {
+    public ResponseInsertEmployeeVO signInEmployee(SignInUserInfo signInUserInfo, RegisterEmployeeInfo registerEmployeeInfo) {
         String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
         String uuid = UUID.randomUUID().toString();
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 
         userAndEmployeeMapper.insertEmployee(registerEmployeeInfo);
 
-        ResponseRegisterEmployeeVO registerEmployeeVO = new ResponseRegisterEmployeeVO(signInUserInfo, registerEmployeeInfo);
+        ResponseInsertEmployeeVO registerEmployeeVO = new ResponseInsertEmployeeVO(signInUserInfo, registerEmployeeInfo);
 
         return registerEmployeeVO;
     }

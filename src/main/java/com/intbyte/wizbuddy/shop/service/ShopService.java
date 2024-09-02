@@ -12,7 +12,6 @@ import com.intbyte.wizbuddy.shop.domain.RegisterShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
-import com.intbyte.wizbuddy.shop.vo.response.ResponseDeleteShopVO;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseEditShopVO;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseRegisterShopVO;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
@@ -71,7 +70,7 @@ public class ShopService {
     }
 
     @Transactional
-    public ResponseDeleteShopVO deleteShop(String employerCode, DeleteShopInfo deleteShopInfo) {
+    public void deleteShop(String employerCode, DeleteShopInfo deleteShopInfo) {
         int shopCode = deleteShopInfo.getShopCode();
 
         Employer employer = employerMapper.getEmployer(employerCode);
@@ -81,8 +80,6 @@ public class ShopService {
 
         shop.removeRequest(deleteShopInfo);
         shopRepository.save(shop);
-
-        return new ResponseDeleteShopVO(deleteShopInfo);
     }
 
     @Transactional

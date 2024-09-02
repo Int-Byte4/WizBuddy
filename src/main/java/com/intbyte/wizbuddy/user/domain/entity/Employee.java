@@ -1,8 +1,7 @@
 package com.intbyte.wizbuddy.user.domain.entity;
 
-import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployeeInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
