@@ -1,9 +1,13 @@
 package com.intbyte.wizbuddy.task.controller;
 
 
+import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.service.TaskService;
+import com.intbyte.wizbuddy.task.vo.request.RequestInsertTaskVO;
 import com.intbyte.wizbuddy.task.vo.response.ResponseFindTaskVO;
+import com.intbyte.wizbuddy.task.vo.response.ResponseInsertTaskVO;
+import com.intbyte.wizbuddy.task.vo.response.ResponseModifyTaskVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,39 +30,41 @@ public class TaskController {
         this.modelMapper = modelMapper;
     }
 
-    // 특정 매장의 모든 task 조회
-    @GetMapping("task") // '/'를 붙이면 requestMapping 적용 x
-    public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShop(@PathVariable("shopCode") int shopCode){
+    // 특정 task 조회
+    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
+    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
 
-        List<TaskDTO> taskDTOList = taskService.findAllTaskByShopCode(shopCode);
+        TaskDTO taskDTO = taskService.findTaskById(taskCode);
 
-        List<ResponseFindTaskVO> responseTasks = taskDTOList
-                .stream()
-                .map(taskDTO -> ResponseFindTaskVO.builder()
-                        .taskCode(taskDTO.getTaskCode())
-                        .taskContents(taskDTO.getTaskContents())
-                        .taskFlag(taskDTO.isTaskFlag())
-                        .taskFixedState(taskDTO.isTaskFixedState())
-                        .createdAt(taskDTO.getCreatedAt())
-                        .updatedAt(taskDTO.getUpdatedAt())
-                        .shopCode(taskDTO.getShopCode())
-                        .build()
-                )
-                .collect(Collectors.toList());
+        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
+                .taskCode(taskDTO.getTaskCode())
+                .taskContents(taskDTO.getTaskContents())
+                .taskFlag(taskDTO.isTaskFlag())
+                .taskFixedState(taskDTO.isTaskFixedState())
+                .createdAt(taskDTO.getCreatedAt())
+                .updatedAt(taskDTO.getUpdatedAt())
+                .shopCode(taskDTO.getShopCode())
+                .build();
 
-        return ResponseEntity.status(HttpStatus.OK).body(responseTasks);
+        return ResponseEntity.status(HttpStatus.OK).body(findTask);
     }
 
-    // 특정 매장의 TASK 중 QueryParam에 따라 fixed or nonfixed task 찾아주기
+    // 특정 매장의 task 조회
     @GetMapping("task")
-    public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixed(
+    public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixedState(
             @PathVariable("shopCode") int shopCode,
-            @RequestParam(name = "fixed") boolean fixed){
+            @RequestParam(name = "fixed", required = false) Boolean fixed) {
 
-        List<TaskDTO> taskDTOList = null;
-        if(fixed){ // 고정 task 찾아주기
+        List<TaskDTO> taskDTOList;
+
+        if (fixed == null) {
+            // fixed 파라미터가 없을 경우, 모든 Task를 반환
+            taskDTOList = taskService.findAllTaskByShopCode(shopCode);
+        } else if (fixed) {
+            // fixed가 true일 경우, 고정된 Task를 반환
             taskDTOList = taskService.findAllTaskByShopCodeByFixedState(shopCode);
-        }else{ // 고정 안된 task 찾아주기
+        } else {
+            // fixed가 false일 경우, 고정되지 않은 Task를 반환
             taskDTOList = taskService.findAllTaskByShopCodeByNonFixedState(shopCode);
         }
 
@@ -79,28 +85,31 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(responseTasks);
     }
 
+    // 특정 매장에 1개 task 추가
+    @PostMapping("/task")
+    public ResponseEntity<Void>insertTask(
+            @RequestBody RequestInsertTaskVO request){
 
+        TaskDTO taskDTO = modelMapper.map(request, TaskDTO.class);
 
-    // 특정 task 조회
-    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
-    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
+        taskService.insertTask(taskDTO);
 
-        TaskDTO taskDTO = taskService.findTaskById(taskCode);
-
-        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
-                .taskCode(taskDTO.getTaskCode())
-                .taskContents(taskDTO.getTaskContents())
-                .taskFlag(taskDTO.isTaskFlag())
-                .taskFixedState(taskDTO.isTaskFixedState())
-                .createdAt(taskDTO.getCreatedAt())
-                .updatedAt(taskDTO.getUpdatedAt())
-                .shopCode(taskDTO.getShopCode())
-                .build();
-
-        return ResponseEntity.status(HttpStatus.OK).body(findTask);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    // 특정 매장의 특정 task 수정(삭제도 같이 수행)
+    @PostMapping("task/{taskCode}")
+    public ResponseEntity<Void> modifyTask(
+            @PathVariable("shopCode") int shopCode,
+            @PathVariable("taskCode") int taskCode,
+            @RequestBody RequestInsertTaskVO request
+    ){
+        EditTaskInfo editTaskInfo = new EditTaskInfo(request.getTaskContents(), request.isTaskFlag(), request.isTaskFixedState(), request.getUpdatedAt());
 
+        taskService.modifyTask(taskCode, editTaskInfo);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 
 
 }
