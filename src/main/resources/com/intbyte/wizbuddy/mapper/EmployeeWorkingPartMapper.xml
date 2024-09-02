@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.mapper.EmployeeWorkingPartMapper">
-    <resultMap id="EmployeeAndScheduleResultMap" type="com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO">
+    <resultMap id="EmployeeAndScheduleResultMap" type="com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart">
         <id property="workingPartCode" column="working_part_code"/>
         <result property="employeeCode" column="employee_code"/>
         <result property="workingDate" column="working_date"/>
@@ -11,58 +11,67 @@
         <result property="scheduleCode" column="schedule_code"/>
     </resultMap>
 
-    <select id="findEmployeeByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+    <select id="findEmployeeByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="String">
         SELECT
                A.working_part_code
              , A.employee_code
              , A.schedule_code
              , A.working_date
              , A.working_part_time
-             , A.schedule_code
           FROM employee_working_part A
          WHERE A.employee_code = #{employeeCode}
          LIMIT 1
     </select>
 
-    <select id="selectSchedule" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+    <select id="selectScheduleByScheduleCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
         SELECT
                A.working_part_code
              , A.employee_code
              , A.schedule_code
              , A.working_date
              , A.working_part_time
-             , A.schedule_code
           FROM employee_working_part A
           JOIN weekly_schedule B ON A.schedule_code = B.schedule_code
          WHERE B.schedule_code = #{scheduleCode}
     </select>
 
-    <select id="selectScheduleByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+    <select id="selectAllScheduleByEmployeeCode"  resultMap="EmployeeAndScheduleResultMap" parameterType="string">
+        SELECT
+        A.working_part_code
+        , A.employee_code
+        , A.schedule_code
+        , A.working_date
+        , A.working_part_time
+        FROM employee_working_part A
+        JOIN employee B ON A.employee_code = B.employee_code
+        WHERE B.employee_code = #{employeeCode}
+    </select>
+
+    <select id="selectScheduleByWorkingPartCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
         SELECT
                A.working_part_code
              , A.employee_code
              , A.schedule_code
              , A.working_date
              , A.working_part_time
-             , A.schedule_code
           FROM employee_working_part A
           JOIN employee B ON A.employee_code = B.employee_code
-         WHERE B.employee_code = #{employeeCode}
+         WHERE A.working_part_code = #{workingPartCode}
     </select>
 
-    <update id="updateScheduleByComment" parameterType="com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO">
-        UPDATE employee_working_part A
-          JOIN substitution_board S ON A.working_part_code = S.working_part_code
-          JOIN comments C ON S.subs_code = C.subs_code
-           SET A.employee_code = C.employee_code
-         WHERE S.subs_code = #{subsCode}
-           AND C.comment_code = #{commentCode}
-           AND A.working_date = (SELECT working_date
-                                   FROM employee_working_part
-                                  WHERE working_part_code = S.working_part_code)
-           AND A.working_part_time = (SELECT working_part_time
-                                        FROM employee_working_part
-                                       WHERE working_part_code = S.working_part_code);
-    </update>
+<!--    <update id="updateScheduleByComment" parameterType="com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO">-->
+<!--        UPDATE employee_working_part A-->
+<!--          JOIN substitution_board S ON A.working_part_code = S.working_part_code-->
+<!--          JOIN comments C ON S.subs_code = C.subs_code-->
+<!--           SET A.employee_code = C.employee_code-->
+<!--         WHERE S.subs_code = #{subsCode}-->
+<!--           AND C.comment_code = #{commentCode}-->
+<!--           AND A.working_date = (SELECT working_date-->
+<!--                                   FROM employee_working_part-->
+<!--                                  WHERE working_part_code = S.working_part_code)-->
+<!--           AND A.working_part_time = (SELECT working_part_time-->
+<!--                                        FROM employee_working_part-->
+<!--                                       WHERE working_part_code = S.working_part_code);-->
+<!--    </update>-->
 </mapper>
 
