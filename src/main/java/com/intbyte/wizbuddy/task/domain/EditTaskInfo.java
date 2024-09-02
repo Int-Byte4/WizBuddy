@@ -17,4 +17,5 @@ public class EditTaskInfo {
     private boolean taskFixedState;
 //    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+//    private int shopCode;
 }
