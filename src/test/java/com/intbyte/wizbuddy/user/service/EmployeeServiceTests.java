@@ -41,8 +41,6 @@ class EmployeeServiceTests {
         //then
         List<Employee> newEmployees = employeeRepository.findAll();
         assertEquals(newEmployees.get(0).getEmployeeName(), employeeInfo.getEmployeeName());
-
-        newEmployees.forEach(System.out::println);
     }
 
     @Test
@@ -61,7 +59,5 @@ class EmployeeServiceTests {
         //then
         List<Employee> newEmployees = employeeRepository.findAll();
         assertEquals(false, newEmployees.get(0).isEmployeeFlag());
-
-        newEmployees.forEach(System.out::println);
     }
 }

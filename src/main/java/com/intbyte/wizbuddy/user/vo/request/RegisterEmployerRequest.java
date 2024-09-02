@@ -1,13 +1,10 @@
 package com.intbyte.wizbuddy.user.vo.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 public class RegisterEmployerRequest {
     private RequestRegisterUserVO newUser;
     private RequestRegisterEmployerVO newEmployer;

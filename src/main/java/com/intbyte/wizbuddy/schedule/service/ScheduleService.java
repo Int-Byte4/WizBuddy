@@ -50,24 +50,23 @@ public class ScheduleService {
 
     // 한주의 근무일정 조회
     @Transactional
-    public List<EmployeeWorkingPartDTO> findSchedule(int scheduleCode) {
+    public List<EmployeeWorkingPart> findSchedule(int scheduleCode) {
         WeeklySchedule weeklySchedule =  weeklyScheduleRepository.findById(scheduleCode)
                 .orElseThrow(ScheduleNotFoundException::new);
 
         validateRequest(weeklySchedule);
 
-        return employeeWorkingPartMapper.selectSchedule(weeklySchedule.getScheduleCode());
+        return employeeWorkingPartMapper.selectScheduleByScheduleCode(weeklySchedule.getScheduleCode());
     }
 
     // 직원코드로 직원별 한주의 근무일정 조회
     @Transactional
-    public List<EmployeeWorkingPartDTO> findScheduleByEmployeeCode(int employeeCode) {
-        EmployeeWorkingPartDTO foundCode = employeeWorkingPartMapper.findEmployeeByEmployeeCode(employeeCode);
+    public List<EmployeeWorkingPart> findScheduleByEmployeeCode(String employeeCode) {
+        EmployeeWorkingPart foundCode = employeeWorkingPartMapper.findEmployeeByEmployeeCode(employeeCode);
 
-        if (foundCode == null || foundCode.getEmployeeCode() != employeeCode)
-            throw new EmployeeCodeNotFoundException();
+        if (foundCode == null) throw new EmployeeCodeNotFoundException();
 
-        return employeeWorkingPartMapper.selectScheduleByEmployeeCode(employeeCode);
+        return employeeWorkingPartMapper.selectAllScheduleByEmployeeCode(employeeCode);
     }
 
     // 한주의 스케줄 등록
@@ -89,52 +88,51 @@ public class ScheduleService {
 
     // 2. 직원 배치
     @Transactional
-    public EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart) {
+    public void registSchedulePerEmployee(EmployeeWorkingPart employeeWorkingPart) {
         EmployeeWorkingPart insertSchedulePerEmployee =
                 new EmployeeWorkingPart(employeeWorkingPart.getWorkingPartCode()
                 , employeeWorkingPart.getEmployeeCode()
                 , employeeWorkingPart.getScheduleCode()
                 , employeeWorkingPart.getWorkingDate()
                 , employeeWorkingPart.getWorkingPartTime());
-        int employeeCode = employeeWorkingPart.getEmployeeCode();
+        String employeeCode = employeeWorkingPart.getEmployeeCode();
         if(employeeWorkingPartMapper.findEmployeeByEmployeeCode(employeeCode) == null) throw new EmployeeCodeNotFoundException();
 
         employeeWorkingPartRepository.save(mapper.map(insertSchedulePerEmployee, EmployeeWorkingPart.class));
-
-        return employeeWorkingPart;
     }
 
 
     // 근무일 수정
     @Transactional
-    public void EditSchedule(int employeeCode, EditScheduleInfo editScheduleInfo) {
-        EmployeeWorkingPart foundSchedule = employeeWorkingPartRepository.findById(employeeCode)
-                .orElseThrow(EmployeeCodeNotFoundException::new);
+    public void EditSchedule(int workingPartCode, EditScheduleInfo modifyScheduleInfo) {
+        EmployeeWorkingPart foundSchedule = employeeWorkingPartMapper.selectScheduleByWorkingPartCode(workingPartCode);
 
-        foundSchedule.modify(editScheduleInfo);
+        if (foundSchedule == null) throw new ScheduleNotFoundException();
 
+        foundSchedule.modify(modifyScheduleInfo);
         employeeWorkingPartRepository.save(foundSchedule);
     }
 
+
     // 근무일정 삭제
     @Transactional
-    public void deleteSchedule(int employeeCode) {
-        boolean exists = employeeWorkingPartRepository.existsById(employeeCode);
+    public void deleteSchedule(int workingPartCode) {
+        EmployeeWorkingPart foundCode = employeeWorkingPartMapper.selectScheduleByWorkingPartCode(workingPartCode);
 
-        if(!exists) throw new EmployeeCodeNotFoundException();
+        if (foundCode == null) throw new ScheduleNotFoundException();
 
-        employeeWorkingPartRepository.deleteById(employeeCode);
+        employeeWorkingPartRepository.delete(foundCode);
     }
 
-    // 대타게시글에 달린 댓글을 선택해서 근무일정 수정하기
-    @Transactional
-    public void selectCommentToEdit(int subsCode, int commentCode) {
-        int foundSchedule = employeeWorkingPartMapper.updateScheduleByComment(subsCode, commentCode);
-        if (foundSchedule == 0) {
-//            throw new SomeAppropriateException("No rows were updated");
-        }
-
-    }
+//    // 대타게시글에 달린 댓글을 선택해서 근무일정 수정하기
+//    @Transactional
+//    public void selectCommentToEdit(int subsCode, int commentCode) {
+//        int foundSchedule = employeeWorkingPartMapper.updateScheduleByComment(subsCode, commentCode);
+//        if (foundSchedule == 0) {
+////            // 예외처리
+//        }
+//
+//    }
 
 
 

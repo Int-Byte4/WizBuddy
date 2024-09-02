@@ -54,7 +54,7 @@
         , e.updated_at
         FROM employee e
         WHERE e.employee_email = #{ employeeEmail }
-        AND e.employee_flag = true
+        AND e.employee_flag = 1
     </select>
 
 </mapper>

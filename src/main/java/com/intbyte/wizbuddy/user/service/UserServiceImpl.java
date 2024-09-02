@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        if (employerMapper.getEmployerByEmail(registerEmployerInfo.getEmployerEmail()) != null) throw new EmailDuplicateException();
+        if (employeeMapper.getEmployeeByEmail(registerEmployerInfo.getEmployerEmail()) != null && employeeMapper.getEmployeeByEmail(registerEmployerInfo.getEmployerEmail()) != null) throw new EmailDuplicateException();
 
         registerEmployerInfo.setEmployerCode(customUserCode);
 
@@ -64,6 +64,7 @@ public class UserServiceImpl implements UserService {
         if (signInUserInfo.getUserType().equals("EMPLOYER")) signInUserInfo.setUserType("Employer");
 
         userAndEmployerMapper.insertUser(signInUserInfo);
+
         userAndEmployerMapper.insertEmployer(registerEmployerInfo);
 
         ResponseRegisterEmployerVO registerEmployerVO = new ResponseRegisterEmployerVO(signInUserInfo, registerEmployerInfo);
@@ -83,14 +84,17 @@ public class UserServiceImpl implements UserService {
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        if (employeeMapper.getEmployeeByEmail(registerEmployeeInfo.getEmployeeEmail()) != null) throw new EmailDuplicateException();
+        if (employeeMapper.getEmployeeByEmail(registerEmployeeInfo.getEmployeeEmail()) != null && employerMapper.getEmployerByEmail(registerEmployeeInfo.getEmployeeEmail()) != null) throw new EmailDuplicateException();
 
-        registerEmployeeInfo.setEmployeeCode(signInUserInfo.getUserCode());
+        registerEmployeeInfo.setEmployeeCode(customUserCode);
+
+        signInUserInfo.setUserPassword(bCryptPasswordEncoder.encode(signInUserInfo.getUserPassword()));
         registerEmployeeInfo.setEmployeePassword(bCryptPasswordEncoder.encode(registerEmployeeInfo.getEmployeePassword()));
 
         if(signInUserInfo.getUserType().equals("EMPLOYEE")) signInUserInfo.setUserType("Employee");
 
         userAndEmployeeMapper.insertUser(signInUserInfo);
+
         userAndEmployeeMapper.insertEmployee(registerEmployeeInfo);
 
         ResponseRegisterEmployeeVO registerEmployeeVO = new ResponseRegisterEmployeeVO(signInUserInfo, registerEmployeeInfo);
@@ -109,8 +113,6 @@ public class UserServiceImpl implements UserService {
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
 
-        return new User(loginUser.getUserEmail(), loginUser.getUserPassword(),
-                true, true, true, true,
-                grantedAuthorities);
+        return new User(loginUser.getUserEmail(), loginUser.getUserPassword(), true, true, true, true, grantedAuthorities);
     }
 }

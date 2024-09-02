@@ -5,12 +5,12 @@ import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoard;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.repository.NoticeBoardRepository;
+import com.intbyte.wizbuddy.mapper.NoticeBoardMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
@@ -26,6 +26,9 @@ class NoticeBoardServiceTests {
 
     @Autowired
     private NoticeBoardRepository noticeBoardRepository;
+
+    @Autowired
+    private NoticeBoardMapper noticeBoardMapper;
 
     @Test
     @DisplayName("공지사항 게시글 등록 성공")
@@ -81,5 +84,31 @@ class NoticeBoardServiceTests {
         List<NoticeBoard> newNoticeBoards = noticeBoardRepository.findAll();
         Assertions.assertEquals(false, newNoticeBoards.get(0).equals(deleteNoticeBoardInfo));
         newNoticeBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("공지사항 게시글 전체 조회")
+    @Transactional
+    public void testFindAllNoticeBoards() {
+        //given, when
+        int shopCode = 1;
+
+        //then
+        List<NoticeBoardDTO> noticeBoards = noticeBoardService.findAllNoticeBoards(shopCode);
+
+        noticeBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("공지사항 게시글 단 건 조회")
+    @Transactional
+    public void testFindNoticeBoard() {
+        //given, when
+        int noticeCode = 3;
+
+        //then
+        NoticeBoardDTO noticeBoard = noticeBoardService.findNoticeBoard(noticeCode);
+
+        System.out.println(noticeBoard);
     }
 }
