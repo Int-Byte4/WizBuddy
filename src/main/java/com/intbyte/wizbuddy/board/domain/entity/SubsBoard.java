@@ -53,6 +53,7 @@ public class SubsBoard {
 
     public void toDelete() {
         this.subsFlag = false;
+        this.updatedAt = LocalDateTime.now();
     }
 
 }
