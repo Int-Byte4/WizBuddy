@@ -33,49 +33,85 @@ public class TaskPerCheckListController {
     // -> 2. 파라미터로 받아온 checkListCode에 넣어주기
 
 
-    // 1. 특정 매장의 특정 체크리스트의 모든 업무 조회(특정 매장은 필요없음. -> 이미 체크리스트라는 정보가 어떤 매장이라는 정보를 담고있음.)
+//    // 1. 특정 매장의 특정 체크리스트의 모든 업무 조회(특정 매장은 필요없음. -> 이미 체크리스트라는 정보가 어떤 매장이라는 정보를 담고있음.)
+//    @GetMapping("/taskperchecklist/checklist/{checkListCode}")
+//    public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckList(
+//            @PathVariable("checkListCode") int checkListCode) {
+//        // 1번 체크리스트의 모든 업무 조회
+//
+//        List<TaskPerCheckListDTO> dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCode(checkListCode);
+//
+//        List<ResponseFindTaskPerCheckListVO> response = dtoList.stream().map(
+//                dto -> ResponseFindTaskPerCheckListVO.builder().
+//                        checkListCode(dto.getCheckListCode()).
+//                        taskCode(dto.getTaskCode()).
+//                        taskFinishedState(dto.getTaskFinishedState()).
+//                        createdAt(dto.getCreatedAt()).
+//                        updatedAt(dto.getUpdatedAt()).
+//                        employeeCode(dto.getEmployeeCode()).
+//                        build()
+//                    ).collect(Collectors.toList());
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
+//
+//    // 2. 특정 매장의 특정 체크리스트의 완료된 업무 조회 (1번과 매우 비슷함) -> 이거도 합칠수 있을거갗은데? @RequestParam으로 처리 가능할듯? 1, 2번 합치려고하니까 일단 보류
+//    @GetMapping("/taskperchecklist/checklist/{checkListCode}/1")
+//    public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckListByFinished(
+//            @PathVariable("checkListCode") int checkListCode
+//    ) {
+//        // 1번 체크리스트의 완성된 모든 업무 조회
+//
+//        List<TaskPerCheckListDTO> dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByFinished(checkListCode);
+//
+//        List<ResponseFindTaskPerCheckListVO> response = dtoList.stream().map(
+//                dto -> ResponseFindTaskPerCheckListVO.builder().
+//                        checkListCode(dto.getCheckListCode()).
+//                        taskCode(dto.getTaskCode()).
+//                        taskFinishedState(dto.getTaskFinishedState()).
+//                        createdAt(dto.getCreatedAt()).
+//                        updatedAt(dto.getUpdatedAt()).
+//                        employeeCode(dto.getEmployeeCode()).
+//                        build()
+//        ).collect(Collectors.toList());
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(response);
+//    }
+
+    // 1-1, 1-2, 1-3. 특정 매장의 특정 체크리스트 속 업무 조회 -> ?finished=true이면 완료된 업무만, 아니면 모든 업무만 (finished 안된 업무도 보여주기)
     @GetMapping("/taskperchecklist/checklist/{checkListCode}")
-    public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckList(@PathVariable("checkListCode") int checkListCode) {
-        // 1번 체크리스트의 모든 업무 조회
+    public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckList(
+            @PathVariable("checkListCode") int checkListCode,
+            @RequestParam(value = "finished", required = false) Boolean finished) {
 
-        List<TaskPerCheckListDTO> dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCode(checkListCode);
+        List<TaskPerCheckListDTO> dtoList;
 
-        List<ResponseFindTaskPerCheckListVO> response = dtoList.stream().map(
-                dto -> ResponseFindTaskPerCheckListVO.builder().
-                        checkListCode(dto.getCheckListCode()).
-                        taskCode(dto.getTaskCode()).
-                        taskFinishedState(dto.getTaskFinishedState()).
-                        createdAt(dto.getCreatedAt()).
-                        updatedAt(dto.getUpdatedAt()).
-                        employeeCode(dto.getEmployeeCode()).
-                        build()
-                    ).collect(Collectors.toList());
-
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
-
-    // 2. 특정 매장의 특정 체크리스트의 완료된 업무 조회 (1번과 매우 비슷함) -> 이거도 합칠수 있을거갗은데? @RequestParam으로 처리 가능할듯? 1, 2번 합치려고하니까 일단 보류
-    @GetMapping("/taskperchecklist/checklist/{checkListCode}/1")
-    public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckListByFinished(@PathVariable("checkListCode") int checkListCode) {
-        // 1번 체크리스트의 완성된 모든 업무 조회
-
-        List<TaskPerCheckListDTO> dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByFinished(checkListCode);
+        if(finished == null) {
+            // 특정 체크리스트별 모든 업무 조회
+            dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCode(checkListCode);
+        } else if (finished) {
+            // 완료된 업무만 조회
+            dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByFinished(checkListCode);
+        } else {
+            // 미완료된 업무만 조회
+            dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByNotFinished(checkListCode);
+        }
 
         List<ResponseFindTaskPerCheckListVO> response = dtoList.stream().map(
-                dto -> ResponseFindTaskPerCheckListVO.builder().
-                        checkListCode(dto.getCheckListCode()).
-                        taskCode(dto.getTaskCode()).
-                        taskFinishedState(dto.getTaskFinishedState()).
-                        createdAt(dto.getCreatedAt()).
-                        updatedAt(dto.getUpdatedAt()).
-                        employeeCode(dto.getEmployeeCode()).
-                        build()
+                dto -> ResponseFindTaskPerCheckListVO.builder()
+                        .checkListCode(dto.getCheckListCode())
+                        .taskCode(dto.getTaskCode())
+                        .taskFinishedState(dto.getTaskFinishedState())
+                        .createdAt(dto.getCreatedAt())
+                        .updatedAt(dto.getUpdatedAt())
+                        .employeeCode(dto.getEmployeeCode())
+                        .build()
         ).collect(Collectors.toList());
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    // 3. 특정 매장의 (특정 체크리스트에 특정 업무 추가)
+    // 2. 특정 매장의 (특정 체크리스트에 특정 업무 추가)
     @PostMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
     public ResponseEntity<Void> insertTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,

@@ -17,4 +17,6 @@ public interface TaskPerCheckListMapper {
     List<TaskPerCheckListMybatis> findAllTaskPerCheckListByCheckListCode(int checkListCode);
 
     List<TaskPerCheckListMybatis> findAllTaskPerCheckListByCheckListCodeByFinished(int checkListCode);
+
+    List<TaskPerCheckListMybatis> findAllTaskPerCheckListByCheckListCodeByNonFinished(int checkListCode);
 }

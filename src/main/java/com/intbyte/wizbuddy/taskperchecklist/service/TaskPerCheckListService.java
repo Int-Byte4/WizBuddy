@@ -152,8 +152,7 @@ public class TaskPerCheckListService {
         taskPerCheckListRepository.save(taskPerCheckList);
     }
 
-
-    // 1번 체크리스트에 존재하는 모든 업무 조회 -> 업무 flag가 false가 되면? -> 이건 task에서 삭제해줘야될거같음.
+    // 1번 체크리스트에 존재하는 모든 업무 조회(완료 + 미완료)
     @Transactional
     public List<TaskPerCheckListDTO> findAllTaskPerCheckListByCheckListCode(int checkListCode){
 
@@ -175,6 +174,16 @@ public class TaskPerCheckListService {
                 .collect(Collectors.toList());
     }
 
+    // 1번 체크리스트에 존재하는 모든 미완료된 업무 조회
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckListByCheckListCodeByNotFinished(int checkListCode) {
+        List<TaskPerCheckListMybatis> taskPerCheckListByCheckListCode = taskPerCheckListMapper.findAllTaskPerCheckListByCheckListCodeByNonFinished(checkListCode);
+
+        return taskPerCheckListByCheckListCode.stream()
+                .map(TaskPerCheckList -> modelMapper.map(TaskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
     // 1번 체크리스트에 1번 업무 추가 -> 위ㅏ에 있음.
 
 
@@ -186,4 +195,5 @@ public class TaskPerCheckListService {
 
         taskPerCheckListRepository.deleteById(id);
     }
+
 }

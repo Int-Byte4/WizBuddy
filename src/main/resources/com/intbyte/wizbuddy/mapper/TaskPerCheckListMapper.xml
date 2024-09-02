@@ -80,4 +80,17 @@
         FROM taskperchecklist A
         WHERE A.checklist_code = #{ checkListCode } AND A.task_finished_state = true
     </select>
+
+
+    <select id="findAllTaskPerCheckListByCheckListCodeByNonFinished" parameterType="int" resultMap="taskPerChecklistResultMap">
+        SELECT
+        A.TASK_CODE
+        , A.CHECKLIST_CODE
+        , A.TASK_FINISHED_STATE
+        , A.CREATED_AT
+        , A.UPDATED_AT
+        , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode } AND A.task_finished_state = false
+    </select>
 </mapper>
