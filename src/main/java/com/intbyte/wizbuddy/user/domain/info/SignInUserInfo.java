@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.user.domain;
+package com.intbyte.wizbuddy.user.domain.info;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

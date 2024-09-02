@@ -1,27 +1,21 @@
-package com.intbyte.wizbuddy.user.vo.request;
+package com.intbyte.wizbuddy.user.domain.info;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
+@Getter @Setter
 @NoArgsConstructor
-@Getter
-public class RequestRegisterEmployeeVO {
+@AllArgsConstructor
+public class EditEmployeeInfo {
     private String employeeCode;
     private String employeeName;
-    private String employeeEmail;
     private String employeePassword;
     private String employeePhone;
-    private boolean employeeFlag;
-    private String latitude;
-    private String longitude;
-    private int employeeWage;
     private LocalDate employeeHealthDate;
-    private boolean employeeBlackState;
-    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
