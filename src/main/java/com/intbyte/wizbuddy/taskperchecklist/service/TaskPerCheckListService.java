@@ -4,13 +4,14 @@ import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
 import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
+import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
@@ -55,7 +56,7 @@ public class TaskPerCheckListService {
     @Transactional
     public void insertTaskPerCheckList(TaskPerCheckListDTO taskPerCheckListDTO) {
 
-        TaskPerChecklistId taskPerChecklistId = new TaskPerChecklistId(
+        TaskPerCheckListId taskPerChecklistId = new TaskPerCheckListId(
                 taskPerCheckListDTO.getCheckListCode(),
                 taskPerCheckListDTO.getTaskCode()
         );
@@ -66,7 +67,7 @@ public class TaskPerCheckListService {
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode())
                 .orElseThrow(TaskNotFoundException::new);
         Employee employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid employeeCode"));
+                .orElseThrow(UserNotFoundException::new);
 
         System.out.println("checkList = " + checkList);
         System.out.println("task = " + task);
@@ -75,7 +76,7 @@ public class TaskPerCheckListService {
         TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
                 .checkList(checkList)
                 .task(task)
-                .taskPerChecklistId(taskPerChecklistId)
+                .taskPerCheckListId(taskPerChecklistId)
                 .taskFinishedState(taskPerCheckListDTO.getTaskFinishedState())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -87,7 +88,7 @@ public class TaskPerCheckListService {
 
     // taskPerCheckList에서 1개 조회
     @Transactional
-    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerChecklistId taskPerChecklistId){
+    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerCheckListId taskPerChecklistId){
 
         TaskPerCheckListMybatis findTaskPerCheckList =
                 taskPerCheckListMapper.findTaskPerCheckListById(taskPerChecklistId.getTaskCode(), taskPerChecklistId.getCheckListCode());
@@ -119,7 +120,7 @@ public class TaskPerCheckListService {
     @Transactional
     public void modifyTaskPerCheckList(int taskCode, int checkListCode, EditTaskPerCheckListInfo info){
 
-        TaskPerChecklistId id = new TaskPerChecklistId(taskCode, checkListCode);
+        TaskPerCheckListId id = new TaskPerCheckListId(taskCode, checkListCode);
 
         TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
