@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 public class ResponseFindEmployerVO {
     private String employerCode;
     private String employerName;

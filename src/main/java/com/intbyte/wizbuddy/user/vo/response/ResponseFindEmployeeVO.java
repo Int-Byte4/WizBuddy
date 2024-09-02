@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 public class ResponseFindEmployeeVO {
     private String employeeCode;
     private String employeeName;
