@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/shop/{shopCode}")
+//@RequestMapping("/shop/{shopCode}")
 public class TaskController {
 
     private final TaskService taskService;
@@ -30,27 +30,28 @@ public class TaskController {
         this.modelMapper = modelMapper;
     }
 
-    // 특정 task 조회
-    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
-    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
-
-        TaskDTO taskDTO = taskService.findTaskById(taskCode);
-
-        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
-                .taskCode(taskDTO.getTaskCode())
-                .taskContents(taskDTO.getTaskContents())
-                .taskFlag(taskDTO.isTaskFlag())
-                .taskFixedState(taskDTO.isTaskFixedState())
-                .createdAt(taskDTO.getCreatedAt())
-                .updatedAt(taskDTO.getUpdatedAt())
-                .shopCode(taskDTO.getShopCode())
-                .build();
-
-        return ResponseEntity.status(HttpStatus.OK).body(findTask);
-    }
+//    // 특정 task 조회
+//    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
+//    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
+//
+//        TaskDTO taskDTO = taskService.findTaskById(taskCode);
+//
+//        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
+//                .taskCode(taskDTO.getTaskCode())
+//                .taskContents(taskDTO.getTaskContents())
+//                .taskFlag(taskDTO.isTaskFlag())
+//                .taskFixedState(taskDTO.isTaskFixedState())
+//                .createdAt(taskDTO.getCreatedAt())
+//                .updatedAt(taskDTO.getUpdatedAt())
+//                .shopCode(taskDTO.getShopCode())
+//                .build();
+//
+//        return ResponseEntity.status(HttpStatus.OK).body(findTask);
+//    }
+    // 추후 기능개발이 마무리 된 후에 개발 필요
 
     // 특정 매장의 task 조회
-    @GetMapping("task")
+    @GetMapping("/shop/{shopCode}/task")
     public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixedState(
             @PathVariable("shopCode") int shopCode,
             @RequestParam(name = "fixed", required = false) Boolean fixed) {
@@ -86,8 +87,9 @@ public class TaskController {
     }
 
     // 특정 매장에 1개 task 추가
-    @PostMapping("/task")
+    @PostMapping("/shop/{shopCode}/task")
     public ResponseEntity<Void>insertTask(
+            @PathVariable("shopCode") int shopCode,
             @RequestBody RequestInsertTaskVO request){
 
         TaskDTO taskDTO = modelMapper.map(request, TaskDTO.class);
@@ -98,20 +100,18 @@ public class TaskController {
     }
 
     // 특정 매장의 특정 task 수정(삭제도 같이 수행)
-    @PostMapping("task/{taskCode}")
+    @PostMapping("/shop/{shopCode}/task/{taskCode}")
     public ResponseEntity<Void> modifyTask(
             @PathVariable("shopCode") int shopCode,
             @PathVariable("taskCode") int taskCode,
             @RequestBody RequestInsertTaskVO request
-    ){
+    ) {
         EditTaskInfo editTaskInfo = new EditTaskInfo(request.getTaskContents(), request.isTaskFlag(), request.isTaskFixedState(), request.getUpdatedAt());
 
         taskService.modifyTask(taskCode, editTaskInfo);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
-
 }
 
 //1. 요청으로 보내는거하고 응답으로 받는거 차이를 생각하기
