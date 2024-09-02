@@ -46,7 +46,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public EmployeeDTO getByEmployerCode(String employeeCode) {
+    public EmployeeDTO getByEmployeeCode(String employeeCode) {
         Employee employee = employeeMapper.getEmployee(employeeCode);
 
         if (employee == null) throw new UserNotFoundException();
