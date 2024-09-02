@@ -1,8 +1,6 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
-import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
-import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
