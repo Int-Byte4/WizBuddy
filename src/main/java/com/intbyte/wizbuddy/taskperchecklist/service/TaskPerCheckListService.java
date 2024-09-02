@@ -1,10 +1,16 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
+import com.intbyte.wizbuddy.checklist.domain.CheckListMybatis;
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.mapper.CheckListMapper;
+import com.intbyte.wizbuddy.mapper.ShopMapper;
+import com.intbyte.wizbuddy.mapper.TaskMapper;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
+import com.intbyte.wizbuddy.shop.domain.entity.Shop;
+import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
@@ -38,10 +44,13 @@ public class TaskPerCheckListService {
     private final TaskRepository taskRepository;
 
     private final EmployeeRepository employeeRepository;
+    private final TaskMapper taskMapper;
+    private final CheckListMapper checkListMapper;
+    private final ShopMapper shopMapper;
 
     @Autowired
     public TaskPerCheckListService(CheckListRepository checkListRepository, TaskPerCheckListRepository taskPerCheckListRepository,
-            TaskPerCheckListMapper taskPerCheckListMapper, ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository) {
+                                   TaskPerCheckListMapper taskPerCheckListMapper, ModelMapper modelMapper, TaskRepository taskRepository, EmployeeRepository employeeRepository, TaskMapper taskMapper, CheckListMapper checkListMapper, ShopMapper shopMapper) {
 
         this.checkListRepository = checkListRepository;
         this.taskPerCheckListRepository = taskPerCheckListRepository;
@@ -49,6 +58,9 @@ public class TaskPerCheckListService {
         this.modelMapper = modelMapper;
         this.taskRepository = taskRepository;
         this.employeeRepository = employeeRepository;
+        this.taskMapper = taskMapper;
+        this.checkListMapper = checkListMapper;
+        this.shopMapper = shopMapper;
     }
 
     // 1번 체크리스트에 1번 업무 추가
@@ -95,6 +107,7 @@ public class TaskPerCheckListService {
         return modelMapper.map(findTaskPerCheckList, TaskPerCheckListDTO.class);
     }
 
+    // 모든 taskPerCheckList 조회
     @Transactional
     public List<TaskPerCheckListDTO> findAllTaskPerCheckList() {
 
@@ -105,7 +118,7 @@ public class TaskPerCheckListService {
                 .collect(Collectors.toList());
     }
 
-    // 특정 checkList의 완료된 task만 조회
+    // 특정 checkList의 완료된 task만 조회 -> ????????
     @Transactional
     public List<TaskPerCheckListDTO> findAllTaskPerCheckListFinished(String employeeCode) {
 
@@ -114,12 +127,18 @@ public class TaskPerCheckListService {
         return findTaskPerCheckList.stream()
                 .map(taskPerCheckList -> modelMapper.map(taskPerCheckList, TaskPerCheckListDTO.class))
                 .collect(Collectors.toList());
-    }
+    } // 이거 이상함!!!!!!!!!!!!!!!!
 
+
+
+
+
+
+    // 특정 업무를 직원이 완료 누르면 수정시간 바뀌게 하는거.
     @Transactional
-    public void modifyTaskPerCheckList(int taskCode, int checkListCode, EditTaskPerCheckListInfo info){
+    public void modifyTaskPerCheckList(EditTaskPerCheckListInfo info){
 
-        TaskPerChecklistId id = new TaskPerChecklistId(taskCode, checkListCode);
+        TaskPerChecklistId id = new TaskPerChecklistId(info.getCheckListCode(), info.getTaskCode());
 
         TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 
@@ -132,4 +151,49 @@ public class TaskPerCheckListService {
 
         taskPerCheckListRepository.save(taskPerCheckList);
     }
+
+    // 1번 체크리스트에 존재하는 모든 업무 조회(완료 + 미완료)
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckListByCheckListCode(int checkListCode){
+
+        List<TaskPerCheckListMybatis> taskPerCheckListByCheckListCode = taskPerCheckListMapper.findAllTaskPerCheckListByCheckListCode(checkListCode);
+
+        return taskPerCheckListByCheckListCode.stream()
+                .map(TaskPerCheckList -> modelMapper.map(TaskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // 1번 체크리스트에 존재하는 모든 완료된 업무 조회
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckListByCheckListCodeByFinished(int checkListCode){
+
+        List<TaskPerCheckListMybatis> taskPerCheckListByCheckListCode = taskPerCheckListMapper.findAllTaskPerCheckListByCheckListCodeByFinished(checkListCode);
+
+        return taskPerCheckListByCheckListCode.stream()
+                .map(TaskPerCheckList -> modelMapper.map(TaskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // 1번 체크리스트에 존재하는 모든 미완료된 업무 조회
+    @Transactional
+    public List<TaskPerCheckListDTO> findAllTaskPerCheckListByCheckListCodeByNotFinished(int checkListCode) {
+        List<TaskPerCheckListMybatis> taskPerCheckListByCheckListCode = taskPerCheckListMapper.findAllTaskPerCheckListByCheckListCodeByNonFinished(checkListCode);
+
+        return taskPerCheckListByCheckListCode.stream()
+                .map(TaskPerCheckList -> modelMapper.map(TaskPerCheckList, TaskPerCheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    // 1번 체크리스트에 1번 업무 추가 -> 위ㅏ에 있음.
+
+
+    // 1번 체크리스트에 존재하는 1번 업무 삭제 -> 체크리스트나 업무가 삭제되는게 아니라 체크리스트 안에있는 업무가 삭제된다는 의미(더이상 체크리스트에 속하지 않는다.)
+    @Transactional
+    public void deleteTaskPerCheckListByCheckListCodeAndTaskCode(int checkListCode, int taskCode){
+
+        TaskPerChecklistId id = new TaskPerChecklistId(checkListCode, taskCode);
+
+        taskPerCheckListRepository.deleteById(id);
+    }
+
 }
