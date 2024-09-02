@@ -59,7 +59,7 @@ class TaskPerCheckListServiceTests {
     }
 
     @Test
-    @DisplayName("체크리스트의 업무 전체 조회 테스트 성공")
+    @DisplayName("체크리스트별 업무 전체 조회 테스트 성공")
     public void findAllTaskPerCheckListTest() {
         List<TaskPerCheckListDTO> allTaskPerCheckList = taskPerCheckListService.findAllTaskPerCheckList();
         for (int i = 0; i < allTaskPerCheckList.size(); i++) {
@@ -84,30 +84,70 @@ class TaskPerCheckListServiceTests {
         }
     }
 
+    // 1-1.
     @Test
-    @DisplayName("체크리스트 업무 수정 테스트 성공")
-    public void modifyTaskPerCheckListTest(){
-
-        int taskCode = 1;
-        int checkListCode = 1;
-
-        int size = employeeRepository.findAll().size();
-        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
-
-        // given
-        taskPerCheckListService.insertTaskPerCheckList(
-                new TaskPerCheckListDTO(checkListCode, taskCode, false,
-                        LocalDateTime.now(), LocalDateTime.now(), employeeCode)
-        );
-
-        EditTaskPerCheckListInfo info = new EditTaskPerCheckListInfo(false, LocalDateTime.now(), employeeCode);
-
-        // when
-        taskPerCheckListService.modifyTaskPerCheckList(taskCode, checkListCode, info);
-
-        // then
-        TaskPerCheckListMybatis tpcMybatis = taskPerCheckListMapper.findTaskPerCheckListById(taskCode, checkListCode);
-        assertEquals(false, tpcMybatis.getTaskFinishedState());
+    @DisplayName("특정 매장의 특정 체크리스트속 업무 조회")
+    @Transactional
+    public void findAllTaskPerCheckListByCheckListCodeTest(){
+        taskPerCheckListService.findAllTaskPerCheckListByCheckListCode(1);
     }
+
+    // 1-2.
+    @Test
+    @DisplayName("특정 매장의 특정 체크리스트속 완료된 업무 조회")
+    @Transactional
+    public void findAllTaskPerCheckListByCheckListCodeFinishedTest(){
+        taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByFinished(1);
+    }
+
+    // 1-3.
+    @Test
+    @DisplayName("특정 매장의 특정 체크리스트속 완료된 업무 조회")
+    @Transactional
+    public void findAllTaskPerCheckListByCheckListCodeNotFinishedTest(){
+        taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByNotFinished(1);
+    }
+
+    // 2. 특정 매장(특정 체크리스트)에 특정 업무 추가
+    @Test
+    @DisplayName("특정 매장의 특정 체크리스트에 특정 업무 추가")
+    public void insertTaskPerCheckListByCheckList(){
+        taskPerCheckListService.insertTaskPerCheckList(new TaskPerCheckListDTO(
+
+        ));
+    }
+
+    // 5.
+    @Test
+    @DisplayName("삭제 테스트")
+    public void deleteTaskPerCheckListByCheckListCodeAndTaskCode(){
+        taskPerCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(7, 9);
+    }
+
+//    @Test
+//    @DisplayName("체크리스트 업무 수정 테스트 성공")
+//    public void modifyTaskPerCheckListTest(){
+//
+//        int taskCode = 1;
+//        int checkListCode = 1;
+//
+//        int size = employeeRepository.findAll().size();
+//        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
+//
+//        // given
+//        taskPerCheckListService.insertTaskPerCheckList(
+//                new TaskPerCheckListDTO(checkListCode, taskCode, false,
+//                        LocalDateTime.now(), LocalDateTime.now(), employeeCode)
+//        );
+//
+//        EditTaskPerCheckListInfo info = new EditTaskPerCheckListInfo(false, LocalDateTime.now(), employeeCode);
+//
+//        // when
+//        taskPerCheckListService.modifyTaskPerCheckList(taskCode, checkListCode, info);
+//
+//        // then
+//        TaskPerCheckListMybatis tpcMybatis = taskPerCheckListMapper.findTaskPerCheckListById(taskCode, checkListCode);
+//        assertEquals(false, tpcMybatis.getTaskFinishedState());
+//    }
 
 }

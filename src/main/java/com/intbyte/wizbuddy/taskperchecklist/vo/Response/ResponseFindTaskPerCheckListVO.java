@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.task.vo.response;
+package com.intbyte.wizbuddy.taskperchecklist.vo.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +9,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Builder
-public class ResponseModifyTaskVO {
+public class ResponseFindTaskPerCheckListVO {
+
+    private final int checkListCode;
     private final int taskCode;
-    private final String taskContents;
-    private final boolean taskFlag;
-    private final boolean taskFixedState;
+    private final boolean taskFinishedState;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-    private final int shopCode;
+    private final String employeeCode;
 }

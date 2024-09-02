@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EditTaskPerCheckListInfo {
 
-//    private Integer checkListCode;
+    private Integer checkListCode;
 
-//    private Integer taskCode;
+    private Integer taskCode;
 
     private Boolean taskFinishedState;
 

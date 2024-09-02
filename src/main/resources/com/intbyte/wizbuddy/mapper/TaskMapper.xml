@@ -83,7 +83,7 @@
             , A.updated_at
             , A.shop_code
          FROM Task A
-        WHERE A.shop_code = #{ shopCode }
+        WHERE A.task_flag = true AND A.shop_code = #{ shopCode }
     </select>
 
     <!-- 특정 매장의 고정된 업무만 find -->
