@@ -16,7 +16,7 @@
         <result property="employeeCode" column="employee_code"/>
     </resultMap>
 
-    <!-- 특정 TaskPerCheckList 조회 -->
+    <!-- 전체 TaskPerCheckList 조회 -->
     <select id="findAllTaskPerCheckList" resultMap="taskPerChecklistResultMap">
         SELECT
              A.TASK_CODE
@@ -54,48 +54,30 @@
         WHERE employee_code = #{ employeeCode } AND task_finished_state = true
     </select>
 
+    <!-- 여기서부터 다시 체크하는 중이다..ㄷㅁㅈ가림ㅈㄷ럼ㄷㅈ -->
+    <!-- 특정 체크리스트의 모든 task 조회 -->
+    <select id="findAllTaskPerCheckListByCheckListCode" parameterType="int" resultMap="taskPerChecklistResultMap">
+        SELECT
+        A.TASK_CODE
+        , A.CHECKLIST_CODE
+        , A.TASK_FINISHED_STATE
+        , A.CREATED_AT
+        , A.UPDATED_AT
+        , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode }
+    </select>
 
-<!--    &lt;!&ndash; 특정 TaskPerCheckList 조회 &ndash;&gt;-->
-<!--    <select id="findTaskPerCheckListById" parameterType="map" resultMap="taskPerChecklistResultMap">-->
-<!--        SELECT-->
-<!--             A.TASK_CODE-->
-<!--           , A.CHECKLIST_CODE-->
-<!--           , A.TASK_FINISHED_STATE-->
-<!--           , A.CREATED_AT-->
-<!--           , A.UPDATED_AT-->
-<!--           , A.EMPLOYEE_CODE-->
-<!--        FROM taskperchecklist A-->
-<!--        WHERE TASK_CODE = #{ taskCode } AND CHECKLIST_CODE = #{ checkListCode }-->
-<!--    </select>-->
-
-
-<!--    <resultMap id="findAllTaskPerCheckList" type="com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList">-->
-<!--        &lt;!&ndash; 복합 키 매핑 &ndash;&gt;-->
-<!--        <id property="taskPerChecklistId.taskCode" column="TASK_CODE"/>-->
-<!--        <id property="taskPerChecklistId.checkListCode" column="CHECKLIST_CODE"/>-->
-
-<!--        &lt;!&ndash; 나머지 필드 매핑 &ndash;&gt;-->
-<!--        <result property="taskFinishedState" column="TASK_FINISHED_STATE"/>-->
-<!--        <result property="createdAt" column="CREATED_AT"/>-->
-<!--        <result property="updatedAt" column="UPDATED_AT"/>-->
-
-<!--        &lt;!&ndash; 외래 키 매핑 (Task 엔티티와 연결) &ndash;&gt;-->
-<!--        <association property="task" javaType="com.intbyte.wizbuddy.task.domain.entity.Task">-->
-<!--            <id property="taskCode" column="TASK_CODE"/>-->
-<!--            &lt;!&ndash; Task 엔티티의 다른 필드들 매핑 가능 &ndash;&gt;-->
-<!--        </association>-->
-
-<!--        &lt;!&ndash; 외래 키 매핑 (CheckList 엔티티와 연결) &ndash;&gt;-->
-<!--        <association property="checkList" javaType="com.intbyte.wizbuddy.checklist.domain.entity.CheckList">-->
-<!--            <id property="checkListCode" column="CHECKLIST_CODE"/>-->
-<!--            &lt;!&ndash; CheckList 엔티티의 다른 필드들 매핑 가능 &ndash;&gt;-->
-<!--        </association>-->
-
-<!--        &lt;!&ndash; 일반 외래 키 매핑 (Employee 엔티티와 연결) &ndash;&gt;-->
-<!--        <association property="employee" javaType="com.intbyte.wizbuddy.employee.domain.entity.Employee" column="EMPLOYEE_CODE" />-->
-<!--    </resultMap>-->
-<!--&lt;!&ndash;    <select id="findAllTaskPerCheckList" resultMap="taskPerChecklistResultMap">&ndash;&gt;-->
-<!--&lt;!&ndash;        SELECT * FROM taskperchecklist&ndash;&gt;-->
-<!--&lt;!&ndash;    </select>&ndash;&gt;-->
-
+    <!-- 특정 체크리스트의 완료된(task_finished_state가 true인) 모든 task 조회 -->
+    <select id="findAllTaskPerCheckListByCheckListCodeByFinished" parameterType="int" resultMap="taskPerChecklistResultMap">
+        SELECT
+        A.TASK_CODE
+        , A.CHECKLIST_CODE
+        , A.TASK_FINISHED_STATE
+        , A.CREATED_AT
+        , A.UPDATED_AT
+        , A.EMPLOYEE_CODE
+        FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode } AND A.task_finished_state = true
+    </select>
 </mapper>

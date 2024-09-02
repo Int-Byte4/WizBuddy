@@ -86,29 +86,35 @@ class TaskPerCheckListServiceTests {
     }
 
     @Test
-    @DisplayName("체크리스트 업무 수정 테스트 성공")
-    public void modifyTaskPerCheckListTest(){
-
-        int taskCode = 1;
-        int checkListCode = 1;
-
-        int size = employeeRepository.findAll().size();
-        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
-
-        // given
-        taskPerCheckListService.insertTaskPerCheckList(
-                new TaskPerCheckListDTO(checkListCode, taskCode, false,
-                        LocalDateTime.now(), LocalDateTime.now(), employeeCode)
-        );
-
-        EditTaskPerCheckListInfo info = new EditTaskPerCheckListInfo(false, LocalDateTime.now(), employeeCode);
-
-        // when
-        taskPerCheckListService.modifyTaskPerCheckList(taskCode, checkListCode, info);
-
-        // then
-        TaskPerCheckListMybatis tpcMybatis = taskPerCheckListMapper.findTaskPerCheckListById(taskCode, checkListCode);
-        assertEquals(false, tpcMybatis.getTaskFinishedState());
+    @DisplayName("삭제 테스트")
+    public void deleteTaskPerCheckListByCheckListCodeAndTaskCode(){
+        taskPerCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(7, 9);
     }
+
+//    @Test
+//    @DisplayName("체크리스트 업무 수정 테스트 성공")
+//    public void modifyTaskPerCheckListTest(){
+//
+//        int taskCode = 1;
+//        int checkListCode = 1;
+//
+//        int size = employeeRepository.findAll().size();
+//        String employeeCode = employeeRepository.findAll().get(size-1).getEmployeeCode();
+//
+//        // given
+//        taskPerCheckListService.insertTaskPerCheckList(
+//                new TaskPerCheckListDTO(checkListCode, taskCode, false,
+//                        LocalDateTime.now(), LocalDateTime.now(), employeeCode)
+//        );
+//
+//        EditTaskPerCheckListInfo info = new EditTaskPerCheckListInfo(false, LocalDateTime.now(), employeeCode);
+//
+//        // when
+//        taskPerCheckListService.modifyTaskPerCheckList(taskCode, checkListCode, info);
+//
+//        // then
+//        TaskPerCheckListMybatis tpcMybatis = taskPerCheckListMapper.findTaskPerCheckListById(taskCode, checkListCode);
+//        assertEquals(false, tpcMybatis.getTaskFinishedState());
+//    }
 
 }

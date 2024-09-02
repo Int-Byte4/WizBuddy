@@ -13,4 +13,8 @@ public interface TaskPerCheckListMapper {
     List<TaskPerCheckListMybatis> findAllTaskPerCheckList();
 
     List<TaskPerCheckListMybatis> findAllTaskPerCheckListFinished(String employeeCode);
+
+    List<TaskPerCheckListMybatis> findAllTaskPerCheckListByCheckListCode(int checkListCode);
+
+    List<TaskPerCheckListMybatis> findAllTaskPerCheckListByCheckListCodeByFinished(int checkListCode);
 }
