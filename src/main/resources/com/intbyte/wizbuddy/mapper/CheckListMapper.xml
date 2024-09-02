@@ -35,18 +35,15 @@
         WHERE A.checklist_code = #{ checkListCode }
     </select>
 
-    <!-- flag가 true인것만 조회 -->
-    <select id="findAllCheckListsByFlag" resultMap="checkListResultMap">
+    <select id="findCheckListByIdByShop" resultMap="checkListResultMap" parameterType="int">
         SELECT
-             A.checklist_code
-           , A.checklist_title
-           , A.checklist_flag
-           , A.created_at
-           , A.updated_at
-           , A.shop_code
+        A.checklist_code
+        , A.checklist_title
+        , A.checklist_flag
+        , A.created_at
+        , A.updated_at
+        , A.shop_code
         FROM check_list A
-        WHERE A.checklist_flag = false
+        WHERE checklist_flag = true AND shop_code = #{ shopCode }
     </select>
-
-
 </mapper>

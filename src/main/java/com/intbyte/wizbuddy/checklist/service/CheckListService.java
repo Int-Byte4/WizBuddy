@@ -52,6 +52,8 @@ public class CheckListService {
         checkListRepository.save(checkList);
     }
 
+    // -------- 특정 매장의 모든 체크리스트를 조회 ------------
+
     //    체크리스트 조회
     @Transactional
     public CheckListDTO findCheckListById(int checkListCode){
@@ -60,27 +62,18 @@ public class CheckListService {
         return modelMapper.map(checkList, CheckListDTO.class);
     }
 
-    // 존재하는 모든 체크리스트 조회
+    //    flag가 true 인 특정 매장의 모든 체크리스트 조회 (추가)
     @Transactional
-    public List<CheckListDTO> findAllCheckList(){
-        List<CheckListMybatis> checkListList = checkListMapper.findAllCheckList();
+    public List<CheckListDTO> findCheckListByIdByShop(int shopCode){
+
+        List<CheckListMybatis> checkListList = checkListMapper.findCheckListByIdByShop(shopCode);
 
         return checkListList.stream()
                 .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
                 .collect(Collectors.toList());
     }
 
-    // flag가 true인 모든 체크리스트 조회
-    @Transactional
-    public List<CheckListDTO> findAllCheckListsByFlag(){
-        List<CheckListMybatis> checkListList = checkListMapper.findAllCheckListsByFlag();
-
-        return checkListList.stream()
-                .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    //    체크리스트 업무 수정
+    //    체크리스트 수정
     @Transactional
     public void modifyCheckList(int checkListCode, EditCheckListInfo modifyCheckListInfo){
         CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(CheckListNotFoundException::new);

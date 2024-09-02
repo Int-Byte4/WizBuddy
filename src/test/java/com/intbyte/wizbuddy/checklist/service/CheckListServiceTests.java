@@ -76,19 +76,18 @@ class CheckListServiceTests {
         }
     }
 
-    @Test
-    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
-    @Transactional
-    public void findAllCheckListsByFlag(){
-        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
-        for(CheckListMybatis checklist: allCheckList){
-            assertNotNull(checklist);
-        }
-    }
+//    @Test
+//    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
+//    @Transactional
+//    public void findAllCheckListsByFlag(){
+//        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
+//        for(CheckListMybatis checklist: allCheckList){
+//            assertNotNull(checklist);
+//        }
+//    }
 
     @Test
     @DisplayName("체크리스트 수정 성공")
-    @Transactional
     public void modifyCheckListTest(){
 
         // given
@@ -106,7 +105,6 @@ class CheckListServiceTests {
 
     @Test
     @DisplayName("체크리스트 업무 삭제 성공")
-    @Transactional
     public void deleteCheckListTest(){
 
         // given
