@@ -76,8 +76,6 @@ class ShopServiceTests {
         //then
         List<Shop> newShops = shopRepository.findAll();
         assertEquals(newShops.get(0).getShopName(), editShopInfo.getShopName());
-
-        newShops.forEach(System.out::println);
     }
 
     @Test
@@ -94,8 +92,6 @@ class ShopServiceTests {
         //then
         List<Shop> newShops = shopRepository.findAll();
         assertEquals(false, newShops.get(deleteShopInfo.getShopCode() - 1).getShopFlag());
-
-        newShops.forEach(System.out::println);
     }
 
     @Test
@@ -114,8 +110,6 @@ class ShopServiceTests {
 
         ShopDTO shopDTO = shopList.get(0);
         assertEquals("스타벅스 강남점", shopDTO.getShopName());
-
-        shopList.forEach(System.out::println);
     }
 
     @Test
@@ -131,6 +125,5 @@ class ShopServiceTests {
 
         //then
         assertNotNull(shop);
-        System.out.println("shop = " + shop);
     }
 }
