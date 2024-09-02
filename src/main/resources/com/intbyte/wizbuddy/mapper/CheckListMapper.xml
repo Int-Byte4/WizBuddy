@@ -13,7 +13,7 @@
     </resultMap>
 
     <select id="findAllCheckList" resultMap="checkListResultMap">
-        SELECT
+      SELECT
              A.checklist_code
            , A.checklist_title
            , A.checklist_flag
@@ -24,7 +24,7 @@
     </select>
 
     <select id="findCheckListById" resultMap="checkListResultMap" parameterType="int">
-        SELECT
+      SELECT
              A.checklist_code
            , A.checklist_title
            , A.checklist_flag
@@ -32,18 +32,18 @@
            , A.updated_at
            , A.shop_code
         FROM check_list A
-        WHERE A.checklist_code = #{ checkListCode }
+       WHERE A.checklist_code = #{ checkListCode }
     </select>
 
-    <select id="findCheckListByIdByShop" resultMap="checkListResultMap" parameterType="int">
-        SELECT
-        A.checklist_code
-        , A.checklist_title
-        , A.checklist_flag
-        , A.created_at
-        , A.updated_at
-        , A.shop_code
+    <select id="findAllCheckListByShopId" resultMap="checkListResultMap" parameterType="int">
+      SELECT
+             A.checklist_code
+           , A.checklist_title
+           , A.checklist_flag
+           , A.created_at
+           , A.updated_at
+           , A.shop_code
         FROM check_list A
-        WHERE checklist_flag = true AND shop_code = #{ shopCode }
+       WHERE checklist_flag = true AND shop_code = #{ shopCode }
     </select>
 </mapper>

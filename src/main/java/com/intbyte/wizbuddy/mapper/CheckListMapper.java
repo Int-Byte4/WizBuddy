@@ -12,5 +12,5 @@ public interface CheckListMapper {
 
     List<CheckListMybatis> findAllCheckList();
 
-    List<CheckListMybatis> findCheckListByIdByShop(int checkListCode);
+    List<CheckListMybatis> findAllCheckListByShopId(int shopCode);
 }
