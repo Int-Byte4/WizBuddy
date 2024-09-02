@@ -28,7 +28,7 @@
              , e.updated_at
           FROM employer e
          WHERE e.employer_code = #{ employerCode }
-           AND e.employer_flag = true
+           AND e.employer_flag = 1
     </select>
 
     <select id="getEmployerByEmail" resultMap="employerResultMap" parameterType="string">
