@@ -1,16 +1,15 @@
-package com.intbyte.wizbuddy.shop.domain;
+package com.intbyte.wizbuddy.shop.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-@Getter @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class DeleteShopInfo {
+@NoArgsConstructor
+@Getter
+public class RequestDeleteShopVO {
     private int shopCode;
     private String employerCode;
     private boolean shopFlag;
