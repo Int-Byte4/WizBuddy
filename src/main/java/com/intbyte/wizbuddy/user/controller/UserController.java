@@ -4,12 +4,14 @@ import com.intbyte.wizbuddy.security.JwtUtil;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.service.EmployeeService;
 import com.intbyte.wizbuddy.user.service.EmployerService;
 import com.intbyte.wizbuddy.user.service.UserService;
 import com.intbyte.wizbuddy.user.vo.request.RegisterEmployeeRequest;
 import com.intbyte.wizbuddy.user.vo.request.RegisterEmployerRequest;
+import com.intbyte.wizbuddy.user.vo.response.ResponseFindEmployeeVO;
 import com.intbyte.wizbuddy.user.vo.response.ResponseFindEmployerVO;
 import com.intbyte.wizbuddy.user.vo.response.ResponseRegisterEmployeeVO;
 import com.intbyte.wizbuddy.user.vo.response.ResponseRegisterEmployerVO;
@@ -21,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
 
     private JwtUtil jwtUtil;
@@ -40,8 +43,7 @@ public class UserController {
         this.employeeService = employeeService;
     }
 
-    /* 설명. 로그인 기능(feat. security 모듈 활용) 전에 회원가입 기능 만들기 */
-    @PostMapping("users/employer")
+    @PostMapping("/employer")
     public ResponseEntity<ResponseRegisterEmployerVO> registerEmployer(@RequestBody RegisterEmployerRequest request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployerInfo registerEmployerInfo = modelMapper.map(request.getNewEmployer(), RegisterEmployerInfo.class);
@@ -51,8 +53,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
-
-    @PostMapping("users/employee")
+    @PostMapping("/employee")
     public ResponseEntity<ResponseRegisterEmployeeVO> registerEmployee(@RequestBody RegisterEmployeeRequest request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployeeInfo registerEmployeeInfo = modelMapper.map(request.getNewEmployee(), RegisterEmployeeInfo.class);
@@ -62,8 +63,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
-    // 사장 조회
-    @GetMapping("/users/employer/{employerCode}")
+    @GetMapping("/employer/{employerCode}")
     public ResponseEntity<ResponseFindEmployerVO> getEmployer(@PathVariable("employerCode") String employerCode) {
         EmployerDTO employerDTO = employerService.getByEmployerCode(employerCode);
 
@@ -72,13 +72,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(findUser);
     }
 
-    // 직원 조회
-//    @GetMapping("/users/employee/{employeeCode}")
-//    public ResponseEntity<ResponseFindEmployeeVO> getEmployee(@PathVariable("employeeCode") String employeeCode) {
-//        UserDTO userDTO = employerService.getByEmployerCode(employeeCode);
-//
-//        ResponseFindEmployeeVO findUser = modelMapper.map(userDTO, ResponseFindEmployeeVO.class);
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(findUser);
-//    }
+    @GetMapping("/employee/{employeeCode}")
+    public ResponseEntity<ResponseFindEmployeeVO> getEmployee(@PathVariable("employeeCode") String employeeCode) {
+        EmployeeDTO employeeDTO = employeeService.getByEmployerCode(employeeCode);
+
+        ResponseFindEmployeeVO findUser = modelMapper.map(employeeDTO, ResponseFindEmployeeVO.class);
+
+        return ResponseEntity.status(HttpStatus.OK).body(findUser);
+    }
 }

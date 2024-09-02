@@ -40,8 +40,6 @@ class EmployerServiceTests {
         //then
         List<Employer> newEmployers = employerRepository.findAll();
         assertEquals(newEmployers.get(0).getEmployerName(), employerInfo.getEmployerName());
-
-        newEmployers.forEach(System.out::println);
     }
 
     @Test
@@ -60,7 +58,5 @@ class EmployerServiceTests {
         //then
         List<Employer> newEmployers = employerRepository.findAll();
         assertEquals(false, newEmployers.get(0).isEmployerFlag());
-
-        newEmployers.forEach(System.out::println);
     }
 }

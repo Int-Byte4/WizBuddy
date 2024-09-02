@@ -72,9 +72,6 @@ class UserServiceImplTests {
 
         assertTrue(newUsers.contains(user));
         assertTrue(newEmployers.contains(employer));
-
-        newUsers.forEach(System.out::println);
-        newEmployers.forEach(System.out::println);
     }
 
     @Test
@@ -115,8 +112,5 @@ class UserServiceImplTests {
 
         assertTrue(newUsers.contains(user));
         assertTrue(newEmployees.contains(employee));
-
-        newUsers.forEach(System.out::println);
-        newEmployees.forEach(System.out::println);
     }
 }
