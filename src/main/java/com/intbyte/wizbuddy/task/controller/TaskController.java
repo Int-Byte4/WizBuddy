@@ -6,8 +6,6 @@ import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.service.TaskService;
 import com.intbyte.wizbuddy.task.vo.request.RequestInsertTaskVO;
 import com.intbyte.wizbuddy.task.vo.response.ResponseFindTaskVO;
-import com.intbyte.wizbuddy.task.vo.response.ResponseInsertTaskVO;
-import com.intbyte.wizbuddy.task.vo.response.ResponseModifyTaskVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,27 +28,27 @@ public class TaskController {
         this.modelMapper = modelMapper;
     }
 
-//    // 특정 task 조회
-//    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
-//    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
-//
-//        TaskDTO taskDTO = taskService.findTaskById(taskCode);
-//
-//        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
-//                .taskCode(taskDTO.getTaskCode())
-//                .taskContents(taskDTO.getTaskContents())
-//                .taskFlag(taskDTO.isTaskFlag())
-//                .taskFixedState(taskDTO.isTaskFixedState())
-//                .createdAt(taskDTO.getCreatedAt())
-//                .updatedAt(taskDTO.getUpdatedAt())
-//                .shopCode(taskDTO.getShopCode())
-//                .build();
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(findTask);
-//    }
+    // 1. 특정 task 조회
+    @GetMapping("/task/{taskCode}") // '/'를 붙이면 requestMapping 적용 x
+    public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskCode") int taskCode){
+
+        TaskDTO taskDTO = taskService.findTaskById(taskCode);
+
+        ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
+                .taskCode(taskDTO.getTaskCode())
+                .taskContents(taskDTO.getTaskContents())
+                .taskFlag(taskDTO.isTaskFlag())
+                .taskFixedState(taskDTO.isTaskFixedState())
+                .createdAt(taskDTO.getCreatedAt())
+                .updatedAt(taskDTO.getUpdatedAt())
+                .shopCode(taskDTO.getShopCode())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(findTask);
+    }
     // 추후 기능개발이 마무리 된 후에 개발 필요
 
-    // 특정 매장의 task 조회
+    // 2. 특정 매장의 flag가 true인 task 조회
     @GetMapping("/shop/{shopCode}/task")
     public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixedState(
             @PathVariable("shopCode") int shopCode,
@@ -86,9 +84,9 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(responseTasks);
     }
 
-    // 특정 매장에 1개 task 추가
+    // 3. 특정 매장에 1개 task 추가
     @PostMapping("/shop/{shopCode}/task")
-    public ResponseEntity<Void>insertTask(
+    public ResponseEntity<String>insertTask(
             @PathVariable("shopCode") int shopCode,
             @RequestBody RequestInsertTaskVO request){
 
@@ -96,21 +94,28 @@ public class TaskController {
 
         taskService.insertTask(taskDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
     }
 
-    // 특정 매장의 특정 task 수정(삭제도 같이 수행)
+    // 4. 특정 매장의 특정 task 수정(삭제도 같이 수행)
     @PostMapping("/shop/{shopCode}/task/{taskCode}")
-    public ResponseEntity<Void> modifyTask(
+    public ResponseEntity<String> modifyTask(
             @PathVariable("shopCode") int shopCode,
             @PathVariable("taskCode") int taskCode,
             @RequestBody RequestInsertTaskVO request
     ) {
         EditTaskInfo editTaskInfo = new EditTaskInfo(request.getTaskContents(), request.isTaskFlag(), request.isTaskFixedState(), request.getUpdatedAt());
-
         taskService.modifyTask(taskCode, editTaskInfo);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        // 여기서 taskFlag가 true이면 그대로 리턴
+        if(editTaskInfo.isTaskFlag()){
+            return ResponseEntity.status(HttpStatus.OK).body("task 수정 완료");
+        }else{
+            // taskFalg가 false이면 taskPerCheckList에서도 지워야함.(checkListCode는 상관없이 taskCode가 동일한 모든 task 삭제)
+            taskService.deleteTaskPerCheckList(taskCode);
+
+            return ResponseEntity.status(HttpStatus.OK).body("task 삭제 완료");
+        }
     }
 }
 
