@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.employeepershop.service;
 
 import com.intbyte.wizbuddy.employeepershop.domain.EditEmployeePerShopInfo;
+import com.intbyte.wizbuddy.employeepershop.domain.entity.EmployeePerShop;
 import com.intbyte.wizbuddy.employeepershop.domain.entity.EmployeePerShopId;
 import com.intbyte.wizbuddy.employeepershop.dto.EmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.repository.EmployeePerShopRepository;
@@ -76,10 +77,12 @@ class EmployeePerShopServiceTests {
         int shopCode = 1;
         String employeeCode = employeeRepository.findAll().get(0).getEmployeeCode();
 
-        EditEmployeePerShopInfo info = new EditEmployeePerShopInfo(employeeCode, 11000, 11000);
+        EditEmployeePerShopInfo info = new EditEmployeePerShopInfo(employeeCode, 11000, 11);
 
         employeePerShopService.editEmployeePerShopById(shopCode, employeeCode, info);
 
-        // 미완
+        List<EmployeePerShop> employeePerShop = employeePerShopRepository.findAll();
+
+        System.out.println(employeePerShop.get(0));
     }
 }
