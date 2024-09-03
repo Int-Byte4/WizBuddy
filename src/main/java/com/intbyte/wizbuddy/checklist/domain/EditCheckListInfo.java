@@ -10,9 +10,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EditCheckListInfo {
-//    private int checkListCode;
+
     private String checkListTitle;
     private Boolean checkListFlag;
-//    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

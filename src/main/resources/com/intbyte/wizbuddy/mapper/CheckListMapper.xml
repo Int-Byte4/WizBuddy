@@ -7,7 +7,7 @@
         <id property="checkListCode" column="checklist_code"/>
         <result property="checkListTitle" column="checklist_title"/>
         <result property="checkListFlag" column="checklist_flag"/>
-        <result property="createdAt" column="created_at"/> <!-- column은 db 컬럼명과 동일해야함. -->
+        <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
         <result property="shopCode" column="shop_code"/>
     </resultMap>

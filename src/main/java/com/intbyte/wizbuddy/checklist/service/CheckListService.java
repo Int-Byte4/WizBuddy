@@ -16,7 +16,6 @@ import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
-import com.intbyte.wizbuddy.taskperchecklist.service.TaskPerCheckListService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -48,8 +47,34 @@ public class CheckListService {
         this.taskPerCheckListRepository = taskPerCheckListRepository;
     }
 
-    // 체크리스트 등록 -> 체크리스트가 등록될 때 체크리스트별 업무에도 등록해줘야함.
-    // 4번 체크리스트 등록 -> 4번 체크리스트는 2번 매장에서 등록하기
+    // 1. 특정 체크리스트 조회
+    @Transactional
+    public CheckListDTO findCheckListById(int checkListCode){
+
+        CheckListMybatis checkList = checkListMapper.findCheckListById(checkListCode);
+
+        if(checkList == null)
+            throw new CheckListNotFoundException();
+
+        return modelMapper.map(checkList, CheckListDTO.class);
+    }
+
+    // 2. flag가 true 인 특정 매장의 모든 체크리스트 조회
+    @Transactional
+    public List<CheckListDTO> findCheckListByIdByShop(int shopCode){
+
+        List<CheckListMybatis> checkListList = checkListMapper.findAllCheckListByShopId(shopCode);
+
+        if(checkListList == null || checkListList.isEmpty())
+            throw new CheckListNotFoundException();
+
+        return checkListList.stream()
+                .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
+                .collect(Collectors.toList());
+    }
+
+
+    // 3. 특정 매장의 체크리스트 등록, 고정된 업무를 추가
     @Transactional
     public void insertCheckList(CheckListDTO checkListInfo){
 
@@ -62,12 +87,9 @@ public class CheckListService {
                 .updatedAt(LocalDateTime.now())
                 .shopCode(shop)
                 .build();
-        
-        // 0. 체크리스트가 등록됨.
+
         checkListRepository.save(checkList);
 
-        // 1. 체크리스트 테이블의 shop_code가 있는데 task 테이블에서 shop_code가 동일 + flag true + fixed_state true인 모든걸 가져옴.
-        // -> List<Task> // shop도 있음.
         int shopCode = shop.getShopCode();
         List<TaskMybatis> allTaskByShopCode = taskMapper.findAllTaskByShopCodeByFixedState(shopCode);
         List<Task> allTask = new ArrayList<>();
@@ -83,10 +105,7 @@ public class CheckListService {
                     .build();
             allTask.add(task);
         }
-        // 위의 Task를 만들었다!!!!
 
-        // 2. 이 모든 task의 정보(taskCode), checkList의 정보(checkListCode)를 가지고 taskPerCheckList에 집어넣기. -> 일단 employeeCode는 NULL로 안넣어주기
-        // -> taskCode가 아닌 Task, CheckList가 필요하다!! -> 이 데이터로 TaskPerCheckList로 만들고 save 하나하나 해주기
         for (int i = 0; i < allTask.size(); i++) {
             TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
                     .taskPerChecklistId(new TaskPerChecklistId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
@@ -101,37 +120,17 @@ public class CheckListService {
         }
     }
 
-    // -------- 특정 매장의 모든 체크리스트를 조회 ------------
-
-    //    체크리스트 조회
-    @Transactional
-    public CheckListDTO findCheckListById(int checkListCode){
-
-        CheckListMybatis checkList = checkListMapper.findCheckListById(checkListCode);
-        return modelMapper.map(checkList, CheckListDTO.class);
-    }
-
-    //    flag가 true 인 특정 매장의 모든 체크리스트 조회 (추가)
-    @Transactional
-    public List<CheckListDTO> findCheckListByIdByShop(int shopCode){
-
-        List<CheckListMybatis> checkListList = checkListMapper.findAllCheckListByShopId(shopCode);
-
-        return checkListList.stream()
-                .map(checkList -> modelMapper.map(checkList, CheckListDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    //    체크리스트 수정
+    // 4. 체크리스트 수정
     @Transactional
     public void modifyCheckList(int checkListCode, EditCheckListInfo modifyCheckListInfo){
+
         CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(CheckListNotFoundException::new);
 
         checkList.modify(modifyCheckListInfo);
         checkListRepository.save(checkList);
     }
 
-//    체크리스트  삭제
+    // 5. 체크리스트 삭제
     @Transactional
     public void deleteCheckList(int checkListCode){
 
@@ -145,6 +144,7 @@ public class CheckListService {
         checkListRepository.save(checkList);
     }
 
+    // 0. 특정 체크리스트에서 업무 삭제
     @Transactional
     public void deleteTaskPerCheckList(int checkListCode){
 

@@ -11,12 +11,9 @@ import java.time.LocalDateTime;
 @Builder
 public class RequestModifyCheckListVO {
 
-    //    private final int checkListCode;
     private final String checkListTitle;
     private final Boolean checkListFlag;
-    //    private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-//    private final int shopCode;
 
     @JsonCreator
     public RequestModifyCheckListVO(
