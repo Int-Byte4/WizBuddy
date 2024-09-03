@@ -7,7 +7,10 @@ import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.vo.request.RequestDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.request.RequestInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.request.RequestModifySubsBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseFindSubsBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -26,7 +29,6 @@ public class SubsBoardController {
     private final SubsBoardService subsBoardService;
     private final ModelMapper modelMapper;
 
-    // 모든 게시판 가져오기
     @GetMapping
     public ResponseEntity<List<ResponseFindSubsBoardVO>> getAllSubsBoards() {
         List<SubsBoardDTO> subsBoardDTOs = subsBoardService.findAllSubsBoards();
@@ -70,7 +72,6 @@ public class SubsBoardController {
     public ResponseEntity<List<ResponseFindSubsBoardVO>> getSubsBoardsByShopCode(@PathVariable("shopCode") int shopCode) {
         List<SubsBoardDTO> subsBoardDTOs = subsBoardService.getSubsBoardsByShopCode(shopCode);
 
-        // DTO 리스트를 VO 리스트로 변환
         List<ResponseFindSubsBoardVO> subsBoardVOs = subsBoardDTOs.stream()
                 .map(dto -> ResponseFindSubsBoardVO.builder()
                         .subsCode(dto.getSubsCode())
@@ -89,31 +90,31 @@ public class SubsBoardController {
 
     @PostMapping
     @PreAuthorize("hasRole('EMPLOYER')")
-    public ResponseEntity<Void> createSubsBoard(@RequestBody RequestInsertSubsBoardVO requestInsertSubsBoardVO) {
+    public ResponseEntity<ResponseInsertSubsBoardVO> createSubsBoard(@RequestBody RequestInsertSubsBoardVO requestInsertSubsBoardVO) {
         SubsBoardDTO subsBoardEntity = modelMapper.map(requestInsertSubsBoardVO, SubsBoardDTO.class);
-        subsBoardService.registSubsBoard(subsBoardEntity);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        ResponseInsertSubsBoardVO responseBoard = subsBoardService.registSubsBoard(subsBoardEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
 
-
-    // 게시판 수정하기 (사장만 접근 가능)
-    @PutMapping("/update/{subsCode}")
+    @PatchMapping("/update/{subsCode}")
     @PreAuthorize("hasRole('EMPLOYER')")
-    public ResponseEntity<Void> updateSubsBoard(
+    public ResponseEntity<ResponseModifySubsBoardVO> updateSubsBoard(
             @PathVariable("subsCode") int subsCode,
             @RequestBody RequestModifySubsBoardVO requestModify) {
-        EditSubsBoardInfo editSubsBoardInfo = new EditSubsBoardInfo(requestModify.getSubsTitle(),requestModify.getSubsContent(),requestModify.getUpdatedAt(),requestModify.getEmployeeWorkingPartCode());
-        subsBoardService.modifySubsBoards(subsCode,editSubsBoardInfo);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        EditSubsBoardInfo editSubsBoardInfo = modelMapper.map(requestModify, EditSubsBoardInfo.class);
+        ResponseModifySubsBoardVO responseBoard = subsBoardService.modifySubsBoards(subsCode, editSubsBoardInfo);
+        return  ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
 
-    // 게시판 삭제하기 (사장만 접근 가능)
-    @PutMapping("/delete/{subsCode}")
+    @PatchMapping("/delete/{subsCode}")
     @PreAuthorize("hasRole('EMPLOYER')")
-    public ResponseEntity<Void> deleteSubsBoard(@PathVariable("subsCode") int subsCode, @RequestBody RequestDeleteSubsBoardVO requestDeleteSubsBoardVO) {
+    public ResponseEntity<ResponseDeleteSubsBoardVO> deleteSubsBoard(
+            @PathVariable("subsCode") int subsCode,
+            @RequestBody RequestDeleteSubsBoardVO requestDeleteSubsBoardVO) {
         SubsBoardDTO subsBoardEntity = modelMapper.map(requestDeleteSubsBoardVO, SubsBoardDTO.class);
         subsBoardEntity.setSubsCode(subsCode);
-        subsBoardService.deleteSubsBoard(subsBoardEntity);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        ResponseDeleteSubsBoardVO responseBoard = subsBoardService.deleteSubsBoard(subsBoardEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
+
 }
