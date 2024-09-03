@@ -10,10 +10,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class EditManualBoardInfo {
-    private int manualBoardCode;
+    private int manualCode;
     private String manualTitle;
     private String manualContents;
     private String imageUrl;
+    private boolean manualFlag;
     private LocalDateTime updatedAt;
-    private int userCode;
+    private String userCode;
 }

@@ -18,6 +18,6 @@ public class ManualBoardDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int shopCode;
-    private int userCode;
+    private String userCode;
 
 }
