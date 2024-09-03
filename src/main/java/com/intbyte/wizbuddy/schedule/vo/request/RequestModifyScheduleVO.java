@@ -1,12 +1,12 @@
-package com.intbyte.wizbuddy.schedule.domain;
+package com.intbyte.wizbuddy.schedule.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
-public class EditScheduleInfo {
+public class RequestModifyScheduleVO {
     private String employeeCode;
 }

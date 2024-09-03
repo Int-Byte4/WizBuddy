@@ -81,18 +81,26 @@ class ManualBoardServiceTests {
     }
 
     @Test
-    @DisplayName("매뉴얼 게시글 전체 조회")
-    @Transactional
+    @DisplayName("매뉴얼 게시판 전체 게시글 조회")
     public void testFindAllManualBoards() {
-
-        // given, when
-        int shopCode = 1;
-
-        // then
-        List<ManualBoardDTO> manualBoards = manualBoardService.findAllManualBoards(shopCode);
+        List<ManualBoardDTO> manualBoards = manualBoardService.findAllManualBoards();
 
         manualBoards.forEach(System.out::println);
     }
+
+//    @Test
+//    @DisplayName("매뉴얼 게시글 전체 조회")
+//    @Transactional
+//    public void testFindAllManualBoards() {
+//
+//        // given, when
+//        int shopCode = 1;
+//
+//        // then
+//        List<ManualBoardDTO> manualBoards = manualBoardService.findAllManualBoards(shopCode);
+//
+//        manualBoards.forEach(System.out::println);
+//    }
 
     @Test
     @DisplayName("매뉴얼 게시글 단 건 조회")

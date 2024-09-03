@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.mapper.WeeklyScheduleMapper">
-    <resultMap id="scheduleResultMap" type="com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO">
+    <resultMap id="scheduleResultMap" type="com.intbyte.wizbuddy.schedule.domain.entity.WeeklySchedule">
         <id property="scheduleCode" column="schedule_code"/>
         <result property="scheduleFlag" column="schedule_flag"/>
         <result property="scheduleStartDate" column="schedule_start_date"/>

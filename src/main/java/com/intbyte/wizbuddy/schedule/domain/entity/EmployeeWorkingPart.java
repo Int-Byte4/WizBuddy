@@ -17,19 +17,19 @@ public class EmployeeWorkingPart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="working_part_code")
     private int workingPartCode;
 
-    @Column
+    @Column(nullable = false, name = "employee_code")
     private String employeeCode;
 
-    @Column
+    @Column(nullable = false, name = "schedule_code")
     private int scheduleCode;
 
-    @Column
+    @Column(nullable = false, name = "working_date")
     private LocalDateTime workingDate;
 
-    @Column
+    @Column(nullable = false, name = "working_part_time")
     private String workingPartTime;
 
     public void modify(@Valid EditScheduleInfo modifyWorkingPartInfo) {
