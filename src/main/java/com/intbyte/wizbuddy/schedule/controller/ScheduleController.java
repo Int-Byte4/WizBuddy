@@ -4,10 +4,12 @@ import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.service.ScheduleService;
+import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleByCommentVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistScheduleVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseFindEmployeeWorkingPartVO;
+import com.intbyte.wizbuddy.schedule.vo.response.ResponseModifyScheduleByCommentVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistWeeklyScheduleVO;
 
@@ -83,20 +85,22 @@ public class ScheduleController {
 
         scheduleService.registSchedule(weeklyScheduleDTO);
 
-        ResponseRegistWeeklyScheduleVO registSchedule = modelMapper.map(weeklyScheduleDTO, ResponseRegistWeeklyScheduleVO.class);
+        ResponseRegistWeeklyScheduleVO registSchedule = modelMapper
+                .map(weeklyScheduleDTO, ResponseRegistWeeklyScheduleVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registSchedule);
     }
 
     @PostMapping("regist/employee")
     public ResponseEntity<ResponseRegistEmployeeWorkingPartVO> registSchedulePerEmployee(
-            @RequestBody RequestRegistEmployeeWorkingPartVO request
-    ) {
+            @RequestBody RequestRegistEmployeeWorkingPartVO request) {
+
         EmployeeWorkingPartDTO employeeWorkingPartDTO = modelMapper.map(request, EmployeeWorkingPartDTO.class);
 
         scheduleService.registSchedulePerEmployee(employeeWorkingPartDTO);
 
-        ResponseRegistEmployeeWorkingPartVO registEmployee = modelMapper.map(employeeWorkingPartDTO, ResponseRegistEmployeeWorkingPartVO.class);
+        ResponseRegistEmployeeWorkingPartVO registEmployee = modelMapper
+                .map(employeeWorkingPartDTO, ResponseRegistEmployeeWorkingPartVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registEmployee);
     }
@@ -104,11 +108,23 @@ public class ScheduleController {
     @PatchMapping("modify/{workingPartCode}")
     public ResponseEntity<EditScheduleInfo> editSchedule(
             @PathVariable("workingPartCode") int workingPartCode,
-            @RequestBody RequestModifyScheduleVO request
-    ) {
+            @RequestBody RequestModifyScheduleVO request) {
+
         EditScheduleInfo editSchedule = modelMapper.map(request, EditScheduleInfo.class);
 
         scheduleService.editSchedule(workingPartCode, editSchedule);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
+    }
+
+    @PatchMapping("modify")
+    public ResponseEntity<ResponseModifyScheduleByCommentVO> editScheduleByComment(
+            @RequestBody RequestModifyScheduleByCommentVO request) {
+
+        scheduleService.editScheduleByComment(request.getSubsCode(), request.isSubsFlag(), request.getEmployeeCode());
+
+        ResponseModifyScheduleByCommentVO editSchedule = modelMapper
+                .map(request, ResponseModifyScheduleByCommentVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
     }

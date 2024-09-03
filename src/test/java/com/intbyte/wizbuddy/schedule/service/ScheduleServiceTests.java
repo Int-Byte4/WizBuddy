@@ -5,7 +5,6 @@ import com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.repository.EmployeeWorkingPartRepository;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -139,7 +138,7 @@ class ScheduleServiceTests {
     @Test
     @DisplayName("댓글 채택해서 스케줄 수정")
     public void testScheduleService_update_schedule_SuccessTest() {
-        scheduleService.EditScheduleByEmployeeCode(1
+        scheduleService.editScheduleByComment(1
                 , true
                 , "20240831-1859-4c43-b692-b6cb5891c24a");
     }
