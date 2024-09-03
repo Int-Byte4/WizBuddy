@@ -3,12 +3,13 @@ package com.intbyte.wizbuddy.board.vo.request;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Builder
 public class RequestInsertSubsBoardVO {
     private String subsTitle;
     private String subsContent;

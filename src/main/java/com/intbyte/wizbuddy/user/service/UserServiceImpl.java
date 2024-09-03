@@ -91,8 +91,6 @@ public class UserServiceImpl implements UserService {
         signInUserInfo.setUserPassword(bCryptPasswordEncoder.encode(signInUserInfo.getUserPassword()));
         registerEmployeeInfo.setEmployeePassword(bCryptPasswordEncoder.encode(registerEmployeeInfo.getEmployeePassword()));
 
-        if(signInUserInfo.getUserType().equals("EMPLOYEE")) signInUserInfo.setUserType("Employee");
-
         userAndEmployeeMapper.insertUser(signInUserInfo);
 
         userAndEmployeeMapper.insertEmployee(registerEmployeeInfo);
@@ -109,9 +107,16 @@ public class UserServiceImpl implements UserService {
         if (loginUser == null) throw new UsernameNotFoundException(userEmail + " 이메일 아이디의 유저는 존재하지 않습니다.");
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
-        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+
+        switch (loginUser.getUserType()) {
+            case "Employee" -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+            case "Employer" -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
+            case "Admin" -> {
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+            }
+        }
 
         return new User(loginUser.getUserEmail(), loginUser.getUserPassword(), true, true, true, true, grantedAuthorities);
     }

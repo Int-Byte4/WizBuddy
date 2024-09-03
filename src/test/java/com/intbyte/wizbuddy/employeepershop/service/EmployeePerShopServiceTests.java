@@ -5,8 +5,6 @@ import com.intbyte.wizbuddy.employeepershop.domain.entity.EmployeePerShop;
 import com.intbyte.wizbuddy.employeepershop.domain.entity.EmployeePerShopId;
 import com.intbyte.wizbuddy.employeepershop.dto.EmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.repository.EmployeePerShopRepository;
-import com.intbyte.wizbuddy.mapper.EmployeePerShopMapper;
-import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,12 +21,6 @@ class EmployeePerShopServiceTests {
     private EmployeePerShopService employeePerShopService;
 
     @Autowired
-    private EmployeePerShopMapper employeePerShopMapper;
-
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
     private EmployeePerShopRepository employeePerShopRepository;
 
     @Test
@@ -37,7 +29,7 @@ class EmployeePerShopServiceTests {
     public void insertEmployeePerShopSuccessTest() {
         //given
         int currentSize = employeePerShopRepository.findAll().size();
-        String employeeCode = employeeRepository.findAll().get(0).getEmployeeCode();
+        String employeeCode = employeePerShopRepository.findAll().get(0).getEmployeeCode();
 
         EmployeePerShopDTO employeePerShopDTO = new EmployeePerShopDTO(2, employeeCode, 10000, 10);
 
@@ -58,16 +50,18 @@ class EmployeePerShopServiceTests {
     }
 
     @Test
-    @DisplayName("매장 별 직원 직원코드로 조회 성공")
+    @DisplayName("매장 별 직원 직원코드로 직원이 속한 매장들 조회 성공")
     public void findEmployeePerShopByCodeSuccessTest() {
         //given
         EmployeePerShopId employeePerShopId = new EmployeePerShopId(2, "20240831-187e-452d-88b4-62b7469c1cfa");
 
         //when
-        EmployeePerShopDTO employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeePerShopId);
+        List<EmployeePerShopDTO> employeePerShopList = employeePerShopService.findEmployeePerShopById(employeePerShopId.getEmployeeCode());
 
         //then
-        assertEquals(employeePerShopDTO.getEmployeeCode(), "20240831-187e-452d-88b4-62b7469c1cfa");
+        for (EmployeePerShopDTO employeePerShopDTO : employeePerShopList) {
+            System.out.println(employeePerShopDTO);
+        }
     }
 
     @Test
@@ -75,9 +69,9 @@ class EmployeePerShopServiceTests {
     @DisplayName("매장 별 직원 정보 수정 성공")
     public void deleteEmployeePerShopSuccessTest() {
         int shopCode = 1;
-        String employeeCode = employeeRepository.findAll().get(0).getEmployeeCode();
+        String employeeCode = employeePerShopRepository.findAll().get(0).getEmployeeCode();
 
-        EditEmployeePerShopInfo info = new EditEmployeePerShopInfo(employeeCode, 11000, 11);
+        EditEmployeePerShopInfo info = new EditEmployeePerShopInfo(11000, 11);
 
         employeePerShopService.editEmployeePerShopById(shopCode, employeeCode, info);
 

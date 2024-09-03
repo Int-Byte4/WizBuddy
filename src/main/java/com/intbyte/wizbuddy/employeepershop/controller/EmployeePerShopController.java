@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.employeepershop.controller;
 
 import com.intbyte.wizbuddy.employeepershop.domain.EditEmployeePerShopInfo;
-import com.intbyte.wizbuddy.employeepershop.domain.entity.EmployeePerShopId;
 import com.intbyte.wizbuddy.employeepershop.dto.EmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.service.EmployeePerShopService;
 import com.intbyte.wizbuddy.employeepershop.vo.request.RequestInsertEmployeePerShopVO;
@@ -35,18 +34,26 @@ public class EmployeePerShopController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @GetMapping("employers")
+    @GetMapping("list")
     public ResponseEntity<List<EmployeePerShopDTO>> getEmployeesPerShop() {
         List<EmployeePerShopDTO> employeePerShopDTOList = employeePerShopService.findAllEmployeePerShop();
 
         return ResponseEntity.status(HttpStatus.OK).body(employeePerShopDTOList);
     }
 
-    @GetMapping("/{employeePerShopId}")
-    public ResponseEntity<EmployeePerShopDTO> getEmployeePerShop(@PathVariable EmployeePerShopId employeePerShopId) {
-        EmployeePerShopDTO employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeePerShopId);
+    @GetMapping("/{employeeCode}")
+    public ResponseEntity<List<EmployeePerShopDTO>> getEmployeeIncludeShops(@PathVariable String employeeCode) {
+        List<EmployeePerShopDTO> employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeeCode);
 
         return ResponseEntity.status(HttpStatus.OK).body(employeePerShopDTO);
+    }
+
+    // 직원이 속한 매장 조회
+    @GetMapping("shop/{shopCode}/employee/{employeeCode}")
+    public ResponseEntity<EmployeePerShopDTO> getShopByEmployeeCode(@PathVariable int shopCode, @PathVariable String employeeCode) {
+        EmployeePerShopDTO response = employeePerShopService.getEmployeePerShopByEmployeeCode(shopCode, employeeCode);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PatchMapping("/modify/shop/{shopCode}/employee/{employeeCode}")
@@ -58,9 +65,9 @@ public class EmployeePerShopController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("/{employeePerShopId}")
-    public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable EmployeePerShopId employeePerShopId) {
-        employeePerShopService.deleteEmployeePerShopById(employeePerShopId);
+    @DeleteMapping("/delete//employee/{employeeCode}")
+    public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable String employeeCode) {
+        employeePerShopService.deleteEmployeePerShopByEmployerCode(employeeCode);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

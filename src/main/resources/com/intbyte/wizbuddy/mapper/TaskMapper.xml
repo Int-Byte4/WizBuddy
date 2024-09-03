@@ -7,15 +7,12 @@
         <id property="taskCode" column="task_code"/>
         <result property="taskContents" column="task_contents"/>
         <result property="taskFlag" column="task_flag"/>
-        <result property="taskFixedState" column="task_fixed_state"/> <!-- column은 db 컬럼명과 동일해야함. -->
+        <result property="taskFixedState" column="task_fixed_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
         <result property="shopCode" column="shop_code"/>
     </resultMap>
 
-    <!-- parameterType이 뭔지 알아보기
-    parameterType : 비즈니스 로직으로부터 전달 받은, SQL 구문에 사용될 매개변수의 자료형
-    이 속성은 이 쿼리가 실행될 때 전달받는 파라미터의 타입을 명시-->
     <select id="findAllTask" resultMap="taskResultMap">
        SELECT
               A.task_code
@@ -70,9 +67,7 @@
     </select>
 
 
-
-    <!-- 밑의 쿼리부터는 사장이 사용할 수 있는 기능(flag가 true인 task만 조회) -->
-    <!-- 특정 매장의 모든 업무만 find -->
+    <!-- 특정 매장의 모든 업무 find -->
     <select id="findAllTaskByShopCode" resultMap="taskResultMap" parameterType="int">
        SELECT
               A.task_code
@@ -113,5 +108,4 @@
          FROM Task A
         WHERE A.task_flag = true AND A.shop_code = #{ shopCode } AND A.task_fixed_state = false
     </select>
-
 </mapper>

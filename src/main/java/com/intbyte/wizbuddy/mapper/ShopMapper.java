@@ -8,4 +8,8 @@ public interface ShopMapper {
     String findByBusinessNum(String businessNum);
 
     Shop findShopByShopCode(int shopCode);
+
+    Shop findByEmployerCode(String employerCode);
+
+    int findByShopCode(int shopCode);
 }

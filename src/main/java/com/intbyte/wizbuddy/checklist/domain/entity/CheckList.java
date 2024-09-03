@@ -35,9 +35,8 @@ public class CheckList {
     @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name="shop_code")
-    private Shop shopCode;
+    @Column(name="shop_code")
+    private Integer shopCode;
 
     public void modify(@Valid EditCheckListInfo editCheckListInfo){
         this.checkListTitle = editCheckListInfo.getCheckListTitle();

@@ -11,15 +11,11 @@ import java.time.LocalDateTime;
 @ToString
 @EqualsAndHashCode
 public class CheckListDTO {
+
     private int checkListCode;
-
     private String checkListTitle;
-
-    private Boolean checkListFlag;
-
+    private boolean checkListFlag;
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
     private int shopCode;
 }

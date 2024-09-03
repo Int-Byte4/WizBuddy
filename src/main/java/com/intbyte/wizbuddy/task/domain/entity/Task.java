@@ -37,9 +37,8 @@ public class Task {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name="shop_code")
-    private Shop shop;
+    @Column(name="shop_code")
+    private Integer shopCode;
 
     public void modify(@Valid EditTaskInfo editTaskInfo){
         this.taskContents = editTaskInfo.getTaskContents();

@@ -14,5 +14,4 @@ public interface UserService extends UserDetailsService {
 
     @Transactional
     ResponseInsertEmployeeVO signInEmployee(SignInUserInfo signInUserInfo, RegisterEmployeeInfo registerEmployeeInfo);
-
 }

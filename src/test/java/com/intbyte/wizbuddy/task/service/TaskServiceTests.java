@@ -35,38 +35,6 @@ class TaskServiceTests {
     private TaskMapper taskMapper;
 
 
-    // 3번
-    @Test
-    public void 업무_1개_추가_테스트() {
-        // given:
-        List<TaskMybatis> currentTaskList = taskMapper.findAllTask();
-        TaskDTO taskDTO = new TaskDTO(currentTaskList.size() + 1, "새로운 업무 추가"
-                    , true, true, LocalDateTime.now(), LocalDateTime.now(), 2);
-
-        // when:
-        taskService.insertTask(taskDTO);
-
-        // then:
-        List<TaskMybatis> currentTaskList2 = taskMapper.findAllTask();
-
-        TaskMybatis findTask = taskMapper.findTaskById(taskDTO.getTaskCode());
-        Assertions.assertEquals(taskDTO.getTaskCode(), findTask.getTaskCode());
-    }
-
-    @Test
-    @Transactional // 1번
-    public void id로_업무_1개_조회_테스트(){
-
-        // given
-        int taskCode = taskMapper.findAllTask().size() - 1;
-
-        // when
-        TaskDTO task = taskService.findTaskById(taskCode);
-
-        // then
-        assertNotNull(task);
-    }
-
     @Test
     @Transactional
     public void 전체_업무_조회_테스트(){
@@ -99,21 +67,18 @@ class TaskServiceTests {
         }
     }
 
-
     @Test
-    public void id로_업무_1개_수정_테스트(){
+    @Transactional // 1번
+    public void id로_업무_1개_조회_테스트(){
 
-        // given:
-        int taskCode = taskMapper.findAllTask().size();
-        EditTaskInfo editTaskInfo = new EditTaskInfo("수정된 내용", true, true,
-                LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+        // given
+        int taskCode = taskMapper.findAllTask().size() - 1;
 
-        // when:
-        taskService.modifyTask(taskCode, editTaskInfo);
+        // when
+        TaskDTO task = taskService.findTaskById(taskCode);
 
-        // then:
-        TaskMybatis findTask = taskMapper.findTaskById(taskCode);
-        Assertions.assertEquals(findTask.getTaskContents(), editTaskInfo.getTaskContents());
+        // then
+        assertNotNull(task);
     }
 
     // 2-1번
@@ -168,15 +133,55 @@ class TaskServiceTests {
         }
     }
 
+
+    // 3. 특정 매장에 1개 task 추가
+    @Test
+    public void 업무_1개_추가_테스트() {
+        // given:
+        List<TaskMybatis> currentTaskList = taskMapper.findAllTask();
+        TaskDTO taskDTO = new TaskDTO(currentTaskList.size() + 1, "새로운 업무 추가"
+                , true, true, LocalDateTime.now(), LocalDateTime.now(), 2);
+
+        // when:
+        taskService.insertTask(taskDTO);
+
+        // then:
+        List<TaskMybatis> currentTaskList2 = taskMapper.findAllTask();
+
+        TaskMybatis findTask = taskMapper.findTaskById(taskDTO.getTaskCode());
+        Assertions.assertEquals(taskDTO.getTaskCode(), findTask.getTaskCode());
+    }
+
+    // 4. 특정 매장의 특정 task 수정
+    @Test
+    public void id로_업무_1개_수정_테스트(){
+
+        // given:
+        int taskCode = taskMapper.findAllTask().size();
+        EditTaskInfo editTaskInfo = new EditTaskInfo("수정된 내용", true, true,
+                LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
+
+        // when:
+        taskService.modifyTask(taskCode, editTaskInfo);
+
+        // then:
+        TaskMybatis findTask = taskMapper.findTaskById(taskCode);
+        Assertions.assertEquals(findTask.getTaskContents(), editTaskInfo.getTaskContents());
+    }
+
     @Test
     @DisplayName("task에서 task flag 제외한 나머지 수정 테스트")
-    public void modifyTaskTest(){
-        taskService.modifyTask(1, new EditTaskInfo("new contents222", true, false, LocalDateTime.now()));
+    public void modifyTaskTest() {
+        assertDoesNotThrow(() -> {
+            taskService.modifyTask(1, new EditTaskInfo("new contents222", true, false, LocalDateTime.now()));
+        });
     }
 
     @Test
     @DisplayName("task flag false로 변환시 taskCode가 동일한 모든 taskPerCheckList 삭제")
-    public void deleteTaskAndTaskPerCheckListTest(){
-        taskService.deleteTaskPerCheckList(10);
+    public void deleteTaskAndTaskPerCheckListTest() {
+        assertDoesNotThrow(() -> {
+            taskService.deleteTaskPerCheckList(10);
+        });
     }
 }

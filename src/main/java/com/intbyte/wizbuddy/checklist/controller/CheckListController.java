@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.checklist.controller;
 
-
 import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
 import com.intbyte.wizbuddy.checklist.dto.CheckListDTO;
 import com.intbyte.wizbuddy.checklist.service.CheckListService;
@@ -38,7 +37,7 @@ public class CheckListController {
         ResponseFindCheckListVO checkListVO = ResponseFindCheckListVO.builder()
                 .checkListCode(checkListDTO.getCheckListCode())
                 .checkListTitle(checkListDTO.getCheckListTitle())
-                .checkListFlag(checkListDTO.getCheckListFlag())
+                .checkListFlag(checkListDTO.isCheckListFlag())
                 .createdAt(checkListDTO.getCreatedAt())
                 .updatedAt(checkListDTO.getUpdatedAt())
                 .shopCode(checkListDTO.getShopCode())
@@ -59,7 +58,7 @@ public class CheckListController {
                 .map(checkListDTO -> ResponseFindCheckListVO.builder()
                         .checkListCode(checkListDTO.getCheckListCode())
                         .checkListTitle(checkListDTO.getCheckListTitle())
-                        .checkListFlag(checkListDTO.getCheckListFlag())
+                        .checkListFlag(checkListDTO.isCheckListFlag())
                         .createdAt(checkListDTO.getCreatedAt())
                         .updatedAt(checkListDTO.getUpdatedAt())
                         .shopCode(checkListDTO.getShopCode())
@@ -70,7 +69,7 @@ public class CheckListController {
         return ResponseEntity.status(HttpStatus.OK).body(checkListVOList);
     }
 
-    // 3. 특정 매장에 체크리스트 1개 추가
+    // 3. 특정 매장에 체크리스트 1개 등록
     @PostMapping("/shop/{shopCode}/checklist")
     public ResponseEntity<String> insertCheckList(
             @PathVariable("shopCode") int shopCode,
@@ -83,7 +82,7 @@ public class CheckListController {
         return ResponseEntity.status(HttpStatus.CREATED).body("생성 완료");
     }
 
-    // 4, 5. 특정 매장의 특정 체크리스트 수정, 삭제 -> 삭제의 경우에는 taskPerCheckList에서도 삭제해야함.
+    // 4, 5. 특정 매장의 특정 체크리스트 수정, 삭제
     @PostMapping("/shop/{shopCode}/checklist/{checkListCode}")
     public ResponseEntity<String> modifyCheckList(
             @PathVariable("shopCode") int shopCode,
@@ -93,12 +92,11 @@ public class CheckListController {
         EditCheckListInfo info = new EditCheckListInfo(request.getCheckListTitle(), request.getCheckListFlag(), request.getUpdatedAt());
 
         checkListService.modifyCheckList(checkListCode, info);
-        if(request.getCheckListFlag()){ // flag가 true면 그대로 진행
+        if(request.getCheckListFlag()){
             return ResponseEntity.status(HttpStatus.OK).body("수정 완료");
         }else{
             checkListService.deleteCheckList(checkListCode);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("삭제 완료");
         }
     }
-
 }
