@@ -22,7 +22,7 @@
                S.business_num
           FROM shop S
          WHERE S.business_num = #{ businessNum }
-           AND S.shop_flag = true
+           AND S.shop_flag = 1
     </select>
 
     <select id="findShopByShopCode" resultMap="shopResultMap" parameterType="int">
@@ -38,6 +38,23 @@
              , S.employer_code
           FROM shop S
          WHERE S.shop_code = #{ shopCode }
-           AND S.shop_flag = true
+           AND S.shop_flag = 1
     </select>
+
+    <select id="findByEmployerCode" resultMap="shopResultMap" parameterType="string">
+        SELECT
+        S.shop_code
+        , S.shop_name
+        , S.shop_location
+        , S.shop_flag
+        , S.shop_open_time
+        , S.business_num
+        , S.created_at
+        , S.updated_at
+        , S.employer_code
+        FROM shop S
+        WHERE S.employer_code = #{ employerCode }
+        AND S.shop_flag = 1
+    </select>
+
 </mapper>
