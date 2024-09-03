@@ -1,7 +1,5 @@
 package com.intbyte.wizbuddy.taskperchecklist.controller;
 
-
-import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.taskperchecklist.service.TaskPerCheckListService;

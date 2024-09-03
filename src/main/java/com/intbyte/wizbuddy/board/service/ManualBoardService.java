@@ -85,17 +85,28 @@ public class ManualBoardService {
         manualBoardRepository.save(manualBoard);
     }
 
-    /* 기능. 4. 매뉴얼 게시판 게시글 조회 */
+    /* 기능 4. 매뉴얼 게시판 전체 게시글 조회 */
     @Transactional
-    public List<ManualBoardDTO> findAllManualBoards(int shopCode) {
-        List<ManualBoard> manualBoardList = manualBoardMapper.findAllManualBoards(shopCode);
+    public List<ManualBoardDTO> findAllManualBoards() {
+        List<ManualBoard> manualBoardList = manualBoardMapper.findAllManualBoards();
 
+        if(manualBoardList == null || manualBoardList.isEmpty()) throw new ManualBoardNotFoundException();
         return manualBoardList.stream()
                 .map(manualBoard -> modelMapper.map(manualBoard, ManualBoardDTO.class))
                 .collect(Collectors.toList());
     }
 
-    /* 기능 5. 공지사항 게시글 단 건 조회 */
+    /* 기능 5. 매장별 매뉴얼 게시판 게시글 조회 */
+//    @Transactional
+//    public List<ManualBoardDTO> findAllManualBoards(int shopCode) {
+//        List<ManualBoard> manualBoardList = manualBoardMapper.findAllManualBoards(shopCode);
+//
+//        return manualBoardList.stream()
+//                .map(manualBoard -> modelMapper.map(manualBoard, ManualBoardDTO.class))
+//                .collect(Collectors.toList());
+//    }
+
+    /* 기능 6. 공지사항 게시글 단 건 조회 */
     @Transactional
     public ManualBoardDTO findManualBoard(int manualCode) {
         ManualBoard manualBoard = manualBoardMapper.findManualBoard(manualCode);

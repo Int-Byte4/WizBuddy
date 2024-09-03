@@ -14,9 +14,8 @@ import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
+import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
-import com.intbyte.wizbuddy.taskperchecklist.service.TaskPerCheckListService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -89,7 +88,7 @@ public class CheckListService {
         // -> taskCode가 아닌 Task, CheckList가 필요하다!! -> 이 데이터로 TaskPerCheckList로 만들고 save 하나하나 해주기
         for (int i = 0; i < allTask.size(); i++) {
             TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
-                    .taskPerChecklistId(new TaskPerChecklistId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
+                    .taskPerCheckListId(new TaskPerCheckListId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
                     .checkList(checkList)
                     .task(allTask.get(i))
                     .taskFinishedState(false)

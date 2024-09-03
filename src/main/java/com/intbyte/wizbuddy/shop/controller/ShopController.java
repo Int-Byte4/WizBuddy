@@ -8,7 +8,6 @@ import com.intbyte.wizbuddy.shop.service.ShopService;
 import com.intbyte.wizbuddy.shop.vo.request.RequestDeleteShopVO;
 import com.intbyte.wizbuddy.shop.vo.request.RequestEditShopVO;
 import com.intbyte.wizbuddy.shop.vo.request.RequestRegisterShopVO;
-import com.intbyte.wizbuddy.shop.vo.response.ResponseDeleteShopVO;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseEditShopVO;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseRegisterShopVO;
 import org.modelmapper.ModelMapper;
@@ -66,11 +65,11 @@ public class ShopController {
     }
 
     @PatchMapping("/delete/{employerCode}")
-    public ResponseEntity<ResponseDeleteShopVO> deleteShop(@PathVariable String employerCode, @RequestBody RequestDeleteShopVO request) {
+    public ResponseEntity<Void> deleteShop(@PathVariable String employerCode, @RequestBody RequestDeleteShopVO request) {
         DeleteShopInfo deleteShopInfo = modelMapper.map(request, DeleteShopInfo.class);
 
-        ResponseDeleteShopVO response = shopService.deleteShop(employerCode, deleteShopInfo);
+        shopService.deleteShop(employerCode, deleteShopInfo);
 
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
