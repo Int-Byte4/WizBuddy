@@ -54,10 +54,12 @@ public class Comment {
     }
 
     public void toDelete() {
+        this.updatedAt = LocalDateTime.now();
         this.commentFlag = false;
     }
 
     public void toAdopt() {
+        this.updatedAt = LocalDateTime.now();
         this.commentAdoptedState = true;
     }
 }

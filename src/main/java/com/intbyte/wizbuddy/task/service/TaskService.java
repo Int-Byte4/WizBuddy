@@ -2,6 +2,7 @@ package com.intbyte.wizbuddy.task.service;
 
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.mapper.CheckListMapper;
 import com.intbyte.wizbuddy.mapper.TaskMapper;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
@@ -10,6 +11,7 @@ import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
+import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,13 +29,17 @@ public class TaskService {
     private final TaskMapper taskMapper;        // mybatis
     private final ModelMapper modelMapper; // dto <-> entity 변환
     private final ShopRepository shopRepository;
+    private final TaskPerCheckListRepository taskPerCheckListRepository;
+    private final CheckListMapper checkListMapper;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, TaskMapper mapper, ModelMapper modelMapper, @Qualifier("shopRepository") ShopRepository shopRepository) {
+    public TaskService(TaskRepository taskRepository, TaskMapper mapper, ModelMapper modelMapper, @Qualifier("shopRepository") ShopRepository shopRepository, @Qualifier("taskPerCheckListRepository") TaskPerCheckListRepository taskPerCheckListRepository, CheckListMapper checkListMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = mapper;
         this.modelMapper = modelMapper;
         this.shopRepository = shopRepository;
+        this.taskPerCheckListRepository = taskPerCheckListRepository;
+        this.checkListMapper = checkListMapper;
     }
 
     @Transactional
@@ -137,14 +143,17 @@ public class TaskService {
         taskRepository.save(task);
     }
 
+    // Task의 task_flag가 false가 된다 -> 해당 task는 삭제된것 -> taskPerCheckList에서도 삭제해줘야함.
+    // 원래라면 db 제약조건에 의해서 바로 처리 되겠지만 우리는 flag로 soft delete를 했기 때문에 따로 처리해줘야함.
     @Transactional
-    public void deleteTask(int taskCode){
+    public void deleteTaskPerCheckList(int taskCode){
 
         Task task = taskRepository.findById(taskCode).orElseThrow(TaskNotFoundException::new);
-        EditTaskInfo editTaskInfo = new EditTaskInfo(task.getTaskContents(), false, task.isTaskFixedState(), task.getUpdatedAt());
 
-        task.modify(editTaskInfo);
+        // 이미 이 함수에 들어온 순간 flag가 false인것. -> taskCode와 shopCode를 안다.
+        // -> shopCode를 통해 checkList에서 shopCode를 가진 모든 checkList를 뽑아야함.
+//        checkListMapper.findAllCheckListByShopId() // shopCode가 동일한(flag true) 모든 checkList 가져오는 메서드 만들기
 
-        taskRepository.save(task);
+        taskPerCheckListRepository.deleteByTask(task);
     }
 }

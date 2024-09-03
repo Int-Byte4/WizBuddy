@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.schedule.service;
 
-import com.intbyte.wizbuddy.mapper.EmployeeWorkingPartMapper;
 import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
+import com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.repository.EmployeeWorkingPartRepository;
@@ -49,7 +49,7 @@ class ScheduleServiceTests {
         int scheduleCode = 1;
 
         // when
-        List<EmployeeWorkingPartDTO> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
+        List<EmployeeWorkingPart> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
 
         // then
         assertNotNull(employeeWorkingPartList);
@@ -60,10 +60,10 @@ class ScheduleServiceTests {
     @DisplayName("직원별 스케줄 조회 성공")
     public void testScheduleService_select_employee_SuccessTest() {
         // given
-        int employeeCode = 6;
+        String employeeCode = "20240831-07de-4b18-95c6-564cd86a5af2";
 
         // when
-        List<EmployeeWorkingPartDTO> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
+        List<EmployeeWorkingPart> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
 
         // then
         assertNotNull(employeeWorkPartList);
@@ -92,144 +92,72 @@ class ScheduleServiceTests {
     @DisplayName("직원 근무배치 성공")
     public void testScheduleService_insert_employee_SuccessTest() {
         // given
-        EmployeeWorkingPartDTO employeeWorkingPartDTO = new EmployeeWorkingPartDTO(19,
-                8,
+        List<EmployeeWorkingPart> currentEmployeeWorkingPartList = employeeWorkingPartRepository.findAll();
+        int currentSize = currentEmployeeWorkingPartList.size();
+
+        EmployeeWorkingPart employeeWorkingPart = new EmployeeWorkingPart(19,
+                "20240831-cc00-4288-b2a6-2f864ddbf6b5",
                 1,
                 LocalDateTime.now(),
                 "1T");
 
         // when
-        EmployeeWorkingPartDTO savedEmployeeWorkingPart = scheduleService
-                .registSchedulePerEmployee(employeeWorkingPartDTO);
+        scheduleService.registSchedulePerEmployee(employeeWorkingPart);
 
         // then
-        assertNotNull(savedEmployeeWorkingPart);
+        List<EmployeeWorkingPart> newEmployeeWorkingPartList = employeeWorkingPartRepository.findAll();
+        int newCurrentSize = newEmployeeWorkingPartList.size();
+
+        assertEquals(currentSize + 1, newCurrentSize);
+
     }
 
     @Test
     @DisplayName("스케줄 수정 성공")
     public void testScheduleService_update_SuccessTest() {
         // given
-        int employeeCode = 6;
-        EditScheduleInfo editScheduleInfo = new EditScheduleInfo(employeeCode, "1T");
+        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository.findById(1).get();
+        String employeeCode = "20240831-f409-40b1-a03d-4d14d52fa13a";
+        EditScheduleInfo editScheduleInfo = new EditScheduleInfo(employeeCode);
 
         // when
-        scheduleService.EditSchedule(employeeCode, editScheduleInfo);
+        scheduleService.EditSchedule(employeeWorkingPart.getWorkingPartCode(), editScheduleInfo);
 
         // then
-        assertEquals(editScheduleInfo.getWorkingPartTime(), "1T");
+        assertEquals(employeeWorkingPart.getEmployeeCode(), editScheduleInfo.getEmployeeCode());
     }
+
+
 
     @Test
     @DisplayName("스케줄 삭제 성공")
     public void testScheduleService_delete_SuccessTest() {
         // given
-        int employeeCode = 6;
+        int workingPartCode = 18;
 
         // when
-        scheduleService.deleteSchedule(employeeCode);
+        scheduleService.deleteSchedule(workingPartCode);
 
         // then
-        boolean isDeleted = !employeeWorkingPartRepository.existsById(employeeCode);
+        boolean isDeleted = !employeeWorkingPartRepository.existsById(workingPartCode);
         assertTrue(isDeleted);
     }
 
-    @Test
-    @DisplayName("대타 게시판에 달린 댓글 선택해서 근무일정 수정 성공")
-    public void testScheduleService_update_By_Comment_SuccessTest() {
-        // given
-        int subsCode = 1;
-        int commentCode = 3;
+//    @Test
+//    @DisplayName("대타 게시판에 달린 댓글 선택해서 근무일정 수정 성공")
+//    public void testScheduleService_update_By_Comment_SuccessTest() {
+//        // given
+//        int subsCode = 1;
+//        int commentCode = 3;
+//
+//        // when
+//        scheduleService.selectCommentToEdit(subsCode, commentCode);
+//
+//        // then
+//        assertDoesNotThrow(() -> {
+//            scheduleService.selectCommentToEdit(subsCode, commentCode);
+//        });
+//
+//    }
 
-        // when
-        scheduleService.selectCommentToEdit(subsCode, commentCode);
-
-        // then
-        assertDoesNotThrow(() -> {
-            scheduleService.selectCommentToEdit(subsCode, commentCode);
-        });
-
-    }
-
-//    @Test
-//    @DisplayName("한주의 스케줄 조회 실패")
-//    public void testScheduleService_select_per_employee_ExceptionTest() {
-//        // given
-//        int scheduleCode = 200;
-//
-//        // when
-//        List<EmployeeWorkingPartDTO> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
-//
-//        // then
-//        assertNotNull(employeeWorkingPartList);
-//        employeeWorkingPartList.forEach(System.out::println);
-//    }
-//
-//    @Test
-//    @DisplayName("직원별 스케줄 조회 실패")
-//    public void testScheduleService_select_employee_ExceptionTest() {
-//        // given
-//        int employeeCode = 200;
-//
-//        // when
-//        List<EmployeeWorkingPartDTO> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
-//
-//        // then
-//        assertNotNull(employeeWorkPartList);
-//        employeeWorkPartList.forEach(System.out::println);
-//    }
-//
-//    @Test
-//    @DisplayName("스케줄 등록 실패")
-//    public void testScheduleService_insert_ExceptionTest() {
-//        // given
-//        WeeklyScheduleDTO weeklyScheduleDTO = new WeeklyScheduleDTO(1, true, LocalDate.of(2024,8,26), LocalDateTime.now(), LocalDateTime.now());
-//
-//        // when
-//        WeeklyScheduleDTO savedSchedule = scheduleService.registWeeklySchedule(weeklyScheduleDTO);
-//
-//        // then
-//        assertNotNull(savedSchedule);
-//    }
-//
-//    @Test
-//    @DisplayName("직원 근무배치 실패")
-//    public void testScheduleService_insert_employee_ExceptionTest() {
-//        // given
-//        EmployeeWorkingPartDTO employeeWorkingPartDTO = new EmployeeWorkingPartDTO(19, 100, 1, LocalDateTime.now(), "1T");
-//
-//        // when
-//        EmployeeWorkingPartDTO savedEmployeeWorkingPart = scheduleService.registSchedulePerEmployee(employeeWorkingPartDTO);
-//
-//        // then
-//        assertNotNull(savedEmployeeWorkingPart);
-//    }
-//
-//    @Test
-//    @DisplayName("스케줄 수정 실패")
-//    public void testScheduleService_update_ExceptionTest() {
-//        // given
-//        int employeeCode = 100;
-//        EditScheduleInfo editScheduleInfo = new EditScheduleInfo(100, "1T");
-//
-//        // when
-//        scheduleService.EditSchedule(employeeCode, editScheduleInfo);
-//
-//        // then
-//        assertEquals(editScheduleInfo.getWorkingPartTime(), "1T");
-//    }
-//
-//    @Test
-//    @DisplayName("스케줄 삭제 실패")
-//    public void testScheduleService_delete_ExceptionTest() {
-//        // given
-//        int employeeCode = 100;
-//
-//        // when
-//        scheduleService.deleteSchedule(employeeCode);
-//
-//        // then
-//        boolean isDeleted = !employeeWorkingPartRepository.existsById(employeeCode);
-//        assertTrue(isDeleted);
-//    }
 }

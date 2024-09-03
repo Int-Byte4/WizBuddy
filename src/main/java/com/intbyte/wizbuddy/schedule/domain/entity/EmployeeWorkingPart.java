@@ -21,7 +21,7 @@ public class EmployeeWorkingPart {
     private int workingPartCode;
 
     @Column
-    private int employeeCode;
+    private String employeeCode;
 
     @Column
     private int scheduleCode;
@@ -34,7 +34,6 @@ public class EmployeeWorkingPart {
 
     public void modify(@Valid EditScheduleInfo modifyWorkingPartInfo) {
         this.employeeCode = modifyWorkingPartInfo.getEmployeeCode();
-        this.workingPartTime = modifyWorkingPartInfo.getWorkingPartTime();
     }
 
 }
