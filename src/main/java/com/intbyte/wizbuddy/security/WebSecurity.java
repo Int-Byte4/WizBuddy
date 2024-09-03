@@ -62,6 +62,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task/*", "POST")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/manualBoard", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/register/", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/shops", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/", "GET")).permitAll()
@@ -80,7 +81,6 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/modify/shop/", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "DELETE")).hasRole("EMPLOYER")
-
                                 .anyRequest().authenticated()
                 )
                 /* 설명. authenticationManager 등록(UserDetails를 상속받는 Service 계층 + BCrypt 암호화) */
