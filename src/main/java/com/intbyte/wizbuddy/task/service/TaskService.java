@@ -1,10 +1,8 @@
 package com.intbyte.wizbuddy.task.service;
 
-import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
 import com.intbyte.wizbuddy.mapper.CheckListMapper;
 import com.intbyte.wizbuddy.mapper.TaskMapper;
-import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
 import com.intbyte.wizbuddy.task.domain.TaskMybatis;
@@ -117,15 +115,13 @@ public class TaskService {
     @Transactional
     public void insertTask(TaskDTO taskInfo) {
 
-        Shop shop = shopRepository.findById(taskInfo.getShopCode()).orElseThrow(ShopNotFoundException::new);
-
         Task task = Task.builder()
                 .taskContents(taskInfo.getTaskContents())
                 .taskFlag(true)
                 .taskFixedState(taskInfo.isTaskFixedState())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .shop(shop)
+                .shopCode(taskInfo.getShopCode())
                 .build();
 
         taskRepository.save(task);
@@ -144,6 +140,6 @@ public class TaskService {
     public void deleteTaskPerCheckList(int taskCode){
         Task task = taskRepository.findById(taskCode).orElseThrow(TaskNotFoundException::new);
 
-        taskPerCheckListRepository.deleteByTask(task);
+        taskPerCheckListRepository.deleteByTask(taskCode);
     }
 }

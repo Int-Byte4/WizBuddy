@@ -129,13 +129,12 @@ public class TaskPerCheckListService {
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode()).orElseThrow(TaskNotFoundException::new);
 
         TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
-                .checkList(checkList)
-                .task(task)
-                .taskPerCheckListId(taskPerChecklistId)
+                .checkListCode(taskPerCheckListDTO.getCheckListCode())
+                .taskCode(taskPerCheckListDTO.getTaskCode())
                 .taskFinishedState(taskPerCheckListDTO.getTaskFinishedState())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .employee(employee)
+                .employeeCode(taskPerCheckListDTO.getEmployeeCode())
                 .build();
 
         taskPerCheckListRepository.save(taskPerCheckList);
@@ -154,12 +153,22 @@ public class TaskPerCheckListService {
     @Transactional
     public void modifyTaskPerCheckList(EditTaskPerCheckListInfo info){
 
-        TaskPerCheckListId id = new TaskPerCheckListId(info.getCheckListCode(), info.getTaskCode());
-        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).orElseThrow(TaskPerCheckListNotFoundException::new);
+//        TaskPerCheckListMybatis taskPerCheckListMybatis = taskPerCheckListMapper.findTaskPerCheckListById(info.getTaskCode(), info.getCheckListCode());
+//
+//        TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
+//                .checkListCode(info.getCheckListCode())
+//                .taskCode(info.getTaskCode())
+//                .taskFinishedState(info.getTaskFinishedState())
+//                .updatedAt(LocalDateTime.now())
+//                .employeeCode(info.getEmployeeCode())
+//                .build();
 
+        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(new TaskPerCheckListId(info.getCheckListCode(), info.getTaskCode())).orElseThrow(IllegalArgumentException::new);
+
+        // 나중에 뺄 코드
         Employee findEmployee = employeeRepository.findById(info.getEmployeeCode()).orElseThrow();
 
-        taskPerCheckList.modify(info, findEmployee);
+        taskPerCheckList.modify(info, findEmployee.getEmployeeCode());
 
         taskPerCheckListRepository.save(taskPerCheckList);
     }

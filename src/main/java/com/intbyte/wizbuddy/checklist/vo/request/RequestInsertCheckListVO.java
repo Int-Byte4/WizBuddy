@@ -15,7 +15,7 @@ public class RequestInsertCheckListVO {
     private final Boolean checkListFlag;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
-    private final int shopCode;
+    private final Integer shopCode;
 
     @JsonCreator
     public RequestInsertCheckListVO(

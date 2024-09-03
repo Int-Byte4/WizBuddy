@@ -17,38 +17,33 @@ import java.time.LocalDateTime;
 @ToString
 @Builder
 @EqualsAndHashCode
+@IdClass(TaskPerCheckListId.class)
 public class TaskPerCheckList {
 
-    @EmbeddedId
-    private TaskPerCheckListId taskPerCheckListId;
+    @Id
+    @Column(name="checklist_code")
+    private Integer checkListCode;
 
-    @ManyToOne
-    @MapsId("checkListCode")
-    @JoinColumn(name = "checklist_code", insertable = false, updatable = false)
-    private CheckList checkList;
+    @Id
+    @Column(name = "task_code")
+    private Integer taskCode;
 
-    @ManyToOne
-    @MapsId("taskCode")
-    @JoinColumn(name = "task_code", insertable = false, updatable = false)
-    private Task task;
-
-    @Column
+    @Column(name = "task_finished_state")
     private Boolean taskFinishedState;
 
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_code")
-    private Employee employee;
+    @Column(name = "employee_code")
+    private String employeeCode;
 
-    public void modify(EditTaskPerCheckListInfo info, Employee employee) {
+    public void modify(EditTaskPerCheckListInfo info, String EmployeeCode) {
 
         this.taskFinishedState = info.getTaskFinishedState();
         this.updatedAt = info.getUpdatedAt();
-        this.employee = employee;
+        this.employeeCode = EmployeeCode;
     }
 }

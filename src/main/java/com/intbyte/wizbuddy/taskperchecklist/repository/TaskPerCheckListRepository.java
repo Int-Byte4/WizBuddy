@@ -17,13 +17,13 @@ public interface TaskPerCheckListRepository extends JpaRepository<TaskPerCheckLi
     // task를 통한 삭제 JPQL
     @Modifying
     @Transactional
-    @Query("DELETE FROM TaskPerCheckList t WHERE t.task = :task")
-    void deleteByTask(@Param("task") Task task);
+    @Query("DELETE FROM TaskPerCheckList t WHERE t.taskCode = :taskCode")
+    void deleteByTask(@Param("taskCode") Integer taskCode);
 
     // checkList를 통한 삭제 JPQL
     @Modifying
     @Transactional
-    @Query("DELETE FROM TaskPerCheckList t WHERE t.checkList = :checkList")
-    void deleteByCheckList(@Param("checkList") CheckList checkList);
+    @Query("DELETE FROM TaskPerCheckList t WHERE t.checkListCode = :checkListCode")
+    void deleteByCheckList(@Param("checkListCode") Integer checkListCode);
 
 }
