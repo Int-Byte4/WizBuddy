@@ -8,11 +8,11 @@ import java.util.Map;
 
 @Mapper
 public interface EmployeePerShopMapper {
-    EmployeePerShopDTO findEmployeePerShopById(String employeeCode);
+    List<EmployeePerShopDTO> findEmployeePerShopById(String employeeCode);
 
     List<EmployeePerShopDTO> findAllEmployeePerShop();
 
-    int findShopCodeByEmployeeCode(String employeeCode);
+    String findEmployeeCodeByEmployeeCode(String employeeCode);
 
-    EmployeePerShopDTO findByShopCode(Map<String, Object> param);
+    EmployeePerShopDTO findEmployeePerShopByShopCodeAndEmployeeCode(Map<String, Object> params);
 }

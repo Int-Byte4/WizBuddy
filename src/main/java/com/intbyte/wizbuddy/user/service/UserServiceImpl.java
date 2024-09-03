@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
             case "Admin" -> {
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
             }
         }
 

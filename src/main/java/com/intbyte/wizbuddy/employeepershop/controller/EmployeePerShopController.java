@@ -6,7 +6,6 @@ import com.intbyte.wizbuddy.employeepershop.service.EmployeePerShopService;
 import com.intbyte.wizbuddy.employeepershop.vo.request.RequestInsertEmployeePerShopVO;
 import com.intbyte.wizbuddy.employeepershop.vo.request.RequestModifyEmployeePerShopVO;
 import com.intbyte.wizbuddy.employeepershop.vo.response.ResponseInsertEmployeePerShopVO;
-import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,11 +25,11 @@ public class EmployeePerShopController {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping("/register/employer/{employerCode}")
-    public ResponseEntity<ResponseInsertEmployeePerShopVO> registerEmployeePerShop(@PathVariable String employerCode ,@RequestBody RequestInsertEmployeePerShopVO request) {
+    @PostMapping("/register")
+    public ResponseEntity<ResponseInsertEmployeePerShopVO> registerEmployeePerShop(@RequestBody RequestInsertEmployeePerShopVO request) {
         EmployeePerShopDTO employeePerShopDTO = modelMapper.map(request, EmployeePerShopDTO.class);
 
-        employeePerShopService.insertEmployeePerShop(employerCode, employeePerShopDTO);
+        employeePerShopService.insertEmployeePerShop(employeePerShopDTO);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
@@ -43,18 +42,18 @@ public class EmployeePerShopController {
     }
 
     @GetMapping("/{employeeCode}")
-    public ResponseEntity<EmployeePerShopDTO> getEmployeePerShop(@PathVariable String employeeCode) {
-        EmployeePerShopDTO employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeeCode);
+    public ResponseEntity<List<EmployeePerShopDTO>> getEmployeeIncludeShops(@PathVariable String employeeCode) {
+        List<EmployeePerShopDTO> employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeeCode);
 
         return ResponseEntity.status(HttpStatus.OK).body(employeePerShopDTO);
     }
 
     // 직원이 속한 매장 조회
-    @GetMapping("/employee/{employeeCode}")
-    public ResponseEntity<ShopDTO> getShopByEmployeeCode(@PathVariable String employeeCode) {
-        ShopDTO shopDTO = employeePerShopService.getShopByEmployeeCode(employeeCode);
+    @GetMapping("shop/{shopCode}/employee/{employeeCode}")
+    public ResponseEntity<EmployeePerShopDTO> getShopByEmployeeCode(@PathVariable int shopCode, @PathVariable String employeeCode) {
+        EmployeePerShopDTO response = employeePerShopService.getEmployeePerShopByEmployeeCode(shopCode, employeeCode);
 
-        return ResponseEntity.status(HttpStatus.OK).body(shopDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PatchMapping("/modify/shop/{shopCode}/employee/{employeeCode}")
@@ -66,9 +65,9 @@ public class EmployeePerShopController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("/delete/employer/{employerCode}/employee/{employeeCode}")
-    public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable String employerCode, @PathVariable String employeeCode) {
-        employeePerShopService.deleteEmployeePerShopByEmployerCode(employerCode, employeeCode);
+    @DeleteMapping("/delete//employee/{employeeCode}")
+    public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable String employeeCode) {
+        employeePerShopService.deleteEmployeePerShopByEmployerCode(employeeCode);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
