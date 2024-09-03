@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.schedule.service;
 
-import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
+import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
 import com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
+//@Transactional
 class ScheduleServiceTests {
 
     @Autowired
@@ -27,8 +27,6 @@ class ScheduleServiceTests {
 
     @Autowired
     private EmployeeWorkingPartRepository employeeWorkingPartRepository;
-
-    private EmployeeWorkingPartDTO employeeWorkingPartDTO;
 
     @Test
     @DisplayName("전체 스케줄 조회 성공")
@@ -107,7 +105,6 @@ class ScheduleServiceTests {
         int newCurrentSize = newEmployeeWorkingPartList.size();
 
         assertEquals(currentSize + 1, newCurrentSize);
-
     }
 
     @Test
@@ -125,8 +122,6 @@ class ScheduleServiceTests {
         assertEquals(employeeWorkingPart.getEmployeeCode(), editScheduleInfo.getEmployeeCode());
     }
 
-
-
     @Test
     @DisplayName("스케줄 삭제 성공")
     public void testScheduleService_delete_SuccessTest() {
@@ -141,21 +136,11 @@ class ScheduleServiceTests {
         assertTrue(isDeleted);
     }
 
-//    @Test
-//    @DisplayName("대타 게시판에 달린 댓글 선택해서 근무일정 수정 성공")
-//    public void testScheduleService_update_By_Comment_SuccessTest() {
-//        // given
-//        int subsCode = 1;
-//        int commentCode = 3;
-//
-//        // when
-//        scheduleService.selectCommentToEdit(subsCode, commentCode);
-//
-//        // then
-//        assertDoesNotThrow(() -> {
-//            scheduleService.selectCommentToEdit(subsCode, commentCode);
-//        });
-
-//    }
-
+    @Test
+    @DisplayName("댓글 채택해서 스케줄 수정")
+    public void testScheduleService_update_schedule_SuccessTest() {
+        scheduleService.EditScheduleByEmployeeCode(1
+                , true
+                , "20240831-1859-4c43-b692-b6cb5891c24a");
+    }
 }
