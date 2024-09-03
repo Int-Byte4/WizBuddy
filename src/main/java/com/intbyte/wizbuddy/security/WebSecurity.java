@@ -37,10 +37,9 @@ public class WebSecurity {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
-        /* 설명. csrf 비활성화 */
         http.csrf((csrf) -> csrf.disable());
 
-        /* 설명. 로그인 시 추가할 authenticationManager 만들기 */
+        /* 로그인 시 추가할 authenticationManager */
         AuthenticationManagerBuilder authenticationManagerBuilder =
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.userDetailsService(userService)
@@ -52,8 +51,8 @@ public class WebSecurity {
                         authz
                                 .requestMatchers(new AntPathRequestMatcher("/users/employee", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/users/employer/", "GET")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/users/employee/", "GET")).hasRole("EMPLOYEE")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employer/", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employee/", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer/edit", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer/delete", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employee/edit", "PATCH")).hasRole("EMPLOYEE")
@@ -76,7 +75,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/subsboards/delete/*", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/manualBoard", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/register/", "POST")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/shop/shops", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/shop/shops", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/edit", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/delete", "PATCH")).hasRole("EMPLOYER")
@@ -89,17 +88,17 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "DELETE")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/register", "POST")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/employers", "GET")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/register/employer/", "POST")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/list", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/employee", "GET")).hasRole("EMPLOYEE")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/modify/shop/", "PATCH")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "DELETE")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/employer/*", "DELETE")).hasRole("EMPLOYER")
                                 .anyRequest().authenticated()
                 )
-                /* 설명. authenticationManager 등록(UserDetails를 상속받는 Service 계층 + BCrypt 암호화) */
+                /* UserDetails를 상속받는 Service 계층 + BCrypt 암호화 */
                 .authenticationManager(authenticationManager)
-
-                /* 설명. session 방식을 사용하지 않음(JWT Token 방식 사용 시 설정할 내용) */
+          
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilter(getAuthenticationFilter(authenticationManager));
@@ -108,7 +107,7 @@ public class WebSecurity {
         return http.build();
     }
 
-    /* 설명. 인증(Authentication)용 메소드(인증 필터 반환) */
+    /* Authentication 용 메소드(인증 필터 반환) */
     private Filter getAuthenticationFilter(AuthenticationManager authenticationManager) {
         return new AuthenticationFilter(authenticationManager, userService, env);
     }
