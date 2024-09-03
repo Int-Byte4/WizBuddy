@@ -5,7 +5,7 @@ import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
 import com.intbyte.wizbuddy.exception.taskperchecklist.TaskPerCheckListNotFoundException;
-import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
+import com.intbyte.wizbuddy.exception.user.EmployeeNotFoundException;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
@@ -123,7 +123,7 @@ public class TaskPerCheckListService {
         Employee employee = null;
 
         if(taskPerCheckListDTO.getEmployeeCode() != null)
-            employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode()).orElseThrow(EmployerNotFoundException::new);
+            employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode()).orElseThrow(EmployeeNotFoundException::new);
 
         CheckList checkList = checkListRepository.findById(taskPerCheckListDTO.getCheckListCode()).orElseThrow(CheckListNotFoundException::new);
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode()).orElseThrow(TaskNotFoundException::new);
