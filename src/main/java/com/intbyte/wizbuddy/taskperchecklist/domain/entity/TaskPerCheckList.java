@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class TaskPerCheckList {
 
     @EmbeddedId
-    private TaskPerChecklistId taskPerChecklistId;
+    private TaskPerCheckListId taskPerCheckListId;
 
     @ManyToOne
     @MapsId("checkListCode")

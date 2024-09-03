@@ -14,7 +14,7 @@ import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
+import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -108,7 +108,7 @@ public class CheckListService {
 
         for (int i = 0; i < allTask.size(); i++) {
             TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
-                    .taskPerChecklistId(new TaskPerChecklistId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
+                    .taskPerCheckListId(new TaskPerCheckListId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
                     .checkList(checkList)
                     .task(allTask.get(i))
                     .taskFinishedState(false)

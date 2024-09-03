@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class TaskPerChecklistId implements Serializable {
+public class TaskPerCheckListId implements Serializable {
 
     private Integer checkListCode;
     private Integer taskCode;

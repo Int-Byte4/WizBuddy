@@ -1,11 +1,10 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
+import com.intbyte.wizbuddy.checklist.domain.CheckListMybatis;
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
-import com.intbyte.wizbuddy.exception.taskperchecklist.TaskPerCheckListNotFoundException;
-import com.intbyte.wizbuddy.exception.user.EmployeeNotFoundException;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
