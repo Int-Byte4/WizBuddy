@@ -16,5 +16,4 @@ public class ResponseFindEmployeeWorkingPartVO {
     private int scheduleCode;
     private LocalDateTime workingDate;
     private String workingPartTime;
-
 }
