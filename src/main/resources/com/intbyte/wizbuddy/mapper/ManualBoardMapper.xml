@@ -22,7 +22,7 @@
          WHERE M.manual_code = #{ manualCode }
            AND M.manual_flag = true
     </select>
-    <select id="findAllManualBoards" resultMap="manualBoardResultMap" resultType="hashMap">
+    <select id="findAllManualBoards" resultMap="manualBoardResultMap">
         SELECT
                M.manual_code
              , M.manual_title
@@ -34,10 +34,24 @@
              , M.shop_code
              , M.user_code
           FROM manual_board M
-         WHERE M.shop_code = #{ shopCode }
-           AND M.manual_flag = true
          ORDER BY created_at DESC
     </select>
+<!--    <select id="findAllManualBoards" resultMap="manualBoardResultMap" resultType="hashMap">-->
+<!--        SELECT-->
+<!--               M.manual_code-->
+<!--             , M.manual_title-->
+<!--             , M.manual_contents-->
+<!--             , M.manual_flag-->
+<!--             , M.image_url-->
+<!--             , M.created_at-->
+<!--             , M.updated_at-->
+<!--             , M.shop_code-->
+<!--             , M.user_code-->
+<!--          FROM manual_board M-->
+<!--         WHERE M.shop_code = #{ shopCode }-->
+<!--           AND M.manual_flag = true-->
+<!--         ORDER BY created_at DESC-->
+<!--    </select>-->
     <select id="findManualBoard" resultMap="manualBoardResultMap" parameterType="int">
         SELECT
                M.manual_code

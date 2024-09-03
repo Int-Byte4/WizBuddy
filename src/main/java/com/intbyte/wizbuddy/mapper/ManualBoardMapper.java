@@ -10,8 +10,7 @@ import java.util.List;
 public interface ManualBoardMapper {
     int findUserCodeByManualCode(int manualCode);
 
-    List<ManualBoard> findAllManualBoards(int shopCode);
-
-
     ManualBoard findManualBoard(int manualCode);
+
+    List<ManualBoard> findAllManualBoards();
 }
