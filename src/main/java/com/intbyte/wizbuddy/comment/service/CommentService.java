@@ -4,6 +4,10 @@ import com.intbyte.wizbuddy.comment.domain.EditCommentInfo;
 import com.intbyte.wizbuddy.comment.domain.Entity.Comment;
 import com.intbyte.wizbuddy.comment.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.repository.CommentRepository;
+import com.intbyte.wizbuddy.comment.vo.response.ResponseAdoptCommentVO;
+import com.intbyte.wizbuddy.comment.vo.response.ResponseDeleteCommentVO;
+import com.intbyte.wizbuddy.comment.vo.response.ResponseInsertCommentVO;
+import com.intbyte.wizbuddy.comment.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.exception.comment.CommentNotFoundException;
 import com.intbyte.wizbuddy.mapper.CommentMapper;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +59,7 @@ public class CommentService {
     }
 
     @Transactional
-    public void registerComment(CommentDTO comments) {
+    public ResponseInsertCommentVO registerComment(CommentDTO comments) {
 
         Comment comment = Comment.builder()
                 .commentContent(comments.getCommentContent())
@@ -68,27 +72,31 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
+        return modelMapper.map(comments, ResponseInsertCommentVO.class);
     }
 
     @Transactional
-    public void modifyComment(int commentCode, EditCommentInfo modifyCommentInfo) {
+    public ResponseModifyCommentVO modifyComment(int commentCode, EditCommentInfo modifyCommentInfo) {
         Comment modifycomment = commentRepository.findById(commentCode).orElseThrow(CommentNotFoundException::new);
         modifycomment.toUpdate(modifyCommentInfo);
         commentRepository.save(modifycomment);
+        return modelMapper.map(modifycomment, ResponseModifyCommentVO.class);
     }
 
     @Transactional
-    public void removeComment(CommentDTO deleteComment) {
+    public ResponseDeleteCommentVO removeComment(CommentDTO deleteComment) {
         Comment comment = commentRepository.findById(deleteComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
         comment.toDelete();
         commentRepository.save(comment);
+        return modelMapper.map(comment, ResponseDeleteCommentVO.class);
     }
 
     @Transactional
-    public void adoptComment(CommentDTO adoptComment) {
+    public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
         Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
         comment.toAdopt();
         commentRepository.save(comment);
+        return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
 
 }
