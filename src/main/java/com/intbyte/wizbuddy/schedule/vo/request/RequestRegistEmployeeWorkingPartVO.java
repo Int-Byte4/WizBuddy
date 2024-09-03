@@ -1,19 +1,17 @@
-package com.intbyte.wizbuddy.schedule.dto;
+package com.intbyte.wizbuddy.schedule.vo.request;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter @Setter
-public class EmployeeWorkingPartDTO {
-    private int workingPartCode;
+@Getter
+public class RequestRegistEmployeeWorkingPartVO {
     private String employeeCode;
     private int scheduleCode;
     private LocalDateTime workingDate;
     private String workingPartTime;
-
 }

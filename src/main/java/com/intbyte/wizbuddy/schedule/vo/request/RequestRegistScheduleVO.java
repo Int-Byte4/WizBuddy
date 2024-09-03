@@ -1,16 +1,16 @@
-package com.intbyte.wizbuddy.schedule.dto;
+package com.intbyte.wizbuddy.schedule.vo.request;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter @Setter
-public class WeeklyScheduleDTO {
-    private int scheduleCode;
+@Getter
+public class RequestRegistScheduleVO {
     private boolean scheduleFlag;
     private LocalDate scheduleStartDate;
     private LocalDateTime createdAt;
