@@ -1,17 +1,18 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
-import com.intbyte.wizbuddy.checklist.domain.CheckListMybatis;
 import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.exception.taskperchecklist.TaskPerCheckListNotFoundException;
+import com.intbyte.wizbuddy.exception.user.EmployeeNotFoundException;
 import com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
 import com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
+import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
@@ -47,7 +48,7 @@ public class TaskPerCheckListService {
 
     // taskPerCheckList에서 1개 조회
     @Transactional
-    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerChecklistId taskPerChecklistId){
+    public TaskPerCheckListDTO findTaskPerCheckListById(TaskPerCheckListId taskPerChecklistId){
 
         TaskPerCheckListMybatis findTaskPerCheckList =
                 taskPerCheckListMapper.findTaskPerCheckListById(taskPerChecklistId.getTaskCode(), taskPerChecklistId.getCheckListCode());
@@ -114,7 +115,7 @@ public class TaskPerCheckListService {
     @Transactional
     public void insertTaskPerCheckList(TaskPerCheckListDTO taskPerCheckListDTO) {
 
-        TaskPerChecklistId taskPerChecklistId = new TaskPerChecklistId(
+        TaskPerCheckListId taskPerChecklistId = new TaskPerCheckListId(
                 taskPerCheckListDTO.getCheckListCode(),
                 taskPerCheckListDTO.getTaskCode()
         );
@@ -130,7 +131,7 @@ public class TaskPerCheckListService {
         TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
                 .checkList(checkList)
                 .task(task)
-                .taskPerChecklistId(taskPerChecklistId)
+                .taskPerCheckListId(taskPerChecklistId)
                 .taskFinishedState(taskPerCheckListDTO.getTaskFinishedState())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -144,7 +145,7 @@ public class TaskPerCheckListService {
     @Transactional
     public void deleteTaskPerCheckListByCheckListCodeAndTaskCode(int checkListCode, int taskCode){
 
-        TaskPerChecklistId id = new TaskPerChecklistId(checkListCode, taskCode);
+        TaskPerCheckListId id = new TaskPerCheckListId(checkListCode, taskCode);
 
         taskPerCheckListRepository.deleteById(id);
     }
@@ -153,7 +154,7 @@ public class TaskPerCheckListService {
     @Transactional
     public void modifyTaskPerCheckList(EditTaskPerCheckListInfo info){
 
-        TaskPerChecklistId id = new TaskPerChecklistId(info.getCheckListCode(), info.getTaskCode());
+        TaskPerCheckListId id = new TaskPerCheckListId(info.getCheckListCode(), info.getTaskCode());
         TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).orElseThrow(TaskPerCheckListNotFoundException::new);
 
         Employee findEmployee = employeeRepository.findById(info.getEmployeeCode()).orElseThrow();

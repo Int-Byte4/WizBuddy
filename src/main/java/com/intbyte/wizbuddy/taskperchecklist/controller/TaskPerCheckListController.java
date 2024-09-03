@@ -42,7 +42,7 @@ public class TaskPerCheckListController {
             dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByFinished(checkListCode);
         else
             dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCodeByNotFinished(checkListCode);
-        }
+
 
         List<ResponseFindTaskPerCheckListVO> response = dtoList.stream().map(
                 dto -> ResponseFindTaskPerCheckListVO.builder()

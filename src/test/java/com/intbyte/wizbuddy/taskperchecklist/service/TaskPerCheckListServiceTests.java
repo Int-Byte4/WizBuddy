@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.taskperchecklist.service;
 
 import com.intbyte.wizbuddy.taskperchecklist.domain.EditTaskPerCheckListInfo;
-import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerChecklistId;
+import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +41,7 @@ class TaskPerCheckListServiceTests {
     public void findTaskPerCheckListByIdTest(){
 
         // given
-        TaskPerChecklistId taskPerChecklistId = new TaskPerChecklistId(1, 1);
+        TaskPerCheckListId taskPerChecklistId = new TaskPerCheckListId(1, 1);
 
         // when
         TaskPerCheckListDTO taskPerCheckListDTO =
