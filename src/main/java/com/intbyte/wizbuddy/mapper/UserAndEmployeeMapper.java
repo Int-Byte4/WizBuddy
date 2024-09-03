@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.mapper;
 
-import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.SignInUserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
