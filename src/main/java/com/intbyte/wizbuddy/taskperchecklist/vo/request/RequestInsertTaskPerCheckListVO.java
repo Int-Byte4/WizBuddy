@@ -12,9 +12,6 @@ import java.time.LocalDateTime;
 @Builder
 public class RequestInsertTaskPerCheckListVO {
 
-//    private int checkListCode;
-//    private int taskCode;
-
     private final Boolean taskFinishedState;
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;

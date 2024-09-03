@@ -6,11 +6,8 @@ import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.dto.CheckListDTO;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
-import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.mapper.CheckListMapper;
 import com.intbyte.wizbuddy.mapper.TaskMapper;
-import com.intbyte.wizbuddy.shop.domain.entity.Shop;
-import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckList;
@@ -18,7 +15,6 @@ import com.intbyte.wizbuddy.taskperchecklist.domain.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,16 +29,14 @@ public class CheckListService {
     private final CheckListRepository checkListRepository;
     private final CheckListMapper checkListMapper;
     private final ModelMapper modelMapper;
-    private final ShopRepository shopRepository;
     private final TaskMapper taskMapper;
     private final TaskPerCheckListRepository taskPerCheckListRepository;
 
     @Autowired
-    public CheckListService(CheckListRepository checkListRepository, CheckListMapper checkListMapper, ModelMapper modelMapper, ShopRepository shopRepository, TaskMapper taskMapper, @Qualifier("taskPerCheckListRepository") TaskPerCheckListRepository taskPerCheckListRepository) {
+    public CheckListService(CheckListRepository checkListRepository, CheckListMapper checkListMapper, ModelMapper modelMapper, TaskMapper taskMapper, TaskPerCheckListRepository taskPerCheckListRepository) {
         this.checkListRepository = checkListRepository;
         this.checkListMapper = checkListMapper;
         this.modelMapper = modelMapper;
-        this.shopRepository = shopRepository;
         this.taskMapper = taskMapper;
         this.taskPerCheckListRepository = taskPerCheckListRepository;
     }
@@ -78,19 +72,17 @@ public class CheckListService {
     @Transactional
     public void insertCheckList(CheckListDTO checkListInfo){
 
-        Shop shop = shopRepository.findById(checkListInfo.getShopCode()).orElseThrow(ShopNotFoundException::new);
-
         CheckList checkList = CheckList.builder()
                 .checkListTitle(checkListInfo.getCheckListTitle())
                 .checkListFlag(true)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .shopCode(shop)
+                .shopCode(checkListInfo.getShopCode())
                 .build();
 
         checkListRepository.save(checkList);
 
-        int shopCode = shop.getShopCode();
+        int shopCode = checkListInfo.getShopCode();
         List<TaskMybatis> allTaskByShopCode = taskMapper.findAllTaskByShopCodeByFixedState(shopCode);
         List<Task> allTask = new ArrayList<>();
         for (int i = 0; i < allTaskByShopCode.size(); i++) {
@@ -101,16 +93,15 @@ public class CheckListService {
                     .taskFixedState(allTaskByShopCode.get(i).isTaskFixedState())
                     .createdAt(allTaskByShopCode.get(i).getCreatedAt())
                     .updatedAt(allTaskByShopCode.get(i).getUpdatedAt())
-                    .shop(shop)
+                    .shopCode(shopCode)
                     .build();
             allTask.add(task);
         }
 
         for (int i = 0; i < allTask.size(); i++) {
             TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
-                    .taskPerCheckListId(new TaskPerCheckListId(checkList.getCheckListCode(), allTask.get(i).getTaskCode()))
-                    .checkList(checkList)
-                    .task(allTask.get(i))
+                    .taskCode(allTask.get(i).getTaskCode())
+                    .checkListCode(checkList.getCheckListCode())
                     .taskFinishedState(false)
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
@@ -147,9 +138,8 @@ public class CheckListService {
     // 0. 특정 체크리스트에서 업무 삭제
     @Transactional
     public void deleteTaskPerCheckList(int checkListCode){
-
         CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(CheckListNotFoundException::new);
 
-        taskPerCheckListRepository.deleteByCheckList(checkList);
+        taskPerCheckListRepository.deleteByCheckList(checkListCode);
     }
 }

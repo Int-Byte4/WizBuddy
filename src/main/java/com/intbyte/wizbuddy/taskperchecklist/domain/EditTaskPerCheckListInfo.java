@@ -18,10 +18,7 @@ public class EditTaskPerCheckListInfo {
 
     private Boolean taskFinishedState;
 
-//    private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
-    // private Integer employeeCode;
     private String employeeCode;
 }

@@ -24,7 +24,4 @@ public class RequestModifyTaskPerCheckListVO {
         this.updatedAt = updatedAt;
         this.employeeCode = employeeCode;
     }
-//    private int checkListCode;
-//    private int taskCode;
-//    private LocalDateTime createdAt;
 }
