@@ -61,6 +61,8 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/task/*", "POST")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/manualboard", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/manualboard/update/*", "PATCH")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/schedule/schedules", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/schedule/schedules/*", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/schedule/schedules/users/*", "GET")).permitAll()

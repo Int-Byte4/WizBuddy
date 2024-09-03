@@ -18,5 +18,5 @@ public class ResponseFindManualBoardVO {
     private final LocalDateTime createdAt;
     private final LocalDateTime updatedAt;
     private final int shopCode;
-    private final int userCode;
+    private final String userCode;
 }

@@ -8,9 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface ManualBoardMapper {
-    int findUserCodeByManualCode(int manualCode);
-
-    ManualBoard findManualBoard(int manualCode);
+    String findUserCodeByManualCode(int manualCode);
 
     List<ManualBoard> findAllManualBoards();
+
+    List<ManualBoard> findManualBoardByShopCode(int shopCode);
+
+    ManualBoard findManualBoardByManualCode(int manualCode);
 }
