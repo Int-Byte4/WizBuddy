@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.schedule.domain;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class EditScheduleInfo {
-
     private String employeeCode;
 }

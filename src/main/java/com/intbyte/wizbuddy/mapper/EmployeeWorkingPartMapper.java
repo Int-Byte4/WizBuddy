@@ -8,13 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface EmployeeWorkingPartMapper {
-    EmployeeWorkingPart findEmployeeByEmployeeCode(String employeeCode);
+    List<EmployeeWorkingPart> findEmployeeByEmployeeCode(String employeeCode);
 
     List<EmployeeWorkingPart> selectScheduleByScheduleCode(int scheduleCode);
 
     List<EmployeeWorkingPart> selectAllScheduleByEmployeeCode(String employeeCode);
 
     EmployeeWorkingPart selectScheduleByWorkingPartCode(int workingPartCode);
-
-    int updateScheduleByComment(int subsCode, int commentCode);
 }
