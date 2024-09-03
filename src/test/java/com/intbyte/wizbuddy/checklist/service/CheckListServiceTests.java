@@ -26,14 +26,7 @@ class CheckListServiceTests {
     private CheckListService checkListService;
 
     @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private CheckListRepository checkListRepository;
-
-    @Autowired
     private CheckListMapper checkListMapper;
-
 
     @Test
     @DisplayName("체크리스트 전체 조회 성공")
@@ -44,17 +37,6 @@ class CheckListServiceTests {
             assertNotNull(checklist);
         }
     }
-
-
-//    @Test
-//    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
-//    @Transactional
-//    public void findAllCheckListsByFlag(){
-//        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
-//        for(CheckListMybatis checklist: allCheckList){
-//            assertNotNull(checklist);
-//        }
-//    }
 
     @Test
     @DisplayName("체크리스트 수정 성공")
@@ -88,7 +70,7 @@ class CheckListServiceTests {
         assertEquals(false, checkList.getCheckListFlag());
     }
 
-    // 1.
+    // 1. 특정 checkList 조회
     @Test
     @DisplayName("체크리스트 1개 조회 성공")
     public void findCheckListByIdTest(){
@@ -104,7 +86,7 @@ class CheckListServiceTests {
         Assertions.assertNotNull(checkList);
     }
 
-    // 2.
+    // 2. 특정 매장의 flag가 ture인 모든 checklist 조회
     @Test
     @DisplayName("특정 매장의 flag가 true인 모든 체크리스트 전체 조회 성공")
     public void findCheckListByIdByShop(){
@@ -113,9 +95,9 @@ class CheckListServiceTests {
         });
     }
 
-    // 3-1.
+    // 3-1.특정 매장에 체크리스트 1개 등록
     @Test
-    @DisplayName("체크리스트 등록 성공")
+    @DisplayName("특정 매장에 체크리스트 1개 등록 성공")
     public void insertCheckListTest(){
         // given:
         int shopCode = 1;
@@ -131,13 +113,13 @@ class CheckListServiceTests {
         Assertions.assertEquals(checkListDTO.getCheckListCode(),checkList.getCheckListCode());
     }
 
-    // 3-2.
+    // 3-2. 특정 매장에 체크리스트 1개 등록시 해당 매장의 fixed task 자동 추가 테스트
     @Test
-    @DisplayName("CheckList 생성시 fixed task 추가되는지 테스트")
+    @DisplayName("특정 매장에 체크리스트 1개 등록시 해당 매장의 fixed task 자동 추가 테스트")
     public void insertCheckListFixedStateTask(){
 
         CheckListDTO dto = new CheckListDTO();
-        dto.setCheckListTitle("4번 체크리스트에는 2번 매장");
+        dto.setCheckListTitle("3번 체크리스트에는 2번 매장");
         dto.setShopCode(2);
 
         assertDoesNotThrow(() -> {
@@ -145,7 +127,7 @@ class CheckListServiceTests {
         });
     }
 
-    // 4.
+    // 4. 특정 매장의 체크리스트 수정
     @Test
     @DisplayName("CheckList 수정 테스트")
     public void modifyCheckList(){
@@ -154,7 +136,7 @@ class CheckListServiceTests {
         });
     }
 
-    // 5.
+    // 5. 특정 매장의 체크리스트 삭제
     @Test
     @DisplayName("CheckList 삭제시 같은 chedkListCode를 가진 TaskPerCheckList 삭제 테스트")
     public void deleteCheckListAndTaskPerCheckListTest(){

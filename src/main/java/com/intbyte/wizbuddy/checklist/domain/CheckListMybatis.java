@@ -10,15 +10,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CheckListMybatis {
 
-    private int checkListCode;
-
+    private Integer checkListCode;
     private String checkListTitle;
-
     private Boolean checkListFlag;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
-    private int shopCode;
+    private Integer shopCode;
 }
