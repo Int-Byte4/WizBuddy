@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;

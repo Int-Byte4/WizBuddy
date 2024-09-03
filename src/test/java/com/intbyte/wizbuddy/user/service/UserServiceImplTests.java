@@ -1,8 +1,8 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.SignInUserInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.domain.entity.User;
