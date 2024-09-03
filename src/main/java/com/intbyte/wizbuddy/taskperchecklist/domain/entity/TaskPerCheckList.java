@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class TaskPerCheckList {
 
     @EmbeddedId
-    private TaskPerChecklistId taskPerChecklistId;
+    private TaskPerCheckListId taskPerCheckListId;
 
     @ManyToOne
     @MapsId("checkListCode")
@@ -45,7 +45,7 @@ public class TaskPerCheckList {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "employee_code", nullable = false)
+    @JoinColumn(name = "employee_code")
     private Employee employee;  // 얘는 복합키는 아닌 그냥 외래키
 
     public void modify(EditTaskPerCheckListInfo info, Employee employee) {

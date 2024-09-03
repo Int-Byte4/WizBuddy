@@ -2,8 +2,8 @@ package com.intbyte.wizbuddy.user.service;
 
 import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
 import com.intbyte.wizbuddy.mapper.EmployeeMapper;
-import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
@@ -46,7 +46,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public EmployeeDTO getByEmployerCode(String employeeCode) {
+    public EmployeeDTO getByEmployeeCode(String employeeCode) {
         Employee employee = employeeMapper.getEmployee(employeeCode);
 
         if (employee == null) throw new UserNotFoundException();

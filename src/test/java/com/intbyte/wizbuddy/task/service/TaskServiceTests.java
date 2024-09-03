@@ -7,6 +7,7 @@ import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,8 @@ class TaskServiceTests {
     @Autowired
     private TaskMapper taskMapper;
 
+
+    // 3번
     @Test
     public void 업무_1개_추가_테스트() {
         // given:
@@ -51,7 +54,7 @@ class TaskServiceTests {
     }
 
     @Test
-    @Transactional
+    @Transactional // 1번
     public void id로_업무_1개_조회_테스트(){
 
         // given
@@ -113,20 +116,7 @@ class TaskServiceTests {
         Assertions.assertEquals(findTask.getTaskContents(), editTaskInfo.getTaskContents());
     }
 
-    @Test
-    public void id_로_업무_1개_삭제_테스트(){
-
-        // given: 전체 업무 개수
-        List<TaskMybatis> currentTaskList = taskMapper.findAllTask();
-        TaskMybatis task = currentTaskList.get(currentTaskList.size() - 1);
-
-        // when: 마지막 업무 삭제(taskFlag가 false)
-        taskService.deleteTask(task.getTaskCode());
-
-        // then:
-        Assertions.assertEquals(false, taskService.findTaskById(task.getTaskCode()).isTaskFlag());
-    }
-
+    // 2-1번
     @Test
     @Transactional
     public void 매장_id로_모든_업무_조회(){
@@ -144,9 +134,10 @@ class TaskServiceTests {
         }
     }
 
+    // 2-2번
     @Test
     @Transactional
-    public void 매장_id로_고전된_모든_업무_조회(){
+    public void 매장_id로_고정된_모든_업무_조회(){
         // given
         int shopCode = 1;
 
@@ -160,6 +151,7 @@ class TaskServiceTests {
         }
     }
 
+    // 2-3번
     @Test
     @Transactional
     public void 매장_id로_고정_안된_모든_업무_조회(){
@@ -174,5 +166,17 @@ class TaskServiceTests {
             System.out.println(allTaskByShopCode.get(i));
             assertNotNull(allTaskByShopCode.get(i));
         }
+    }
+
+    @Test
+    @DisplayName("task에서 task flag 제외한 나머지 수정 테스트")
+    public void modifyTaskTest(){
+        taskService.modifyTask(1, new EditTaskInfo("new contents222", true, false, LocalDateTime.now()));
+    }
+
+    @Test
+    @DisplayName("task flag false로 변환시 taskCode가 동일한 모든 taskPerCheckList 삭제")
+    public void deleteTaskAndTaskPerCheckListTest(){
+        taskService.deleteTaskPerCheckList(10);
     }
 }

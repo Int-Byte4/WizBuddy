@@ -1,8 +1,7 @@
 package com.intbyte.wizbuddy.user.domain.entity;
 
-import com.intbyte.wizbuddy.user.domain.DeleteEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployeeInfo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +25,7 @@ public class Employee {
     @Column(name="employee_name")
     private String employeeName;
 
-    @Column(nullable = false, unique = true, name = "employee_email")
+    @Column(nullable = false, name = "employee_email")
     private String employeeEmail;
 
     @Column(nullable = false, name="employee_password")

@@ -98,11 +98,8 @@ class ShopServiceTests {
     @DisplayName("매장 전체 조회 성공")
     @Transactional
     void testGetShopListSuccess() {
-        // given
-        String userCode = "20240831-07de-4b18-95c6-564cd86a5af2";
-
-        // when
-        List<ShopDTO> shopList = shopService.getAllShop(userCode);
+        // given, when
+        List<ShopDTO> shopList = shopService.getAllShop();
 
         // then
         assertNotNull(shopList);
@@ -117,11 +114,11 @@ class ShopServiceTests {
     @Transactional
     void testGetShopSuccess() {
         //given
-        String userCode = "20240831-5e1c-400a-8f17-df561d451480";
         int shopCode = 1;
 
         //when
-        Shop shop = shopService.getShop(userCode, shopCode);
+        ShopDTO shop = shopService.getShop(shopCode);
+
 
         //then
         assertNotNull(shop);

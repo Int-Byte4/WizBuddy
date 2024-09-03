@@ -27,7 +27,7 @@
 
     </resultMap>
 
-    <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
+    <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.info.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
         INSERT INTO users(user_code, user_type, user_email, user_password)
         VALUES(
               #{ userCode },
@@ -37,7 +37,7 @@
               )
     </insert>
 
-    <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">
+    <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">
         INSERT INTO employee(employee_code, employee_name, employee_email, employee_password, employee_phone, employee_flag, latitude, longitude, employee_wage, employee_health_date, employee_black_state, created_at, updated_at)
         VALUES(
               #{ employeeCode },

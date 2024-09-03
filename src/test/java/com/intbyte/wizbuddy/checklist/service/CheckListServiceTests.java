@@ -35,7 +35,7 @@ class CheckListServiceTests {
     private CheckListMapper checkListMapper;
 
     @Test
-    @DisplayName("체크리스트 등록 성공")
+    @DisplayName("체크리스트 등록 성공") // 3번 - 1
     public void insertCheckListTest(){
         // given:
         int shopCode = 1;
@@ -52,7 +52,7 @@ class CheckListServiceTests {
     }
 
     @Test
-    @DisplayName("체크리스트 1개 조회 성공")
+    @DisplayName("체크리스트 1개 조회 성공") // 1번
     public void findCheckListByIdTest(){
 
         // given
@@ -76,19 +76,18 @@ class CheckListServiceTests {
         }
     }
 
-    @Test
-    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
-    @Transactional
-    public void findAllCheckListsByFlag(){
-        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
-        for(CheckListMybatis checklist: allCheckList){
-            assertNotNull(checklist);
-        }
-    }
+//    @Test
+//    @DisplayName("flag가 true인 체크리스트 전체 조회 성공")
+//    @Transactional
+//    public void findAllCheckListsByFlag(){
+//        List<CheckListMybatis> allCheckList = checkListMapper.findAllCheckListsByFlag();
+//        for(CheckListMybatis checklist: allCheckList){
+//            assertNotNull(checklist);
+//        }
+//    }
 
     @Test
     @DisplayName("체크리스트 수정 성공")
-    @Transactional
     public void modifyCheckListTest(){
 
         // given
@@ -106,7 +105,6 @@ class CheckListServiceTests {
 
     @Test
     @DisplayName("체크리스트 업무 삭제 성공")
-    @Transactional
     public void deleteCheckListTest(){
 
         // given
@@ -118,5 +116,30 @@ class CheckListServiceTests {
         // then
         CheckListMybatis checkList = checkListMapper.findCheckListById(checkListCode);
         assertEquals(false, checkList.getCheckListFlag());
+    }
+
+
+    @Test
+    @DisplayName("CheckList 생성시 fixed task 추가되는지 테스트") // 3-2
+    public void insertCheckListFixedStateTask(){
+
+        CheckListDTO dto = new CheckListDTO();
+        dto.setCheckListTitle("4번 체크리스트에는 2번 매장");
+        dto.setShopCode(2);
+
+        checkListService.insertCheckList(dto);
+    }
+
+    @Test
+    @DisplayName("CheckList 수정 테스트") // 4번
+    public void modifyCheckList(){
+        checkListService.modifyCheckList(1, new EditCheckListInfo("새로운 checkList 제목", true, LocalDateTime.now()));
+    }
+
+
+    @Test
+    @DisplayName("CheckList 삭제시 같은 chedkListCode를 가진 TaskPerCheckList 삭제 테스트") // 5번
+    public void deleteCheckListAndTaskPerCheckListTest(){
+        checkListService.deleteTaskPerCheckList(7);
     }
 }

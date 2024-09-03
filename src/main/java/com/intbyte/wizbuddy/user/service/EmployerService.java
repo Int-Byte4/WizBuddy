@@ -2,12 +2,11 @@ package com.intbyte.wizbuddy.user.service;
 
 import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
 import com.intbyte.wizbuddy.mapper.EmployerMapper;
-import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
-import com.intbyte.wizbuddy.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,6 @@ public class EmployerService {
 
     private final EmployerRepository employerRepository;
     private final EmployerMapper employerMapper;
-    private final UserRepository userRepository;
     private final ModelMapper mapper;
 
     // user에서 회원가입하면 사장 등록까지 한 번에 처리한다.
