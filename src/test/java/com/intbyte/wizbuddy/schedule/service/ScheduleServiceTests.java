@@ -49,11 +49,10 @@ class ScheduleServiceTests {
         int scheduleCode = 1;
 
         // when
-        List<EmployeeWorkingPart> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
+        List<EmployeeWorkingPartDTO> employeeWorkingPartList = scheduleService.findSchedule(scheduleCode);
 
         // then
         assertNotNull(employeeWorkingPartList);
-        employeeWorkingPartList.forEach(System.out::println);
     }
 
     @Test
@@ -63,11 +62,10 @@ class ScheduleServiceTests {
         String employeeCode = "20240831-07de-4b18-95c6-564cd86a5af2";
 
         // when
-        List<EmployeeWorkingPart> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
+        List<EmployeeWorkingPartDTO> employeeWorkPartList = scheduleService.findScheduleByEmployeeCode(employeeCode);
 
         // then
         assertNotNull(employeeWorkPartList);
-        employeeWorkPartList.forEach(System.out::println);
     }
 
     @Test
@@ -82,7 +80,7 @@ class ScheduleServiceTests {
                         LocalDateTime.now());
 
         // when
-        WeeklyScheduleDTO savedSchedule = scheduleService.registWeeklySchedule(weeklyScheduleDTO);
+        WeeklyScheduleDTO savedSchedule = scheduleService.registSchedule(weeklyScheduleDTO);
 
         // then
         assertNotNull(savedSchedule);
@@ -95,7 +93,7 @@ class ScheduleServiceTests {
         List<EmployeeWorkingPart> currentEmployeeWorkingPartList = employeeWorkingPartRepository.findAll();
         int currentSize = currentEmployeeWorkingPartList.size();
 
-        EmployeeWorkingPart employeeWorkingPart = new EmployeeWorkingPart(19,
+        EmployeeWorkingPartDTO employeeWorkingPart = new EmployeeWorkingPartDTO(19,
                 "20240831-cc00-4288-b2a6-2f864ddbf6b5",
                 1,
                 LocalDateTime.now(),
@@ -121,7 +119,7 @@ class ScheduleServiceTests {
         EditScheduleInfo editScheduleInfo = new EditScheduleInfo(employeeCode);
 
         // when
-        scheduleService.EditSchedule(employeeWorkingPart.getWorkingPartCode(), editScheduleInfo);
+        scheduleService.editSchedule(employeeWorkingPart.getWorkingPartCode(), editScheduleInfo);
 
         // then
         assertEquals(employeeWorkingPart.getEmployeeCode(), editScheduleInfo.getEmployeeCode());
@@ -157,7 +155,7 @@ class ScheduleServiceTests {
 //        assertDoesNotThrow(() -> {
 //            scheduleService.selectCommentToEdit(subsCode, commentCode);
 //        });
-//
+
 //    }
 
 }

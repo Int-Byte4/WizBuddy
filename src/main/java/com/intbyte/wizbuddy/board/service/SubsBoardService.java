@@ -4,6 +4,9 @@ import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.SubsBoard;
 import com.intbyte.wizbuddy.board.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.board.repository.SubsBoardRepository;
+import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
 import com.intbyte.wizbuddy.exception.board.SubsBoardNotFoundException;
 import com.intbyte.wizbuddy.mapper.SubsBoardMapper;
 
@@ -48,7 +51,7 @@ public class SubsBoardService {
     }
 
     @Transactional
-    public void registSubsBoard(SubsBoardDTO subsBoards) {
+    public ResponseInsertSubsBoardVO registSubsBoard(SubsBoardDTO subsBoards) {
         SubsBoard subsBoard = SubsBoard.builder()
                 .subsTitle(subsBoards.getSubsTitle())
                 .subsContent(subsBoards.getSubsContent())
@@ -61,20 +64,24 @@ public class SubsBoardService {
 
         subsBoardRepository.save(subsBoard);
 
+        return modelMapper.map(subsBoard, ResponseInsertSubsBoardVO.class);
     }
 
     @Transactional
-    public void modifySubsBoards(int subsCode, EditSubsBoardInfo modifysubsBoard) {
+    public ResponseModifySubsBoardVO modifySubsBoards(int subsCode, EditSubsBoardInfo modifysubsBoard) {
         SubsBoard subsBoard = subsBoardRepository.findById(subsCode).orElseThrow(SubsBoardNotFoundException::new);
         subsBoard.toUpdate(modifysubsBoard);
         subsBoardRepository.save(subsBoard);
+        return modelMapper.map(subsBoard, ResponseModifySubsBoardVO.class);
     }
 
     @Transactional
-    public void deleteSubsBoard(SubsBoardDTO deleteSubsBoard) {
-        SubsBoard subsBoard = subsBoardRepository.findById(deleteSubsBoard.getSubsCode()).orElseThrow(SubsBoardNotFoundException::new);
+    public ResponseDeleteSubsBoardVO deleteSubsBoard(SubsBoardDTO deleteSubsBoard) {
+        SubsBoard subsBoard = subsBoardRepository.findById(deleteSubsBoard.getSubsCode())
+                .orElseThrow(SubsBoardNotFoundException::new);
         subsBoard.toDelete();
         subsBoardRepository.save(subsBoard);
+        return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);
     }
 
 }
