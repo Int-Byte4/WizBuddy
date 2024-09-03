@@ -88,7 +88,7 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "DELETE")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/register/employer/", "POST")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/register", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/list", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/", "GET")).hasRole("ADMIN")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/employee", "GET")).hasRole("EMPLOYEE")

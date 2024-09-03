@@ -10,4 +10,6 @@ public interface ShopMapper {
     Shop findShopByShopCode(int shopCode);
 
     Shop findByEmployerCode(String employerCode);
+
+    int findByShopCode(int shopCode);
 }

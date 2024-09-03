@@ -37,7 +37,14 @@
         WHERE employee_code = #{ employeeCode }
     </select>
 
-    <select id="findByShopCode" parameterType="map" resultMap="employeePerShopResultMap">
+    <select id="findEmployeeCodeByEmployeeCode" parameterType="string" resultType="string">
+        SELECT
+               employee_code
+          FROM employeepershop
+         WHERE employee_code = #{ employeeCode }
+    </select>
+
+    <select id="findEmployeePerShopByShopCodeAndEmployeeCode" parameterType="map" resultMap="employeePerShopResultMap">
         SELECT
         shop_code
         , employee_code
@@ -45,7 +52,7 @@
         , shop_monthly_wage
         FROM employeepershop
         WHERE shop_code = #{ shopCode }
-          AND employee_code = #{ employeeCode }
+        AND employee_code = #{ employeeCode }
     </select>
 
 </mapper>

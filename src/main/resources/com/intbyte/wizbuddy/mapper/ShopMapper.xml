@@ -57,4 +57,12 @@
         AND S.shop_flag = 1
     </select>
 
+    <select id="findByShopCode" resultType="int" parameterType="int">
+        SELECT
+               shop_code
+          FROM Shop
+         WHERE shop_code = #{ shopCode }
+           AND shop_flag = 1
+    </select>
+
 </mapper>
