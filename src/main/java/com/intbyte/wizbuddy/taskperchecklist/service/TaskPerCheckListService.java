@@ -5,6 +5,7 @@ import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
 import com.intbyte.wizbuddy.checklist.repository.CheckListRepository;
 import com.intbyte.wizbuddy.exception.checklist.CheckListNotFoundException;
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.mapper.CheckListMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.mapper.TaskMapper;
@@ -71,18 +72,16 @@ public class TaskPerCheckListService {
                 taskPerCheckListDTO.getCheckListCode(),
                 taskPerCheckListDTO.getTaskCode()
         );
-
+        Employee employee = null;
         // CheckList, Task, Employee 객체 조회
         CheckList checkList = checkListRepository.findById(taskPerCheckListDTO.getCheckListCode())
                 .orElseThrow(CheckListNotFoundException::new);
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode())
                 .orElseThrow(TaskNotFoundException::new);
-        Employee employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode())
-                .orElseThrow(() -> new IllegalArgumentException("Invalid employeeCode"));
-
-        System.out.println("checkList = " + checkList);
-        System.out.println("task = " + task);
-        System.out.println("employee = " + employee);
+        if(taskPerCheckListDTO.getEmployeeCode() != null){
+            employee = employeeRepository.findById(taskPerCheckListDTO.getEmployeeCode())
+                    .orElseThrow(EmployerNotFoundException::new);
+        }
 
         TaskPerCheckList taskPerCheckList = TaskPerCheckList.builder()
                 .checkList(checkList)

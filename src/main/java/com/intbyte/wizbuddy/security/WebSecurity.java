@@ -71,10 +71,10 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist/*", "POST")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*", "GET")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "DELETE")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/checklist/*/task/*", "PUT")).permitAll()
 
                                 .anyRequest().authenticated()
                 )

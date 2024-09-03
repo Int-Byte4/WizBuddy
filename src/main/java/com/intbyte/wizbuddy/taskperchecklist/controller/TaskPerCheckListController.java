@@ -119,29 +119,30 @@ public class TaskPerCheckListController {
             @RequestBody RequestInsertTaskPerCheckListVO request
     ){
         TaskPerCheckListDTO dto = modelMapper.map(request, TaskPerCheckListDTO.class);
+        dto.setTaskCode(taskCode);
+        dto.setCheckListCode(checkListCode);
 
         taskPerCheckListService.insertTaskPerCheckList(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    // 4. 특정 매장의 특정 체크리스트에 특정 업무 삭제 -> 결국 체크리스트에서 빼잖아? -> 체크리스트에서 해줘야할거같은데
+    // 3. 특정 매장의 특정 체크리스트에 특정 업무 삭제 -> 결국 체크리스트에서 빼잖아? -> 체크리스트에서 해줘야할거같은데
     // 근데 또 생각해보니까 체크리스트에서는 이걸 모름
     // "삭제" 버튼을 누르면 여기로 매핑되게 하면 되지 않을까? 결국 여기에서 삭제를 해줘야한다는 의미
     @DeleteMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
-    public ResponseEntity<Void> deleteTaskPerCheckList(
+    public ResponseEntity<String> deleteTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode
     ){
         taskPerCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(checkListCode, taskCode);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("체크리스트에서 업무 삭제 정공");
     }
 
 
-
-    // 5. 특정 매장의 특정 체크리스트에 특정 업무 완료표시(체크리스트, 업무, 직원) -> 수정과 삭제가 나눠진것. 이건 수정임
+    // 4. 특정 매장의 특정 체크리스트에 특정 업무 완료표시(체크리스트, 업무, 직원) -> 수정과 삭제가 나눠진것. 이건 수정임
     @PutMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
-    public ResponseEntity<Void> modifyTaskPerCheckList(
+    public ResponseEntity<String> modifyTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode,
             @RequestBody RequestModifyTaskPerCheckListVO request
@@ -152,7 +153,7 @@ public class TaskPerCheckListController {
         );
         taskPerCheckListService.modifyTaskPerCheckList(info);
 
-        return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.OK).body("업무 완료표시 수정 성공");
     }
 
 }
