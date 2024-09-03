@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.schedule.domain;
+package com.intbyte.wizbuddy.schedule.info;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

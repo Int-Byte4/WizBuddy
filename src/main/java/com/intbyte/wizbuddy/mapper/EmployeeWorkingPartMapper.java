@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.mapper;
 
 import com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart;
-import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public interface EmployeeWorkingPartMapper {
 
     List<EmployeeWorkingPart> selectScheduleByScheduleCode(int scheduleCode);
 
-    List<EmployeeWorkingPart> selectAllScheduleByEmployeeCode(String employeeCode);
-
     EmployeeWorkingPart selectScheduleByWorkingPartCode(int workingPartCode);
+
+    void editSchedule(int workingPartCode, String employeeCode);
 }

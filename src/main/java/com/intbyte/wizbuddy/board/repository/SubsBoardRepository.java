@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SubsBoardRepository extends JpaRepository<SubsBoard, Integer> {
 
+    SubsBoard findBysubsCodeAndSubsFlag(int subsCode, boolean subsFlag);
 }

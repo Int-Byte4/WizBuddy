@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.schedule.controller;
 
-import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
+import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.service.ScheduleService;
@@ -29,11 +29,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ScheduleController {
 
-
     private final ScheduleService scheduleService;
     private final ModelMapper modelMapper;
 
-    // 전체 스케줄 조회
     @GetMapping("/schedules")
     public ResponseEntity<List<WeeklyScheduleDTO>> findAllSchedules() {
 
@@ -41,7 +39,7 @@ public class ScheduleController {
 
         return new ResponseEntity<>(weeklyScheduleDTOList, HttpStatus.OK);
     }
-    // 한주의 스케줄 상세 조회
+
     @GetMapping("/schedules/{scheduleCode}")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findSchedule(
             @PathVariable("scheduleCode") int scheduleCode) {
@@ -59,7 +57,6 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    // 직원 별 한주의 스케줄 상세 조회
     @GetMapping("schedules/users/{employeeCode}")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findScheduleByEmployeeCode(
             @PathVariable("employeeCode") String employeeCode) {
@@ -78,11 +75,10 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    // 한주의 스케줄 등록
-    // 1. 스케줄 등록
     @PostMapping("regist")
     public ResponseEntity<ResponseRegistWeeklyScheduleVO> registSchedule(
             @RequestBody RequestRegistScheduleVO request) {
+
         WeeklyScheduleDTO weeklyScheduleDTO = modelMapper.map(request, WeeklyScheduleDTO.class);
 
         scheduleService.registSchedule(weeklyScheduleDTO);
@@ -92,7 +88,6 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(registSchedule);
     }
 
-    // 2. 직원 등록
     @PostMapping("regist/employee")
     public ResponseEntity<ResponseRegistEmployeeWorkingPartVO> registSchedulePerEmployee(
             @RequestBody RequestRegistEmployeeWorkingPartVO request
@@ -106,7 +101,6 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(registEmployee);
     }
 
-    // 근무일 수정
     @PatchMapping("modify/{workingPartCode}")
     public ResponseEntity<EditScheduleInfo> editSchedule(
             @PathVariable("workingPartCode") int workingPartCode,
@@ -119,7 +113,12 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
     }
 
+    @DeleteMapping("delete/{workingPartCode}")
+    public ResponseEntity<Void> deleteSchedule(
+            @PathVariable("workingPartCode") int workingPartCode) {
 
+        scheduleService.deleteSchedule(workingPartCode);
 
-
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
