@@ -74,7 +74,7 @@ public class TaskPerCheckListController {
 
         taskPerCheckListService.insertTaskPerCheckList(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("업무 생성 완료");
     }
 
     // 3. 특정 매장의 특정 체크리스트에 특정 업무 삭제
@@ -86,7 +86,7 @@ public class TaskPerCheckListController {
     ){
         taskPerCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(checkListCode, taskCode);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
+        return ResponseEntity.status(HttpStatus.OK).body("업무 삭제 완료");
     }
 
 

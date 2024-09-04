@@ -115,9 +115,6 @@ public class TaskPerCheckListService {
                 taskPerCheckListDTO.getTaskCode()
         );
 
-        // 매장별 직원에서 체크리스트의 매장번호와 직원에서 해당 직원이 속하는지 확인하는 코드 필요
-
-
         CheckList checkList = checkListRepository.findById(taskPerCheckListDTO.getCheckListCode()).orElseThrow(CheckListNotFoundException::new);
         Task task = taskRepository.findById(taskPerCheckListDTO.getTaskCode()).orElseThrow(TaskNotFoundException::new);
 

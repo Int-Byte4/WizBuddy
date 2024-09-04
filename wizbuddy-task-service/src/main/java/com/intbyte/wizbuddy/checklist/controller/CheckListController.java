@@ -101,7 +101,7 @@ public class CheckListController {
             return ResponseEntity.status(HttpStatus.OK).body("수정 완료");
         }else{
             checkListService.deleteCheckList(checkListCode);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("삭제 완료");
+            return ResponseEntity.status(HttpStatus.OK).body("삭제 완료");
         }
     }
 }
