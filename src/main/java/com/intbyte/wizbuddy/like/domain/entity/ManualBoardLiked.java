@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.domain.entity;
+package com.intbyte.wizbuddy.like.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,27 +8,27 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Entity(name = "noticeBoardLiked")
-@Table(name = "noticeboardliked")
+@Entity(name = "manualBoardLiked")
+@Table(name = "manualboardliked")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Builder
-public class NoticeBoardLiked {
+public class ManualBoardLiked {
 
     @Id
     @Column
-    private int noticeLikedCode;
+    private int manualLikedCode;
 
     @Column
     private LocalDateTime createdAt;
 
     @Column
-    private int shopCode;
+    private int manualCode;
 
     @Column
-    private int noticeCode;
+    private int shopCode;
 
     @Column
     private String employeeCode;
