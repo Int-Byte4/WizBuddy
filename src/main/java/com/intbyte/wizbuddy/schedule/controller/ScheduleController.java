@@ -13,6 +13,7 @@ import com.intbyte.wizbuddy.schedule.vo.response.ResponseModifyScheduleByComment
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistWeeklyScheduleVO;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +36,7 @@ public class ScheduleController {
     private final ModelMapper modelMapper;
 
     @GetMapping("/schedules")
+    @Operation(summary = "전체 스케줄 조회")
     public ResponseEntity<List<WeeklyScheduleDTO>> findAllSchedules() {
 
         List<WeeklyScheduleDTO> weeklyScheduleDTOList = scheduleService.findAllSchedules();
@@ -43,6 +45,7 @@ public class ScheduleController {
     }
 
     @GetMapping("/schedules/{scheduleCode}")
+    @Operation(summary = "한주의 스케줄 상세 조회")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findSchedule(
             @PathVariable("scheduleCode") int scheduleCode) {
 
@@ -60,6 +63,7 @@ public class ScheduleController {
     }
 
     @GetMapping("schedules/users/{employeeCode}")
+    @Operation(summary = "직원 별 한주의 스케줄 상세 조회")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findScheduleByEmployeeCode(
             @PathVariable("employeeCode") String employeeCode) {
 
@@ -78,6 +82,7 @@ public class ScheduleController {
     }
 
     @PostMapping("regist")
+    @Operation(summary = "한주의 스케줄 - 스케줄 등록")
     public ResponseEntity<ResponseRegistWeeklyScheduleVO> registSchedule(
             @RequestBody RequestRegistScheduleVO request) {
 
@@ -92,6 +97,7 @@ public class ScheduleController {
     }
 
     @PostMapping("regist/employee")
+    @Operation(summary = "한주의 스케줄 - 직원 등록")
     public ResponseEntity<ResponseRegistEmployeeWorkingPartVO> registSchedulePerEmployee(
             @RequestBody RequestRegistEmployeeWorkingPartVO request) {
 
@@ -106,6 +112,7 @@ public class ScheduleController {
     }
 
     @PatchMapping("modify/{workingPartCode}")
+    @Operation(summary = "스케줄 수정")
     public ResponseEntity<EditScheduleInfo> editSchedule(
             @PathVariable("workingPartCode") int workingPartCode,
             @RequestBody RequestModifyScheduleVO request) {
@@ -118,6 +125,7 @@ public class ScheduleController {
     }
 
     @PatchMapping("modify")
+    @Operation(summary = "댓글 채택으로 스케줄 수정")
     public ResponseEntity<ResponseModifyScheduleByCommentVO> editScheduleByComment(
             @RequestBody RequestModifyScheduleByCommentVO request) {
 
@@ -130,6 +138,7 @@ public class ScheduleController {
     }
 
     @DeleteMapping("delete/{workingPartCode}")
+    @Operation(summary = "스케줄 삭제")
     public ResponseEntity<Void> deleteSchedule(
             @PathVariable("workingPartCode") int workingPartCode) {
 
