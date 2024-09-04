@@ -1,8 +1,9 @@
-package com.intbyte.wizbuddy.board.service;
+package com.intbyte.wizbuddy.like;
 
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoardLiked;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardLikedDTO;
 import com.intbyte.wizbuddy.board.repository.NoticeBoardLikedRepository;
+import com.intbyte.wizbuddy.board.service.NoticeBoardLikedService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
