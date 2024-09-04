@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @Operation(summary = "관리자 - 사장 전체 조회")
-    @GetMapping("/employers/")
+    @GetMapping("/employers")
     public ResponseEntity<List<EmployerDTO>> getEmployers() {
         List<EmployerDTO> response = employerService.findAllEmployer();
 
@@ -71,7 +71,7 @@ public class UserController {
     }
 
     @Operation(summary = "관리자 - 직원 전체 조회")
-    @GetMapping("/employees/")
+    @GetMapping("/employees")
     public ResponseEntity<List<EmployeeDTO>> getEmployees() {
         List<EmployeeDTO> response = employeeService.findAllEmployee();
 

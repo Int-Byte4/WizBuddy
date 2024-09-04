@@ -6,14 +6,8 @@
     <resultMap id="manualBoardLikedResultMap" type="com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked">
         <id property="manualLikedCode" column="manual_liked_code"/>
         <result property="createdAt" column="created_at"/>
-        <association property="manualBoard" javaType="com.intbyte.wizbuddy.board.dto.ManualBoardDTO">
-            <id property="manualCode" column="manual_code"/>
-        </association>
-        <association property="shop" javaType="com.intbyte.wizbuddy.shop.dto.ShopDTO">
-            <id property="shopCode" column="shop_code"/>
-        </association>
-        <association property="employee" javaType="com.intbyte.wizbuddy.user.dto.EmployeeDTO">
-            <id property="employeeCode" column="employee_code"/>
-        </association>
+        <result property="manualCode" column="manual_code"/>
+        <result property="shopCode" column="shop_code"/>
+        <result property="employeeCode" column="employee_code"/>
     </resultMap>
 </mapper>
