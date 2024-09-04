@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.mapper.ManualBoardLikedMapper">
-    <resultMap id="manualBoardLikedResultMap" type="com.intbyte.wizbuddy.board.domain.entity.ManualBoardLiked">
+    <resultMap id="manualBoardLikedResultMap" type="com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked">
         <id property="manualLikedCode" column="manual_liked_code"/>
         <result property="createdAt" column="created_at"/>
         <association property="manualBoard" javaType="com.intbyte.wizbuddy.board.dto.ManualBoardDTO">
