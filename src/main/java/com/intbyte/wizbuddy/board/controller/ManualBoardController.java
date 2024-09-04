@@ -50,6 +50,7 @@ public class  ManualBoardController {
         return ResponseEntity.ok(manualBoardVOs);
     }
 
+    // 2. 매장별 매뉴얼 게시글 조회
     @GetMapping("/shop/{shopcode}")
     @Operation(summary = "매장별 매뉴얼 게시판 조회")
     public ResponseEntity<List<ResponseFindManualBoardVO>> getManualBoardByShopCode(@PathVariable("shopcode") int shopCode) {
