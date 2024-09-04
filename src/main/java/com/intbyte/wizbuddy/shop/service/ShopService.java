@@ -81,7 +81,15 @@ public class ShopService {
 
     @Transactional
     public List<ShopDTO> getAllShop() {
-        return convertToShopDTO(shopRepository.findAll());
+        List<ShopDTO> shopDTOList = new ArrayList<>();
+
+        for (Shop shop : shopRepository.findAll()) {
+            ShopDTO shopDTO = modelMapper.map(shop, ShopDTO.class);
+
+            shopDTOList.add(shopDTO);
+        }
+
+        return shopDTOList;
     }
 
     @Transactional
@@ -92,27 +100,7 @@ public class ShopService {
 
         if (shopDTO == null) throw new ShopNotFoundException();
 
-
         return shopDTO;
-    }
-
-    private List<ShopDTO> convertToShopDTO(List<Shop> shops) {
-        List<ShopDTO> shopDTOList = new ArrayList<>();
-        for (Shop shop : shops) {
-            ShopDTO shopDTO = new ShopDTO(
-                    shop.getShopCode()
-                    , shop.getShopName()
-                    , shop.getShopLocation()
-                    , shop.getShopFlag()
-                    , shop.getShopOpenTime()
-                    , shop.getBusinessNum()
-                    , shop.getCreatedAt()
-                    , shop.getUpdatedAt()
-                    , shop.getEmployerCode());
-
-            shopDTOList.add(shopDTO);
-        }
-        return shopDTOList;
     }
 
     private ShopDTO convertToShopDTO(Shop shop) {

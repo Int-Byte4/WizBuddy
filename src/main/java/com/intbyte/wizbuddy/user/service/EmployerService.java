@@ -13,6 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -57,5 +60,17 @@ public class EmployerService {
         EmployerDTO employerDTO = mapper.map(employer, EmployerDTO.class);
 
         return employerDTO;
+    }
+
+    public List<EmployerDTO> findAllEmployer() {
+        List<EmployerDTO> employerDTOList = new ArrayList<>();
+
+        for (Employer employer : employerRepository.findAll()) {
+            EmployerDTO employerDTO = mapper.map(employer, EmployerDTO.class);
+
+            employerDTOList.add(employerDTO);
+        }
+
+        return employerDTOList;
     }
 }
