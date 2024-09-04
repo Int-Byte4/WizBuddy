@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.dto;
+package com.intbyte.wizbuddy.like.dto;
 
 import lombok.*;
 
@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class NoticeBoardLikedDTO {
-    private int noticeLikedCode;
+public class ManualBoardLikedDTO {
+    private int manualLikedCode;
     private LocalDateTime createdAt;
+    private int manualCode;
     private int shopCode;
-    private int noticeCode;
     private String employeeCode;
 }

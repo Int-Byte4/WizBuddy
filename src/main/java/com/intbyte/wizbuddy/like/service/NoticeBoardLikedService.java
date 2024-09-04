@@ -1,8 +1,8 @@
-package com.intbyte.wizbuddy.board.service;
+package com.intbyte.wizbuddy.like.service;
 
-import com.intbyte.wizbuddy.board.domain.entity.NoticeBoardLiked;
-import com.intbyte.wizbuddy.board.dto.NoticeBoardLikedDTO;
-import com.intbyte.wizbuddy.board.repository.NoticeBoardLikedRepository;
+import com.intbyte.wizbuddy.like.domain.entity.NoticeBoardLiked;
+import com.intbyte.wizbuddy.like.dto.NoticeBoardLikedDTO;
+import com.intbyte.wizbuddy.like.repository.NoticeBoardLikedRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
