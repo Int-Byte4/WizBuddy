@@ -67,7 +67,6 @@ public class SubsBoardController {
         return ResponseEntity.ok(subsBoardVO);
     }
 
-    // 특정 상점의 게시판 가져오기
     @GetMapping("/shop/{shopCode}")
     public ResponseEntity<List<ResponseFindSubsBoardVO>> getSubsBoardsByShopCode(@PathVariable("shopCode") int shopCode) {
         List<SubsBoardDTO> subsBoardDTOs = subsBoardService.getSubsBoardsByShopCode(shopCode);

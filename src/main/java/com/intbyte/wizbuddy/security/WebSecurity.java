@@ -106,6 +106,8 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/employee", "GET")).hasRole("EMPLOYEE")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/modify/shop/", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/employeepershop/employer/*", "DELETE")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/manualboards/like", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/noticeboards/like", "POST")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 /* UserDetails를 상속받는 Service 계층 + BCrypt 암호화 */

@@ -3,7 +3,6 @@ package com.intbyte.wizbuddy.like.service;
 import com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked;
 import com.intbyte.wizbuddy.like.dto.ManualBoardLikedDTO;
 import com.intbyte.wizbuddy.like.repository.ManualBoardLikedRepository;
-import com.intbyte.wizbuddy.like.service.ManualBoardLikedService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
