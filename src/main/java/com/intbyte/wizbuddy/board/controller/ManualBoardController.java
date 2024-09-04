@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 public class  ManualBoardController {
 
     private final ManualBoardService manualBoardService;
-
     public ManualBoardController(ManualBoardService manualBoardService) {
         this.manualBoardService = manualBoardService;
     }
