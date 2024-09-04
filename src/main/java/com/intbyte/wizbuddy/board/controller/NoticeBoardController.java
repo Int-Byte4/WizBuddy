@@ -9,6 +9,7 @@ import com.intbyte.wizbuddy.board.vo.request.RequestUpdateNoticeBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseFindNoticeBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertNoticeBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateNoticeBoardVO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class NoticeBoardController {
     }
 
     @GetMapping
+    @Operation(summary = "공지사항 게시판 전체 조회")
     public ResponseEntity<List<ResponseFindNoticeBoardVO>> getAllNoticeBoards() {
         List<NoticeBoardDTO> noticeBoardDTOs = noticeBoardService.findAllNoticeBoards();
 
@@ -50,6 +52,7 @@ public class NoticeBoardController {
     }
 
     @GetMapping("/shop/{shopCode}")
+    @Operation(summary = "매장별 공지사항 게시판 조회")
     public ResponseEntity<List<ResponseFindNoticeBoardVO>> getNoticeBoardByShopCode(@PathVariable("shopCode") int shopCode) {
         List<NoticeBoardDTO> noticeBoardDTOs = noticeBoardService.findNoticeBoardByShopCode(shopCode);
 
@@ -71,6 +74,7 @@ public class NoticeBoardController {
     }
 
     @GetMapping("/{noticecode}")
+    @Operation(summary = "공지사항 게시판 단 건 조회")
     public ResponseEntity<ResponseFindNoticeBoardVO> findNoticeBoardByNoticeCode(@PathVariable("noticecode") int noticeCode) {
         NoticeBoardDTO noticeBoardDTO = noticeBoardService.findNoticeBoardByNoticeCode(noticeCode);
 
@@ -90,6 +94,7 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "공지사항 게시글 등록")
     public ResponseEntity<ResponseInsertNoticeBoardVO> insertNoticeBoard (
             @RequestBody RequestInsertNoticeBoardVO requestInsertNoticeBoardVO) {
 
@@ -99,6 +104,7 @@ public class NoticeBoardController {
     }
 
     @PatchMapping("update/{noticecode}")
+    @Operation(summary = "공지사항 게시글 수정 및 삭제")
     public ResponseEntity<ResponseUpdateNoticeBoardVO> updateNoticeBoard(
             @PathVariable("noticecode") int noticeCode,
             @RequestBody RequestUpdateNoticeBoardVO requestUpdateNoticeBoardVO) {

@@ -9,6 +9,7 @@ import com.intbyte.wizbuddy.board.vo.request.RequestUpdateManualBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseFindManualBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertManualBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateManualBoardVO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class  ManualBoardController {
     }
 
     @GetMapping
+    @Operation(summary = "매뉴얼 게시판 전체 조회")
     public ResponseEntity<List<ResponseFindManualBoardVO>> getAllManualBoards() {
         List<ManualBoardDTO> manualBoardDTOs = manualBoardService.findAllManualBoards();
 
@@ -49,6 +51,7 @@ public class  ManualBoardController {
     }
 
     @GetMapping("/shop/{shopcode}")
+    @Operation(summary = "매장별 매뉴얼 게시판 조회")
     public ResponseEntity<List<ResponseFindManualBoardVO>> getManualBoardByShopCode(@PathVariable("shopcode") int shopCode) {
         List<ManualBoardDTO> manualBoardDTOs = manualBoardService.findManualBoardByShopCode(shopCode);
 
@@ -70,6 +73,7 @@ public class  ManualBoardController {
     }
 
     @GetMapping("/{manualcode}")
+    @Operation(summary = "매뉴얼 게시글 단 건 조회")
     public ResponseEntity<ResponseFindManualBoardVO> findManualBoardByManualCode(@PathVariable("manualcode") int manualCode) {
         ManualBoardDTO manualBoardDTO = manualBoardService.findManualBoardByManualCode(manualCode);
 
@@ -89,6 +93,7 @@ public class  ManualBoardController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "매뉴얼 게시글 등록")
     public ResponseEntity<ResponseInsertManualBoardVO> insertManualBoard(
             @RequestBody RequestInsertManualBoardVO requestInsertManualBoardVO) {
 
@@ -98,6 +103,7 @@ public class  ManualBoardController {
     }
 
     @PatchMapping("/update/{manualcode}")
+    @Operation(summary = "매뉴얼 게시글 수정 및 삭제")
     public ResponseEntity<ResponseUpdateManualBoardVO> updateManualBoard(
             @PathVariable("manualcode") int manualCode,
             @RequestBody RequestUpdateManualBoardVO requestUpdateManualBoardVO) {
