@@ -18,7 +18,6 @@ public class ManualBoardLikedService {
         this.manualBoardLikedRepository = manualBoardLikedRepository;
     }
 
-    /* 기능. 1. 매뉴얼 게시글 좋아요 추가 */
     @Transactional
     public void registerManualBoardLike(ManualBoardLikedDTO manualBoardLikedInfo) {
 
