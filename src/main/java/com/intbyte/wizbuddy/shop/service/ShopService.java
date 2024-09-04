@@ -4,9 +4,6 @@ import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
 import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
-import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
-import com.intbyte.wizbuddy.mapper.EmployeeMapper;
-import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
@@ -14,8 +11,10 @@ import com.intbyte.wizbuddy.shop.domain.RegisterShopInfo;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
-import com.intbyte.wizbuddy.user.domain.entity.Employer;
+import com.intbyte.wizbuddy.shop.vo.response.ResponseEditShopVO;
+import com.intbyte.wizbuddy.shop.vo.response.ResponseRegisterShopVO;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,13 +27,12 @@ import java.util.List;
 public class ShopService {
 
     private final ShopRepository shopRepository;
-    private final EmployerMapper employerMapper;
     private final ShopMapper shopMapper;
-    private final EmployeeMapper employeeMapper;
+    private final ModelMapper modelMapper;
 
     @Transactional
-    public void registerShop(String employerCode, RegisterShopInfo shopInfo) {
-        if (employerMapper.getEmployer(employerCode) == null) throw new EmployerNotFoundException();
+    public ResponseRegisterShopVO registerShop(String employerCode, RegisterShopInfo shopInfo) {
+        if (shopMapper.getEmployerCode(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
@@ -47,28 +45,32 @@ public class ShopService {
                 .updatedAt(LocalDateTime.now())
                 .employerCode(employerCode)
                 .build();
-        
+
         shopRepository.save(shop);
+
+        return new ResponseRegisterShopVO(shopInfo);
     }
 
     @Transactional
-    public void modifyShop(String employerCode, EditShopInfo modifyShopInfo) {
+    public ResponseEditShopVO modifyShop(String employerCode, EditShopInfo modifyShopInfo) {
         int shopCode = modifyShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        String employer = shopMapper.getEmployerCode(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
 
         shop.modify(modifyShopInfo);
         shopRepository.save(shop);
+
+        return new ResponseEditShopVO(modifyShopInfo);
     }
 
     @Transactional
     public void deleteShop(String employerCode, DeleteShopInfo deleteShopInfo) {
         int shopCode = deleteShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        String employer = shopMapper.getEmployerCode(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
@@ -78,21 +80,20 @@ public class ShopService {
     }
 
     @Transactional
-    public List<ShopDTO> getAllShop(String userCode) {
-        if (employerMapper.getEmployer(userCode) == null && employeeMapper.getEmployee(userCode) == null) throw new UserNotFoundException();
-
+    public List<ShopDTO> getAllShop() {
         return convertToShopDTO(shopRepository.findAll());
     }
 
     @Transactional
-    public Shop getShop(String userCode, int shopCode) {
-        if (employerMapper.getEmployer(userCode) == null && employeeMapper.getEmployee(userCode) == null) throw new UserNotFoundException();
-
+    public ShopDTO getShop(int shopCode) {
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
-        if (shop == null) throw new ShopNotFoundException();
+        ShopDTO shopDTO = convertToShopDTO(shop);
 
-        return shop;
+        if (shopDTO == null) throw new ShopNotFoundException();
+
+
+        return shopDTO;
     }
 
     private List<ShopDTO> convertToShopDTO(List<Shop> shops) {
@@ -114,8 +115,21 @@ public class ShopService {
         return shopDTOList;
     }
 
-    private void validateRequest(Employer employer, Shop shop) {
-        if (!employer.getEmployerCode().equals(shop.getEmployerCode())) {
+    private ShopDTO convertToShopDTO(Shop shop) {
+        return new ShopDTO(
+                shop.getShopCode()
+                , shop.getShopName()
+                , shop.getShopLocation()
+                , shop.getShopFlag()
+                , shop.getShopOpenTime()
+                , shop.getBusinessNum()
+                , shop.getCreatedAt()
+                , shop.getUpdatedAt()
+                , shop.getEmployerCode());
+    }
+
+    private void validateRequest(String employerCode, Shop shop) {
+        if (!employerCode.equals(shop.getEmployerCode())) {
             throw new ShopModifyOtherEmployerException();
         }
     }

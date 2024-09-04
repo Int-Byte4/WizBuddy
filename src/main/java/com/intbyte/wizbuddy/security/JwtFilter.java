@@ -13,7 +13,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Slf4j
-
 /* 설명. OncePerRequestFilter를 상속받아 doFilterInternal을 오버라이딩 한다.(한번만 실행되는 필터) */
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -27,9 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     /* 설명. 들고 온(Request Header) 토큰이 유효한지 판별 및 인증(Authentication 객체로 관리) */
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.info("UsernamePasswordAuthenticationFilter보다 먼저 동작하는 필터");
 
         String authorizationHeader = request.getHeader("Authorization");
@@ -50,8 +47,3 @@ public class JwtFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);    // 실행 될 다음 필터는 UsernamePasswordAuthenticationFilter
     }
 }
-
-
-
-
-

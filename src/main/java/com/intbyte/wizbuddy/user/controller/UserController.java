@@ -1,18 +1,14 @@
 package com.intbyte.wizbuddy.user.controller;
 
-import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
-import com.intbyte.wizbuddy.user.dto.UserDTO;
+import com.intbyte.wizbuddy.security.JwtUtil;
+import com.intbyte.wizbuddy.user.domain.info.*;
+import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
+import com.intbyte.wizbuddy.user.dto.EmployerDTO;
 import com.intbyte.wizbuddy.user.service.EmployeeService;
 import com.intbyte.wizbuddy.user.service.EmployerService;
 import com.intbyte.wizbuddy.user.service.UserService;
-import com.intbyte.wizbuddy.vo.request.RegisterEmployeeRequest;
-import com.intbyte.wizbuddy.vo.request.RegisterEmployerRequest;
-import com.intbyte.wizbuddy.vo.response.ResponseFindEmployeeVO;
-import com.intbyte.wizbuddy.vo.response.ResponseFindEmployerVO;
-import com.intbyte.wizbuddy.vo.response.ResponseRegisterEmployeeVO;
-import com.intbyte.wizbuddy.vo.response.ResponseRegisterEmployerVO;
+import com.intbyte.wizbuddy.user.vo.request.*;
+import com.intbyte.wizbuddy.user.vo.response.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,8 +17,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
 
+    private JwtUtil jwtUtil;
     private Environment env;
     private ModelMapper modelMapper;
     private UserService userService;
@@ -30,7 +28,8 @@ public class UserController {
     private EmployeeService employeeService;
 
     @Autowired
-    public UserController(Environment env, ModelMapper modelMapper, UserService userService, EmployerService employerService, EmployeeService employeeService) {
+    public UserController(JwtUtil jwtUtil, Environment env, ModelMapper modelMapper, UserService userService, EmployerService employerService, EmployeeService employeeService) {
+        this.jwtUtil = jwtUtil;
         this.env = env;
         this.modelMapper = modelMapper;
         this.userService = userService;
@@ -38,52 +37,77 @@ public class UserController {
         this.employeeService = employeeService;
     }
 
-    /* 설명. 로그인 기능(feat. security 모듈 활용) 전에 회원가입 기능 만들기 */
-    @PostMapping("users/employer")
-    public ResponseEntity<ResponseRegisterEmployerVO> registerEmployer(@RequestBody RegisterEmployerRequest request) {
+    @PostMapping("/employer")
+    public ResponseEntity<ResponseInsertEmployerVO> registerEmployer(@RequestBody RequestInsertEmployerVO request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployerInfo registerEmployerInfo = modelMapper.map(request.getNewEmployer(), RegisterEmployerInfo.class);
 
-        userService.signInEmployer(signInUserInfo, registerEmployerInfo);
+        ResponseInsertEmployerVO responseUser = userService.signInEmployer(signInUserInfo, registerEmployerInfo);
 
-        ResponseRegisterEmployerVO responseUser = new ResponseRegisterEmployerVO(request.getNewUser(), request.getNewEmployer());
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
-
-    @PostMapping("users/employee")
-    public ResponseEntity<ResponseRegisterEmployeeVO> registerEmployer(@RequestBody RegisterEmployeeRequest request) {
+    @PostMapping("/employee")
+    public ResponseEntity<ResponseInsertEmployeeVO> registerEmployee(@RequestBody RequestInsertEmployeeVO request) {
         SignInUserInfo signInUserInfo = modelMapper.map(request.getNewUser(), SignInUserInfo.class);
         RegisterEmployeeInfo registerEmployeeInfo = modelMapper.map(request.getNewEmployee(), RegisterEmployeeInfo.class);
 
-        userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
+        ResponseInsertEmployeeVO responseUser =  userService.signInEmployee(signInUserInfo, registerEmployeeInfo);
 
-        ResponseRegisterEmployeeVO responseUser = new ResponseRegisterEmployeeVO(request.getNewUser(), request.getNewEmployee());
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
     }
 
-    @GetMapping("/users/employer/{employerCode}")
+    @GetMapping("/employer/{employerCode}")
     public ResponseEntity<ResponseFindEmployerVO> getEmployer(@PathVariable("employerCode") String employerCode) {
-        UserDTO userDTO = employerService.getByEmployerCode(employerCode);
+        EmployerDTO employerDTO = employerService.getByEmployerCode(employerCode);
 
-        ResponseFindEmployerVO findUser = modelMapper.map(userDTO, ResponseFindEmployerVO.class);
+        ResponseFindEmployerVO findUser = modelMapper.map(employerDTO, ResponseFindEmployerVO.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(findUser);
     }
 
-    @GetMapping("/users/employee/{employeeCode}")
+    @GetMapping("/employee/{employeeCode}")
     public ResponseEntity<ResponseFindEmployeeVO> getEmployee(@PathVariable("employeeCode") String employeeCode) {
-        UserDTO userDTO = employerService.getByEmployerCode(employeeCode);
+        EmployeeDTO employeeDTO = employeeService.getByEmployeeCode(employeeCode);
 
-        ResponseFindEmployeeVO findUser = modelMapper.map(userDTO, ResponseFindEmployeeVO.class);
+        ResponseFindEmployeeVO findUser = modelMapper.map(employeeDTO, ResponseFindEmployeeVO.class);
 
         return ResponseEntity.status(HttpStatus.OK).body(findUser);
     }
 
+    @PatchMapping("/employer/edit")
+    public ResponseEntity<Void> modifyEmployer(@RequestBody RequestEditEmployerVO request) {
+        EditEmployerInfo editEmployerInfo = modelMapper.map(request, EditEmployerInfo.class);
+
+        employerService.modifyEmployer(editEmployerInfo);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/employee/edit")
+    public ResponseEntity<Void> modifyEmployer(@RequestBody RequestEditEmployeeVO request) {
+        EditEmployeeInfo editEmployeeInfo = modelMapper.map(request, EditEmployeeInfo.class);
+
+        employeeService.modifyEmployee(editEmployeeInfo);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/employer/delete")
+    public ResponseEntity<Void> deleteEmployer(@RequestBody RequestDeleteEmployerVO request) {
+        DeleteEmployerInfo deleteEmployerInfo = modelMapper.map(request, DeleteEmployerInfo.class);
+
+        employerService.deleteEmployer(deleteEmployerInfo);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PatchMapping("/employee/delete")
+    public ResponseEntity<Void> deleteEmployer(@RequestBody RequestDeleteEmployeeVO request) {
+        DeleteEmployeeInfo deleteEmployeeInfo = modelMapper.map(request, DeleteEmployeeInfo.class);
+
+        employeeService.deleteEmployee(deleteEmployeeInfo);
+
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }
-
-
-
-
-
-

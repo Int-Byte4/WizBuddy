@@ -1,8 +1,8 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo;
-import com.intbyte.wizbuddy.user.domain.RegisterEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.SignInUserInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.info.RegisterEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.SignInUserInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.domain.entity.User;
@@ -72,9 +72,6 @@ class UserServiceImplTests {
 
         assertTrue(newUsers.contains(user));
         assertTrue(newEmployers.contains(employer));
-
-        newUsers.forEach(System.out::println);
-        newEmployers.forEach(System.out::println);
     }
 
     @Test
@@ -115,8 +112,5 @@ class UserServiceImplTests {
 
         assertTrue(newUsers.contains(user));
         assertTrue(newEmployees.contains(employee));
-
-        newUsers.forEach(System.out::println);
-        newEmployees.forEach(System.out::println);
     }
 }

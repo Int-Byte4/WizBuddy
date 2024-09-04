@@ -16,22 +16,18 @@ public class WeeklySchedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name="schedule_code")
     private int scheduleCode;
 
-    @Column
+    @Column(nullable = false, name = "schedule_flag")
     private boolean scheduleFlag;
 
-    @Column
+    @Column(nullable = false, name = "schedule_start_date")
     private LocalDate scheduleStartDate;
 
-    @Column
+    @Column(nullable = false, updatable = false, name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(nullable = false, name = "updated_at")
     private LocalDateTime updatedAt;
-
-
-
-
 }

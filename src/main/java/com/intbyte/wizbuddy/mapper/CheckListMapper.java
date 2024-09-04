@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.mapper;
 
-import com.intbyte.wizbuddy.checklist.domain.entity.CheckList;
+import com.intbyte.wizbuddy.checklist.domain.CheckListMybatis;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 @Mapper
 public interface CheckListMapper {
 
-    CheckList findCheckListById(int checkListCode);
+    CheckListMybatis findCheckListById(int checkListCode);
 
-    List<CheckList> findAllCheckList();
+    List<CheckListMybatis> findAllCheckList();
 
-    List<CheckList> findAllCheckListsByFlag();
+    List<CheckListMybatis> findAllCheckListByShopId(int shopCode);
 }

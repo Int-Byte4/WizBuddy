@@ -1,8 +1,17 @@
 package com.intbyte.wizbuddy.mapper;
 
+import com.intbyte.wizbuddy.board.domain.entity.NoticeBoard;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface NoticeBoardMapper {
-    int findEmployerCodeByNoticeCode(int noticeCode);
+    String findEmployerCodeByNoticeCode(int noticeCode);
+
+    List<NoticeBoard> findAllNoticeBoards();
+
+    List<NoticeBoard> findNoticeBoardByShopCode(int shopCode);
+
+    NoticeBoard findNoticeBoardByNoticeCode(int noticeCode);
 }

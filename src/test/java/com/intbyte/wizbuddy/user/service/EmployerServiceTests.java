@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.user.service;
 
-import com.intbyte.wizbuddy.user.domain.DeleteEmployerInfo;
-import com.intbyte.wizbuddy.user.domain.EditEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.DeleteEmployerInfo;
+import com.intbyte.wizbuddy.user.domain.info.EditEmployerInfo;
 import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import com.intbyte.wizbuddy.user.repository.EmployerRepository;
 import jakarta.transaction.Transactional;
@@ -40,8 +40,6 @@ class EmployerServiceTests {
         //then
         List<Employer> newEmployers = employerRepository.findAll();
         assertEquals(newEmployers.get(0).getEmployerName(), employerInfo.getEmployerName());
-
-        newEmployers.forEach(System.out::println);
     }
 
     @Test
@@ -60,7 +58,5 @@ class EmployerServiceTests {
         //then
         List<Employer> newEmployers = employerRepository.findAll();
         assertEquals(false, newEmployers.get(0).isEmployerFlag());
-
-        newEmployers.forEach(System.out::println);
     }
 }

@@ -2,10 +2,7 @@ package com.intbyte.wizbuddy.comment.domain.Entity;
 
 
 import com.intbyte.wizbuddy.comment.domain.EditCommentInfo;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -23,6 +20,7 @@ import java.time.LocalDateTime;
 public class Comment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comment_code")
     private int commentCode;
 
@@ -34,6 +32,7 @@ public class Comment {
     private boolean commentFlag;
 
     @Column(name = "comment_adopted_state")
+    @ColumnDefault("false")
     private boolean commentAdoptedState;
 
     @Column(name = "created_at")
@@ -46,7 +45,7 @@ public class Comment {
     private int subsCode;
 
     @Column(name = "employee_code")
-    private int employeeCode;
+    private String employeeCode;
 
     public void toUpdate(@Valid EditCommentInfo editCommentInfo) {
         this.commentContent = editCommentInfo.getCommentContent();
@@ -55,6 +54,12 @@ public class Comment {
     }
 
     public void toDelete() {
+        this.updatedAt = LocalDateTime.now();
         this.commentFlag = false;
+    }
+
+    public void toAdopt() {
+        this.updatedAt = LocalDateTime.now();
+        this.commentAdoptedState = true;
     }
 }

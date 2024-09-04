@@ -25,10 +25,7 @@ public class JwtUtil {
     private final Key key;
     private final UserService userService;
 
-    public JwtUtil(
-            @Value("${token.secret}") String secretKey,
-            UserService userService
-    ) {
+    public JwtUtil(@Value("${token.secret}") String secretKey, UserService userService) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
         this.userService = userService;
@@ -36,9 +33,9 @@ public class JwtUtil {
 
     /* 설명. Token 검증(Bearer 토큰이 넘어왔고, 우리 사이트의 secret key로 만들어 졌는가, 만료되었는지와 내용이 비어있진 않은지) */
     public boolean validateToken(String token) {
-
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT Token {}", e);
         } catch (ExpiredJwtException e) {
@@ -49,7 +46,7 @@ public class JwtUtil {
             log.info("JWT Token claims empty {}", e);
         }
 
-        return true;
+        return false;
     }
 
     /* 설명. 넘어온 AccessToken으로 인증 객체 추출 */
@@ -88,6 +85,5 @@ public class JwtUtil {
     public String getUserId(String token) {
         return parseClaims(token).getSubject();
     }
-
 
 }

@@ -76,8 +76,6 @@ class ShopServiceTests {
         //then
         List<Shop> newShops = shopRepository.findAll();
         assertEquals(newShops.get(0).getShopName(), editShopInfo.getShopName());
-
-        newShops.forEach(System.out::println);
     }
 
     @Test
@@ -94,19 +92,14 @@ class ShopServiceTests {
         //then
         List<Shop> newShops = shopRepository.findAll();
         assertEquals(false, newShops.get(deleteShopInfo.getShopCode() - 1).getShopFlag());
-
-        newShops.forEach(System.out::println);
     }
 
     @Test
     @DisplayName("매장 전체 조회 성공")
     @Transactional
     void testGetShopListSuccess() {
-        // given
-        String userCode = "20240831-07de-4b18-95c6-564cd86a5af2";
-
-        // when
-        List<ShopDTO> shopList = shopService.getAllShop(userCode);
+        // given, when
+        List<ShopDTO> shopList = shopService.getAllShop();
 
         // then
         assertNotNull(shopList);
@@ -114,8 +107,6 @@ class ShopServiceTests {
 
         ShopDTO shopDTO = shopList.get(0);
         assertEquals("스타벅스 강남점", shopDTO.getShopName());
-
-        shopList.forEach(System.out::println);
     }
 
     @Test
@@ -123,14 +114,13 @@ class ShopServiceTests {
     @Transactional
     void testGetShopSuccess() {
         //given
-        String userCode = "20240831-5e1c-400a-8f17-df561d451480";
         int shopCode = 1;
 
         //when
-        Shop shop = shopService.getShop(userCode, shopCode);
+        ShopDTO shop = shopService.getShop(shopCode);
+
 
         //then
         assertNotNull(shop);
-        System.out.println("shop = " + shop);
     }
 }

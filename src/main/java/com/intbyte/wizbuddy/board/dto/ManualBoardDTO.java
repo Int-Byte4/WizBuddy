@@ -1,5 +1,4 @@
 package com.intbyte.wizbuddy.board.dto;
-
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,6 +17,5 @@ public class ManualBoardDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int shopCode;
-    private int userCode;
-
+    private String userCode;
 }

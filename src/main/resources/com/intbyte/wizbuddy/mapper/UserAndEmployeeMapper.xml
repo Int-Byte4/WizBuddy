@@ -6,6 +6,8 @@
     <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.domain.entity.User">
         <id property="userCode" column="user_code"/>
         <result property="userType" column="user_type"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPassword" column="user_password"/>
 
         <collection property="employee" javaType="com.intbyte.wizbuddy.user.domain.entity.Employee">
             <id property="employeeCode" column="employee_code"/>
@@ -25,15 +27,17 @@
 
     </resultMap>
 
-    <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
-        INSERT INTO users(user_code, user_type)
+    <insert id="insertUser" parameterType="com.intbyte.wizbuddy.user.domain.info.SignInUserInfo" useGeneratedKeys="true" keyProperty="userCode">
+        INSERT INTO users(user_code, user_type, user_email, user_password)
         VALUES(
-        #{ userCode },
-        #{ userType }
-        )
+              #{ userCode },
+              #{ userType },
+              #{ userEmail },
+              #{ userPassword }
+              )
     </insert>
 
-    <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">
+    <insert id="insertEmployee" parameterType="com.intbyte.wizbuddy.user.domain.info.RegisterEmployeeInfo" useGeneratedKeys="true" keyProperty="employeeCode">
         INSERT INTO employee(employee_code, employee_name, employee_email, employee_password, employee_phone, employee_flag, latitude, longitude, employee_wage, employee_health_date, employee_black_state, created_at, updated_at)
         VALUES(
               #{ employeeCode },

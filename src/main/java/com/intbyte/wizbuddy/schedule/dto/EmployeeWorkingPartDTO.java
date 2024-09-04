@@ -10,15 +10,10 @@ import java.time.LocalDateTime;
 @ToString
 @Getter @Setter
 public class EmployeeWorkingPartDTO {
-
     private int workingPartCode;
-
-    private int employeeCode;
-
+    private String employeeCode;
     private int scheduleCode;
-
     private LocalDateTime workingDate;
-
     private String workingPartTime;
 
 }

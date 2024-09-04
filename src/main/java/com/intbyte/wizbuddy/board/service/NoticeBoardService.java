@@ -5,13 +5,19 @@ import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoard;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.repository.NoticeBoardRepository;
+import com.intbyte.wizbuddy.board.vo.request.RequestInsertNoticeBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseInsertNoticeBoardVO;
+import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateNoticeBoardVO;
 import com.intbyte.wizbuddy.exception.noticeboard.NoticeBoardModifyOtherUserException;
 import com.intbyte.wizbuddy.exception.noticeboard.NoticeBoardNotFoundException;
 import com.intbyte.wizbuddy.mapper.NoticeBoardMapper;
 import jakarta.transaction.Transactional;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 
@@ -19,62 +25,109 @@ public class NoticeBoardService {
 
     private final NoticeBoardMapper noticeBoardMapper;
     private final NoticeBoardRepository noticeBoardRepository;
+    private final ModelMapper modelMapper;
 
-    public NoticeBoardService(NoticeBoardRepository noticeBoardRepository, NoticeBoardMapper noticeBoardMapper) {
+
+    public NoticeBoardService(NoticeBoardRepository noticeBoardRepository, NoticeBoardMapper noticeBoardMapper, ModelMapper modelMapper) {
         this.noticeBoardRepository = noticeBoardRepository;
         this.noticeBoardMapper = noticeBoardMapper;
+        this.modelMapper = modelMapper;
     }
 
-    /* 기능. 1. 공지사항 게시판 게시글 등록 */
     @Transactional
-    public void registerNoticeBoard(NoticeBoardDTO noticeBoardInfo) {
-        int shopCode = noticeBoardInfo.getShopCode();
-
-        // 예외처리 추가 필요
+    public ResponseInsertNoticeBoardVO registerNoticeBoard(RequestInsertNoticeBoardVO noticeBoardInfo) {
         NoticeBoard noticeBoard = NoticeBoard.builder()
                 .noticeTitle(noticeBoardInfo.getNoticeTitle())
                 .noticeContent(noticeBoardInfo.getNoticeContent())
-                .noticeFlag(true)
+                .noticeFlag(noticeBoardInfo.isNoticeFlag())
                 .imageUrl(noticeBoardInfo.getImageUrl())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .shopCode(shopCode)
+                .shopCode(noticeBoardInfo.getShopCode())
+                .employerCode(noticeBoardInfo.getEmployerCode())
                 .build();
 
-        noticeBoardRepository.save(noticeBoard);
+        NoticeBoard savedNoticeBoard = noticeBoardRepository.save(noticeBoard);
+
+        ResponseInsertNoticeBoardVO vo = ResponseInsertNoticeBoardVO.builder()
+                .noticeTitle(savedNoticeBoard.getNoticeTitle())
+                .noticeContent(savedNoticeBoard.getNoticeContent())
+                .noticeFlag(savedNoticeBoard.isNoticeFlag())
+                .imageUrl(savedNoticeBoard.getImageUrl())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .shopCode(savedNoticeBoard.getShopCode())
+                .employerCode(savedNoticeBoard.getEmployerCode())
+                .build();
+
+        return vo;
     }
 
-    /* 기능. 2. 공지사항 게시판 게시글 수정 */
     @Transactional
-    public void modifyNoticeBoard(int noticeCode, int requestEmployerCode, EditNoticeBoardInfo modifyNoticeBoardInfo) {
-        // 유저가 해당 매장 사장인지 확인
-        int writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
-        if (writerCode != requestEmployerCode) throw new NoticeBoardModifyOtherUserException();
+    public ResponseUpdateNoticeBoardVO modifyNoticeBoard(int noticeCode, EditNoticeBoardInfo modifyNoticeBoardInfo) {
+        String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
 
-        // 게시글 코드로 해당 게시글이 레포지토리에 존재하는지 확인
-        NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
+        if (writerCode != null && writerCode.equals(modifyNoticeBoardInfo.getEmployerCode())) {
+            NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
 
-        // 매뉴얼 게시글 제목, 내용, 이미지 url, 수정 날짜 수정
-        noticeBoard.modify(modifyNoticeBoardInfo);
+            noticeBoard.modify(modifyNoticeBoardInfo);
 
-        // 변경된 객체를 repository에 저장
-        noticeBoardRepository.save(noticeBoard);
+            noticeBoardRepository.save(noticeBoard);
+            ResponseUpdateNoticeBoardVO vo = ResponseUpdateNoticeBoardVO.builder()
+                    .noticeTitle(noticeBoard.getNoticeTitle())
+                    .noticeContent(noticeBoard.getNoticeContent())
+                    .noticeFlag(noticeBoard.isNoticeFlag())
+                    .imageUrl(noticeBoard.getImageUrl())
+                    .updatedAt(LocalDateTime.now())
+                    .build();
+            return vo;
+        } else {
+            throw new NoticeBoardModifyOtherUserException();
+        }
     }
 
-    /* 기능. 3. 공지사항 게시판 게시글 삭제 */
     @Transactional
-    public void deleteNoticeBoard(int noticeCode, int requestEmployerCode, DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
-        // 유저가 공지사항 게시글 작성자인지 확인
-        int writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
-        if (writerCode != requestEmployerCode) throw new NoticeBoardModifyOtherUserException();
+    public void deleteNoticeBoard(int noticeCode, DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
 
-        // 게시물 코드로 해당 게시글이 레포지토리에 존재하는지 확인
-        NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
+        String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
 
-        // 게시글 상태, 수정 날짜 수정
-        noticeBoard.delete(deleteNoticeBoardInfo);
+        if(writerCode != null && writerCode.equals(deleteNoticeBoardInfo.getEmployerCode())) {
+            NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
 
-        // 변경된 객체를 repository에 저장
-        noticeBoardRepository.save(noticeBoard);
+            noticeBoard.delete(deleteNoticeBoardInfo);
+
+            noticeBoardRepository.save(noticeBoard);
+
+        } else {
+            throw new NoticeBoardModifyOtherUserException();
+        }
+    }
+
+    @Transactional
+    public List<NoticeBoardDTO> findAllNoticeBoards() {
+        List<NoticeBoard> noticeBoardList = noticeBoardMapper.findAllNoticeBoards();
+
+        if(noticeBoardList == null || noticeBoardList.isEmpty()) throw new NoticeBoardNotFoundException();
+        return noticeBoardList.stream()
+                .map(noticeBoard -> modelMapper.map(noticeBoard, NoticeBoardDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<NoticeBoardDTO> findNoticeBoardByShopCode(int shopCode) {
+        List<NoticeBoard> noticeBoardList = noticeBoardMapper.findNoticeBoardByShopCode(shopCode);
+
+        return noticeBoardList.stream()
+                .map(noticeBoard -> modelMapper.map(noticeBoard, NoticeBoardDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public NoticeBoardDTO findNoticeBoardByNoticeCode(int noticeCode) {
+        NoticeBoard noticeBoard = noticeBoardMapper.findNoticeBoardByNoticeCode(noticeCode);
+
+        NoticeBoardDTO noticeBoardDTO = modelMapper.map(noticeBoard, NoticeBoardDTO.class);
+
+        return noticeBoardDTO;
     }
 }

@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.checklist.domain.entity;
 
 import com.intbyte.wizbuddy.checklist.domain.EditCheckListInfo;
+import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -35,7 +36,7 @@ public class CheckList {
     private LocalDateTime updatedAt;
 
     @Column(name="shop_code")
-    private int shopCode;
+    private Integer shopCode;
 
     public void modify(@Valid EditCheckListInfo editCheckListInfo){
         this.checkListTitle = editCheckListInfo.getCheckListTitle();

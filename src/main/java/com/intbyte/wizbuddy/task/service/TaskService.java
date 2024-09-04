@@ -1,13 +1,18 @@
 package com.intbyte.wizbuddy.task.service;
 
 import com.intbyte.wizbuddy.exception.task.TaskNotFoundException;
+import com.intbyte.wizbuddy.mapper.CheckListMapper;
 import com.intbyte.wizbuddy.mapper.TaskMapper;
+import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
+import com.intbyte.wizbuddy.task.domain.TaskMybatis;
 import com.intbyte.wizbuddy.task.domain.entity.Task;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.repository.TaskRepository;
+import com.intbyte.wizbuddy.taskperchecklist.repository.TaskPerCheckListRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,15 +23,93 @@ import java.util.stream.Collectors;
 @Service
 public class TaskService {
 
-    private final TaskRepository taskRepository; // jpa
-    private final TaskMapper taskMapper;        // mybatis
-    private final ModelMapper modelMapper; // dto <-> entity 변환
+    private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
+    private final ModelMapper modelMapper;
+    private final ShopRepository shopRepository;
+    private final TaskPerCheckListRepository taskPerCheckListRepository;
+    private final CheckListMapper checkListMapper;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, TaskMapper mapper, ModelMapper modelMapper) {
+    public TaskService(TaskRepository taskRepository, TaskMapper mapper, ModelMapper modelMapper, @Qualifier("shopRepository") ShopRepository shopRepository, @Qualifier("taskPerCheckListRepository") TaskPerCheckListRepository taskPerCheckListRepository, CheckListMapper checkListMapper) {
         this.taskRepository = taskRepository;
         this.taskMapper = mapper;
         this.modelMapper = modelMapper;
+        this.shopRepository = shopRepository;
+        this.taskPerCheckListRepository = taskPerCheckListRepository;
+        this.checkListMapper = checkListMapper;
+    }
+
+    @Transactional
+    public TaskDTO findTaskById(int taskCode){
+
+        TaskMybatis findTask = taskMapper.findTaskById(taskCode);
+
+        if(findTask == null)
+            throw new TaskNotFoundException();
+
+        return modelMapper.map(findTask, TaskDTO.class);
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTask(){
+
+        List<TaskMybatis> findTasks = taskMapper.findAllTask();
+
+        if(findTasks == null || findTasks.isEmpty())
+            throw new TaskNotFoundException();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTaskByFixedState(){
+
+        List<TaskMybatis> findTasks = taskMapper.findAllTaskByFixedState();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTasksByTaskFlag(){
+
+        List<TaskMybatis> findTasks = taskMapper.findAllTasksByTaskFlag();
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+
+    @Transactional
+    public List<TaskDTO> findAllTaskByShopCode(int shopCode){
+        List<TaskMybatis> findTasks = taskMapper.findAllTaskByShopCode(shopCode);
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTaskByShopCodeByFixedState(int shopCode){
+        List<TaskMybatis> findTasksFixedState = taskMapper.findAllTaskByShopCodeByFixedState(shopCode);
+
+        return findTasksFixedState.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<TaskDTO> findAllTaskByShopCodeByNonFixedState(int shopCode){
+        List<TaskMybatis> findTasks = taskMapper.findAllTaskByShopCodeByNonFixedState(shopCode);
+
+        return findTasks.stream()
+                .map(task -> modelMapper.map(task, TaskDTO.class))
+                .collect(Collectors.toList());
     }
 
     @Transactional
@@ -38,65 +121,25 @@ public class TaskService {
                 .taskFixedState(taskInfo.isTaskFixedState())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
+                .shopCode(taskInfo.getShopCode())
                 .build();
 
         taskRepository.save(task);
     }
 
     @Transactional
-    public TaskDTO findTaskById(int taskCode){
-
-        Task findTask = taskMapper.findTaskById(taskCode);
-        return modelMapper.map(findTask, TaskDTO.class);
-    }
-
-    @Transactional
-    public List<TaskDTO> findAllTask(){
-
-        List<Task> findTasks = taskMapper.findAllTask();
-
-        return findTasks.stream()
-                .map(task -> modelMapper.map(task, TaskDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public List<TaskDTO> findAllTaskByFixedState(){
-
-        List<Task> findTasks = taskMapper.findAllTaskByFixedState();
-
-        return findTasks.stream()
-                .map(task -> modelMapper.map(task, TaskDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public List<TaskDTO> findAllTasksByTaskFlag(){
-
-        List<Task> findTasks = taskMapper.findAllTasksByTaskFlag();
-
-        return findTasks.stream()
-                .map(task -> modelMapper.map(task, TaskDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Transactional
     public void modifyTask(int taskCode, EditTaskInfo modifyTaskInfo){
 
         Task task = taskRepository.findById(taskCode).orElseThrow(TaskNotFoundException::new);
-
         task.modify(modifyTaskInfo);
+
         taskRepository.save(task);
     }
 
     @Transactional
-    public void deleteTask(int taskCode){
+    public void deleteTaskPerCheckList(int taskCode){
+        Task task = taskRepository.findById(taskCode).orElseThrow(TaskNotFoundException::new);
 
-        Task task = taskMapper.findTaskById(taskCode);
-        EditTaskInfo editTaskInfo = new EditTaskInfo(task.getTaskContents(), false, task.isTaskFixedState(), task.getUpdatedAt());
-
-        task.modify(editTaskInfo);
-
-        taskRepository.save(task);
+        taskPerCheckListRepository.deleteByTask(taskCode);
     }
 }

@@ -1,10 +1,7 @@
 package com.intbyte.wizbuddy.board.domain.entity;
 
 import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
 
@@ -19,7 +16,9 @@ import java.time.LocalDateTime;
 @Builder
 @EqualsAndHashCode
 public class SubsBoard {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subs_code")
     private int subsCode;
 
@@ -54,6 +53,7 @@ public class SubsBoard {
 
     public void toDelete() {
         this.subsFlag = false;
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

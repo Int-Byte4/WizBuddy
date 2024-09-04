@@ -10,8 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class DeleteManualBoardInfo {
-    private int manualCode;
     private boolean manualFlag;
     private LocalDateTime updatedAt;
-    private int userCode;
+    private String userCode;
 }

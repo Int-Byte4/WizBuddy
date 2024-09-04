@@ -10,14 +10,9 @@ import java.time.LocalDateTime;
 @ToString
 @Getter @Setter
 public class WeeklyScheduleDTO {
-
     private int scheduleCode;
-
     private boolean scheduleFlag;
-
     private LocalDate scheduleStartDate;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 }

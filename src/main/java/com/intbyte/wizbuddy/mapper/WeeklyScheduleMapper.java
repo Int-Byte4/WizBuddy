@@ -8,7 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface WeeklyScheduleMapper {
-//    WeeklyScheduleDTO findScheduleCode(int scheduleCode);
 
     List<WeeklyScheduleDTO> selectAllSchedules();
 

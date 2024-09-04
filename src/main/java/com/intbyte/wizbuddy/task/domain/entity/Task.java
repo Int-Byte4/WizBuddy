@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.task.domain.entity;
 
+import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -35,6 +36,9 @@ public class Task {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name="shop_code")
+    private Integer shopCode;
 
     public void modify(@Valid EditTaskInfo editTaskInfo){
         this.taskContents = editTaskInfo.getTaskContents();

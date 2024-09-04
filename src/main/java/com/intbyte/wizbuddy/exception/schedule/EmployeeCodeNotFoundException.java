@@ -10,6 +10,6 @@ public class EmployeeCodeNotFoundException extends IllegalArgumentException {
 
     public EmployeeCodeNotFoundException() {
         super(message);
-        this.status = StatusEnum.EMPLOYEE_NOT_FOUND;
+        this.status = StatusEnum.EMPLOYEE_CODE_NOT_FOUND;
     }
 }

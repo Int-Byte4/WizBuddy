@@ -10,5 +10,5 @@ import java.util.List;
 public interface SubsBoardMapper {
     List<SubsBoard> selectAllSubsBoard();
     SubsBoard selectSubsBoardById(int subsCode);
-
+    List<SubsBoard> selectSubsBoardByShopCode(int shopCode);
 }

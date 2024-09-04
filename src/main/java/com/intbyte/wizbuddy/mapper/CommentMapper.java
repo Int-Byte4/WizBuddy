@@ -9,4 +9,6 @@ import java.util.List;
 public interface CommentMapper {
     List<Comment> selectAllComment();
     Comment selectCommentById(int code);
+    List<Comment> selectCommentBySubsCode(int subsCode);
+    List<Comment> selectCommentByEmployeeCode(String employeeCode);
 }
