@@ -106,11 +106,16 @@ public class CommentService {
 
     @Transactional
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
-        SubsBoard subsBoard = subsBoardRepository.findBysubsCode(adoptComment.getSubsCode());
+
+        int subsCode = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(CommentNotFoundException::new).getSubsCode();
+
+        SubsBoard subsBoard = subsBoardRepository.findBysubsCode(subsCode);
         if (subsBoard == null) throw new SubsBoardNotFoundException();
 
-        Comment comment = commentRepository.findBySubsCodeAndCommentAdoptedState(adoptComment.getSubsCode(), adoptComment.isCommentAdoptedState());
-        if(comment != null) throw new AlreadyAdoptedSubsBoardException();
+        Comment commentBySubsCode = commentRepository.findBySubsCodeAndCommentAdoptedState(subsCode, adoptComment.isCommentAdoptedState());
+        if(commentBySubsCode != null) throw new AlreadyAdoptedSubsBoardException();
+
+        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
 
         EmployeeWorkingPart writer = employeeWorkingPartRepository
                 .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());

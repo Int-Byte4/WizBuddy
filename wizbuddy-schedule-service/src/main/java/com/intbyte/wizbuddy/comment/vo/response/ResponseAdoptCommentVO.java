@@ -12,4 +12,6 @@ import java.time.LocalDateTime;
 public class ResponseAdoptCommentVO {
     private boolean commentAdoptedState;
     private LocalDateTime updatedAt;
+    private int subsCode;
+    private String employeeCode;
 }
