@@ -116,8 +116,8 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/shop/*", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/register", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/update/*", "PATCH")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 /* UserDetails를 상속받는 Service 계층 + BCrypt 암호화 */
