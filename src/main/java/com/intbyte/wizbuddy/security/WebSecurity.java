@@ -51,8 +51,10 @@ public class WebSecurity {
                         authz
                                 .requestMatchers(new AntPathRequestMatcher("/users/employee", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/users/employer/", "GET")).hasRole("ADMIN")
-                                .requestMatchers(new AntPathRequestMatcher("/users/employee/", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employers", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employees", "GET")).hasRole("ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employer", "GET")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/users/employee", "GET")).hasRole("EMPLOYEE")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer/edit", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employer/delete", "PATCH")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/users/employee/edit", "PATCH")).hasRole("EMPLOYEE")
@@ -116,6 +118,8 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/shop/*", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/register", "POST")).hasRole("EMPLOYER")
                                 .requestMatchers(new AntPathRequestMatcher("/noticeboard/update/*", "PATCH")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 /* UserDetails를 상속받는 Service 계층 + BCrypt 암호화 */

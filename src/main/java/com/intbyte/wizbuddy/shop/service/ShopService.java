@@ -3,7 +3,6 @@ package com.intbyte.wizbuddy.shop.service;
 import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
 import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
-import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
@@ -32,7 +31,6 @@ public class ShopService {
 
     @Transactional
     public ResponseRegisterShopVO registerShop(String employerCode, RegisterShopInfo shopInfo) {
-        if (shopMapper.getEmployerCode(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
@@ -81,7 +79,15 @@ public class ShopService {
 
     @Transactional
     public List<ShopDTO> getAllShop() {
-        return convertToShopDTO(shopRepository.findAll());
+        List<ShopDTO> shopDTOList = new ArrayList<>();
+
+        for (Shop shop : shopRepository.findAll()) {
+            ShopDTO shopDTO = modelMapper.map(shop, ShopDTO.class);
+
+            shopDTOList.add(shopDTO);
+        }
+
+        return shopDTOList;
     }
 
     @Transactional
@@ -92,27 +98,7 @@ public class ShopService {
 
         if (shopDTO == null) throw new ShopNotFoundException();
 
-
         return shopDTO;
-    }
-
-    private List<ShopDTO> convertToShopDTO(List<Shop> shops) {
-        List<ShopDTO> shopDTOList = new ArrayList<>();
-        for (Shop shop : shops) {
-            ShopDTO shopDTO = new ShopDTO(
-                    shop.getShopCode()
-                    , shop.getShopName()
-                    , shop.getShopLocation()
-                    , shop.getShopFlag()
-                    , shop.getShopOpenTime()
-                    , shop.getBusinessNum()
-                    , shop.getCreatedAt()
-                    , shop.getUpdatedAt()
-                    , shop.getEmployerCode());
-
-            shopDTOList.add(shopDTO);
-        }
-        return shopDTOList;
     }
 
     private ShopDTO convertToShopDTO(Shop shop) {
