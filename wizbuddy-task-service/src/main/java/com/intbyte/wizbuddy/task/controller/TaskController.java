@@ -91,7 +91,7 @@ public class TaskController {
     @Operation(summary = "특정 매장에 업무 추가")
     public ResponseEntity<String> insertTask(
             @PathVariable("shopCode") int shopCode,
-            @RequestBody RequestModifyTaskVO request){
+            @RequestBody RequestInsertTaskVO request){
 
         TaskDTO taskDTO = modelMapper.map(request, TaskDTO.class);
 
@@ -106,7 +106,7 @@ public class TaskController {
     public ResponseEntity<String> modifyTask(
             @PathVariable("shopCode") int shopCode,
             @PathVariable("taskCode") int taskCode,
-            @RequestBody RequestInsertTaskVO request
+            @RequestBody RequestModifyTaskVO request
     ) {
         EditTaskInfo editTaskInfo = new EditTaskInfo(request.getTaskContents(), request.isTaskFlag(), request.isTaskFixedState(), request.getUpdatedAt());
         taskService.modifyTask(taskCode, editTaskInfo);
