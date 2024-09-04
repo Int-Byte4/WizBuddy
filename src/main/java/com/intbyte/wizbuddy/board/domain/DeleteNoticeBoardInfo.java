@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class DeleteNoticeBoardInfo {
-    private int noticeCode;
     private boolean noticeFlag;
     private LocalDateTime updatedAt;
+    private String employerCode;
 }
