@@ -9,7 +9,6 @@ import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.mapper.EmployeePerShopMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
-import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,14 +21,12 @@ import java.util.Map;
 public class EmployeePerShopService {
 
     private final EmployeePerShopRepository employeePerShopRepository;
-    private final ShopRepository shopRepository;
     private final EmployeePerShopMapper employeePerShopMapper;
     private final ShopMapper shopMapper;
 
     @Autowired
-    public EmployeePerShopService(EmployeePerShopRepository employeePerShopRepository, ShopRepository shopRepository, EmployeePerShopMapper employeePerShopMapper, ShopMapper shopMapper) {
+    public EmployeePerShopService(EmployeePerShopRepository employeePerShopRepository, EmployeePerShopMapper employeePerShopMapper, ShopMapper shopMapper) {
         this.employeePerShopRepository = employeePerShopRepository;
-        this.shopRepository = shopRepository;
         this.employeePerShopMapper = employeePerShopMapper;
         this.shopMapper = shopMapper;
     }

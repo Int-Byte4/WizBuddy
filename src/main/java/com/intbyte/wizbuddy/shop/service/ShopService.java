@@ -4,7 +4,6 @@ import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
 import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
 import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
-import com.intbyte.wizbuddy.mapper.EmployerMapper;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
@@ -14,7 +13,6 @@ import com.intbyte.wizbuddy.shop.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.repository.ShopRepository;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseEditShopVO;
 import com.intbyte.wizbuddy.shop.vo.response.ResponseRegisterShopVO;
-import com.intbyte.wizbuddy.user.domain.entity.Employer;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -29,13 +27,12 @@ import java.util.List;
 public class ShopService {
 
     private final ShopRepository shopRepository;
-    private final EmployerMapper employerMapper;
     private final ShopMapper shopMapper;
     private final ModelMapper modelMapper;
 
     @Transactional
     public ResponseRegisterShopVO registerShop(String employerCode, RegisterShopInfo shopInfo) {
-        if (employerMapper.getEmployer(employerCode) == null) throw new EmployerNotFoundException();
+        if (shopMapper.getEmployerCode(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
@@ -48,7 +45,7 @@ public class ShopService {
                 .updatedAt(LocalDateTime.now())
                 .employerCode(employerCode)
                 .build();
-        
+
         shopRepository.save(shop);
 
         return new ResponseRegisterShopVO(shopInfo);
@@ -58,7 +55,7 @@ public class ShopService {
     public ResponseEditShopVO modifyShop(String employerCode, EditShopInfo modifyShopInfo) {
         int shopCode = modifyShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        String employer = shopMapper.getEmployerCode(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
@@ -73,7 +70,7 @@ public class ShopService {
     public void deleteShop(String employerCode, DeleteShopInfo deleteShopInfo) {
         int shopCode = deleteShopInfo.getShopCode();
 
-        Employer employer = employerMapper.getEmployer(employerCode);
+        String employer = shopMapper.getEmployerCode(employerCode);
         Shop shop = shopMapper.findShopByShopCode(shopCode);
 
         validateRequest(employer, shop);
@@ -131,8 +128,8 @@ public class ShopService {
                 , shop.getEmployerCode());
     }
 
-    private void validateRequest(Employer employer, Shop shop) {
-        if (!employer.getEmployerCode().equals(shop.getEmployerCode())) {
+    private void validateRequest(String employerCode, Shop shop) {
+        if (!employerCode.equals(shop.getEmployerCode())) {
             throw new ShopModifyOtherEmployerException();
         }
     }

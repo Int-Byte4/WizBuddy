@@ -65,7 +65,7 @@ public class EmployeePerShopController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @DeleteMapping("/delete//employee/{employeeCode}")
+    @DeleteMapping("/delete/employee/{employeeCode}")
     public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable String employeeCode) {
         employeePerShopService.deleteEmployeePerShopByEmployerCode(employeeCode);
 
