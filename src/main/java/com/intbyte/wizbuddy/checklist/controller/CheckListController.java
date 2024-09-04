@@ -6,6 +6,7 @@ import com.intbyte.wizbuddy.checklist.service.CheckListService;
 import com.intbyte.wizbuddy.checklist.vo.request.RequestInsertCheckListVO;
 import com.intbyte.wizbuddy.checklist.vo.request.RequestModifyCheckListVO;
 import com.intbyte.wizbuddy.checklist.vo.response.ResponseFindCheckListVO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,7 @@ public class CheckListController {
 
     // 1. 특정 checkList 조회
     @GetMapping("/checklist/{checkListCode}")
+    @Operation(summary = "특정 체크리스트 조회")
     public ResponseEntity<ResponseFindCheckListVO> getCheckListById(
             @PathVariable("checkListCode") int checkListCode) {
 
@@ -48,6 +50,7 @@ public class CheckListController {
 
     // 2. 특정 매장의 flag가 ture인 모든 checklist 조회
     @GetMapping("/shop/{shopCode}/checklist")
+    @Operation(summary = "특정 매장의 모든 체크리스트 조회")
     public ResponseEntity<List<ResponseFindCheckListVO>> getAllCheckListByShop(
             @PathVariable("shopCode") int shopCode){
 
@@ -71,6 +74,7 @@ public class CheckListController {
 
     // 3. 특정 매장에 체크리스트 1개 등록
     @PostMapping("/shop/{shopCode}/checklist")
+    @Operation(summary = "특정 매장에 체크리스트 등록")
     public ResponseEntity<String> insertCheckList(
             @PathVariable("shopCode") int shopCode,
             @RequestBody RequestInsertCheckListVO request
@@ -84,6 +88,7 @@ public class CheckListController {
 
     // 4, 5. 특정 매장의 특정 체크리스트 수정, 삭제
     @PostMapping("/shop/{shopCode}/checklist/{checkListCode}")
+    @Operation(summary = "특정 체크리스트 수정, 삭제")
     public ResponseEntity<String> modifyCheckList(
             @PathVariable("shopCode") int shopCode,
             @PathVariable("checkListCode") int checkListCode,
