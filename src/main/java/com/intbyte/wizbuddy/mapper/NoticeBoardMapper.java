@@ -8,8 +8,11 @@ import java.util.List;
 
 @Mapper
 public interface NoticeBoardMapper {
-    int findEmployerCodeByNoticeCode(int noticeCode);
-    List<NoticeBoard> findAllNoticeBoards(int shopCode);
+    String findEmployerCodeByNoticeCode(int noticeCode);
 
-    NoticeBoard findNoticeBoard(int noticeCode);
+    List<NoticeBoard> findAllNoticeBoards();
+
+    List<NoticeBoard> findNoticeBoardByShopCode(int shopCode);
+
+    NoticeBoard findNoticeBoardByNoticeCode(int noticeCode);
 }

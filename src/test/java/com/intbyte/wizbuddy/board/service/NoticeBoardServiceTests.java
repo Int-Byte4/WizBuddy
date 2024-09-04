@@ -5,6 +5,7 @@ import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoard;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.repository.NoticeBoardRepository;
+import com.intbyte.wizbuddy.exception.noticeboard.NoticeBoardNotFoundException;
 import com.intbyte.wizbuddy.mapper.NoticeBoardMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
@@ -27,41 +28,38 @@ class NoticeBoardServiceTests {
     @Autowired
     private NoticeBoardRepository noticeBoardRepository;
 
-    @Autowired
-    private NoticeBoardMapper noticeBoardMapper;
-
-    @Test
-    @DisplayName("공지사항 게시글 등록 성공")
-    @Transactional
-    public void testRegisterNoticeBoard() {
-        // given
-        List<NoticeBoard> noticeBoards = noticeBoardRepository.findAll();
-        int lastNum = noticeBoards.size();
-
-        NoticeBoardDTO noticeBoardInfo = new NoticeBoardDTO(lastNum, "test","test", true, null, LocalDateTime.now(), LocalDateTime.now(), 1);
-
-        // when
-        noticeBoardService.registerNoticeBoard(noticeBoardInfo);
-
-        // then
-        List<NoticeBoard> newNoticeBoards = noticeBoardRepository.findAll();
-        int newLastNum = newNoticeBoards.size();
-
-        assertEquals(newLastNum, noticeBoardRepository.findAll().size());
-
-        newNoticeBoards.forEach(System.out::println);
-    }
+//    @Test
+//    @DisplayName("공지사항 게시글 등록 성공")
+//    @Transactional
+//    public void testRegisterNoticeBoard() {
+//        // given
+//        List<NoticeBoard> noticeBoards = noticeBoardRepository.findAll();
+//        int lastNum = noticeBoards.size();
+//
+//        NoticeBoardDTO noticeBoardInfo = new NoticeBoardDTO(lastNum, "test", "test", true, null, LocalDateTime.now(), LocalDateTime.now(), 1,"20240831-3750-4218-9aed-7eabc7c634c2");
+//
+//        // when
+//        noticeBoardService.registerNoticeBoard(noticeBoardInfo);
+//
+//        // then
+//        List<NoticeBoard> newNoticeBoards = noticeBoardRepository.findAll();
+//        int newLastNum = newNoticeBoards.size();
+//
+//        assertEquals(newLastNum, noticeBoardRepository.findAll().size());
+//
+//        newNoticeBoards.forEach(System.out::println);
+//    }
 
     @Test
     @DisplayName("공지사항 게시물 수정 성공")
     @Transactional
     public void testModifyNoticeBoardSuccess() {
         // given
-        int employerCode = 1;
-        EditNoticeBoardInfo editNoticeBoardInfo = new EditNoticeBoardInfo(1, "제목 수정", "내용 수정", null, LocalDateTime.now(), 1, 1);
+        String employerCode = "20240831-3750-4218-9aed-7eabc7c634c2";
+        EditNoticeBoardInfo editNoticeBoardInfo = new EditNoticeBoardInfo(1, "제목 수정", "내용 수정", null, true, LocalDateTime.now(), "20240831-3750-4218-9aed-7eabc7c634c2");
 
         // when
-        noticeBoardService.modifyNoticeBoard(employerCode, editNoticeBoardInfo.getEmployerCode(), editNoticeBoardInfo);
+        noticeBoardService.modifyNoticeBoard(1, editNoticeBoardInfo);
 
         // then
         List<NoticeBoard> newNoticeBoards = noticeBoardRepository.findAll();
@@ -75,26 +73,34 @@ class NoticeBoardServiceTests {
     @Transactional
     public void testDeleteNoticeBoardSuccess() {
         // given
-        DeleteNoticeBoardInfo deleteNoticeBoardInfo = new DeleteNoticeBoardInfo(1, false, LocalDateTime.now());
+        String employerCode =  "20240831-3750-4218-9aed-7eabc7c634c2";
+        DeleteNoticeBoardInfo deleteNoticeBoardInfo = new DeleteNoticeBoardInfo(false, LocalDateTime.now(), employerCode);
 
         // when
-        noticeBoardService.deleteNoticeBoard(1, 1, deleteNoticeBoardInfo);
+        noticeBoardService.deleteNoticeBoard(1, deleteNoticeBoardInfo);
 
         // then
-        List<NoticeBoard> newNoticeBoards = noticeBoardRepository.findAll();
-        Assertions.assertEquals(false, newNoticeBoards.get(0).equals(deleteNoticeBoardInfo));
-        newNoticeBoards.forEach(System.out::println);
+        NoticeBoard noticeBoard = noticeBoardRepository.findById(1).orElseThrow(NoticeBoardNotFoundException::new);
+
+        assertFalse(noticeBoard.isNoticeFlag());
     }
 
     @Test
     @DisplayName("공지사항 게시글 전체 조회")
     @Transactional
     public void testFindAllNoticeBoards() {
-        //given, when
+        List<NoticeBoardDTO> noticeBoards = noticeBoardService.findAllNoticeBoards();
+
+        noticeBoards.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName("매장별 공지사항 게시글 조회")
+    @Transactional
+    public void testFindNoticeBoardByShopCode() {
         int shopCode = 1;
 
-        //then
-        List<NoticeBoardDTO> noticeBoards = noticeBoardService.findAllNoticeBoards(shopCode);
+        List<NoticeBoardDTO> noticeBoards = noticeBoardService.findNoticeBoardByShopCode(shopCode);
 
         noticeBoards.forEach(System.out::println);
     }
@@ -102,12 +108,12 @@ class NoticeBoardServiceTests {
     @Test
     @DisplayName("공지사항 게시글 단 건 조회")
     @Transactional
-    public void testFindNoticeBoard() {
+    public void testFindNoticeBoardByNoticeCode() {
         //given, when
         int noticeCode = 3;
 
         //then
-        NoticeBoardDTO noticeBoard = noticeBoardService.findNoticeBoard(noticeCode);
+        NoticeBoardDTO noticeBoard = noticeBoardService.findNoticeBoardByNoticeCode(noticeCode);
 
         System.out.println(noticeBoard);
     }

@@ -35,9 +35,9 @@ public class ManualBoardController {
     // 1. 매뉴얼 게시판 전체 조회
     @GetMapping
     public ResponseEntity<List<ResponseFindManualBoardVO>> getAllManualBoards() {
-        List<ManualBoardDTO> manualBoardDTOS = manualBoardService.findAllManualBoards();
+        List<ManualBoardDTO> manualBoardDTOs = manualBoardService.findAllManualBoards();
 
-        List<ResponseFindManualBoardVO> manualBoardVOs = manualBoardDTOS.stream()
+        List<ResponseFindManualBoardVO> manualBoardVOs = manualBoardDTOs.stream()
                 .map(dto -> ResponseFindManualBoardVO.builder()
                         .manualCode(dto.getManualCode())
                         .manualTitle(dto.getManualTitle())

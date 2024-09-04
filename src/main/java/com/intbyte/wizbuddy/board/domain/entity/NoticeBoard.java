@@ -2,10 +2,7 @@ package com.intbyte.wizbuddy.board.domain.entity;
 
 import com.intbyte.wizbuddy.board.domain.DeleteNoticeBoardInfo;
 import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -20,30 +17,34 @@ import java.time.LocalDateTime;
 @Builder
 public class NoticeBoard {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="notice_code")
     private int noticeCode;
 
-    @Column
+    @Column(name="notice_title")
     private String noticeTitle;
 
-    @Column
+    @Column(name="notice_content")
     private String noticeContent;
 
-    @Column
+    @Column(name="notice_flag")
     @ColumnDefault("true")
     private boolean noticeFlag;
 
-    @Column
+    @Column(name="image_url")
     private String imageUrl;
 
-    @Column
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @Column
+    @Column(name="shop_code")
     private int shopCode;
+
+    @Column(name="employer_code")
+    private String employerCode;
 
     public void modify(EditNoticeBoardInfo modifyNoticeBoardInfo) {
         this.noticeTitle = modifyNoticeBoardInfo.getNoticeTitle();
@@ -53,7 +54,7 @@ public class NoticeBoard {
     }
 
     public void delete(DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
-        this.noticeFlag = false;
-        this.updatedAt = LocalDateTime.now();
+        this.noticeFlag = deleteNoticeBoardInfo.isNoticeFlag();
+        this.updatedAt = deleteNoticeBoardInfo.getUpdatedAt();
     }
 }
