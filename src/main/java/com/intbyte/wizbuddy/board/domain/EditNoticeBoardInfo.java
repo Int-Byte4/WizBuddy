@@ -14,7 +14,7 @@ public class EditNoticeBoardInfo {
     private String noticeTitle;
     private String noticeContent;
     private String imageUrl;
+    private boolean noticeFlag;
     private LocalDateTime updatedAt;
-    private int shopCode;
-    private int employerCode;
+    private String employerCode;
 }
