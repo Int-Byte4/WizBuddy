@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.intbyte.wizbuddy.mapper.TaskPerCheckListMapper">
+    <resultMap id="taskPerChecklistResultMap" type="com.intbyte.wizbuddy.taskperchecklist.domain.TaskPerCheckListMybatis">
+
+        <id property="taskCode" column="task_code"/>
+        <id property="checkListCode" column="checklist_code"/>
+
+        <result property="taskFinishedState" column="task_finished_state"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="employeeCode" column="employee_code"/>
+    </resultMap>
+
+    <!-- 전체 TaskPerCheckList 조회 -->
+    <select id="findAllTaskPerCheckList" resultMap="taskPerChecklistResultMap">
+      SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+    </select>
+
+    <!-- 특정 TaskPerCheckList 조회 -->
+    <select id="findTaskPerCheckListById" parameterType="map" resultMap="taskPerChecklistResultMap">
+      SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+        WHERE TASK_CODE = #{ taskCode } AND CHECKLIST_CODE = #{ checkListCode }
+    </select>
+
+    <!-- 특정 checklist의 완료된 task 조회 -->
+    <select id="findAllTaskPerCheckListFinished" parameterType="String" resultMap="taskPerChecklistResultMap">
+       SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+        WHERE employee_code = #{ employeeCode } AND task_finished_state = true
+    </select>
+
+
+    <!-- 특정 체크리스트에 속한 모든 task 조회 -->
+    <select id="findAllTaskPerCheckListByCheckListCode" parameterType="int" resultMap="taskPerChecklistResultMap">
+      SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode }
+    </select>
+
+    <!-- 특정 체크리스트의 완료된(task_finished_state가 true인) 모든 task 조회 -->
+    <select id="findAllTaskPerCheckListByCheckListCodeByFinished" parameterType="int" resultMap="taskPerChecklistResultMap">
+      SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode } AND A.task_finished_state = true
+    </select>
+
+    <!-- 특정 체크리스트의 완료된(task_finished_state가 false인) 모든 task 조회 -->
+    <select id="findAllTaskPerCheckListByCheckListCodeByNonFinished" parameterType="int" resultMap="taskPerChecklistResultMap">
+      SELECT
+              A.TASK_CODE
+            , A.CHECKLIST_CODE
+            , A.TASK_FINISHED_STATE
+            , A.CREATED_AT
+            , A.UPDATED_AT
+            , A.EMPLOYEE_CODE
+         FROM taskperchecklist A
+        WHERE A.checklist_code = #{ checkListCode } AND A.task_finished_state = false
+    </select>
+</mapper>
