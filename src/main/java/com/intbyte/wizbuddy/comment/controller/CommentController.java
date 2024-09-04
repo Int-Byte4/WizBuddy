@@ -8,6 +8,7 @@ import com.intbyte.wizbuddy.comment.vo.request.RequestDeleteCommentVO;
 import com.intbyte.wizbuddy.comment.vo.request.RequestInsertCommentVO;
 import com.intbyte.wizbuddy.comment.vo.request.RequestModifyCommentVO;
 import com.intbyte.wizbuddy.comment.vo.response.*;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,7 @@ public class CommentController {
     private final ModelMapper modelMapper;
 
     @GetMapping
+    @Operation(summary = "댓글 전체 조회")
     public ResponseEntity<List<ResponseFindCommentVO>> getAllComments() {
         List<CommentDTO> commentDTOs = commentService.findAllComment();
 
@@ -46,6 +48,7 @@ public class CommentController {
     }
 
     @GetMapping("/{commentCode}")
+    @Operation(summary = "댓글 1개 조회")
     public ResponseEntity<ResponseFindCommentVO> getCommentById(@PathVariable("commentCode") int commentCode) {
         CommentDTO commentDTO = commentService.findCommentById(commentCode);
 
@@ -64,8 +67,8 @@ public class CommentController {
     }
 
 
-    // 3. subsCode로 댓글 조회
     @GetMapping("/subs/{subsCode}")
+    @Operation(summary = "게시글별 댓글 전체 조회")
     public ResponseEntity<List<ResponseFindCommentVO>> getCommentsBySubsCode(@PathVariable("subsCode") int subsCode) {
         List<CommentDTO> commentDTOs = commentService.getCommentsBySubsCode(subsCode);
 
@@ -85,8 +88,8 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
-    // 4. employeeCode로 댓글 조회
     @GetMapping("/employee/{employeeCode}")
+    @Operation(summary = "직원별 댓글 전체 조회")
     public ResponseEntity<List<ResponseFindCommentVO>> getCommentsByEmployeeCode(@PathVariable("employeeCode") String employeeCode) {
         List<CommentDTO> commentDTOs = commentService.getCommentsByEmployeeCode(employeeCode);
         List<ResponseFindCommentVO> comments = commentDTOs.stream()
@@ -104,27 +107,24 @@ public class CommentController {
         return ResponseEntity.ok(comments);
     }
 
-    // 5. 새로운 댓글 등록
     @PostMapping
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "댓글 등록")
     public ResponseEntity<ResponseInsertCommentVO> registerComment(@RequestBody RequestInsertCommentVO request) {
         CommentDTO commentDTO = modelMapper.map(request, CommentDTO.class);
         ResponseInsertCommentVO responseComment = commentService.registerComment(commentDTO);
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    // 6. 댓글 수정
     @PatchMapping("/update/{commentCode}")
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "댓글 수정")
     public ResponseEntity<ResponseModifyCommentVO> modifyComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestModifyCommentVO request) {
         EditCommentInfo editCommentInfo = modelMapper.map(request, EditCommentInfo.class);
         ResponseModifyCommentVO responseComment = commentService.modifyComment(commentCode, editCommentInfo);
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    // 7. 댓글 삭제
     @PatchMapping("/delete/{commentCode}")
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @Operation(summary = "댓글 삭제")
     public ResponseEntity<ResponseDeleteCommentVO> removeComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestDeleteCommentVO request) {
         CommentDTO deleteComment = modelMapper.map(request, CommentDTO.class);
         deleteComment.setCommentCode(commentCode);
@@ -132,9 +132,8 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    // 8. 댓글 채택
     @PatchMapping("/adopt/{commentCode}")
-    @PreAuthorize("hasRole('EMPLOYER')")
+    @Operation(summary = "댓글 채택")
     public ResponseEntity<ResponseAdoptCommentVO> adoptComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestAdoptCommentVO request) {
         CommentDTO adoptComment = modelMapper.map(request, CommentDTO.class);
         adoptComment.setCommentCode(commentCode);

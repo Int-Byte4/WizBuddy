@@ -11,6 +11,7 @@ import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseFindSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class SubsBoardController {
     private final ModelMapper modelMapper;
 
     @GetMapping
+    @Operation(summary = "대타게시글 전체 조회")
     public ResponseEntity<List<ResponseFindSubsBoardVO>> getAllSubsBoards() {
         List<SubsBoardDTO> subsBoardDTOs = subsBoardService.findAllSubsBoards();
 
@@ -50,6 +52,7 @@ public class SubsBoardController {
     }
 
     @GetMapping("/{subsCode}")
+    @Operation(summary = "대타게시글 1개 조회")
     public ResponseEntity<ResponseFindSubsBoardVO> getSubsBoardById(@PathVariable("subsCode") int subsCode) {
         SubsBoardDTO subsBoardDTO = subsBoardService.findSubsBoardById(subsCode);
 
@@ -68,6 +71,7 @@ public class SubsBoardController {
     }
 
     @GetMapping("/shop/{shopCode}")
+    @Operation(summary = "매장별 대타게시글 전체 조회")
     public ResponseEntity<List<ResponseFindSubsBoardVO>> getSubsBoardsByShopCode(@PathVariable("shopCode") int shopCode) {
         List<SubsBoardDTO> subsBoardDTOs = subsBoardService.getSubsBoardsByShopCode(shopCode);
 
@@ -88,7 +92,7 @@ public class SubsBoardController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('EMPLOYER')")
+    @Operation(summary = "대타게시글 등록")
     public ResponseEntity<ResponseInsertSubsBoardVO> createSubsBoard(@RequestBody RequestInsertSubsBoardVO requestInsertSubsBoardVO) {
         SubsBoardDTO subsBoardEntity = modelMapper.map(requestInsertSubsBoardVO, SubsBoardDTO.class);
         ResponseInsertSubsBoardVO responseBoard = subsBoardService.registSubsBoard(subsBoardEntity);
@@ -96,7 +100,7 @@ public class SubsBoardController {
     }
 
     @PatchMapping("/update/{subsCode}")
-    @PreAuthorize("hasRole('EMPLOYER')")
+    @Operation(summary = "대타게시글 수정")
     public ResponseEntity<ResponseModifySubsBoardVO> updateSubsBoard(
             @PathVariable("subsCode") int subsCode,
             @RequestBody RequestModifySubsBoardVO requestModify) {
@@ -106,7 +110,7 @@ public class SubsBoardController {
     }
 
     @PatchMapping("/delete/{subsCode}")
-    @PreAuthorize("hasRole('EMPLOYER')")
+    @Operation(summary = "대타게시글 삭제")
     public ResponseEntity<ResponseDeleteSubsBoardVO> deleteSubsBoard(
             @PathVariable("subsCode") int subsCode,
             @RequestBody RequestDeleteSubsBoardVO requestDeleteSubsBoardVO) {
