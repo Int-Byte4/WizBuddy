@@ -152,34 +152,4 @@ public class ScheduleService {
 
         employeeWorkingPartRepository.delete(employeeWorkingPart);
     }
-
-    @Transactional
-    public void editScheduleByComment(int subsCode, boolean subsFlag, String employeeCode) {
-
-        SubsBoard subsBoard = subsBoardRepository.findBysubsCodeAndSubsFlag(subsCode, subsFlag);
-        if (subsBoard == null) throw new SubsBoardNotFoundException();
-
-        EmployeeWorkingPart writer = employeeWorkingPartRepository
-                .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
-
-        Comment comment = commentRepository.findBySubsCodeAndEmployeeCode(subsCode,employeeCode);
-
-        List<EmployeeWorkingPart> commentAuthor = employeeWorkingPartRepository
-                .findByEmployeeCode(comment.getEmployeeCode());
-
-        EmployeeWorkingPart nonMatchingCommentAuthors = commentAuthor.stream()
-                .filter(author -> !Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime())
-                        || !Objects.equals(author.getWorkingDate(), writer.getWorkingDate()))
-                .findFirst()
-                .orElseThrow(WorkingPartCodeNotEqualsException::new);
-
-        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
-                .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
-        if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
-
-        employeeWorkingPart.modifyWorkingPart(nonMatchingCommentAuthors.getEmployeeCode());
-        employeeWorkingPartRepository.save(employeeWorkingPart);
-    }
-
-
 }

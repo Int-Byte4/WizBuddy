@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.comment.service;
 
+import com.intbyte.wizbuddy.board.domain.entity.SubsBoard;
+import com.intbyte.wizbuddy.board.repository.SubsBoardRepository;
 import com.intbyte.wizbuddy.comment.domain.EditCommentInfo;
 import com.intbyte.wizbuddy.comment.domain.Entity.Comment;
 import com.intbyte.wizbuddy.comment.dto.CommentDTO;
@@ -8,15 +10,24 @@ import com.intbyte.wizbuddy.comment.vo.response.ResponseAdoptCommentVO;
 import com.intbyte.wizbuddy.comment.vo.response.ResponseDeleteCommentVO;
 import com.intbyte.wizbuddy.comment.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.vo.response.ResponseModifyCommentVO;
+import com.intbyte.wizbuddy.exception.board.AlreadyAdoptedSubsBoardException;
+import com.intbyte.wizbuddy.exception.board.SubsBoardNotFoundException;
 import com.intbyte.wizbuddy.exception.comment.CommentNotFoundException;
+import com.intbyte.wizbuddy.exception.schedule.ScheduleNotFoundException;
+import com.intbyte.wizbuddy.exception.schedule.WorkingPartCodeNotEqualsException;
 import com.intbyte.wizbuddy.mapper.CommentMapper;
+import com.intbyte.wizbuddy.schedule.domain.entity.EmployeeWorkingPart;
+import com.intbyte.wizbuddy.schedule.repository.EmployeeWorkingPartRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +37,8 @@ public class CommentService {
     private final CommentMapper commentMapper;
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
+    private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
+    private final SubsBoardRepository subsBoardRepository;
 
 
     public List<CommentDTO> findAllComment() {
@@ -93,9 +106,32 @@ public class CommentService {
 
     @Transactional
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
-        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(CommentNotFoundException::new);
+        SubsBoard subsBoard = subsBoardRepository.findBysubsCode(adoptComment.getSubsCode());
+        if (subsBoard == null) throw new SubsBoardNotFoundException();
+
+        Comment comment = commentRepository.findBySubsCodeAndCommentAdoptedState(adoptComment.getSubsCode(), adoptComment.isCommentAdoptedState());
+        if(comment != null) throw new AlreadyAdoptedSubsBoardException();
+
+        EmployeeWorkingPart writer = employeeWorkingPartRepository
+                .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
+
+        List<EmployeeWorkingPart> commentAuthor = employeeWorkingPartRepository
+                .findByEmployeeCode(comment.getEmployeeCode());
+
+        EmployeeWorkingPart matchingCommentAuthor = commentAuthor.stream()
+                .filter(author -> Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime()))
+                .findFirst()
+                .orElseThrow(WorkingPartCodeNotEqualsException::new);
+
+        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
+                .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
+        if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
+
         comment.toAdopt();
+        employeeWorkingPart.modifyWorkingPart(matchingCommentAuthor.getEmployeeCode());
         commentRepository.save(comment);
+        employeeWorkingPartRepository.save(employeeWorkingPart);
+
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
 

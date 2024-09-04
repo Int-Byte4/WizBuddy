@@ -122,19 +122,6 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
     }
 
-    @PatchMapping("modify")
-    @Operation(summary = "댓글 채택으로 스케줄 수정")
-    public ResponseEntity<ResponseModifyScheduleByCommentVO> editScheduleByComment(
-            @RequestBody RequestModifyScheduleByCommentVO request) {
-
-        scheduleService.editScheduleByComment(request.getSubsCode(), request.isSubsFlag(), request.getEmployeeCode());
-
-        ResponseModifyScheduleByCommentVO editSchedule = modelMapper
-                .map(request, ResponseModifyScheduleByCommentVO.class);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
-    }
-
     @DeleteMapping("delete/{workingPartCode}")
     @Operation(summary = "스케줄 삭제")
     public ResponseEntity<Void> deleteSchedule(
