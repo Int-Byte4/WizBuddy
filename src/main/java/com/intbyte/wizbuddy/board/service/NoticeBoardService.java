@@ -34,7 +34,6 @@ public class NoticeBoardService {
         this.modelMapper = modelMapper;
     }
 
-    /* 기능. 1. 공지사항 게시판 게시글 등록 */
     @Transactional
     public ResponseInsertNoticeBoardVO registerNoticeBoard(RequestInsertNoticeBoardVO noticeBoardInfo) {
         NoticeBoard noticeBoard = NoticeBoard.builder()
@@ -64,10 +63,8 @@ public class NoticeBoardService {
         return vo;
     }
 
-    /* 기능. 2. 공지사항 게시판 게시글 수정 */
     @Transactional
     public ResponseUpdateNoticeBoardVO modifyNoticeBoard(int noticeCode, EditNoticeBoardInfo modifyNoticeBoardInfo) {
-        // 유저가 해당 매장 사장인지 확인
         String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
 
         if (writerCode != null && writerCode.equals(modifyNoticeBoardInfo.getEmployerCode())) {
@@ -83,17 +80,14 @@ public class NoticeBoardService {
                     .imageUrl(noticeBoard.getImageUrl())
                     .updatedAt(LocalDateTime.now())
                     .build();
-
             return vo;
         } else {
             throw new NoticeBoardModifyOtherUserException();
         }
     }
 
-    /* 기능. 3. 공지사항 게시판 게시글 삭제 */
     @Transactional
     public void deleteNoticeBoard(int noticeCode, DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
-        // 유저가 공지사항 게시글 작성자인지 확인
 
         String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
 
@@ -109,7 +103,6 @@ public class NoticeBoardService {
         }
     }
 
-    /* 기능. 4. 전체 공지사항 게시글 조회 */
     @Transactional
     public List<NoticeBoardDTO> findAllNoticeBoards() {
         List<NoticeBoard> noticeBoardList = noticeBoardMapper.findAllNoticeBoards();
@@ -120,7 +113,6 @@ public class NoticeBoardService {
                 .collect(Collectors.toList());
     }
 
-    /* 기능. 5. 매장별 공지사항 게시글 조회 */
     @Transactional
     public List<NoticeBoardDTO> findNoticeBoardByShopCode(int shopCode) {
         List<NoticeBoard> noticeBoardList = noticeBoardMapper.findNoticeBoardByShopCode(shopCode);
@@ -130,7 +122,6 @@ public class NoticeBoardService {
                 .collect(Collectors.toList());
     }
 
-    /* 기능 6. 공지사항 게시글 단 건 조회 */
     @Transactional
     public NoticeBoardDTO findNoticeBoardByNoticeCode(int noticeCode) {
         NoticeBoard noticeBoard = noticeBoardMapper.findNoticeBoardByNoticeCode(noticeCode);

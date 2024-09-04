@@ -6,7 +6,6 @@ import com.intbyte.wizbuddy.board.domain.entity.ManualBoard;
 import com.intbyte.wizbuddy.board.dto.ManualBoardDTO;
 import com.intbyte.wizbuddy.board.repository.ManualBoardRepository;
 import com.intbyte.wizbuddy.board.vo.request.RequestInsertManualBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseFindManualBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertManualBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateManualBoardVO;
 import com.intbyte.wizbuddy.exception.manualboard.ManualBoardModifyOtherUserException;
@@ -72,6 +71,9 @@ public class ManualBoardService {
     public ResponseUpdateManualBoardVO modifyManualBoard(int manualCode, EditManualBoardInfo modifyManualBoardInfo) {
         // 유저가 매뉴얼 게시글 작성자인지 확인
         String writerCode = manualBoardMapper.findUserCodeByManualCode(manualCode);
+
+        System.out.println("writerCode = " + writerCode);
+        System.out.println("modifyManualBoardInfo.getUserCode() = " + modifyManualBoardInfo.getUserCode());
         
         if(writerCode != null && writerCode.equals(modifyManualBoardInfo.getUserCode())) {
             // 게시글 코드로 해당 게시글이 레포지토리에 존재하는지 확인

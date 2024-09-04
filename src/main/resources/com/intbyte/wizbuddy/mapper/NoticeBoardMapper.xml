@@ -17,58 +17,58 @@
 
     <select id="findEmployerCodeByNoticeCode" parameterType="int" resultType="string">
         SELECT
-               N.employer_code
-          FROM notice_board N
-         WHERE N.notice_code = #{ noticeCode }
-           AND N.notice_flag = true
+        N.employer_code
+        FROM notice_board N
+        WHERE N.notice_code = #{ noticeCode }
+        AND N.notice_flag = true
     </select>
 
     <select id="findAllNoticeBoards" resultMap="noticeBoardResultMap">
         SELECT
-               N.notice_code
-             , N.notice_title
-             , N.notice_content
-             , N.notice_flag
-             , N.image_url
-             , N.created_at
-             , N.updated_at
-             , N.shop_code
-             , N.employer_code
-          FROM notice_board N
-         WHERE N.notice_flag = true
-         ORDER BY N.created_at DESC
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.notice_flag = true
+        ORDER BY N.created_at DESC
     </select>
 
     <select id="findNoticeBoardByShopCode" resultMap="noticeBoardResultMap" parameterType="int">
         SELECT
-               N.notice_code
-             , N.notice_title
-             , N.notice_content
-             , N.notice_flag
-             , N.image_url
-             , N.created_at
-             , N.updated_at
-             , N.shop_code
-             , N.employer_code
-          FROM notice_board N
-         WHERE N.shop_code = #{ shopCode }
-           AND N.notice_flag = true
-         ORDER BY N.created_at DESC
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.shop_code = #{ shopCode }
+        AND N.notice_flag = true
+        ORDER BY N.created_at DESC
     </select>
 
     <select id="findNoticeBoardByNoticeCode" resultMap="noticeBoardResultMap" parameterType="int">
         SELECT
-               N.notice_code
-             , N.notice_title
-             , N.notice_content
-             , N.notice_flag
-             , N.image_url
-             , N.created_at
-             , N.updated_at
-             , N.shop_code
-             , N.employer_code
-          FROM notice_board N
-         WHERE N.notice_code = #{ notice_code }
-           AND N.notice_flag = true
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.notice_code = #{ notice_code }
+        AND N.notice_flag = true
     </select>
 </mapper>
