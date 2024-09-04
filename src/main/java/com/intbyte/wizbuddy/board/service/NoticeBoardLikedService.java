@@ -18,7 +18,6 @@ public class NoticeBoardLikedService {
         this.noticeBoardLikedRepository = noticeBoardLikedRepository;
     }
 
-    /* 기능. 1. 공지사항 게시글 좋아요 추가 */
     @Transactional
     public void registerNoticeBoardLike(NoticeBoardLikedDTO noticeBoardLikedInfo) {
 

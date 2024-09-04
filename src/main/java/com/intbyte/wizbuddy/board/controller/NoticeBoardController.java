@@ -28,7 +28,6 @@ public class NoticeBoardController {
         this.noticeBoardService = noticeBoardService;
     }
 
-    // 1. 공지사항 게시판 전체 조회
     @GetMapping
     public ResponseEntity<List<ResponseFindNoticeBoardVO>> getAllNoticeBoards() {
         List<NoticeBoardDTO> noticeBoardDTOs = noticeBoardService.findAllNoticeBoards();
@@ -50,7 +49,6 @@ public class NoticeBoardController {
         return ResponseEntity.ok(noticeBoardVOs);
     }
 
-    // 2. 매장별 공지사항 게시글 조회
     @GetMapping("/shop/{shopCode}")
     public ResponseEntity<List<ResponseFindNoticeBoardVO>> getNoticeBoardByShopCode(@PathVariable("shopCode") int shopCode) {
         List<NoticeBoardDTO> noticeBoardDTOs = noticeBoardService.findNoticeBoardByShopCode(shopCode);
@@ -72,7 +70,6 @@ public class NoticeBoardController {
         return ResponseEntity.ok(noticeBoardVOs);
     }
 
-    // 3. 공지사항 게시글 단 건 조회
     @GetMapping("/{noticecode}")
     public ResponseEntity<ResponseFindNoticeBoardVO> findNoticeBoardByNoticeCode(@PathVariable("noticecode") int noticeCode) {
         NoticeBoardDTO noticeBoardDTO = noticeBoardService.findNoticeBoardByNoticeCode(noticeCode);
@@ -91,8 +88,8 @@ public class NoticeBoardController {
 
         return ResponseEntity.ok(noticeBoardVO);
     }
-    // 4. 새로운 공지사항 게시글 등록
-    @PostMapping
+
+    @PostMapping("/register")
     public ResponseEntity<ResponseInsertNoticeBoardVO> insertNoticeBoard (
             @RequestBody RequestInsertNoticeBoardVO requestInsertNoticeBoardVO) {
 
@@ -100,7 +97,7 @@ public class NoticeBoardController {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-    // 5. 공지사항 게시글 수정, 삭제
+
     @PatchMapping("update/{noticecode}")
     public ResponseEntity<ResponseUpdateNoticeBoardVO> updateNoticeBoard(
             @PathVariable("noticecode") int noticeCode,

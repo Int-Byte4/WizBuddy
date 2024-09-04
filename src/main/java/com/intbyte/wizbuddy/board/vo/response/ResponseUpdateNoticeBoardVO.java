@@ -12,13 +12,9 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class ResponseUpdateNoticeBoardVO {
-    private int noticeCode;
     private String noticeTitle;
     private String noticeContent;
     private boolean noticeFlag;
     private String imageUrl;
-    private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private int shopCode;
-    private String employerCode;
 }

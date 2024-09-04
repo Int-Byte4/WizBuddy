@@ -18,18 +18,18 @@ import java.time.LocalDateTime;
 public class NoticeBoardLiked {
 
     @Id
-    @Column
+    @Column(name="notice_liked_code")
     private int noticeLikedCode;
 
-    @Column
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="employee_code")
     private int shopCode;
 
-    @Column
+    @Column(name="shop_code")
     private int noticeCode;
 
-    @Column
+    @Column(name="notice_code")
     private String employeeCode;
 }

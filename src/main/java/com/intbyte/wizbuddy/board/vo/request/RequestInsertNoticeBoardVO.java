@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 @Getter
 @Builder
 public class RequestInsertNoticeBoardVO {
-    private int noticeCode;
     private String noticeTitle;
     private String noticeContent;
     private boolean noticeFlag;
