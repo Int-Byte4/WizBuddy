@@ -2,9 +2,9 @@ package com.intbyte.wizbuddy.user.service;
 
 import com.intbyte.wizbuddy.exception.user.UserNotFoundException;
 import com.intbyte.wizbuddy.mapper.EmployeeMapper;
-import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.domain.info.DeleteEmployeeInfo;
 import com.intbyte.wizbuddy.user.domain.info.EditEmployeeInfo;
+import com.intbyte.wizbuddy.user.domain.entity.Employee;
 import com.intbyte.wizbuddy.user.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.user.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;
@@ -12,6 +12,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -54,5 +57,17 @@ public class EmployeeService {
         EmployeeDTO employeeDTO = mapper.map(employee, EmployeeDTO.class);
 
         return employeeDTO;
+    }
+
+    public List<EmployeeDTO> findAllEmployee() {
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+
+        for (Employee employee : employeeRepository.findAll()) {
+            EmployeeDTO employeeDTO = mapper.map(employee, EmployeeDTO.class);
+
+            employeeDTOList.add(employeeDTO);
+        }
+
+        return employeeDTOList;
     }
 }

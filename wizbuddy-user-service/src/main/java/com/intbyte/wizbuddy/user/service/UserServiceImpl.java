@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
-        if (employeeMapper.getEmployeeByEmail(registerEmployerInfo.getEmployerEmail()) != null && employeeMapper.getEmployeeByEmail(registerEmployerInfo.getEmployerEmail()) != null) throw new EmailDuplicateException();
+        if (employerMapper.getEmployerByEmail(registerEmployerInfo.getEmployerEmail()) != null && employerMapper.getEmployerByEmail(registerEmployerInfo.getEmployerEmail()) != null) throw new EmailDuplicateException();
 
         registerEmployerInfo.setEmployerCode(customUserCode);
 
