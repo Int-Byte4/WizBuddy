@@ -1,26 +1,27 @@
-package com.intbyte.wizbuddy.board.service;
+package com.intbyte.wizbuddy.like.service;
 
-import com.intbyte.wizbuddy.board.domain.entity.ManualBoardLiked;
-import com.intbyte.wizbuddy.board.dto.ManualBoardLikedDTO;
-import com.intbyte.wizbuddy.board.repository.ManualBoardLikedRepository;
-import com.intbyte.wizbuddy.mapper.ManualBoardLikedMapper;
+import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
+import com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked;
+import com.intbyte.wizbuddy.like.dto.ManualBoardLikedDTO;
+import com.intbyte.wizbuddy.like.repository.ManualBoardLikedRepository;
+import com.intbyte.wizbuddy.like.vo.response.ResponseInsertManualBoardLikeVO;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class ManualBoardLikedService {
 
     private final ManualBoardLikedRepository manualBoardLikedRepository;
 
-    public ManualBoardLikedService(ManualBoardLikedRepository manualBoardLikedRepository) {
-        this.manualBoardLikedRepository = manualBoardLikedRepository;
-    }
+    private final ModelMapper modelMapper;
 
-    /* 기능. 1. 매뉴얼 게시글 좋아요 추가 */
     @Transactional
-    public void registerManualBoardLike(ManualBoardLikedDTO manualBoardLikedInfo) {
+    public ResponseInsertManualBoardLikeVO registerManualBoardLike(ManualBoardLikedDTO manualBoardLikedInfo) {
 
         ManualBoardLiked manualBoardLiked = ManualBoardLiked.builder()
                 .manualLikedCode(manualBoardLikedInfo.getManualLikedCode())
@@ -31,6 +32,7 @@ public class ManualBoardLikedService {
                 .build();
 
         manualBoardLikedRepository.save(manualBoardLiked);
+        return modelMapper.map(manualBoardLiked, ResponseInsertManualBoardLikeVO.class);
     }
 
 

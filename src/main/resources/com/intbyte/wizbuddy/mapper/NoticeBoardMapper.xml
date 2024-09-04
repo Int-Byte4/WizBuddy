@@ -3,54 +3,72 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.mapper.NoticeBoardMapper">
-<resultMap id="noticeBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.NoticeBoard">
-    <id property="noticeCode" column="notice_code"/>
-    <result property="noticeTitle" column="notice_title"/>
-    <result property="noticeContent" column="notice_content"/>
-    <result property="noticeFlag" column="notice_flag"/>
-    <result property="imageURL" column="image_url"/>
-    <result property="createdAt" column="created_at"/>
-    <result property="updatedAt" column="updated_at"/>
-    <result property="shopCode" column="shop_code"/>
-</resultMap>
+    <resultMap id="noticeBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.NoticeBoard">
+        <id property="noticeCode" column="notice_code"/>
+        <result property="noticeTitle" column="notice_title"/>
+        <result property="noticeContent" column="notice_content"/>
+        <result property="noticeFlag" column="notice_flag"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="shopCode" column="shop_code"/>
+        <result property="employerCode" column="employer_code"/>
+    </resultMap>
 
-    <select id="findEmployerCodeByNoticeCode" resultType="int" resultMap="noticeBoardResultMap">
+    <select id="findEmployerCodeByNoticeCode" parameterType="int" resultType="string">
         SELECT
-               N.employer_code
-          FROM notice_board N
-         WHERE N.notice_code = #{ noticeCode }
-           AND N.shop_code = #{ shopCode }
-           AND N.notice_flag = true
+        N.employer_code
+        FROM notice_board N
+        WHERE N.notice_code = #{ noticeCode }
+        AND N.notice_flag = true
     </select>
 
-    <select id="findAllNoticeBoards" resultMap="noticeBoardResultMap" parameterType="int">
+    <select id="findAllNoticeBoards" resultMap="noticeBoardResultMap">
         SELECT
-               N.notice_code
-             , N.notice_title
-             , N.notice_content
-             , N.notice_flag
-             , N.image_url
-             , N.created_at
-             , N.updated_at
-             , N.shop_code
-          FROM notice_board N
-         WHERE N.shop_code = #{ shopCode }
-           AND N.notice_flag = true
-         ORDER BY N.created_at DESC
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.notice_flag = true
+        ORDER BY N.created_at DESC
     </select>
 
-    <select id="findNoticeBoard" resultMap="noticeBoardResultMap" parameterType="int">
+    <select id="findNoticeBoardByShopCode" resultMap="noticeBoardResultMap" parameterType="int">
         SELECT
-               N.notice_code
-             , N.notice_title
-             , N.notice_content
-             , N.notice_flag
-             , N.image_url
-             , N.created_at
-             , N.updated_at
-             , N.shop_code
-          FROM notice_board N
-         WHERE N.notice_code = #{ notice_code }
-           AND N.notice_flag = true
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.shop_code = #{ shopCode }
+        AND N.notice_flag = true
+        ORDER BY N.created_at DESC
+    </select>
+
+    <select id="findNoticeBoardByNoticeCode" resultMap="noticeBoardResultMap" parameterType="int">
+        SELECT
+        N.notice_code
+        , N.notice_title
+        , N.notice_content
+        , N.notice_flag
+        , N.image_url
+        , N.created_at
+        , N.updated_at
+        , N.shop_code
+        , N.employer_code
+        FROM notice_board N
+        WHERE N.notice_code = #{ notice_code }
+        AND N.notice_flag = true
     </select>
 </mapper>

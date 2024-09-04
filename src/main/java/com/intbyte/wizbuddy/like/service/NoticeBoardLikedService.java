@@ -1,26 +1,26 @@
-package com.intbyte.wizbuddy.board.service;
+package com.intbyte.wizbuddy.like.service;
 
-import com.intbyte.wizbuddy.board.domain.entity.NoticeBoardLiked;
-import com.intbyte.wizbuddy.board.dto.NoticeBoardLikedDTO;
-import com.intbyte.wizbuddy.board.repository.NoticeBoardLikedRepository;
+import com.intbyte.wizbuddy.like.domain.entity.NoticeBoardLiked;
+import com.intbyte.wizbuddy.like.dto.NoticeBoardLikedDTO;
+import com.intbyte.wizbuddy.like.repository.NoticeBoardLikedRepository;
+import com.intbyte.wizbuddy.like.vo.response.ResponseInsertNoticeBoardLikeVO;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class NoticeBoardLikedService {
 
     private final NoticeBoardLikedRepository noticeBoardLikedRepository;
 
+    private final ModelMapper modelMapper;
 
-    public NoticeBoardLikedService(NoticeBoardLikedRepository noticeBoardLikedRepository) {
-        this.noticeBoardLikedRepository = noticeBoardLikedRepository;
-    }
-
-    /* 기능. 1. 공지사항 게시글 좋아요 추가 */
     @Transactional
-    public void registerNoticeBoardLike(NoticeBoardLikedDTO noticeBoardLikedInfo) {
+    public ResponseInsertNoticeBoardLikeVO registerNoticeBoardLike(NoticeBoardLikedDTO noticeBoardLikedInfo) {
 
         NoticeBoardLiked noticeBoardLiked = NoticeBoardLiked.builder()
                                            .noticeLikedCode(noticeBoardLikedInfo.getNoticeCode())
@@ -31,5 +31,6 @@ public class NoticeBoardLikedService {
                                            .build();
 
         noticeBoardLikedRepository.save(noticeBoardLiked);
+        return modelMapper.map(noticeBoardLiked, ResponseInsertNoticeBoardLikeVO.class);
     }
 }

@@ -1,6 +1,6 @@
-package com.intbyte.wizbuddy.board.repository;
+package com.intbyte.wizbuddy.like.repository;
 
-import com.intbyte.wizbuddy.board.domain.entity.NoticeBoardLiked;
+import com.intbyte.wizbuddy.like.domain.entity.NoticeBoardLiked;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

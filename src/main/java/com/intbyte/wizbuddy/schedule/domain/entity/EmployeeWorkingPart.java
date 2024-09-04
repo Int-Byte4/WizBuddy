@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.schedule.domain.entity;
 
-import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
+import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -36,4 +36,7 @@ public class EmployeeWorkingPart {
         this.employeeCode = modifyWorkingPartInfo.getEmployeeCode();
     }
 
+    public void modifyWorkingPart(String employeeCode) {
+        this.employeeCode = employeeCode;
+    }
 }

@@ -18,5 +18,5 @@ public class NoticeBoardDTO {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private int shopCode;
-
+    private String employerCode;
 }

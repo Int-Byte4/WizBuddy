@@ -16,32 +16,33 @@ import java.time.LocalDateTime;
 @Builder
 public class ManualBoard {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="manual_code")
     private int manualCode;
 
-    @Column
+    @Column(name="manual_title")
     private String manualTitle;
 
-    @Column
+    @Column(name="manual_contents")
     private String manualContents;
 
-    @Column
+    @Column(name="manual_flag")
     private boolean manualFlag;
 
-    @Column
+    @Column(name="image_url")
     private String imageUrl;
 
-    @Column
+    @Column(name="created_at")
     private LocalDateTime createdAt;
 
-    @Column
+    @Column(name="updated_at")
     private LocalDateTime updatedAt;
 
-    @Column
+    @Column(name="shop_code")
     private int shopCode;
 
-    @Column
-    private int userCode;
+    @Column(name="user_code")
+    private String userCode;
 
 
     public void modify(EditManualBoardInfo modifyManualBoardInfo) {
@@ -52,7 +53,7 @@ public class ManualBoard {
     }
 
     public void delete(DeleteManualBoardInfo deleteManualBoardInfo) {
-        this.manualFlag = false;
-        this.updatedAt = LocalDateTime.now();
+        this.manualFlag = deleteManualBoardInfo.isManualFlag();
+        this.updatedAt = deleteManualBoardInfo.getUpdatedAt();
     }
 }

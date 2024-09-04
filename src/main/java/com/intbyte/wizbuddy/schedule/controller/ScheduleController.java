@@ -1,13 +1,15 @@
 package com.intbyte.wizbuddy.schedule.controller;
 
-import com.intbyte.wizbuddy.schedule.domain.EditScheduleInfo;
+import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
 import com.intbyte.wizbuddy.schedule.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.schedule.service.ScheduleService;
+import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleByCommentVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistScheduleVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseFindEmployeeWorkingPartVO;
+import com.intbyte.wizbuddy.schedule.vo.response.ResponseModifyScheduleByCommentVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistWeeklyScheduleVO;
 
@@ -29,11 +31,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ScheduleController {
 
-
     private final ScheduleService scheduleService;
     private final ModelMapper modelMapper;
 
-    // 전체 스케줄 조회
     @GetMapping("/schedules")
     public ResponseEntity<List<WeeklyScheduleDTO>> findAllSchedules() {
 
@@ -41,7 +41,7 @@ public class ScheduleController {
 
         return new ResponseEntity<>(weeklyScheduleDTOList, HttpStatus.OK);
     }
-    // 한주의 스케줄 상세 조회
+
     @GetMapping("/schedules/{scheduleCode}")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findSchedule(
             @PathVariable("scheduleCode") int scheduleCode) {
@@ -59,7 +59,6 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    // 직원 별 한주의 스케줄 상세 조회
     @GetMapping("schedules/users/{employeeCode}")
     public ResponseEntity<List<ResponseFindEmployeeWorkingPartVO>> findScheduleByEmployeeCode(
             @PathVariable("employeeCode") String employeeCode) {
@@ -78,40 +77,39 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    // 한주의 스케줄 등록
-    // 1. 스케줄 등록
     @PostMapping("regist")
     public ResponseEntity<ResponseRegistWeeklyScheduleVO> registSchedule(
             @RequestBody RequestRegistScheduleVO request) {
+
         WeeklyScheduleDTO weeklyScheduleDTO = modelMapper.map(request, WeeklyScheduleDTO.class);
 
         scheduleService.registSchedule(weeklyScheduleDTO);
 
-        ResponseRegistWeeklyScheduleVO registSchedule = modelMapper.map(weeklyScheduleDTO, ResponseRegistWeeklyScheduleVO.class);
+        ResponseRegistWeeklyScheduleVO registSchedule = modelMapper
+                .map(weeklyScheduleDTO, ResponseRegistWeeklyScheduleVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registSchedule);
     }
 
-    // 2. 직원 등록
     @PostMapping("regist/employee")
     public ResponseEntity<ResponseRegistEmployeeWorkingPartVO> registSchedulePerEmployee(
-            @RequestBody RequestRegistEmployeeWorkingPartVO request
-    ) {
+            @RequestBody RequestRegistEmployeeWorkingPartVO request) {
+
         EmployeeWorkingPartDTO employeeWorkingPartDTO = modelMapper.map(request, EmployeeWorkingPartDTO.class);
 
         scheduleService.registSchedulePerEmployee(employeeWorkingPartDTO);
 
-        ResponseRegistEmployeeWorkingPartVO registEmployee = modelMapper.map(employeeWorkingPartDTO, ResponseRegistEmployeeWorkingPartVO.class);
+        ResponseRegistEmployeeWorkingPartVO registEmployee = modelMapper
+                .map(employeeWorkingPartDTO, ResponseRegistEmployeeWorkingPartVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registEmployee);
     }
 
-    // 근무일 수정
     @PatchMapping("modify/{workingPartCode}")
     public ResponseEntity<EditScheduleInfo> editSchedule(
             @PathVariable("workingPartCode") int workingPartCode,
-            @RequestBody RequestModifyScheduleVO request
-    ) {
+            @RequestBody RequestModifyScheduleVO request) {
+
         EditScheduleInfo editSchedule = modelMapper.map(request, EditScheduleInfo.class);
 
         scheduleService.editSchedule(workingPartCode, editSchedule);
@@ -119,7 +117,24 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
     }
 
+    @PatchMapping("modify")
+    public ResponseEntity<ResponseModifyScheduleByCommentVO> editScheduleByComment(
+            @RequestBody RequestModifyScheduleByCommentVO request) {
 
+        scheduleService.editScheduleByComment(request.getSubsCode(), request.isSubsFlag(), request.getEmployeeCode());
 
+        ResponseModifyScheduleByCommentVO editSchedule = modelMapper
+                .map(request, ResponseModifyScheduleByCommentVO.class);
 
+        return ResponseEntity.status(HttpStatus.CREATED).body(editSchedule);
+    }
+
+    @DeleteMapping("delete/{workingPartCode}")
+    public ResponseEntity<Void> deleteSchedule(
+            @PathVariable("workingPartCode") int workingPartCode) {
+
+        scheduleService.deleteSchedule(workingPartCode);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
