@@ -167,8 +167,9 @@ public class ScheduleService {
         List<EmployeeWorkingPart> commentAuthor = employeeWorkingPartRepository
                 .findByEmployeeCode(comment.getEmployeeCode());
 
-        EmployeeWorkingPart matchingCommentAuthor = commentAuthor.stream()
-                .filter(author -> Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime()))
+        EmployeeWorkingPart nonMatchingCommentAuthors = commentAuthor.stream()
+                .filter(author -> !Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime())
+                        || !Objects.equals(author.getWorkingDate(), writer.getWorkingDate()))
                 .findFirst()
                 .orElseThrow(WorkingPartCodeNotEqualsException::new);
 
@@ -176,7 +177,7 @@ public class ScheduleService {
                 .findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
         if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
 
-        employeeWorkingPart.modifyWorkingPart(matchingCommentAuthor.getEmployeeCode());
+        employeeWorkingPart.modifyWorkingPart(nonMatchingCommentAuthors.getEmployeeCode());
         employeeWorkingPartRepository.save(employeeWorkingPart);
     }
 
