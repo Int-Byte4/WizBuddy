@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like;
+package com.intbyte.wizbuddy.like.service;
 
 import com.intbyte.wizbuddy.board.domain.entity.NoticeBoardLiked;
 import com.intbyte.wizbuddy.board.dto.NoticeBoardLikedDTO;
