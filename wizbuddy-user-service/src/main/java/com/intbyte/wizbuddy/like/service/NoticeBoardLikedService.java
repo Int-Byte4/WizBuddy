@@ -6,7 +6,6 @@ import com.intbyte.wizbuddy.like.dto.NoticeBoardLikedDTO;
 import com.intbyte.wizbuddy.like.repository.NoticeBoardLikedRepository;
 import com.intbyte.wizbuddy.like.vo.response.ResponseInsertNoticeBoardLikeVO;
 import com.intbyte.wizbuddy.mapper.NoticeBoardLikedMapper;
-import com.intbyte.wizbuddy.mapper.NoticeBoardMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
