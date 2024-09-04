@@ -3,7 +3,6 @@ package com.intbyte.wizbuddy.shop.service;
 import com.intbyte.wizbuddy.exception.shop.BusinessNumDuplicateException;
 import com.intbyte.wizbuddy.exception.shop.ShopModifyOtherEmployerException;
 import com.intbyte.wizbuddy.exception.shop.ShopNotFoundException;
-import com.intbyte.wizbuddy.exception.user.EmployerNotFoundException;
 import com.intbyte.wizbuddy.mapper.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
 import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
@@ -32,7 +31,6 @@ public class ShopService {
 
     @Transactional
     public ResponseRegisterShopVO registerShop(String employerCode, RegisterShopInfo shopInfo) {
-        if (shopMapper.getEmployerCode(employerCode) == null) throw new EmployerNotFoundException();
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new BusinessNumDuplicateException();
 
         Shop shop = Shop.builder()
