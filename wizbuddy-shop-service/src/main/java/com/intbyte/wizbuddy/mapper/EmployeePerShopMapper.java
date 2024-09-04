@@ -15,4 +15,6 @@ public interface EmployeePerShopMapper {
     String findEmployeeCodeByEmployeeCode(String employeeCode);
 
     EmployeePerShopDTO findEmployeePerShopByShopCodeAndEmployeeCode(Map<String, Object> params);
+
+    int findShopCodeByEmployeeCode(String employeeCode);
 }

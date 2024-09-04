@@ -10,4 +10,15 @@
         <result property="noticeCode" column="notice_code"/>
         <result property="employeeCode" column="employee_code"/>
     </resultMap>
+    <select id="getNoticeBoardLikedByUserCode" parameterType="map" resultMap="noticeBoardLikedResultMap">
+        SELECT
+               notice_liked_code
+             , created_at
+             , notice_code
+             , shop_code
+             , employee_code
+        FROM noticeboardliked
+        WHERE employee_code = #{ employeeCode }
+          AND notice_code = #{ noticeCode }
+    </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.exception.manualboard;
+package com.intbyte.wizbuddy.exception.board.manualboard;
 
 import com.intbyte.wizbuddy.exception.StatusEnum;
 

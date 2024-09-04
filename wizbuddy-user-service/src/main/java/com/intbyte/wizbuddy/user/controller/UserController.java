@@ -79,7 +79,7 @@ public class UserController {
     }
 
     @Operation(summary = "사장 단 건 조회")
-    @GetMapping("/employer/{employerCode}")
+    @GetMapping("employer/{employerCode}")
     public ResponseEntity<ResponseFindEmployerVO> getEmployer(@PathVariable("employerCode") String employerCode) {
         EmployerDTO employerDTO = employerService.getByEmployerCode(employerCode);
 
@@ -89,7 +89,7 @@ public class UserController {
     }
 
     @Operation(summary = "직원 단 건 조회")
-    @GetMapping("/employee/{employeeCode}")
+    @GetMapping("employee/{employeeCode}")
     public ResponseEntity<ResponseFindEmployeeVO> getEmployee(@PathVariable("employeeCode") String employeeCode) {
         EmployeeDTO employeeDTO = employeeService.getByEmployeeCode(employeeCode);
 

@@ -3,8 +3,9 @@ package com.intbyte.wizbuddy.shop.employeepershop.vo.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestInsertEmployeePerShopVO {

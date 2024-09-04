@@ -1,15 +1,12 @@
 package com.intbyte.wizbuddy.like.vo.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 @Builder
 public class ResponseInsertNoticeBoardLikeVO {
     private LocalDateTime createdAt;

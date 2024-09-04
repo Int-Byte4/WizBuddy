@@ -4,10 +4,11 @@ import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class ResponseEditShopVO {
     EditShopInfo shopInfo;
 }

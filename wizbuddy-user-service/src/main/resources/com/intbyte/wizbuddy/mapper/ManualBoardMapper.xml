@@ -64,7 +64,7 @@
         , M.shop_code
         , M.user_code
         FROM manual_board M
-        WHERE M.manual_code = #{ manual_code }
+        WHERE M.manual_code = #{ manualCode }
         AND M.manual_flag = true
     </select>
 </mapper>

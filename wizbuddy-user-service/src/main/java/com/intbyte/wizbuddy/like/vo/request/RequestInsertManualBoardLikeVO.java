@@ -3,12 +3,13 @@ package com.intbyte.wizbuddy.like.vo.request;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class RequestInsertManualBoardLikeVO {
     private LocalDateTime createdAt;
     private int manualCode;

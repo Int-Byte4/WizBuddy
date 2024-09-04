@@ -68,7 +68,7 @@
         , N.shop_code
         , N.employer_code
         FROM notice_board N
-        WHERE N.notice_code = #{ notice_code }
+        WHERE N.notice_code = #{ noticeCode }
         AND N.notice_flag = true
     </select>
 </mapper>

@@ -42,13 +42,12 @@ public class EmployeePerShopController {
     }
 
     @GetMapping("/{employeeCode}")
-    public ResponseEntity<List<EmployeePerShopDTO>> getEmployeeIncludeShops(@PathVariable String employeeCode) {
+    public ResponseEntity<List<EmployeePerShopDTO>> getShopsbyEmployeeCode(@PathVariable String employeeCode) {
         List<EmployeePerShopDTO> employeePerShopDTO = employeePerShopService.findEmployeePerShopById(employeeCode);
 
         return ResponseEntity.status(HttpStatus.OK).body(employeePerShopDTO);
     }
 
-    // 직원이 속한 매장 조회
     @GetMapping("shop/{shopCode}/employee/{employeeCode}")
     public ResponseEntity<EmployeePerShopDTO> getShopByEmployeeCode(@PathVariable int shopCode, @PathVariable String employeeCode) {
         EmployeePerShopDTO response = employeePerShopService.getEmployeePerShopByEmployeeCode(shopCode, employeeCode);
@@ -67,7 +66,7 @@ public class EmployeePerShopController {
 
     @DeleteMapping("/delete/employee/{employeeCode}")
     public ResponseEntity<Void> deleteEmployeePerShop(@PathVariable String employeeCode) {
-        employeePerShopService.deleteEmployeePerShopByEmployerCode(employeeCode);
+        employeePerShopService.deleteEmployeePerShopByEmployeeCode(employeeCode);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

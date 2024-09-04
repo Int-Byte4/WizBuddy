@@ -10,4 +10,15 @@
         <result property="shopCode" column="shop_code"/>
         <result property="employeeCode" column="employee_code"/>
     </resultMap>
+    <select id="getManualBoardLikedByUserCode" parameterType="map" resultMap="manualBoardLikedResultMap">
+        SELECT
+               manual_liked_code
+             , created_at
+             , manual_code
+             , shop_code
+             , employee_code
+          FROM manualboardliked
+         WHERE employee_code = #{ employeeCode }
+           AND manual_code = #{ manualCode }
+    </select>
 </mapper>
