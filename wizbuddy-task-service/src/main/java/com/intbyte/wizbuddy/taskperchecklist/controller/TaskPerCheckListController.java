@@ -7,6 +7,7 @@ import com.intbyte.wizbuddy.taskperchecklist.service.TaskPerCheckListService;
 import com.intbyte.wizbuddy.taskperchecklist.vo.Response.ResponseFindTaskPerCheckListVO;
 import com.intbyte.wizbuddy.taskperchecklist.vo.request.RequestInsertTaskPerCheckListVO;
 import com.intbyte.wizbuddy.taskperchecklist.vo.request.RequestModifyTaskPerCheckListVO;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,7 @@ public class TaskPerCheckListController {
 
     // 1-1, 1-2, 1-3. finishedState에 따른 특정 매장의 특정 체크리스트 속 업무 조회
     @GetMapping("/taskperchecklist/checklist/{checkListCode}")
+    @Operation(summary = "종료 상태에 따른 체크리스트속 업무 조회")
     public ResponseEntity<List<ResponseFindTaskPerCheckListVO>> getAllTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @RequestParam(value = "finished", required = false) Boolean finished) {
@@ -60,6 +62,7 @@ public class TaskPerCheckListController {
 
     // 2. 특정 체크리스트에 특정 업무 추가
     @PostMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
+    @Operation(summary = "특정 체크리스트에 특정 업무 추가")
     public ResponseEntity<String> insertTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode,
@@ -71,23 +74,25 @@ public class TaskPerCheckListController {
 
         taskPerCheckListService.insertTaskPerCheckList(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     // 3. 특정 매장의 특정 체크리스트에 특정 업무 삭제
     @DeleteMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
+    @Operation(summary = "특정 체크리스트의 특정 업무 삭제")
     public ResponseEntity<String> deleteTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode
     ){
         taskPerCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(checkListCode, taskCode);
 
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("체크리스트에서 업무 삭제 정공");
+        return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
     }
 
 
-    // 4. 특정 매장의 특정 체크리스트에 특정 업무 완료표시(체크리스트, 업무, 직원) -> 수정과 삭제가 나눠진것. 이건 수정임
+    // 4. 특정 매장의 특정 체크리스트에 특정 업무 완료표시(체크리스트, 업무, 직원)(수정)
     @PutMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
+    @Operation(summary = "특정 체크리스트의 특정 업무 완료 표시")
     public ResponseEntity<String> modifyTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode,
@@ -101,5 +106,4 @@ public class TaskPerCheckListController {
 
         return ResponseEntity.status(HttpStatus.OK).body("업무 완료표시 수정 성공");
     }
-
 }
