@@ -5,6 +5,7 @@ import com.intbyte.wizbuddy.task.domain.EditTaskInfo;
 import com.intbyte.wizbuddy.task.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.service.TaskService;
 import com.intbyte.wizbuddy.task.vo.request.RequestInsertTaskVO;
+import com.intbyte.wizbuddy.task.vo.request.RequestModifyTaskVO;
 import com.intbyte.wizbuddy.task.vo.response.ResponseFindTaskVO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(findTask);
     }
 
+    // 2. 특정 매장의 fixed에 따른 task 조회
     @GetMapping("/shop/{shopCode}/task")
     public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixedState(
             @PathVariable("shopCode") int shopCode,
@@ -83,7 +85,7 @@ public class TaskController {
 
     // 3. 특정 매장에 1개 task 추가
     @PostMapping("/shop/{shopCode}/task")
-    public ResponseEntity<String>insertTask(
+    public ResponseEntity<String> insertTask(
             @PathVariable("shopCode") int shopCode,
             @RequestBody RequestInsertTaskVO request){
 
@@ -99,7 +101,7 @@ public class TaskController {
     public ResponseEntity<String> modifyTask(
             @PathVariable("shopCode") int shopCode,
             @PathVariable("taskCode") int taskCode,
-            @RequestBody RequestInsertTaskVO request
+            @RequestBody RequestModifyTaskVO request
     ) {
         EditTaskInfo editTaskInfo = new EditTaskInfo(request.getTaskContents(), request.isTaskFlag(), request.isTaskFixedState(), request.getUpdatedAt());
         taskService.modifyTask(taskCode, editTaskInfo);

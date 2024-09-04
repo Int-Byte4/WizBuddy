@@ -60,7 +60,7 @@ public class TaskPerCheckListController {
 
     // 2. 특정 체크리스트에 특정 업무 추가
     @PostMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
-    public ResponseEntity<Void> insertTaskPerCheckList(
+    public ResponseEntity<String> insertTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
             @PathVariable("taskCode") int taskCode,
             @RequestBody RequestInsertTaskPerCheckListVO request
@@ -71,7 +71,7 @@ public class TaskPerCheckListController {
 
         taskPerCheckListService.insertTaskPerCheckList(dto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.CREATED).body("추가 완료");
     }
 
     // 3. 특정 매장의 특정 체크리스트에 특정 업무 삭제
