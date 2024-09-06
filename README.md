@@ -677,119 +677,119 @@
 ## 📍 01_user
 <details>
  <summary>관리자 로그인</summary>
-  <img src="https://github.com/user-attachments/assets/0c7e37ee-66f8-4d88-966c-00fa9935da01" width=700>
+  <img src="/images/4.APITest/1.user/user1.png" width=700>
 </details>
 <details>
  <summary>관리자-사장 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/827782f1-2b53-4e84-9906-9c4da85013e8" width=700>
+  <img src="/images/4.APITest/1.user/user2.png" width=700>
 </details>
 <details>
  <summary>관리자-직원 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/1e46a061-d216-4181-9cc3-05f2736fa68e" width=700>
+  <img src="/images/4.APITest/1.user/user3.png" width=700>
 </details>
 <details>
  <summary>사장 조회</summary>
-  <img src="https://github.com/user-attachments/assets/6fa18992-b7ef-4101-9edd-dc4ad31b99ad" width=700>
+  <img src="/images/4.APITest/1.user/user4.png" width=700>
 </details>
 <details>
  <summary>직원 조회</summary>
-  <img src="https://github.com/user-attachments/assets/ec953dce-b9d2-42b2-9b04-e9614689962e" width=700>
+  <img src="/images/4.APITest/1.user/user5.png" width=700>
 </details>
 <details>
  <summary>사장 회원가입</summary>
-  <img src="https://github.com/user-attachments/assets/5cccb23f-d060-41e2-bd38-c129da10bf7a" width=700>
+  <img src="/images/4.APITest/1.user/user6.png" width=700>
 </details>
 <details>
  <summary>사장 로그인</summary>
-  <img src="https://github.com/user-attachments/assets/43c368c8-1672-4fee-a0d0-d674d8c531f3" width=700>
+  <img src="/images/4.APITest/1.user/user7.png" width=700>
 </details>
 <details>
  <summary>사장 정보수정</summary>
-  <img src="https://github.com/user-attachments/assets/9789b819-7cb6-4270-8451-c1e26b952854" width=700>
+  <img src="/images/4.APITest/1.user/user8.png" width=700>
 </details>
 <details>
  <summary>사장 삭제 요청</summary>
-  <img src="https://github.com/user-attachments/assets/a26e8a8d-de06-499a-b149-d6334f77aa7b" width=700>
+  <img src="/images/4.APITest/1.user/user9.png" width=700>
 </details>
 <details>
  <summary>직원 회원가입</summary>
-  <img src="https://github.com/user-attachments/assets/3c966573-de54-4bf1-a589-588ca27783af" width=700>
+  <img src="/images/4.APITest/1.user/user10.png" width=700>
 </details>
 <details>
  <summary>직원 로그인</summary>
-  <img src="https://github.com/user-attachments/assets/9a8b7532-6b89-41be-90b5-fe3ce5a29882" width=700>
+  <img src="/images/4.APITest/1.user/user11.png" width=700>
 </details>
 <details>
  <summary>직원 정보수정</summary>
-  <img src="https://github.com/user-attachments/assets/661fe423-cf86-4161-80f0-6016d5630892" width=700>
+  <img src="/images/4.APITest/1.user/user12.png" width=700>
 </details>
 <details>
  <summary>직원 삭제 요청</summary>
-  <img src="https://github.com/user-attachments/assets/80b5a9d9-9e90-46d1-a114-2d5b9e217f9c" width=700>
+  <img src="/images/4.APITest/1.user/user13.png" width=700>
 </details>
 
 ## 📍 02_shop
 <details>
  <summary>4번 사장 회원가입</summary>
-  <img src="https://github.com/user-attachments/assets/c9cc4eab-05e3-4eb7-8a66-4aad0aea97b5" width=700>
+  <img src="/images/4.APITest/2.shop/shop1.PNG" width=700>
 </details>
 <details>
  <summary>4번 사장 로그인</summary>
-  <img src="https://github.com/user-attachments/assets/2ccf6cb6-c23c-4ed2-82d5-22839c247b37" width=700>
+  <img src="/images/4.APITest/2.shop/shop2.PNG" width=700>
 </details>
 <details>
  <summary>매장 등록</summary>
-  <img src="https://github.com/user-attachments/assets/da825abd-e76c-4bd7-add9-b4012894ef32" width=700>
+  <img src="/images/4.APITest/2.shop/shop3.PNG" width=700>
 </details>
 <details>
  <summary>매장 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/ed15fedf-ce38-4ddc-b5bc-ee97e8b2202e" width=700>
+  <img src="/images/4.APITest/2.shop/shop4.PNG" width=700>
 </details>
 <details>
  <summary>매장 단 건 조회</summary>
-  <img src="https://github.com/user-attachments/assets/83dbe3fb-17fc-4afa-b70b-f87f290d9792" width=700>
+  <img src="/images/4.APITest/2.shop/shop5.PNG" width=700>
 </details>
 <details>
  <summary>매장 수정</summary>
-  <img src="https://github.com/user-attachments/assets/fe9c86b2-2126-483c-84a0-00de67f69d5c" width=700>
+  <img src="/images/4.APITest/2.shop/shop6.PNG" width=700>
 </details>
 <details>
  <summary>매장 삭제 요청</summary>
-  <img src="https://github.com/user-attachments/assets/959c8fc4-85ea-48cb-ae51-7c6af548c2df" width=700>
+  <img src="/images/4.APITest/2.shop/shop7.PNG" width=700>
 </details>
 
 ## 📍 03_employee per shop
 <details>
  <summary>13번 직원 회원가입</summary>
-  <img src="https://github.com/user-attachments/assets/8706be48-faf3-492c-a8d6-83970c92dd3e" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps1.PNG" width=700>
 </details>
 <details>
  <summary>13번 직원 로그인</summary>
-  <img src="https://github.com/user-attachments/assets/50b27940-262e-455f-8f16-33c7db3d8aa1" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps2.PNG" width=700>
 </details>
 <details>
  <summary>매장별 직원 등록</summary>
-  <img src="https://github.com/user-attachments/assets/5a885e1d-a78e-4e76-bb3a-706a41843f53" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps3.PNG" width=700>
 </details>
 <details>
  <summary>매장별 직원 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/f822cb27-a8f0-40c5-815f-b219685f2e6c" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps4.PNG" width=700>
 </details>
 <details>
  <summary>매장 내 직원 정보 조회</summary>
-  <img src="https://github.com/user-attachments/assets/0064b1ce-68c9-4dae-800e-19dc1a8471a0" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps6.PNG" width=700>
 </details>
 <details>
  <summary>직원이 속한 매장 리스트 조회</summary>
-  <img src="https://github.com/user-attachments/assets/78ea940a-3cbe-409e-a21e-c5842f05b8f8" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps5.PNG" width=700>
 </details>
 <details>
  <summary>매장별 직원 수정</summary>
-  <img src="https://github.com/user-attachments/assets/c371b76c-2bdc-437a-9864-8b5d91977e03" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps7.PNG" width=700>
 </details>
 <details>
  <summary>매장별 직원 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/6b2c4746-1c7b-444c-a4d3-0012efa0931f" width=700>
+  <img src="/images/4.APITest/3.employeepershop/eps8.PNG" width=700>
 </details>
 
 ## 📍 04_subs board
