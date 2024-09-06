@@ -1,0 +1,1139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/src/main/java/com/intbyte/eurekacloudgateway/EurekaCloudGatewayApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/src/main/java/com/intbyte/eurekacloudgateway/filter/AuthorizationHeaderFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-gateway/src/test/java/com/intbyte/eurekacloudgateway/EurekaCloudGatewayApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/src/main/java/com/intbyte/eurekaserver/EurekaServerApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-eureka-server/src/test/java/com/intbyte/eurekaserver/EurekaServerApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/WizbuddyScheduleServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/controller/SubsBoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/domain/EditSubsBoardInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/domain/entity/SubsBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/dto/SubsBoardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/repository/SubsBoardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/service/SubsBoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestDeleteSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestInsertSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestModifySubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseDeleteSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseFindSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseInsertSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseModifySubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/controller/CommentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/domain/EditCommentInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/domain/Entity/Comment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/dto/CommentDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/repository/CommentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/service/CommentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestAdoptCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestDeleteCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestInsertCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestModifyCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseAdoptCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseDeleteCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseFindCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseInsertCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseModifyCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/StatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/board/AlreadyAdoptedSubsBoardException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/board/SubsBoardNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/comment/CommentNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/schedule/EmployeeCodeNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/schedule/ScheduleCodeDuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/schedule/ScheduleNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/exception/schedule/WorkingPartCodeNotEqualsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/mapper/CommentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/mapper/EmployeeWorkingPartMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/mapper/SubsBoardMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/mapper/WeeklyScheduleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/controller/ScheduleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/domain/entity/EmployeeWorkingPart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/domain/entity/WeeklySchedule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/dto/EmployeeWorkingPartDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/dto/WeeklyScheduleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/info/EditScheduleInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/repository/EmployeeWorkingPartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/repository/WeeklyScheduleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/service/ScheduleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestModifyScheduleByCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestModifyScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestRegistEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestRegistScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseFindEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseModifyScheduleByCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseRegistEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseRegistWeeklyScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/resources/com/intbyte/wizbuddy/mapper/CommentMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/resources/com/intbyte/wizbuddy/mapper/EmployeeWorkingPartMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/resources/com/intbyte/wizbuddy/mapper/SubsBoardMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/main/resources/com/intbyte/wizbuddy/mapper/WeeklyScheduleMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-schedule-service/src/test/java/com/intbyte/wizbuddy/WizbuddyScheduleServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/WizbuddyShopServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/config/MybatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/controller/EmployeePerShopController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/domain/EditEmployeePerShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/domain/RegisterEmployeePerShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/domain/entity/EmployeePerShop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/domain/entity/EmployeePerShopId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/dto/EmployeePerShopDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/repository/EmployeePerShopRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/service/EmployeePerShopService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/vo/request/RequestInsertEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/vo/request/RequestModifyEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/employeepershop/vo/response/ResponseInsertEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/exception/StatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/exception/shop/BusinessNumDuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/exception/shop/ShopModifyOtherEmployerException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/exception/shop/ShopNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/mapper/EmployeePerShopMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/mapper/ShopMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/controller/ShopController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/domain/DeleteShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/domain/EditShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/domain/RegisterShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/domain/entity/Shop.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/dto/ShopDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/repository/ShopRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/service/ShopService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/vo/request/RequestDeleteShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/vo/request/RequestEditShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/vo/request/RequestRegisterShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/vo/response/ResponseEditShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/java/com/intbyte/wizbuddy/shop/vo/response/ResponseRegisterShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/resources/com/intbyte/wizbuddy/mapper/EmployeePerShopMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/main/resources/com/intbyte/wizbuddy/mapper/ShopMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-shop-service/src/test/java/com/intbyte/wizbuddy/WizbuddyShopServiceApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/WizbuddyApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/controller/CheckListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/domain/CheckListMybatis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/domain/EditCheckListInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/domain/entity/CheckList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/dto/CheckListDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/repository/CheckListRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/service/CheckListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/vo/request/RequestInsertCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/vo/request/RequestModifyCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/checklist/vo/response/ResponseFindCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/config/MybatisConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/exception/StatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/exception/checklist/CheckListNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/exception/task/TaskNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/exception/taskperchecklist/TaskPerCheckListNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/mapper/CheckListMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/mapper/TaskMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/mapper/TaskPerCheckListMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/controller/TaskController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/domain/EditTaskInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/domain/TaskMybatis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/domain/entity/Task.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/dto/TaskDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/repository/TaskRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/service/TaskService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/vo/request/RequestInsertTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/vo/request/RequestModifyTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/task/vo/response/ResponseFindTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/controller/TaskPerCheckListController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/domain/EditTaskPerCheckListInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/domain/TaskPerCheckListMybatis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/domain/entity/TaskPerCheckList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/domain/entity/TaskPerCheckListId.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/dto/TaskPerCheckListDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/repository/TaskPerCheckListRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/service/TaskPerCheckListService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/vo/Response/ResponseFindTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/vo/request/RequestInsertTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/java/com/intbyte/wizbuddy/taskperchecklist/vo/request/RequestModifyTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/resources/com/intbyte/wizbuddy/mapper/CheckListMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/resources/com/intbyte/wizbuddy/mapper/TaskMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/main/resources/com/intbyte/wizbuddy/mapper/TaskPerCheckListMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-task-service/src/test/java/com/intbyte/wizbuddy/WizbuddyApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/settings.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/HMACKeyGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/UserServiceApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/controller/ManualBoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/controller/NoticeBoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/DeleteManualBoardInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/DeleteNoticeBoardInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/EditManualBoardInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/EditNoticeBoardInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/entity/ManualBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/domain/entity/NoticeBoard.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/dto/ManualBoardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/dto/NoticeBoardDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/repository/ManualBoardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/repository/NoticeBoardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/service/ManualBoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/service/NoticeBoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestDeleteSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestInsertManualBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestInsertNoticeBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestInsertSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestModifySubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestUpdateManualBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/request/RequestUpdateNoticeBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseDeleteSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseFindManualBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseFindNoticeBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseFindSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseInsertManualBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseInsertNoticeBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseInsertSubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseModifySubsBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseUpdateManualBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/board/vo/response/ResponseUpdateNoticeBoardVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/client/CheckListServiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/client/ScheduleServiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/client/ShopServiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestAdoptCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestDeleteCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestInsertCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/request/RequestModifyCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseAdoptCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseDeleteCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseFindCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseInsertCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/comment/vo/response/ResponseModifyCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/config/AppConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/config/FeignClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/config/SwaggerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/StatusEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/board/LikeDuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/board/manualboard/ManualBoardModifyOtherUserException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/board/manualboard/ManualBoardNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/board/noticeboard/NoticeBoardModifyOtherUserException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/board/noticeboard/NoticeBoardNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/user/EmailDuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/user/EmployeeNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/user/EmployerNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/exception/user/UserNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/controller/ManualBoardLikeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/controller/NoticeBoardLikeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/domain/entity/ManualBoardLiked.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/domain/entity/NoticeBoardLiked.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/dto/ManualBoardLikedDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/dto/NoticeBoardLikedDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/repository/ManualBoardLikedRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/repository/NoticeBoardLikedRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/service/ManualBoardLikedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/service/NoticeBoardLikedService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/vo/request/RequestInsertManualBoardLikeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/vo/request/RequestInsertNoticeBoardLikeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/vo/response/ResponseInsertManualBoardLikeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/like/vo/response/ResponseInsertNoticeBoardLikeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/EmployeeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/EmployerMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/ManualBoardLikedMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/ManualBoardMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/NoticeBoardLikedMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/NoticeBoardMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/UserAndEmployeeMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/mapper/UserAndEmployerMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/dto/WeeklyScheduleDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/info/EditScheduleInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestModifyScheduleByCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestModifyScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestRegistEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/request/RequestRegistScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseFindEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseModifyScheduleByCommentVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseRegistEmployeeWorkingPartVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/schedule/vo/response/ResponseRegistWeeklyScheduleVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/security/AuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/security/JwtFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/security/JwtUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/security/WebSecurity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/employeepershop/dto/EmployeePerShopDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/employeepershop/vo/request/RequestInsertEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/employeepershop/vo/request/RequestModifyEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/employeepershop/vo/response/ResponseInsertEmployeePerShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/dto/ShopDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/info/DeleteShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/info/EditShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/info/RegisterShopInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/vo/request/RequestDeleteShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/vo/request/RequestEditShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/vo/request/RequestRegisterShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/vo/response/ResponseEditShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/shop/shop/vo/response/ResponseRegisterShopVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/checklist/vo/RequestInsertCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/checklist/vo/RequestModifyCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/checklist/vo/ResponseFindCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/task/vo/RequestInsertTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/task/vo/RequestModifyTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/task/vo/ResponseFindTaskVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/taskperchecklist/vo/RequestInsertTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/taskperchecklist/vo/RequestModifyTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/task/taskperchecklist/vo/ResponseFindTaskPerCheckListVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/entity/Employee.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/entity/Employer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/DeleteEmployeeInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/DeleteEmployerInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/EditEmployeeInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/EditEmployerInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/RegisterEmployeeInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/RegisterEmployerInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/domain/info/SignInUserInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/dto/EmployeeDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/dto/EmployerDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/repository/EmployeeRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/repository/EmployerRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/service/EmployeeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/service/EmployerService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestDeleteEmployeeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestDeleteEmployerVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestEditEmployeeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestEditEmployerVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestInsertEmployeeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestInsertEmployerVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestLoginVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/request/RequestRegisterUserVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/response/ResponseFindEmployeeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/response/ResponseFindEmployerVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/response/ResponseInsertEmployeeVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/java/com/intbyte/wizbuddy/user/vo/response/ResponseInsertEmployerVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/EmployeeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/EmployerMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/ManualBoardLikedMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/ManualBoardMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/NoticeBoardLikedMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/NoticeBoardMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/UserAndEmployeeMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/main/resources/com/intbyte/wizbuddy/mapper/UserAndEmployerMapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wizbuddy-user-service/src/test/java/com/intbyte/wizbuddy/UserServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="wizbuddy" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sksmsdlskgus&quot;
+  }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOMozwGc56Vdoj&quot;,
+        &quot;number&quot;: 138
+      },
+      &quot;lastSeen&quot;: 1725420219904
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Int-Byte4/WizBuddy2.git&quot;,
+    &quot;accountId&quot;: &quot;4db84f7b-2bba-4771-98ce-a7fb78e21626&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;Int-Byte4&quot;,
+    &quot;repository&quot;: &quot;WizBuddy2&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2lEIbLTv3fe9T9nsnwq4JEBQK0s" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HMACKeyGenerator.executor": "Run",
+    "Gradle.Build WizBuddy2.executor": "Run",
+    "Gradle.SubsBoardServiceTests.executor": "Run",
+    "Gradle.SubsBoardServiceTests.getBoard.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsAbsent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsPresent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Debug",
+    "Gradle.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_제목_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장번호로_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장별_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.Tests in 'wizbuddy.test'.executor": "Run",
+    "JUnit.All in wizbuddy.test.executor": "Run",
+    "JUnit.CommentServiceTests.adoptCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.deleteCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByEmployeeTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByIdTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentBySubsBoardTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentsBySubsCodeTest.executor": "Run",
+    "JUnit.CommentServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.CommentServiceTests.insertCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.modifyCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.댓글_전체_조회_테스트.executor": "Run",
+    "JUnit.ManualBoardLikedServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testDeleteManualBoard.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testModifyManualBoard.executor": "Run",
+    "JUnit.NoticeBoardServiceTests.executor": "Run",
+    "JUnit.ScheduleServiceTests.testScheduleService_update_By_Comment_SuccessTest.executor": "Run",
+    "JUnit.ShopServiceTests.testDeleteShopSuccess.executor": "Run",
+    "JUnit.SubsBoardServiceTests.deleteSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.executor": "Run",
+    "JUnit.SubsBoardServiceTests.findSubsBoardByShopCodeTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.insertSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testDeleteSubsBoard.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testModifySubsBoards.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "JUnit.TaskServiceTests.id로_업무_1개_수정_테스트.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.WizbuddyApplication (1).executor": "Run",
+    "Spring Boot.WizbuddyApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "Merging nahyeon",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Playdata/Desktop/WizBuddy2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.intbyte.wizbuddy.mapper" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\src\main\resources" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\WizBuddyIntegration" />
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\wizbuddyIntegration" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.intbyte.wizbuddy.comment.service" />
+      <recent name="com.intbyte.wizbuddy.board.service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.intbyte.wizbuddy.exception.comment" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.WizbuddyApplication">
+    <configuration name="CommentServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.comment.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.comment.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.comment.service.CommentServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_등록_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_등록_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_수정_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_수정_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_수정_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_수정_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.testModifySubsBoards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="testModifySubsBoards" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WizbuddyApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="wizbuddy.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.intbyte.WizbuddyApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WizbuddyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="wizbuddy.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.intbyte.wizbuddy.WizbuddyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.WizbuddyApplication (1)" />
+        <item itemvalue="JUnit.SubsBoardServiceTests.대타게시판_수정_테스트" />
+        <item itemvalue="JUnit.SubsBoardServiceTests.대타게시판_등록_테스트" />
+        <item itemvalue="JUnit.SubsBoardServiceTests.testModifySubsBoards" />
+        <item itemvalue="JUnit.CommentServiceTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="" />
+      <created>1724738878560</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724738878560</updated>
+      <workItem from="1724738879657" duration="3325000" />
+      <workItem from="1724743592781" duration="9112000" />
+      <workItem from="1724811645416" duration="124000" />
+      <workItem from="1724832933976" duration="34708000" />
+      <workItem from="1724922660979" duration="89343000" />
+      <workItem from="1725164123411" duration="24546000" />
+      <workItem from="1725235978821" duration="88725000" />
+      <workItem from="1725497125153" duration="1781000" />
+      <workItem from="1725586236137" duration="1160000" />
+    </task>
+    <task id="LOCAL-00049" summary="✨ 기능 추가 : SubsBoard 예외처리 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725109403738</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109403738</updated>
+    </task>
+    <task id="LOCAL-00050" summary="✨ 기능 추가 : SubsBoard 수정 Entity 추가">
+      <option name="closed" value="true" />
+      <created>1725109422788</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109422789</updated>
+    </task>
+    <task id="LOCAL-00051" summary="✨ 기능 수정 : SubsBoard Entity 수정 추가">
+      <option name="closed" value="true" />
+      <created>1725109554713</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109554713</updated>
+    </task>
+    <task id="LOCAL-00052" summary="♻️ 코드 수정 : SubsBoard 등록,수정,삭제 refactor">
+      <option name="closed" value="true" />
+      <created>1725109607046</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109607046</updated>
+    </task>
+    <task id="LOCAL-00053" summary="♻️ 코드 수정 : SubsBoard 등록,수정,삭제 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725109615665</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109615665</updated>
+    </task>
+    <task id="LOCAL-00054" summary="♻️ 코드 수정 : Comment 수정 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725109644089</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109644089</updated>
+    </task>
+    <task id="LOCAL-00055" summary="✨ 기능 수정 : Comment 등록 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725195027284</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1725195027284</updated>
+    </task>
+    <task id="LOCAL-00056" summary="♻️ 코드 수정 : Comment Type 변환 수정">
+      <option name="closed" value="true" />
+      <created>1725195053703</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1725195053703</updated>
+    </task>
+    <task id="LOCAL-00057" summary="♻️ 코드 수정 : Service 코드 refactor">
+      <option name="closed" value="true" />
+      <created>1725199415804</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1725199415804</updated>
+    </task>
+    <task id="LOCAL-00058" summary="✨ 기능 추가 : 게시글별 댓글 조회 쿼리 직원별 댓글 조회 쿼리 추가">
+      <option name="closed" value="true" />
+      <created>1725207788587</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207788587</updated>
+    </task>
+    <task id="LOCAL-00059" summary="✨ 기능 추가 : 게시글별,직원별 댓글 모두 조회 Service 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207831230</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207831230</updated>
+    </task>
+    <task id="LOCAL-00060" summary="✨ 기능 추가 : 게시글별,직원별 댓글 모두 조회 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207852561</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207852561</updated>
+    </task>
+    <task id="LOCAL-00061" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 쿼리 추가">
+      <option name="closed" value="true" />
+      <created>1725207881188</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207881188</updated>
+    </task>
+    <task id="LOCAL-00062" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 Service 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207918084</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207918084</updated>
+    </task>
+    <task id="LOCAL-00063" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207925846</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207925846</updated>
+    </task>
+    <task id="LOCAL-00064" summary="✨ 기능 추가 : Comment 채택 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725209569193</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1725209569193</updated>
+    </task>
+    <task id="LOCAL-00065" summary="✨ 기능 추가 : Comment 채택 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725209576542</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1725209576542</updated>
+    </task>
+    <task id="LOCAL-00066" summary="♻️ 코드 수정 : Comment 등록 테스트 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725210512913</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1725210512914</updated>
+    </task>
+    <task id="LOCAL-00067" summary="♻️ 코드 수정 : Comment Entity 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725266841821</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266841821</updated>
+    </task>
+    <task id="LOCAL-00068" summary="♻️ 코드 수정 : SubsBoard Entity 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725266865770</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266865770</updated>
+    </task>
+    <task id="LOCAL-00069" summary="✨ 기능 추가  : SubsBoard 관련 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725266933554</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266933554</updated>
+    </task>
+    <task id="LOCAL-00070" summary="✨ 기능 추가  : SubsBoard Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725266946989</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266946989</updated>
+    </task>
+    <task id="LOCAL-00071" summary="✨ 기능 추가  : SubsBoard Controller 조회,등록,수정,삭제 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725331678654</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331678654</updated>
+    </task>
+    <task id="LOCAL-00072" summary="✨ 기능 수정  : SubsBoard Service 조회,등록,수정,삭제 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725331702387</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331702387</updated>
+    </task>
+    <task id="LOCAL-00073" summary="✨ 기능 추가  : SubsBoard 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725331731140</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331731140</updated>
+    </task>
+    <task id="LOCAL-00074" summary="✨ 기능 추가  : SubsBoard 등록 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331770304</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331770304</updated>
+    </task>
+    <task id="LOCAL-00075" summary="✨ 기능 추가  : SubsBoard 삭제 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331780749</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331780749</updated>
+    </task>
+    <task id="LOCAL-00076" summary="✨ 기능 추가  : SubsBoard 수정 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331787444</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331787444</updated>
+    </task>
+    <task id="LOCAL-00077" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725357904421</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1725357904421</updated>
+    </task>
+    <task id="LOCAL-00078" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725366439292</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366439292</updated>
+    </task>
+    <task id="LOCAL-00079" summary="✨ 기능 수정  : Comment 조회,등록,수정,삭제 Service 수정">
+      <option name="closed" value="true" />
+      <created>1725366458876</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366458876</updated>
+    </task>
+    <task id="LOCAL-00080" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725366470943</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366470943</updated>
+    </task>
+    <task id="LOCAL-00081" summary="✨ 기능 수정  : CheckListNotFoundException message 수정">
+      <option name="closed" value="true" />
+      <created>1725366504587</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366504587</updated>
+    </task>
+    <task id="LOCAL-00082" summary="✨ 기능 수정  : 게시글 좋아요 기능 수정">
+      <option name="closed" value="true" />
+      <created>1725409633571</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1725409633571</updated>
+    </task>
+    <task id="LOCAL-00083" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410007752</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410007752</updated>
+    </task>
+    <task id="LOCAL-00084" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410169247</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410169247</updated>
+    </task>
+    <task id="LOCAL-00085" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410944121</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410944121</updated>
+    </task>
+    <task id="LOCAL-00086" summary="✨ 기능 추가  : Like 등록 api 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725415800412</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415800412</updated>
+    </task>
+    <task id="LOCAL-00087" summary="✨ 기능 추가  : Like 등록 Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725415886994</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415886994</updated>
+    </task>
+    <task id="LOCAL-00088" summary="✨ 기능 수정  : Like 등록 Service 수정">
+      <option name="closed" value="true" />
+      <created>1725415936473</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415936473</updated>
+    </task>
+    <task id="LOCAL-00089" summary="✨ 기능 추가  : Like 등록 요청, 응답 entity 추가">
+      <option name="closed" value="true" />
+      <created>1725415966684</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415966684</updated>
+    </task>
+    <task id="LOCAL-00090" summary="♻️ 코드 수정 : 주석처리 제거 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725415997335</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415997335</updated>
+    </task>
+    <task id="LOCAL-00091" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419581744</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419581744</updated>
+    </task>
+    <task id="LOCAL-00092" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419600727</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419600727</updated>
+    </task>
+    <task id="LOCAL-00093" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 Controller 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419632396</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419632396</updated>
+    </task>
+    <task id="LOCAL-00094" summary="♻️ 코드 수정 : 매뉴얼 게시판, 공지사항 게시판 불필요한 주석 제거">
+      <option name="closed" value="true" />
+      <created>1725419660075</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419660075</updated>
+    </task>
+    <task id="LOCAL-00095" summary="✨ 기능 추가 : Swagger Operation 달기">
+      <option name="closed" value="true" />
+      <created>1725430316681</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1725430316681</updated>
+    </task>
+    <task id="LOCAL-00096" summary="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <option name="closed" value="true" />
+      <created>1725588165216</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1725588165217</updated>
+    </task>
+    <task id="LOCAL-00097" summary="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <option name="closed" value="true" />
+      <created>1725588850028</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1725588850028</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="nahyeon" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="♻️ 코드 수정 : SubsBoard Entity 코드 수정" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 관련 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard Controller 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard Controller 조회,등록,수정,삭제 기능 추가" />
+    <MESSAGE value="✨ 기능 수정  : SubsBoard Service 조회,등록,수정,삭제 코드 수정" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 조회,등록,수정,삭제 api 경로 및 권한 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 등록 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 삭제 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 수정 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : Comment 조회,등록,수정,삭제 Controller 추가" />
+    <MESSAGE value="✨ 기능 수정  : Comment 조회,등록,수정,삭제 Service 수정" />
+    <MESSAGE value="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가" />
+    <MESSAGE value="✨ 기능 수정  : CheckListNotFoundException message 수정" />
+    <MESSAGE value="✨ 기능 수정  : 게시글 좋아요 기능 수정" />
+    <MESSAGE value="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 api 및 권한 추가" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 Controller 추가" />
+    <MESSAGE value="✨ 기능 수정  : Like 등록 Service 수정" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 요청, 응답 entity 추가" />
+    <MESSAGE value="♻️ 코드 수정 : 주석처리 제거 코드 수정" />
+    <MESSAGE value="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가" />
+    <MESSAGE value="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 Controller 기능 추가" />
+    <MESSAGE value="♻️ 코드 수정 : 매뉴얼 게시판, 공지사항 게시판 불필요한 주석 제거" />
+    <MESSAGE value="✨ 기능 추가 : Swagger Operation 달기" />
+    <MESSAGE value="♻️ 코드 수정 : WizBuddy 폴더 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="♻️ 코드 수정 : WizBuddy 폴더 수정" />
+  </component>
+</project>
