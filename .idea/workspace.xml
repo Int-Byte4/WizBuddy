@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="✨ 파일 추가: readme image 파일 추가">
+    <list default="true" id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="♻️ 코드 수정 : WizBuddy 폴더 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,12 +26,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="wizbuddy" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -101,7 +97,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;Application.HMACKeyGenerator.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.Build WizBuddy2.executor&quot;: &quot;Run&quot;,
     &quot;Gradle.SubsBoardServiceTests.executor&quot;: &quot;Run&quot;,
@@ -168,6 +164,74 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HMACKeyGenerator.executor": "Run",
+    "Gradle.Build WizBuddy2.executor": "Run",
+    "Gradle.SubsBoardServiceTests.executor": "Run",
+    "Gradle.SubsBoardServiceTests.getBoard.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsAbsent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsPresent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Debug",
+    "Gradle.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_제목_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장번호로_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장별_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.Tests in 'wizbuddy.test'.executor": "Run",
+    "JUnit.All in wizbuddy.test.executor": "Run",
+    "JUnit.CommentServiceTests.adoptCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.deleteCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByEmployeeTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByIdTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentBySubsBoardTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentsBySubsCodeTest.executor": "Run",
+    "JUnit.CommentServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.CommentServiceTests.insertCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.modifyCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.댓글_전체_조회_테스트.executor": "Run",
+    "JUnit.ManualBoardLikedServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testDeleteManualBoard.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testModifyManualBoard.executor": "Run",
+    "JUnit.NoticeBoardServiceTests.executor": "Run",
+    "JUnit.ScheduleServiceTests.testScheduleService_update_By_Comment_SuccessTest.executor": "Run",
+    "JUnit.ShopServiceTests.testDeleteShopSuccess.executor": "Run",
+    "JUnit.SubsBoardServiceTests.deleteSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.executor": "Run",
+    "JUnit.SubsBoardServiceTests.findSubsBoardByShopCodeTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.insertSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testDeleteSubsBoard.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testModifySubsBoards.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "JUnit.TaskServiceTests.id로_업무_1개_수정_테스트.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.WizbuddyApplication (1).executor": "Run",
+    "Spring Boot.WizbuddyApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "kyeongSeok",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Playdata/Desktop/WizBuddy2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -306,6 +370,7 @@
         <item itemvalue="JUnit.SubsBoardServiceTests.대타게시판_등록_테스트" />
         <item itemvalue="JUnit.SubsBoardServiceTests.testModifySubsBoards" />
         <item itemvalue="JUnit.CommentServiceTests" />
+        <item itemvalue="Spring Boot.WizbuddyApplication (1)" />
       </list>
     </recent_temporary>
   </component>
