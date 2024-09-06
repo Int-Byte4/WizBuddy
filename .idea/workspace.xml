@@ -1,0 +1,790 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WizBuddyIntegration/README.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="wizbuddy" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;sksmsdlskgus&quot;
+  }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOMozwGc56Vdoj&quot;,
+        &quot;number&quot;: 138
+      },
+      &quot;lastSeen&quot;: 1725420219904
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Int-Byte4/WizBuddy.git&quot;,
+    &quot;accountId&quot;: &quot;9262ee7e-1c58-4b0d-8aa6-d97a6a5c3af1&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;Int-Byte4&quot;,
+    &quot;repository&quot;: &quot;WizBuddy2&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2lEIbLTv3fe9T9nsnwq4JEBQK0s" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HMACKeyGenerator.executor": "Run",
+    "Gradle.Build WizBuddy2.executor": "Run",
+    "Gradle.SubsBoardServiceTests.executor": "Run",
+    "Gradle.SubsBoardServiceTests.getBoard.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsAbsent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.testFindAllSubsBoardsWhenDataIsPresent.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Debug",
+    "Gradle.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_제목_수정_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장번호로_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.SubsBoardServiceTests.매장별_대타게시판_조회_테스트.executor": "Run",
+    "Gradle.Tests in 'wizbuddy.test'.executor": "Run",
+    "JUnit.All in wizbuddy.test.executor": "Run",
+    "JUnit.CommentServiceTests.adoptCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.deleteCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByEmployeeTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentByIdTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentBySubsBoardTest.executor": "Run",
+    "JUnit.CommentServiceTests.findCommentsBySubsCodeTest.executor": "Run",
+    "JUnit.CommentServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.CommentServiceTests.insertCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.modifyCommentTest.executor": "Run",
+    "JUnit.CommentServiceTests.댓글_전체_조회_테스트.executor": "Run",
+    "JUnit.ManualBoardLikedServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testDeleteManualBoard.executor": "Run",
+    "JUnit.ManualBoardServiceTests.testModifyManualBoard.executor": "Run",
+    "JUnit.NoticeBoardServiceTests.executor": "Run",
+    "JUnit.ScheduleServiceTests.testScheduleService_update_By_Comment_SuccessTest.executor": "Run",
+    "JUnit.ShopServiceTests.testDeleteShopSuccess.executor": "Run",
+    "JUnit.SubsBoardServiceTests.deleteSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.executor": "Run",
+    "JUnit.SubsBoardServiceTests.findSubsBoardByShopCodeTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.getSubsBoardWithCommentsTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.insertSubsBoardTest.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testDeleteSubsBoard.executor": "Run",
+    "JUnit.SubsBoardServiceTests.testModifySubsBoards.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_등록_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_삭제_테스트.executor": "Run",
+    "JUnit.SubsBoardServiceTests.대타게시판_수정_테스트.executor": "Run",
+    "JUnit.TaskServiceTests.id로_업무_1개_수정_테스트.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.WizbuddyApplication (1).executor": "Run",
+    "Spring Boot.WizbuddyApplication.executor": "Run",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "seohyun",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/hi/WizBuddy",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.intbyte.wizbuddy.mapper" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\src\main\resources" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\WizBuddyIntegration" />
+      <recent name="C:\Users\Playdata\Desktop\WizBuddy2\wizbuddyIntegration" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.intbyte.wizbuddy.comment.service" />
+      <recent name="com.intbyte.wizbuddy.board.service" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.intbyte.wizbuddy.exception.comment" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.WizbuddyApplication">
+    <configuration name="CommentServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.comment.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.comment.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.comment.service.CommentServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_등록_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_등록_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_수정_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_수정_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.대타게시판_수정_테스트" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="대타게시판_수정_테스트" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubsBoardServiceTests.testModifySubsBoards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="wizbuddy.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.wizbuddy.board.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.intbyte.wizbuddy.board.service" />
+      <option name="MAIN_CLASS_NAME" value="com.intbyte.wizbuddy.board.service.SubsBoardServiceTests" />
+      <option name="METHOD_NAME" value="testModifySubsBoards" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WizbuddyApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="wizbuddy.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.intbyte.WizbuddyApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.intbyte.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WizbuddyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="wizbuddy.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.intbyte.wizbuddy.WizbuddyApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.WizbuddyApplication (1)" />
+        <item itemvalue="JUnit.SubsBoardServiceTests.대타게시판_등록_테스트" />
+        <item itemvalue="JUnit.SubsBoardServiceTests.testModifySubsBoards" />
+        <item itemvalue="JUnit.CommentServiceTests" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="16c6fcba-caea-4f98-8a4d-9d240e7597e0" name="Changes" comment="" />
+      <created>1724738878560</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1724738878560</updated>
+      <workItem from="1724738879657" duration="3325000" />
+      <workItem from="1724743592781" duration="9112000" />
+      <workItem from="1724811645416" duration="124000" />
+      <workItem from="1724832933976" duration="34708000" />
+      <workItem from="1724922660979" duration="89343000" />
+      <workItem from="1725164123411" duration="24546000" />
+      <workItem from="1725235978821" duration="88725000" />
+      <workItem from="1725497125153" duration="1781000" />
+      <workItem from="1725586236137" duration="1160000" />
+      <workItem from="1725591919447" duration="434000" />
+      <workItem from="1725592421394" duration="531000" />
+      <workItem from="1725599042202" duration="307000" />
+    </task>
+    <task id="LOCAL-00049" summary="✨ 기능 추가 : SubsBoard 예외처리 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725109403738</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109403738</updated>
+    </task>
+    <task id="LOCAL-00050" summary="✨ 기능 추가 : SubsBoard 수정 Entity 추가">
+      <option name="closed" value="true" />
+      <created>1725109422788</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109422789</updated>
+    </task>
+    <task id="LOCAL-00051" summary="✨ 기능 수정 : SubsBoard Entity 수정 추가">
+      <option name="closed" value="true" />
+      <created>1725109554713</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109554713</updated>
+    </task>
+    <task id="LOCAL-00052" summary="♻️ 코드 수정 : SubsBoard 등록,수정,삭제 refactor">
+      <option name="closed" value="true" />
+      <created>1725109607046</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109607046</updated>
+    </task>
+    <task id="LOCAL-00053" summary="♻️ 코드 수정 : SubsBoard 등록,수정,삭제 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725109615665</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109615665</updated>
+    </task>
+    <task id="LOCAL-00054" summary="♻️ 코드 수정 : Comment 수정 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725109644089</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1725109644089</updated>
+    </task>
+    <task id="LOCAL-00055" summary="✨ 기능 수정 : Comment 등록 테스트 refactor">
+      <option name="closed" value="true" />
+      <created>1725195027284</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1725195027284</updated>
+    </task>
+    <task id="LOCAL-00056" summary="♻️ 코드 수정 : Comment Type 변환 수정">
+      <option name="closed" value="true" />
+      <created>1725195053703</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1725195053703</updated>
+    </task>
+    <task id="LOCAL-00057" summary="♻️ 코드 수정 : Service 코드 refactor">
+      <option name="closed" value="true" />
+      <created>1725199415804</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1725199415804</updated>
+    </task>
+    <task id="LOCAL-00058" summary="✨ 기능 추가 : 게시글별 댓글 조회 쿼리 직원별 댓글 조회 쿼리 추가">
+      <option name="closed" value="true" />
+      <created>1725207788587</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207788587</updated>
+    </task>
+    <task id="LOCAL-00059" summary="✨ 기능 추가 : 게시글별,직원별 댓글 모두 조회 Service 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207831230</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207831230</updated>
+    </task>
+    <task id="LOCAL-00060" summary="✨ 기능 추가 : 게시글별,직원별 댓글 모두 조회 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207852561</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207852561</updated>
+    </task>
+    <task id="LOCAL-00061" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 쿼리 추가">
+      <option name="closed" value="true" />
+      <created>1725207881188</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207881188</updated>
+    </task>
+    <task id="LOCAL-00062" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 Service 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207918084</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207918084</updated>
+    </task>
+    <task id="LOCAL-00063" summary="✨ 기능 추가 : 매장별 대타게시글 모두 조회 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725207925846</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1725207925846</updated>
+    </task>
+    <task id="LOCAL-00064" summary="✨ 기능 추가 : Comment 채택 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725209569193</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1725209569193</updated>
+    </task>
+    <task id="LOCAL-00065" summary="✨ 기능 추가 : Comment 채택 테스트 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725209576542</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1725209576542</updated>
+    </task>
+    <task id="LOCAL-00066" summary="♻️ 코드 수정 : Comment 등록 테스트 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725210512913</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1725210512914</updated>
+    </task>
+    <task id="LOCAL-00067" summary="♻️ 코드 수정 : Comment Entity 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725266841821</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266841821</updated>
+    </task>
+    <task id="LOCAL-00068" summary="♻️ 코드 수정 : SubsBoard Entity 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725266865770</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266865770</updated>
+    </task>
+    <task id="LOCAL-00069" summary="✨ 기능 추가  : SubsBoard 관련 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725266933554</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266933554</updated>
+    </task>
+    <task id="LOCAL-00070" summary="✨ 기능 추가  : SubsBoard Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725266946989</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1725266946989</updated>
+    </task>
+    <task id="LOCAL-00071" summary="✨ 기능 추가  : SubsBoard Controller 조회,등록,수정,삭제 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725331678654</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331678654</updated>
+    </task>
+    <task id="LOCAL-00072" summary="✨ 기능 수정  : SubsBoard Service 조회,등록,수정,삭제 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725331702387</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331702387</updated>
+    </task>
+    <task id="LOCAL-00073" summary="✨ 기능 추가  : SubsBoard 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725331731140</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331731140</updated>
+    </task>
+    <task id="LOCAL-00074" summary="✨ 기능 추가  : SubsBoard 등록 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331770304</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331770304</updated>
+    </task>
+    <task id="LOCAL-00075" summary="✨ 기능 추가  : SubsBoard 삭제 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331780749</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331780749</updated>
+    </task>
+    <task id="LOCAL-00076" summary="✨ 기능 추가  : SubsBoard 수정 요청,응답 VO 추가">
+      <option name="closed" value="true" />
+      <created>1725331787444</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1725331787444</updated>
+    </task>
+    <task id="LOCAL-00077" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725357904421</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1725357904421</updated>
+    </task>
+    <task id="LOCAL-00078" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725366439292</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366439292</updated>
+    </task>
+    <task id="LOCAL-00079" summary="✨ 기능 수정  : Comment 조회,등록,수정,삭제 Service 수정">
+      <option name="closed" value="true" />
+      <created>1725366458876</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366458876</updated>
+    </task>
+    <task id="LOCAL-00080" summary="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725366470943</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366470943</updated>
+    </task>
+    <task id="LOCAL-00081" summary="✨ 기능 수정  : CheckListNotFoundException message 수정">
+      <option name="closed" value="true" />
+      <created>1725366504587</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1725366504587</updated>
+    </task>
+    <task id="LOCAL-00082" summary="✨ 기능 수정  : 게시글 좋아요 기능 수정">
+      <option name="closed" value="true" />
+      <created>1725409633571</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1725409633571</updated>
+    </task>
+    <task id="LOCAL-00083" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410007752</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410007752</updated>
+    </task>
+    <task id="LOCAL-00084" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410169247</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410169247</updated>
+    </task>
+    <task id="LOCAL-00085" summary="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정">
+      <option name="closed" value="true" />
+      <created>1725410944121</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1725410944121</updated>
+    </task>
+    <task id="LOCAL-00086" summary="✨ 기능 추가  : Like 등록 api 및 권한 추가">
+      <option name="closed" value="true" />
+      <created>1725415800412</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415800412</updated>
+    </task>
+    <task id="LOCAL-00087" summary="✨ 기능 추가  : Like 등록 Controller 추가">
+      <option name="closed" value="true" />
+      <created>1725415886994</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415886994</updated>
+    </task>
+    <task id="LOCAL-00088" summary="✨ 기능 수정  : Like 등록 Service 수정">
+      <option name="closed" value="true" />
+      <created>1725415936473</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415936473</updated>
+    </task>
+    <task id="LOCAL-00089" summary="✨ 기능 추가  : Like 등록 요청, 응답 entity 추가">
+      <option name="closed" value="true" />
+      <created>1725415966684</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415966684</updated>
+    </task>
+    <task id="LOCAL-00090" summary="♻️ 코드 수정 : 주석처리 제거 코드 수정">
+      <option name="closed" value="true" />
+      <created>1725415997335</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1725415997335</updated>
+    </task>
+    <task id="LOCAL-00091" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419581744</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419581744</updated>
+    </task>
+    <task id="LOCAL-00092" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419600727</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419600727</updated>
+    </task>
+    <task id="LOCAL-00093" summary="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 Controller 기능 추가">
+      <option name="closed" value="true" />
+      <created>1725419632396</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419632396</updated>
+    </task>
+    <task id="LOCAL-00094" summary="♻️ 코드 수정 : 매뉴얼 게시판, 공지사항 게시판 불필요한 주석 제거">
+      <option name="closed" value="true" />
+      <created>1725419660075</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1725419660075</updated>
+    </task>
+    <task id="LOCAL-00095" summary="✨ 기능 추가 : Swagger Operation 달기">
+      <option name="closed" value="true" />
+      <created>1725430316681</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1725430316681</updated>
+    </task>
+    <task id="LOCAL-00096" summary="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <option name="closed" value="true" />
+      <created>1725588165216</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1725588165217</updated>
+    </task>
+    <task id="LOCAL-00097" summary="♻️ 코드 수정 : WizBuddy 폴더 수정">
+      <option name="closed" value="true" />
+      <created>1725588850028</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1725588850028</updated>
+    </task>
+    <option name="localTasksCounter" value="98" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="nahyeon" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="♻️ 코드 수정 : SubsBoard Entity 코드 수정" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 관련 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard Controller 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard Controller 조회,등록,수정,삭제 기능 추가" />
+    <MESSAGE value="✨ 기능 수정  : SubsBoard Service 조회,등록,수정,삭제 코드 수정" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 조회,등록,수정,삭제 api 경로 및 권한 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 등록 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 삭제 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : SubsBoard 수정 요청,응답 VO 추가" />
+    <MESSAGE value="✨ 기능 추가  : Comment 조회,등록,수정,삭제 Controller 추가" />
+    <MESSAGE value="✨ 기능 수정  : Comment 조회,등록,수정,삭제 Service 수정" />
+    <MESSAGE value="✨ 기능 추가  : Comment 조회,등록,수정,삭제 api 경로 및 권한 추가" />
+    <MESSAGE value="✨ 기능 수정  : CheckListNotFoundException message 수정" />
+    <MESSAGE value="✨ 기능 수정  : 게시글 좋아요 기능 수정" />
+    <MESSAGE value="✨ 기능 수정  : 게시글 좋아요 태스트 경로  수정" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 api 및 권한 추가" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 Controller 추가" />
+    <MESSAGE value="✨ 기능 수정  : Like 등록 Service 수정" />
+    <MESSAGE value="✨ 기능 추가  : Like 등록 요청, 응답 entity 추가" />
+    <MESSAGE value="♻️ 코드 수정 : 주석처리 제거 코드 수정" />
+    <MESSAGE value="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 VO 기능 추가" />
+    <MESSAGE value="✨ 기능 추가 : 공지사항, 매뉴얼 게시글 조회, 등록, 수정, 삭제 api 요청 및 응답 Controller 기능 추가" />
+    <MESSAGE value="♻️ 코드 수정 : 매뉴얼 게시판, 공지사항 게시판 불필요한 주석 제거" />
+    <MESSAGE value="✨ 기능 추가 : Swagger Operation 달기" />
+    <MESSAGE value="♻️ 코드 수정 : WizBuddy 폴더 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="♻️ 코드 수정 : WizBuddy 폴더 수정" />
+  </component>
+</project>

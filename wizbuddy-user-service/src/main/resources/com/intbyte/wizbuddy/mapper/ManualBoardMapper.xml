@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.mapper.ManualBoardMapper">
+    <resultMap id="manualBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.ManualBoard">
+        <id property="manualCode" column="manual_code"/>
+        <result property="manualTitle" column="manual_title"/>
+        <result property="manualContents" column="manual_contents"/>
+        <result property="manualFlag" column="manual_flag"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+        <result property="shopCode" column="shop_code"/>
+        <result property="userCode" column="user_code"/>
+    </resultMap>
+
+    <select id="findUserCodeByManualCode" parameterType="int" resultType="String">
+        SELECT
+        M.user_code
+        FROM manual_board M
+        WHERE M.manual_code = #{ manualCode }
+        AND M.manual_flag = true
+    </select>
+    <select id="findAllManualBoards" resultMap="manualBoardResultMap">
+        SELECT
+        M.manual_code
+        , M.manual_title
+        , M.manual_contents
+        , M.manual_flag
+        , M.image_url
+        , M.created_at
+        , M.updated_at
+        , M.shop_code
+        , M.user_code
+        FROM manual_board M
+        ORDER BY created_at DESC
+    </select>
+    <select id="findManualBoardByShopCode" resultMap="manualBoardResultMap">
+        SELECT
+        M.manual_code
+        , M.manual_title
+        , M.manual_contents
+        , M.manual_flag
+        , M.image_url
+        , M.created_at
+        , M.updated_at
+        , M.shop_code
+        , M.user_code
+        FROM manual_board M
+        WHERE M.shop_code = #{ shopCode }
+        AND M.manual_flag = true
+        ORDER BY manual_code
+    </select>
+    <select id="findManualBoardByManualCode" resultMap="manualBoardResultMap" parameterType="int">
+        SELECT
+        M.manual_code
+        , M.manual_title
+        , M.manual_contents
+        , M.manual_flag
+        , M.image_url
+        , M.created_at
+        , M.updated_at
+        , M.shop_code
+        , M.user_code
+        FROM manual_board M
+        WHERE M.manual_code = #{ manualCode }
+        AND M.manual_flag = true
+    </select>
+</mapper>
