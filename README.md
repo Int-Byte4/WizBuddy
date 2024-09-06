@@ -1,12 +1,12 @@
 # 🔗 위즈버디 _ WizBuddy
 
- <img src="https://github.com/user-attachments/assets/1443d466-4482-4b68-8a18-bba59f3749c1" alt="배너 이미지 칸" width="900" height="470">
+ <img src="images/1.개요/1.위즈버디_메인.png" alt="배너 이미지 칸" width="900" height="470">
 <br>
 
 
 # 🐼 Group 4 Team Member - `Int4_Byte`
 
-| <img src="https://github.com/user-attachments/assets/b49e078b-7795-4946-b5d2-7efb5efe00a1" height=130/> | <img src="https://github.com/user-attachments/assets/b1774ca0-9da3-47d9-8fc1-123ebb7b8e5f" height=130/> | <img src="https://github.com/user-attachments/assets/f7ab9b88-801f-4fdb-8e6b-8402a0fc3836" height=130/> | <img src="https://github.com/user-attachments/assets/29cf3053-3a4e-4818-9dbb-12ade1737e9d" height=130/> | <img src="https://github.com/user-attachments/assets/f2fb1179-0f41-4e1c-b5fb-f49dc97b14d0" height=130/> | 
+| <img src="images/6.조원/조제훈.png" height=130/> | <img src="images/6.조원/백경석.jpg" height=130/> | <img src="images/6.조원/유제은.jpg" height=130/> | <img src="images/6.조원/이나현.jpg" height=130/> | <img src="images/6.조원/이서현.jpg" height=130/> | 
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |                            조제훈                            |                            백경석                            |                            유제은                            |                            이나현                            |                            이서현                            |
 | [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/JoJeHuni) <br>` ESFJ `| [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/Hellin22) <br>` ENTP `| [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/YuJeeun) <br>` INFP `| [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/sksmsdlskgus) <br>` ENTJ `| [<img src="https://img.shields.io/badge/Github-Link-181717?logo=Github">](https://github.com/sh694090) <br>` INFJ `|
@@ -59,21 +59,21 @@
 
 
 
-#  🚩 프로젝트 개요 
+#  🚩 프로젝트 개요
 ## :one: 프로젝트 소개
 사장님과 아르바이트생을 위한 스마트 매니지먼트 솔루션, **WIZ BUDDY** <br>
 - **W(Work)**: 업무 효율을 극대화하는 최적의 파트너 <br>
 - **I(Instant)**: 즉시 문제를 해결하고 소통을 원활하게 <br>
 - **Z(Zero)**: 스트레스 없이 모든 업무를 간편하게 관리 <br>
 
-## :two: 프로젝트 필요성 
+## :two: 프로젝트 필요성
 ### 1. 사장님
-<img src="https://github.com/user-attachments/assets/981db72a-e109-4181-b232-d1587ef95db3" height=400/> <br>
+<img src="images/1.개요/2.필요성_1.png" height=400/> <br>
 - 23년 12월 매장을 운영하고 있는 사장님을 대상으로 설문조사를 시행한 결과, 아르바이트생의 근태관리가 사업장을 운영할 때 어려운 점 1위로 선정되었습니다.
 - 이를 바탕으로, 사장님들은 매장을 운영하면서도 아르바이트생도 관리해야 한다는 어려움을 겪고 있는 것을 알 수 있었습니다.
-  
+
 ### 2. 아르바이트생
-<img src="https://github.com/user-attachments/assets/3299299b-2232-45b7-be1d-026e8f8a2feb" height=400/> <br>
+<img src="images/1.개요/3.필요성_2.jpg" height=400/> <br>
 - 아르바이트를 할 때, 대부분의 사업장에서 공지사항 전달, 스케줄 관리를 위해 카카오톡을 사용합니다.
 - 20년 12월 아르바이트생을 대상으로 한 설문 조사 결과 5명 중 4명이 단톡방으로 인해 스트레스를 받는다는 결과를 볼 수 있었습니다.<br><br>
 
@@ -83,24 +83,24 @@
 
 ## :three: 유사 서비스 및 차별화 전략
 ### 1. 워키도키
-<img src="https://github.com/user-attachments/assets/c33ccf32-0063-4ea8-90b2-f0255c55bf7c" width=800> <br>
+<img src="images/1.개요/4.유사서비스_1.png" width=800> <br>
 - 아르바이트 추천, 업무 체크리스트 등의 기능 제공
 
 ### 2. 샵솔
- <img src="https://github.com/user-attachments/assets/484f8034-deee-44cb-b9dc-7cead18d1207" width=700>
- <img src="https://github.com/user-attachments/assets/8696b1a6-a6a6-4b6a-97e4-d7423e528e08" width=300> <br>
+ <img src="images/1.개요/5.유사서비스_2.png" width=700>
+ <img src="images/1.개요/6.유사서비스_3.png" width=300> <br>
 - 출퇴근 관리, 자동 급여 계산, 급여 명세서, 체크리스트, 업무일지, 바코드 인식을 통한 유통기한 관리 등의 기능 제공
 
 ### 3. 차별화 전략
-<img src="https://github.com/user-attachments/assets/b8fe5f66-8710-4cad-b059-0b2a7af3396e" height=200>
+<img src="images/1.개요/7.차별화전략.png" height=200>
 
-## :four: 프로젝트 주요 기능 
+## :four: 프로젝트 주요 기능
 ### 1. 업무 체크리스트
 - 사장님의 입장에서는 아르바이트생이 업무를 제대로 수행하고 있는지 쉽게 확인이 가능하고, 아르바이트생의 입장에서는 어떤 업무를 해야 하는지 빠르게 파악이 가능합니다.
-<br><br>
+  <br><br>
 ### 2. 업무 캘린더
 - 사장님이 일주일 근무 스케줄을 게시하면 아르바이트생들은 근무 일정을 한 눈에 확인할 수 있습니다.
-<br><br>
+  <br><br>
 ### 3. 스케줄 조정 기능
 - 아르바이트생들은 사장님께 일일이 전달하지 않고도 다른 아르바이트생들과 서비스 내에서 쉽게 스케줄을 변경할 수 있습니다.
 
@@ -110,7 +110,7 @@
 
 # 🚩 WBS
 ### [🔗 WBS 바로가기](https://docs.google.com/spreadsheets/d/11AirCDIcRRg-C22BVh2cYn6UemvdJoVKG5yCrohsYk4/edit?gid=363407194#gid=363407194)
-<img src="https://github.com/user-attachments/assets/9fdfa08d-3dcc-4728-9752-88831c98d493" width=1000 height=500><br>
+<img src="images/1.개요/8.WBS.png" width=1000 height=500><br>
 
 
 <br><br>
@@ -118,8 +118,8 @@
 
 # 🚩 요구사항
 ### [🔗 요구사항 정의서 바로가기](https://docs.google.com/spreadsheets/d/11AirCDIcRRg-C22BVh2cYn6UemvdJoVKG5yCrohsYk4/edit?gid=0#gid=0)
-<img src="https://github.com/user-attachments/assets/6e444026-4926-433f-93b2-485f2392cc58" width=1000 height=500><br>
-<img src="https://github.com/user-attachments/assets/499796cb-e41e-4ee0-aa95-1ff9f81a9f48" width=1000 height=500>
+<img src="images/1.개요/9.요구사항_1.png" width=1000 height=500><br>
+<img src="images/1.개요/10.요구사항_2.png" width=1000 height=500>
 
 
 <br><br>
@@ -127,21 +127,21 @@
 
 # 🚩 DDD (Domain Driven Design) 설계
 ## :one: Domain Event Storming
-<img src="https://github.com/user-attachments/assets/c9057ada-4473-41c9-a99e-9371586eda99" width=700>
+<img src="images/2.모델링/11.DDD_1.jpg" width=700>
 
 
 <br><br>
 
 
 ## :two: Bounded Context
-<img src="https://github.com/user-attachments/assets/d345d0f1-123f-4e18-b4aa-f5337665bb72" width=700>
+<img src="images/2.모델링/12.DDD_2.jpg" width=700>
 
 
 <br><br>
 
 
 ## :three: Context Map
-<img src="https://github.com/user-attachments/assets/7c7dcb0b-f1da-4ff7-ac1d-b640a7004286" width=700>
+<img src="images/2.모델링/13.DDD_3.jpg" width=700>
 
 
 <br><br>
@@ -149,15 +149,15 @@
 
 # 🚩 DB모델링
 ## :one: 논리 모델링
-<img src="https://github.com/user-attachments/assets/5018902d-64cb-4de7-8a35-6fb0c6a0f88a" width=1000>
-<img src="https://github.com/user-attachments/assets/83b8a1ef-868b-4fd7-af49-dbd7f769267d" width=1000>
+<img src="images/2.모델링/14.모델링_1.png" width=1000>
+<img src="images/2.모델링/15.모델링_2.png" width=1000>
 
 
 <br><br>
 
 
 ## :two: 물리 모델링
-<img src="https://github.com/user-attachments/assets/874aa6bf-0ec5-4cb5-bdc6-7cd190a563ed" width=1000>
+<img src="images/2.모델링/16.모델링_3.png" width=1000>
 
 
 <br><br>
@@ -166,7 +166,7 @@
 ## :three: 테이블 생성
 <details>
   <summary><strong>DDL</strong></summary>
-    
+
     DROP TABLE IF EXISTS Comments;
     DROP TABLE IF EXISTS Substitution_Board;
     DROP TABLE IF EXISTS NoticeBoardLiked;
@@ -399,11 +399,11 @@
                           FOREIGN KEY (subs_code) REFERENCES Substitution_Board(subs_code) ON DELETE CASCADE,
                           FOREIGN KEY (employee_code) REFERENCES Employee(employee_code) ON DELETE CASCADE
     );
-    
+
 </details>
 <details>
   <summary><strong>DML</strong></summary>
- 
+
     INSERT INTO Users (user_code, user_type, user_email, user_password)
     VALUES
         ('20240831-test-test-test-iamadmin1234', 'Admin', 'admin', '$2a$12$o6dzGz6ZSj1KDc1dAk5Bfe1MvpvVialzZ3ldInQ78GiQ3LUemh462');
@@ -670,8 +670,8 @@
 </details>
 
 # 🚩 프로젝트 아키텍처
-<img src="https://github.com/user-attachments/assets/cfa4af4b-91af-4f8f-a3aa-b4fe0d309817" width=600><br>
-<img src="https://github.com/user-attachments/assets/f921bc30-2adf-4095-9950-d6870f90c7b3" width=600>
+<img src="images/3.아키텍처/17.아키텍처.jpg" width=600><br>
+<img src="images/3.아키텍처/18.유레카서버.png" width=600>
 
 # 🚩 API Test
 ## 📍 01_user
@@ -795,49 +795,49 @@
 ## 📍 04_subs board
 <details>
  <summary>대타 게시글 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/a11a271e-8a14-48ce-8f88-1576243d905b" width=700>
+  <img src="images/4.APITest/4.subsboard/subs1.png" width=700>
 </details>
 <details>
  <summary>대타 게시글 1개 조회</summary>
-  <img src="https://github.com/user-attachments/assets/98ed0537-7d39-40ee-bc22-efa4517339f9" width=700>
+  <img src="images/4.APITest/4.subsboard/subs2.png" width=700>
 </details>
 <details>
  <summary>매장별 대타 게시글 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/d02012cb-091d-4ef3-b9b8-55e0d3521103" width=700>
+  <img src="images/4.APITest/4.subsboard/subs3.png" width=700>
 </details>
 <details>
  <summary>대타 게시글 등록</summary>
-  <img src="https://github.com/user-attachments/assets/c383aa6e-b575-46b6-a8ce-38fa925b1d9f" width=700>
+  <img src="images/4.APITest/4.subsboard/subs4.png" width=700>
 </details>
 <details>
  <summary>대타 게시글 수정</summary>
-  <img src="https://github.com/user-attachments/assets/e4c0ced5-365e-4307-9997-f099bbae7888" width=700>
+  <img src="images/4.APITest/4.subsboard/subs5.png" width=700>
 </details>
 <details>
  <summary>대타 게시글 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/42cd2d26-4b8d-4c99-82e1-3a820793de37" width=700>
+  <img src="images/4.APITest/4.subsboard/subs6.png" width=700>
 </details>
 
 ## 📍 05_comment
 <details>
  <summary>댓글 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/0828bcfa-1403-43e0-815e-06c5b0adb939" width=700>
+  <img src="images/4.APITest/5.comment/comment1.png" width=700>
 </details>
 <details>
  <summary>댓글 1개 조회</summary>
-  <img src="https://github.com/user-attachments/assets/0ecd1926-955f-40e8-b4f9-f3fee1506695" width=700>
+  <img src="images/4.APITest/5.comment/comment2.png" width=700>
 </details>
 <details>
  <summary>게시글 별 댓글 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/6c1ab7f2-dcfa-44c9-8a3c-65a15e45ac3a" width=700>
+  <img src="images/4.APITest/5.comment/comment3.png" width=700>
 </details>
 <details>
  <summary>직원별 댓글 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/30c435ad-7e61-4ef2-a35f-04f8cfb80bfe" width=700>
+  <img src="images/4.APITest/5.comment/comment4.png" width=700>
 </details>
 <details>
  <summary>댓글 등록</summary>
-  <img src="https://github.com/user-attachments/assets/68def086-19ba-4a05-8122-1702df241223" width=700>
+  <img src="images/4.APITest/5.comment/comment5.png" width=700>
 </details>
 
 ## 📍 06_schedule
@@ -878,62 +878,62 @@
 ## 📍 07_manual board
 <details>
  <summary>매뉴얼 게시판 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/153c44a0-173d-4050-80f9-4d88ef60fc5c" width=700>
+  <img src="images/4.APITest/7.manualboard/manual1.PNG" width=700>
 </details>
 <details>
  <summary>매장별 매뉴얼 게시판 조회</summary>
-  <img src="https://github.com/user-attachments/assets/d166a971-3b71-4d58-aad7-2937a4ae380f" width=700>
+<img src="images/4.APITest/7.manualboard/manual2.PNG" width=700>
 </details>
 <details>
  <summary>매뉴얼 게시글 단 건 조회</summary>
-  <img src="https://github.com/user-attachments/assets/a5b8089a-7c5c-4b79-ac4b-ba5601d0d30d" width=700>
+  <img src="images/4.APITest/7.manualboard/manual3.PNG" width=700>
 </details>
 <details>
  <summary>매뉴얼 게시글 등록</summary>
-  <img src="https://github.com/user-attachments/assets/c23cf0e5-c8b2-4c4a-8ab5-0b7e1873d714" width=700>
+  <img src="images/4.APITest/7.manualboard/manual4.PNG" width=700>
 </details>
 <details>
  <summary>매뉴얼 게시글 수정</summary>
-  <img src="https://github.com/user-attachments/assets/3a4651b1-2a09-4c28-b144-291d9e8c7a6a" width=700>
+  <img src="images/4.APITest/7.manualboard/manual5.PNG" width=700>
 </details>
 <details>
  <summary>매뉴얼 게시글 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/dfab1428-b2ea-46d0-829a-fe6a4866e0b7" width=700>
+  <img src="images/4.APITest/7.manualboard/manual6.PNG" width=700>
 </details>
 
 ## 📍 08_notice board
 <details>
  <summary>공지사항 게시판 전체 조회</summary>
-  <img src="https://github.com/user-attachments/assets/a676db22-409d-4c05-97e5-82c01406e68a" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice1.PNG" width=700>
 </details>
 <details>
  <summary>매장별 공지사항 게시판 조회</summary>
-  <img src="https://github.com/user-attachments/assets/8a36c523-7c6f-4776-8f22-483352ada5e4" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice2.PNG" width=700>
 </details>
 <details>
  <summary>공지사항 게시판 단 건 조회</summary>
-  <img src="https://github.com/user-attachments/assets/735b9135-344c-4449-8a2a-942efe0b53a3" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice3.PNG" width=700>
 </details>
 <details>
  <summary>공지사항 게시글 등록</summary>
-  <img src="https://github.com/user-attachments/assets/a53f12d9-4895-4692-9fd1-26744aeead4a" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice4.PNG" width=700>
 </details>
 <details>
  <summary>공지사항 게시글 수정</summary>
-  <img src="https://github.com/user-attachments/assets/24e77695-f100-4340-b302-ba136102733a" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice5.PNG" width=700>
 </details>
 <details>
  <summary>공지사항 게시글 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/da4dbb88-c081-410b-9525-52f47ea9dd7c" width=700>
+  <img src="images/4.APITest/8.noticeboard/notice6.PNG" width=700>
 </details>
 
 ## 📍 09_like
 <details>
  <summary>매뉴얼 게시글 좋아요 등록</summary>
-  <img src="https://github.com/user-attachments/assets/c23c54aa-0320-470e-8199-998ca771056c" width=700>
+    <img src="images/4.APITest/9.like/liked1.png" width="700">
 </details><details>
  <summary>공지사항 게시글 좋아요 등록</summary>
-  <img src="https://github.com/user-attachments/assets/87dba6ec-f4f7-480f-8e53-cf312290aa88" width=700>
+    <img src="images/4.APITest/9.like/liked2.png" width="700">
 </details>
 
 ## 📍 10_task
@@ -1017,56 +1017,56 @@
 # 🚩 Swagger - API 명세서
 <details>
 <summary>사용자 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/5205b6f0-dfd7-4254-8a55-b2aa90410a33" width=800>
+ <img src="/images/5.swagger/swagger2.png" width=800>
 </details>
 <details>
 <summary>업무 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/d5ebd29c-d7f7-4066-873f-52768fc13999" width=800>
+ <img src="/images/5.swagger/swagger3.png" width=800>
 </details>
 <details>
 <summary>체크리스트 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/9d895a12-79ba-42b0-bc6a-45e34349be8d" width=800>
+ <img src="/images/5.swagger/swagger4.png" width=800>
 </details>
 <details>
 <summary>체크리스트 별 업무 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/d18ff5e9-b2b3-4bac-aa78-49e32608f94d" width=800>
+ <img src="/images/5.swagger/swagger1.png" width=800>
 </details>
 <details>
 <summary>매장 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/6b2a27b0-73cb-4c01-a42d-d9c9345db1cf" width=800>
+ <img src="/images/5.swagger/swagger5.png" width=800>
 </details>
 <details>
 <summary>매장 별 직원 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/67498213-eeae-4d00-b599-1866f07cc6e0" width=800>
+ <img src="/images/5.swagger/swagger11.png" width=800>
 </details>
 <details>
 <summary>업무 일정 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/c1d2e9e3-3429-456f-82e6-721248858f0b" width=800>
+ <img src="/images/5.swagger/swagger6.png" width=800>
 </details>
 <details>
 <summary>공지사항 게시판 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/09bd5f09-80db-4bcf-87a4-e637cf2df8f8" width=800>
+ <img src="/images/5.swagger/swagger7.png" width=800>
 </details>
 <details>
 <summary>공지사항 게시판 좋아요 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/271e4b5f-3b1c-458c-9432-8b098784234a" width=800>
+ <img src="/images/5.swagger/swagger8.png" width=800>
 </details>
 <details>
 <summary>매뉴얼 게시판 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/73051a64-6e25-4a56-955c-47e5a1e2656f" width=800>
+ <img src="/images/5.swagger/swagger9.png" width=800>
 </details>
 <details>
 <summary>매뉴얼 게시판 좋아요 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/55183b42-4b78-4299-b752-31659be2cb55" width=800>
+ <img src="/images/5.swagger/swagger10.png" width=800>
 </details>
 <details>
 <summary>댓글 컨트롤러</summary>
- <img src="https://github.com/user-attachments/assets/fbf611b4-241c-44b3-860b-69357285b54f" width=800>
+ <img src="/images/5.swagger/swagger12.png" width=800>
 </details>
 
 # 📜 동료평가
 **1. 조제훈**
- 
+
 |Team Member| 동료평가 |
 | :--------------------------------------: | ------ |
 |  백경석  | 웹 개발 경험으로 인해 많은 부분을 알고 있지만 자만하거나 거만하지 않고 팀원들을 도와주며 프로젝트의 진행과 개발 능력 많은 도움을 주었습니다. 팀 분위기도 쾌활하게 만들어주면서 의견을 제시할때는 확실하게 말하며 리듬감을 조절하는 프로젝트의 리더였다고 생각합니다. DB나 자바 모든 분야에서 배울 점이 많은 동료이고 어딜가나 잘 해낼거라고 생각합니다. |
@@ -1075,16 +1075,16 @@
 |  이서현  | 우리 조의 북극성. 아무것도 모르고 경험도 전혀 없는 저에게 하나씩 차근차근 알려주어서 덕분에 많이 배울 수 있었습니다. 설명을 듣고도 멍청한 표정으로 이해를 못하면 다시 이해할 때까지 인내심 있게 알려주었습니다. 또한 문제가 생겼을 때 끈기있게 해결하려고 하는 모습은 본받을 점이라고 생각했습니다. |
 
 **2. 백경석**
-   
+
 |Team Member| 동료평가 |
 | :--------------------------------------: | ------ |
 |  조제훈  | 코딩테스트 파트너로 도움을 많이 받았고, 수업에서 배운 개념에 대해 깊게 배우는 자세가 좋습니다. 궁금증을 크게 가진 적 없던 개념에 대해 이야기 꺼내주면서 다시 한 번 찾아보면서 좀 더 개념을 탄탄하게 만들 수 있게 해준 팀원이라고 생각합니다. 코딩테스트를 자주 하던 만큼 프로젝트를 하면서는 항상 밤늦게까지 남아 기능 구현을 하면서도 많은 대화를 나눌 수 있는 팀원이었으며 프로젝트를 하면서 서로 많이 성장했다고 느꼈습니다. 또 한 번 같이 하고 싶은 팀원입니다. 같이 많은 성장을 할 수 있을 것 같습니다. |
 |  유제은  | 팀원이 실수한걸 밤새 수습하며 화 한번 내지 않는 천사입니다. . .정리를 잘해서 본인이 맡은 부분을 다른 팀원들이 이해하기 쉽게 해줍니다 ㅎㅎ 노션에 오류난 부분을 해결해나가는 과정을 정리해놓은게 도움이 많이 됐습니다람쥐돌이 모르는게 있다고하면 "방송켜~!!!" 라고 하며 직접 화면을 보면서 해결해줍니다 짱이에요 타자도 엄청 빠릅니다 눈깜짝할사이에 메소드 하나가 완성됩니다 |
 |  이나현  | 팀원들의 요청에 언제나 응답하며, 끝까지 도움을 아끼지 않는 착한 청년입니다. 하나에 대해 이해도가 우사인볼트급으로 빨라 핵심을 잘 캐치해줌으로써 팀의 결속력을 높여 모두가 끝까지 함께할 수 있도록 힘을 북돋아줬습니다. 에너지 음료가 필요없을만큼 때로는 묵묵하고 때로는 유머를 선사해주고, 모두에게 에너지를 전달하며 팀 전체가 행복하게 잘 마무리 할 수 있어서 좋았습니다. |
 |  이서현  | 뒤에서 궂은 일을 도맡아 하는 조원입니다. 마지막까지 책임감 있게 마무리를 하는 모습이 인상깊었습니다. 인내심 갑222입니다. 설명을 듣고도 이해하지 못하고 멍청한 표정으로 있으면 이해할 때까지 반복해서 설명해주었습니다. 이런 모습 덕분에 제가 모르는 부분은 더욱 편하게 질문할 수 있었고 적극적으로 참여할 수 있었다고 생각합니다. |
-   
+
 **3. 유제은**
-   
+
 |Team Member| 동료평가 |
 | :--------------------------------------: | ------ |
 |  조제훈  | 웃음이 많아 협업하면서 이나현 팀원과 함께 분위기를 밝게 만들어주고, 프로젝트를 할 때도 열심히 임하는 팀원입니다. 상대방의 의견에 귀 기울여 듣고 스프링으로 처음 프로젝트에 임하는 만큼 걱정도 많았을 것 같은데 어려운 핵심 기능을 맡게 되었음에도 직접 해결하려고 하는 모습 정말 보기 좋았습니다. 길게 회의를 해야 하는 경우에도 새벽까지 남아서 함께하고 항상 할 수 있는 최선을 다해줘서 고마운 팀원입니다. 마지막 프로젝트까지 가게 됐을 때가 기대되는 팀원입니다.(진짜입니다.)  |
