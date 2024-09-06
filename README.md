@@ -939,79 +939,79 @@
 ## 📍 10_task
 <details>
  <summary>특정 매장의 모든 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/7bbde237-c73e-4882-af4a-6fdea8fcac93" width=700>
+    <img src="images/4.APITest/10.task/task2.png" width="700">
 </details>
 <details>
  <summary>특정 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/59dfa375-ddeb-446c-b352-d5b97c832029" width=700>
+    <img src="images/4.APITest/10.task/task1.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 고정 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/3141fe1d-8ec6-4167-9677-ab6b0726ce7f" width=700>
+    <img src="images/4.APITest/10.task/task3.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 비고정 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/c74ae88c-c13f-4c9b-87ce-ee9d73741658" width=700>
+    <img src="images/4.APITest/10.task/task4.png" width="700">
 </details>
 <details>
  <summary>특정 매장에 업무 1개 추가</summary>
-  <img src="https://github.com/user-attachments/assets/e5b9925b-0d71-4ee2-b526-87508f113c88" width=700>
+    <img src="images/4.APITest/10.task/task5.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 업무 1개 수정</summary>
-  <img src="https://github.com/user-attachments/assets/4fd5ba3a-0ea4-482d-a65f-79799da68ef1" width=700>
+    <img src="images/4.APITest/10.task/task6.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 업무 1개 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/25499240-eb09-44f8-a0de-2e7811346ba0" width=700>
+    <img src="images/4.APITest/10.task/task7.png" width="700">
 </details>
 
 ## 📍 11_checklist
 <details>
  <summary>특정 매장의 모든 체크리스트 조회</summary>
-  <img src="https://github.com/user-attachments/assets/f3a01254-5b4a-4dd7-92d5-ff50874fa3bc" width=700>
+    <img src="images/4.APITest/11.checklist/checklist2.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 조회</summary>
-  <img src="https://github.com/user-attachments/assets/bf477834-022a-49e2-8a2a-bf1222b19606" width=700>
+    <img src="images/4.APITest/11.checklist/checklist1.png" width="700">
 </details>
 <details>
  <summary>특정 매장에 체크리스트 1개 추가</summary>
-  <img src="https://github.com/user-attachments/assets/c3ce7f19-1dd2-4a2b-8e74-aacdd81853f6" width=700>
+    <img src="images/4.APITest/11.checklist/checklist3.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 특정 체크리스트 수정</summary>
-  <img src="https://github.com/user-attachments/assets/26077e25-051f-4db7-92f0-8666f23b9231" width=700>
+    <img src="images/4.APITest/11.checklist/checklist4.png" width="700">
 </details>
 <details>
  <summary>특정 매장의 특정 체크리스트 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/e0981050-cef9-47be-acec-07a6123e395f" width=700>
+    <img src="images/4.APITest/11.checklist/checklist5.png" width="700">
 </details>
 
 ## 📍 12_task per checklist
 <details>
  <summary>특정 체크리스트 내 전체 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/87b104fc-4746-48b3-a90c-8a60b44c0ffb" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc1.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 완료 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/968bf9cd-0838-46ef-917e-89aba315dd78" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc2.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 미완료 업무 조회</summary>
-  <img src="https://github.com/user-attachments/assets/af2f3780-ef5c-486a-a8a0-f0d9cf8e04c4" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc3.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 업무 추가</summary>
-  <img src="https://github.com/user-attachments/assets/454cc10d-df6b-4fbb-9aae-a5d64574743e" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc4.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 특정 업무 완료 표시 (수정)</summary>
-  <img src="https://github.com/user-attachments/assets/85b01421-a1b2-465a-bbca-5130ef123fc1" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc5.png" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 특정 업무 완료 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/620b99de-f421-41cd-aa60-e8aff7743103" width=700>
+    <img src="images/4.APITest/12.taskperchecklist/tpc6.png" width="700">
 </details>
 
 # 🚩 Swagger - API 명세서
