@@ -930,88 +930,88 @@
 ## 📍 09_like
 <details>
  <summary>매뉴얼 게시글 좋아요 등록</summary>
-    <img src="images/4.APITest/9.like/liked1.png" width="700">
+    <img src="images/4.APITest/9.like/liked1.PNG" width="700">
 </details><details>
  <summary>공지사항 게시글 좋아요 등록</summary>
-    <img src="images/4.APITest/9.like/liked2.png" width="700">
+    <img src="images/4.APITest/9.like/liked2.PNG" width="700">
 </details>
 
 ## 📍 10_task
 <details>
  <summary>특정 매장의 모든 업무 조회</summary>
-    <img src="images/4.APITest/10.task/task2.png" width="700">
+    <img src="/images/4.APITest/10.task/task2.PNG" width="700">
 </details>
 <details>
  <summary>특정 업무 조회</summary>
-    <img src="images/4.APITest/10.task/task1.png" width="700">
+    <img src="images/4.APITest/10.task/task1.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 고정 업무 조회</summary>
-    <img src="images/4.APITest/10.task/task3.png" width="700">
+    <img src="images/4.APITest/10.task/task3.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 비고정 업무 조회</summary>
-    <img src="images/4.APITest/10.task/task4.png" width="700">
+    <img src="images/4.APITest/10.task/task4.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장에 업무 1개 추가</summary>
-    <img src="images/4.APITest/10.task/task5.png" width="700">
+    <img src="images/4.APITest/10.task/task5.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 업무 1개 수정</summary>
-    <img src="images/4.APITest/10.task/task6.png" width="700">
+    <img src="images/4.APITest/10.task/task6.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 업무 1개 삭제</summary>
-    <img src="images/4.APITest/10.task/task7.png" width="700">
+    <img src="images/4.APITest/10.task/task7.PNG" width="700">
 </details>
 
 ## 📍 11_checklist
 <details>
  <summary>특정 매장의 모든 체크리스트 조회</summary>
-    <img src="images/4.APITest/11.checklist/checklist2.png" width="700">
+    <img src="images/4.APITest/11.checklist/checklist2.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 조회</summary>
-    <img src="images/4.APITest/11.checklist/checklist1.png" width="700">
+    <img src="images/4.APITest/11.checklist/checklist1.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장에 체크리스트 1개 추가</summary>
-    <img src="images/4.APITest/11.checklist/checklist3.png" width="700">
+    <img src="images/4.APITest/11.checklist/checklist3.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 특정 체크리스트 수정</summary>
-    <img src="images/4.APITest/11.checklist/checklist4.png" width="700">
+    <img src="images/4.APITest/11.checklist/checklist4.PNG" width="700">
 </details>
 <details>
  <summary>특정 매장의 특정 체크리스트 삭제</summary>
-    <img src="images/4.APITest/11.checklist/checklist5.png" width="700">
+    <img src="images/4.APITest/11.checklist/checklist5.PNG" width="700">
 </details>
 
 ## 📍 12_task per checklist
 <details>
  <summary>특정 체크리스트 내 전체 업무 조회</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc1.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc1.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 완료 업무 조회</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc2.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc2.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 미완료 업무 조회</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc3.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc3.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 업무 추가</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc4.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc4.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 특정 업무 완료 표시 (수정)</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc5.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc5.PNG" width="700">
 </details>
 <details>
  <summary>특정 체크리스트 내 특정 업무 완료 삭제</summary>
-    <img src="images/4.APITest/12.taskperchecklist/tpc6.png" width="700">
+    <img src="images/4.APITest/12.taskperchecklist/tpc6.PNG" width="700">
 </details>
 
 # 🚩 Swagger - API 명세서
