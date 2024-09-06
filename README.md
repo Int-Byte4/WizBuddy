@@ -841,36 +841,36 @@
 ## 📍 06_schedule
 <details>
  <summary>전체 스케줄 조회</summary>
-  <img src="https://github.com/user-attachments/assets/422cb6f7-d7c2-4228-ab6d-74ddf3dc3892" width=700>
+  <img src="images/4.APITest/6.schedule/schedule1.png" width=700>
 </details>
 <details>
  <summary>한 주의 스케줄 상세 조회</summary>
-  <img src="https://github.com/user-attachments/assets/78365188-381e-4ddd-8e21-ca2d1af4990e" width=700>
+  <img src="images/4.APITest/6.schedule/schedule2.png" width=700>
 </details>
 <details>
  <summary>직원 별 한 주의 스케줄 상세 조회</summary>
-  <img src="https://github.com/user-attachments/assets/3ab87b07-5c5f-4ffd-a032-61465502b3b0" width=700>
+  <img src="images/4.APITest/6.schedule/schedule3.png" width=700>
 </details>
 <details>
  <summary>한 주의 스케줄-스케줄 등록</summary>
-  <img src="https://github.com/user-attachments/assets/64fa8724-c42c-44ca-ae6f-ea6feaa28ce9" width=700>
+  <img src="images/4.APITest/6.schedule/schedule4.png" width=700>
 </details>
 <details>
  <summary>한 주의 스케줄-직원 등록</summary>
-  <img src="https://github.com/user-attachments/assets/7652df68-4c14-4764-922f-ebdd50089278" width=700>
+  <img src="images/4.APITest/6.schedule/schedule5.png" width=700>
 </details>
 <details>
  <summary>스케줄 수정</summary>
-  <img src="https://github.com/user-attachments/assets/734b7bb3-fe72-40e1-bf44-66ddcde4b535" width=700>
+  <img src="images/4.APITest/6.schedule/schedule6.png" width=700>
 </details>
 <details>
  <summary>댓글 채택으로 스케줄 수정</summary>
-  <img src="https://github.com/user-attachments/assets/7634f911-0608-4306-9d6c-01631b10b16f" width=700>
+  <img src="images/4.APITest/6.schedule/schedule7.png" width=700>
 </details>
 
 <details>
  <summary>스케줄 삭제</summary>
-  <img src="https://github.com/user-attachments/assets/c619bf78-6f70-4569-85d2-19eef98b6a84" width=700>
+  <img src="images/4.APITest/6.schedule/schedule8.png" width=700>
 </details>
 
 ## 📍 07_manual board
