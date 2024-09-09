@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.userEntity.query.repository.UserAndEmployerMapper">
+    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.userEntity.domain.entity.UserEntity">
+        <id property="userCode" column="user_code"/>
+        <result property="userType" column="user_type"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPassword" column="user_password"/>
+
+        <collection property="employer" javaType="com.intbyte.wizbuddy.userEntity.domain.entity.Employer">
+            <id property="employerCode" column="employer_code"/>
+            <result property="employerName" column="employer_name"/>
+            <result property="employerEmail" column="employer_email"/>
+            <result property="employerPassword" column="employer_password"/>
+            <result property="employerPhone" column="employer_phone"/>
+            <result property="employerFlag" column="employer_flag"/>
+            <result property="employerBlackState" column="employer_black_state"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="updatedAt" column="updated_at"/>
+        </collection>
+
+    </resultMap>
+
+    <insert id="insertUser" parameterType="map" useGeneratedKeys="true" keyProperty="userCode">
+        INSERT INTO users(user_code, user_type, user_email, user_password)
+        VALUES(
+              #{ code },
+              #{ userType },
+              #{ userEmail },
+              #{ userPassword }
+              )
+    </insert>
+
+    <insert id="insertEmployer" parameterType="map" useGeneratedKeys="true" keyProperty="employerCode">
+        INSERT INTO employer(employer_code, employer_name, employer_email, employer_password, employer_phone, employer_flag, employer_black_state, created_at, updated_at)
+        VALUES(
+              #{ code },
+              #{ employerName },
+              #{ employerEmail },
+              #{ employerPassword },
+              #{ employerPhone },
+              #{ employerFlag },
+              #{ employerBlackState },
+              #{ createdAt },
+              #{ updatedAt }
+              )
+    </insert>
+
+</mapper>
