@@ -46,19 +46,17 @@ public class ManualBoardService {
     public List<ManualBoardDTO> findManualBoardByShopCode(int shopCode) {
         List<ManualBoard> manualBoardList = manualBoardMapper.findManualBoardByShopCode(shopCode);
 
-        if (manualBoardList == null) {
-            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
-        } else {
-            List<ManualBoardDTO> manualBoardDTOList = new ArrayList<>();
+        if (manualBoardList == null) throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
 
-            for (ManualBoard manualBoard : manualBoardMapper.findManualBoardByShopCode(shopCode)) {
-                ManualBoardDTO manualBoardDTO = mapper.map(manualBoard, ManualBoardDTO.class);
+        List<ManualBoardDTO> manualBoardDTOList = new ArrayList<>();
 
-                manualBoardDTOList.add(manualBoardDTO);
-            }
+        for (ManualBoard manualBoard : manualBoardMapper.findManualBoardByShopCode(shopCode)) {
+            ManualBoardDTO manualBoardDTO = mapper.map(manualBoard, ManualBoardDTO.class);
+
+            manualBoardDTOList.add(manualBoardDTO);
+        }
 
             return manualBoardDTOList;
-        }
     }
 
     // 매뉴얼 게시글 단 건 조회

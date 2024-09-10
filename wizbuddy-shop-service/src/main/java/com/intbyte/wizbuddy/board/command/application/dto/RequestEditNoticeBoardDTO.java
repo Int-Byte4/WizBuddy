@@ -14,4 +14,5 @@ public class RequestEditNoticeBoardDTO {
     private String noticeContent;
     private String imageUrl;
     private LocalDateTime updatedAt;
+    private String employerCode;
 }

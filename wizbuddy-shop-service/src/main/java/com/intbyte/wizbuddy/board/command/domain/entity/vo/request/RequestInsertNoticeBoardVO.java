@@ -1,16 +1,13 @@
 package com.intbyte.wizbuddy.board.command.domain.entity.vo.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Builder
+@Setter
 public class RequestInsertNoticeBoardVO {
     private String noticeTitle;
     private String noticeContent;

@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.board.query.controller;
 
 import com.intbyte.wizbuddy.board.query.dto.ManualBoardDTO;
-
 import com.intbyte.wizbuddy.board.query.service.ManualBoardService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;

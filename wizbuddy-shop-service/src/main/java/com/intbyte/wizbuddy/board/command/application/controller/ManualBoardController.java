@@ -2,9 +2,9 @@ package com.intbyte.wizbuddy.board.command.application.controller;
 
 import com.intbyte.wizbuddy.board.command.application.dto.RequestEditManualBoardDTO;
 import com.intbyte.wizbuddy.board.command.application.service.ManualBoardService;
-import com.intbyte.wizbuddy.board.vo.request.RequestInsertManualBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseInsertManualBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateManualBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.request.RequestInsertManualBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseInsertManualBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseUpdateManualBoardVO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.vo.response;
+package com.intbyte.wizbuddy.board.command.domain.entity.vo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
