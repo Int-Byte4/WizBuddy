@@ -83,7 +83,10 @@ public class CheckListService {
         checkListRepository.save(checkList);
 
         int shopCode = checkListInfo.getShopCode();
+
         List<TaskMybatis> allTaskByShopCode = taskMapper.findAllTaskByShopCodeByFixedState(shopCode);
+        // 수정할 부분
+
         List<Task> allTask = new ArrayList<>();
         for (int i = 0; i < allTaskByShopCode.size(); i++) {
             Task task = Task.builder()
