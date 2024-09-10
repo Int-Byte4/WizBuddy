@@ -1,6 +1,6 @@
-package com.intbyte.wizbuddy.mapper;
+package com.intbyte.wizbuddy.like.query.repository;
 
-import com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked;
+import com.intbyte.wizbuddy.like.command.domain.entity.ManualBoardLiked;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Map;

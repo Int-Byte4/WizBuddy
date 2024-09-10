@@ -1,11 +1,12 @@
-package com.intbyte.wizbuddy.like.service;
+package com.intbyte.wizbuddy.like.command.application.service;
 
-import com.intbyte.wizbuddy.exception.board.LikeDuplicateException;
-import com.intbyte.wizbuddy.like.domain.entity.NoticeBoardLiked;
-import com.intbyte.wizbuddy.like.dto.NoticeBoardLikedDTO;
-import com.intbyte.wizbuddy.like.repository.NoticeBoardLikedRepository;
-import com.intbyte.wizbuddy.like.vo.response.ResponseInsertNoticeBoardLikeVO;
-import com.intbyte.wizbuddy.mapper.NoticeBoardLikedMapper;
+import com.intbyte.wizbuddy.board.common.exception.CommonException;
+import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.like.command.domain.entity.NoticeBoardLiked;
+import com.intbyte.wizbuddy.like.command.application.dto.NoticeBoardLikedDTO;
+import com.intbyte.wizbuddy.like.command.domain.repository.NoticeBoardLikedRepository;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.response.ResponseInsertNoticeBoardLikeVO;
+import com.intbyte.wizbuddy.like.query.repository.NoticeBoardLikedMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -31,7 +32,7 @@ public class NoticeBoardLikedService {
         params.put("noticeCode", noticeBoardLikedInfo.getNoticeCode());
         params.put("employeeCode", noticeBoardLikedInfo.getEmployeeCode());
 
-        if (noticeBoardLikedMapper.getNoticeBoardLikedByUserCode(params) != null) throw new LikeDuplicateException();
+        if (noticeBoardLikedMapper.getNoticeBoardLikedByUserCode(params) != null) throw new CommonException(StatusEnum.ALREADY_PUSH_LIKED);
 
         NoticeBoardLiked noticeBoardLiked = NoticeBoardLiked.builder()
                                            .noticeLikedCode(noticeBoardLikedInfo.getNoticeCode())

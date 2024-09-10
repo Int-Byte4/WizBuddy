@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like.domain.entity;
+package com.intbyte.wizbuddy.like.command.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

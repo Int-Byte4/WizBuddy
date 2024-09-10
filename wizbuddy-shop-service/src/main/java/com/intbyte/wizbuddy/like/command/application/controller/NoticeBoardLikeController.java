@@ -1,9 +1,9 @@
-package com.intbyte.wizbuddy.like.controller;
+package com.intbyte.wizbuddy.like.command.application.controller;
 
-import com.intbyte.wizbuddy.like.dto.NoticeBoardLikedDTO;
-import com.intbyte.wizbuddy.like.service.NoticeBoardLikedService;
-import com.intbyte.wizbuddy.like.vo.request.RequestInsertNoticeBoardLikeVO;
-import com.intbyte.wizbuddy.like.vo.response.ResponseInsertNoticeBoardLikeVO;
+import com.intbyte.wizbuddy.like.command.application.dto.NoticeBoardLikedDTO;
+import com.intbyte.wizbuddy.like.command.application.service.NoticeBoardLikedService;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.request.RequestInsertNoticeBoardLikeVO;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.response.ResponseInsertNoticeBoardLikeVO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

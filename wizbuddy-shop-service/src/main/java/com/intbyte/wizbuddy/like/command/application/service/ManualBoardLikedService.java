@@ -1,11 +1,12 @@
-package com.intbyte.wizbuddy.like.service;
+package com.intbyte.wizbuddy.like.command.application.service;
 
-import com.intbyte.wizbuddy.exception.board.LikeDuplicateException;
-import com.intbyte.wizbuddy.like.domain.entity.ManualBoardLiked;
-import com.intbyte.wizbuddy.like.dto.ManualBoardLikedDTO;
-import com.intbyte.wizbuddy.like.repository.ManualBoardLikedRepository;
-import com.intbyte.wizbuddy.like.vo.response.ResponseInsertManualBoardLikeVO;
-import com.intbyte.wizbuddy.mapper.ManualBoardLikedMapper;
+import com.intbyte.wizbuddy.board.common.exception.CommonException;
+import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.like.command.domain.entity.ManualBoardLiked;
+import com.intbyte.wizbuddy.like.command.application.dto.ManualBoardLikedDTO;
+import com.intbyte.wizbuddy.like.command.domain.repository.ManualBoardLikedRepository;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.response.ResponseInsertManualBoardLikeVO;
+import com.intbyte.wizbuddy.like.query.repository.ManualBoardLikedMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,7 +31,7 @@ public class ManualBoardLikedService {
         params.put("manualCode", manualBoardLikedInfo.getManualCode());
         params.put("employeeCode", manualBoardLikedInfo.getEmployeeCode());
 
-        if (manualBoardLikedMapper.getManualBoardLikedByUserCode(params) != null) throw new LikeDuplicateException();
+        if (manualBoardLikedMapper.getManualBoardLikedByUserCode(params) != null) throw new CommonException(StatusEnum.ALREADY_PUSH_LIKED);
 
         ManualBoardLiked manualBoardLiked = ManualBoardLiked.builder()
                 .manualLikedCode(manualBoardLikedInfo.getManualLikedCode())

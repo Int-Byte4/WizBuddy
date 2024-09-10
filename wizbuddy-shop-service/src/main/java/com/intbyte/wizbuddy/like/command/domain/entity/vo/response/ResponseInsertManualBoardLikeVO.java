@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like.vo.response;
+package com.intbyte.wizbuddy.like.command.domain.entity.vo.response;
 
 import lombok.*;
 

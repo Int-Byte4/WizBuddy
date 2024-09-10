@@ -1,9 +1,9 @@
-package com.intbyte.wizbuddy.like.controller;
+package com.intbyte.wizbuddy.like.command.application.controller;
 
-import com.intbyte.wizbuddy.like.dto.ManualBoardLikedDTO;
-import com.intbyte.wizbuddy.like.service.ManualBoardLikedService;
-import com.intbyte.wizbuddy.like.vo.request.RequestInsertManualBoardLikeVO;
-import com.intbyte.wizbuddy.like.vo.response.ResponseInsertManualBoardLikeVO;
+import com.intbyte.wizbuddy.like.command.application.dto.ManualBoardLikedDTO;
+import com.intbyte.wizbuddy.like.command.application.service.ManualBoardLikedService;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.request.RequestInsertManualBoardLikeVO;
+import com.intbyte.wizbuddy.like.command.domain.entity.vo.response.ResponseInsertManualBoardLikeVO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;

@@ -5,7 +5,6 @@ import com.intbyte.wizbuddy.board.common.exception.CommonException;
 import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.dto.ManualBoardDTO;
 import com.intbyte.wizbuddy.board.query.repository.ManualBoardMapper;
-import com.intbyte.wizbuddy.board.command.domain.repository.ManualBoardRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +16,11 @@ import java.util.List;
 public class ManualBoardService {
 
     private final ManualBoardMapper manualBoardMapper;
-    private final ManualBoardRepository manualBoardRepository;
     private final ModelMapper mapper;
 
     @Autowired
-    public ManualBoardService(ManualBoardMapper manualBoardMapper, ManualBoardRepository manualBoardRepository, ModelMapper mapper) {
+    public ManualBoardService(ManualBoardMapper manualBoardMapper, ModelMapper mapper) {
         this.manualBoardMapper = manualBoardMapper;
-        this.manualBoardRepository = manualBoardRepository;
         this.mapper = mapper;
     }
 

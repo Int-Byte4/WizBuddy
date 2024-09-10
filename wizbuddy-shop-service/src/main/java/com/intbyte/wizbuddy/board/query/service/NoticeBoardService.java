@@ -5,7 +5,6 @@ import com.intbyte.wizbuddy.board.common.exception.CommonException;
 import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.query.repository.NoticeBoardMapper;
-import com.intbyte.wizbuddy.board.command.domain.repository.NoticeBoardRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +16,10 @@ import java.util.List;
 public class NoticeBoardService {
 
     private final NoticeBoardMapper noticeBoardMapper;
-    private final NoticeBoardRepository noticeBoardRepository;
     private final ModelMapper mapper;
 
     @Autowired
-    public NoticeBoardService(NoticeBoardRepository noticeBoardRepository, NoticeBoardMapper noticeBoardMapper, ModelMapper modelMapper) {
-        this.noticeBoardRepository = noticeBoardRepository;
+    public NoticeBoardService(NoticeBoardMapper noticeBoardMapper, ModelMapper modelMapper) {
         this.noticeBoardMapper = noticeBoardMapper;
         this.mapper = modelMapper;
     }

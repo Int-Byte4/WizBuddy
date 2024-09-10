@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like.vo.request;
+package com.intbyte.wizbuddy.like.command.domain.entity.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
