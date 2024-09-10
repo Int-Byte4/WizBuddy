@@ -17,24 +17,28 @@ public class TaskServiceImpl implements TaskService {
     }
 
     // query 1. 특정 task 조회
+    @Override
     @Transactional
     public TaskDTO findTaskById(int taskCode){
         return taskMapper.findTaskByTaskCode(taskCode);
     }
 
     // query 2. 특정 shop의 모든 task 조회
+    @Override
     @Transactional
     public List<TaskDTO> findAllTaskByShopCode(int shopCode){
         return taskMapper.findAllTaskByShopCode(shopCode);
     }
 
     // query 3. 특정 shop의 fixed인 모든 task 조회
+    @Override
     @Transactional
     public List<TaskDTO> findAllTaskByShopCodeByFixedState(int shopCode){
         return taskMapper.findAllTaskByShopCodeByFixedState(shopCode);
     }
 
     // query 4. 특정 shop의 non fixed인 모든 task 조회
+    @Override
     @Transactional
     public List<TaskDTO> findAllTaskByShopCodeByNonFixedState(int shopCode){
         return taskMapper.findAllTaskByShopCodeByNonFixedState(shopCode);

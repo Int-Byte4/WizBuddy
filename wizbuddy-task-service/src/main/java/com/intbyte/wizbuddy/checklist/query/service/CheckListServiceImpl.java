@@ -24,6 +24,7 @@ public class CheckListServiceImpl implements CheckListService {
 
 //    쿼리 ㅇ{ㅖ외처리!!!!!!!!!!!!
     // 1. 특정 체크리스트 조회
+    @Override
     @Transactional
     public CheckListDTO findCheckListById(int checkListCode){
 
@@ -36,6 +37,7 @@ public class CheckListServiceImpl implements CheckListService {
     }
 
     // 2. flag가 true 인 특정 매장의 모든 체크리스트 조회
+    @Override
     @Transactional
     public List<CheckListDTO> findCheckListByIdByShop(int shopCode){
 

@@ -23,6 +23,7 @@ public class AppTaskServiceImpl implements AppTaskService {
     }
 
     // command 1. task 최초 추가
+    @Override
     @Transactional
     public void insertTask(TaskDTO taskInfo) {
 
@@ -39,6 +40,7 @@ public class AppTaskServiceImpl implements AppTaskService {
     }
 
     // command 2. task 자체 수정
+    @Override
     @Transactional
     public void modifyTask(int taskCode, TaskDTO taskDTO){
 
@@ -50,6 +52,7 @@ public class AppTaskServiceImpl implements AppTaskService {
     }
 
     // command 3. task 삭제 -> task를 삭제한 순간 infra를 호출하고 infra에서 tpcs에서 taskcode와 관련된 모든거 없애기
+    @Override
     @Transactional
     public void deleteTask(int taskCode, TaskDTO taskDTO){
 
