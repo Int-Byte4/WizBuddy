@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.comment.infrastructure.service;
 
-import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
-import com.intbyte.wizbuddy.comment.infrastructure.repository.SubsBoardRepository;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
 import com.intbyte.wizbuddy.comment.infrastructure.exception.AlreadyAdoptedSubsBoardException;
 import com.intbyte.wizbuddy.comment.infrastructure.exception.ScheduleNotFoundException;
 import com.intbyte.wizbuddy.comment.infrastructure.exception.SubsBoardNotFoundException;
@@ -11,6 +10,7 @@ import com.intbyte.wizbuddy.comment.infrastructure.repository.CommentRepository;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.comment.infrastructure.repository.EmployeeWorkingPartRepository;
+import com.intbyte.wizbuddy.comment.infrastructure.repository.SubsBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,24 +27,20 @@ public class InfraAdoptServiceImpl implements InfraAdoptService {
 
     @Override
     public void handleAdoptProcess(Comment comment) {
-        // 대타 게시글 검증
-        SubsBoardDTO subsBoard = validateSubsBoard(comment.getSubsCode());
 
-        // 이미 채택된 댓글 검증
+        SubsBoard subsBoard = validateSubsBoard(comment.getSubsCode());
+
         validateAlreadyAdoptedComment(comment);
 
-        // 작성자의 부서 확인 및 처리
         EmployeeWorkingPart writer = validateWriterWorkingPart(subsBoard);
 
-        // 댓글 작성자와 부서 및 근무 시간, 근무일 일치 확인
         EmployeeWorkingPart matchingCommentAuthor = validateCommentAuthorWorkingPart(comment, writer);
 
-        // 작업 부서 수정 및 저장
         updateWorkingPart(writer, matchingCommentAuthor);
     }
 
-    private SubsBoardDTO validateSubsBoard(int subsCode) {
-        SubsBoardDTO subsBoard = subsBoardRepository.findBysubsCode(subsCode);
+    private SubsBoard validateSubsBoard(int subsCode) {
+        SubsBoard subsBoard = subsBoardRepository.findBySubsCode(subsCode);
         if (subsBoard == null) {
             throw new SubsBoardNotFoundException();
         }
@@ -52,13 +48,13 @@ public class InfraAdoptServiceImpl implements InfraAdoptService {
     }
 
     private void validateAlreadyAdoptedComment(Comment comment) {
-        Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState(comment.getSubsCode(), comment.isCommentAdoptedState());
+        Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState(comment.getSubsCode(), true);
         if (existingComment != null) {
             throw new AlreadyAdoptedSubsBoardException();
         }
     }
 
-    private EmployeeWorkingPart validateWriterWorkingPart(SubsBoardDTO subsBoard) {
+    private EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard) {
         EmployeeWorkingPart writer = employeeWorkingPartRepository.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
         if (writer == null) {
             throw new ScheduleNotFoundException();
@@ -72,7 +68,7 @@ public class InfraAdoptServiceImpl implements InfraAdoptService {
             throw new WorkingPartCodeNotEqualsException();
         }
 
-        // 근무 날짜와 시간도 일치하는지 확인
+
         return commentAuthorParts.stream()
                 .filter(author -> Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime())
                         && Objects.equals(author.getWorkingDate(), writer.getWorkingDate()))
