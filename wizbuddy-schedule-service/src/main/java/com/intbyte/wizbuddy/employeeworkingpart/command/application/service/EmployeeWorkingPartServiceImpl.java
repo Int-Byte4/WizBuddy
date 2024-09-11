@@ -1,13 +1,12 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
-import com.intbyte.wizbuddy.employeeworkingpart.command.application.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
 import com.intbyte.wizbuddy.employeeworkingpart.common.exception.EmployeeCodeNotFoundException;
 import com.intbyte.wizbuddy.employeeworkingpart.common.exception.WorkingDateAndTimeEqualsException;
 import com.intbyte.wizbuddy.employeeworkingpart.common.exception.ScheduleNotFoundException;
-import com.intbyte.wizbuddy.employeeworkingpart.query.repository.EmployeeWorkingPartMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,31 +14,29 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartService{
 
-    private final EmployeeWorkingPartMapper employeeWorkingPartMapper;
     private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
 
     @Override
     @Transactional
-    public EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart) {
+    public ResponseRegistEmployeeVO registSchedulePerEmployee
+            (ResponseRegistEmployeeVO responseRegistEmployeeVO) {
 
         EmployeeWorkingPart insertSchedulePerEmployee =
-                new EmployeeWorkingPart(employeeWorkingPart.getWorkingPartCode()
-                , employeeWorkingPart.getEmployeeCode()
-                , employeeWorkingPart.getScheduleCode()
-                , employeeWorkingPart.getWorkingDate()
-                , employeeWorkingPart.getWorkingPartTime());
+                new EmployeeWorkingPart(responseRegistEmployeeVO.getWorkingPartCode()
+                , responseRegistEmployeeVO.getEmployeeCode()
+                , responseRegistEmployeeVO.getScheduleCode()
+                , responseRegistEmployeeVO.getWorkingDate()
+                , responseRegistEmployeeVO.getWorkingPartTime());
 
-        String employeeCode = employeeWorkingPart.getEmployeeCode();
+        String employeeCode = responseRegistEmployeeVO.getEmployeeCode();
 
-        if(employeeWorkingPartMapper
-                .findEmployeeByEmployeeCode(employeeCode) == null)
+        if(employeeWorkingPartRepository.findByEmployeeCode(employeeCode)==null)
             throw new EmployeeCodeNotFoundException();
 
         if(employeeWorkingPartRepository
@@ -50,7 +47,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
 
         employeeWorkingPartRepository.save(insertSchedulePerEmployee);
 
-        return employeeWorkingPart;
+        return responseRegistEmployeeVO;
     }
 
     @Override

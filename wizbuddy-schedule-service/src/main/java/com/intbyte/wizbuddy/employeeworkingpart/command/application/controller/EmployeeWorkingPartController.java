@@ -1,11 +1,10 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.controller;
 
-import com.intbyte.wizbuddy.employeeworkingpart.command.application.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.application.service.EmployeeWorkingPartService;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.request.RequestModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.request.RequestRegistEmployeeWorkingPartVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
-import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeWorkingPartVO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,15 +24,16 @@ public class EmployeeWorkingPartController {
 
     @PostMapping("regist/employee")
     @Operation(summary = "한주의 스케줄 - 직원 등록")
-    public ResponseEntity<ResponseRegistEmployeeWorkingPartVO> registSchedulePerEmployee(
+    public ResponseEntity<ResponseRegistEmployeeVO> registSchedulePerEmployee(
             @RequestBody RequestRegistEmployeeWorkingPartVO request) {
 
-        EmployeeWorkingPartDTO employeeWorkingPartDTO = modelMapper.map(request, EmployeeWorkingPartDTO.class);
+        ResponseRegistEmployeeVO responseRegistEmployeeWorkingPartVO = modelMapper
+                .map(request, ResponseRegistEmployeeVO.class);
 
-        employeeWorkingPartService.registSchedulePerEmployee(employeeWorkingPartDTO);
+        employeeWorkingPartService.registSchedulePerEmployee(responseRegistEmployeeWorkingPartVO);
 
-        ResponseRegistEmployeeWorkingPartVO registEmployee = modelMapper
-                .map(employeeWorkingPartDTO, ResponseRegistEmployeeWorkingPartVO.class);
+        ResponseRegistEmployeeVO registEmployee = modelMapper
+                .map(responseRegistEmployeeWorkingPartVO, ResponseRegistEmployeeVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registEmployee);
     }

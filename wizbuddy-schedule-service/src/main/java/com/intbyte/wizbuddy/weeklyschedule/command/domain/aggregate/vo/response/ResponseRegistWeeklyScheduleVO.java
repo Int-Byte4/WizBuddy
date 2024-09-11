@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class ResponseRegistWeeklyScheduleVO {
+    private int scheduleCode;
     private boolean scheduleFlag;
     private LocalDate scheduleStartDate;
     private LocalDateTime createdAt;

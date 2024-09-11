@@ -11,7 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Builder
-public class ResponseRegistEmployeeWorkingPartVO {
+public class ResponseRegistEmployeeVO {
+    private int workingPartCode;
     private String employeeCode;
     private int scheduleCode;
     private LocalDateTime workingDate;

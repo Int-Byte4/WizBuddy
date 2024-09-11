@@ -26,12 +26,13 @@ public class WeeklyScheduleController {
     public ResponseEntity<ResponseRegistWeeklyScheduleVO> registSchedule(
             @RequestBody RequestRegistWeeklyScheduleVO request) {
 
-        WeeklyScheduleDTO weeklyScheduleDTO = modelMapper.map(request, WeeklyScheduleDTO.class);
+        ResponseRegistWeeklyScheduleVO responseRegistWeeklyScheduleVO = modelMapper
+                .map(request, ResponseRegistWeeklyScheduleVO.class);
 
-        weeklyScheduleService.registSchedule(weeklyScheduleDTO);
+        weeklyScheduleService.registSchedule(responseRegistWeeklyScheduleVO);
 
         ResponseRegistWeeklyScheduleVO registSchedule = modelMapper
-                .map(weeklyScheduleDTO, ResponseRegistWeeklyScheduleVO.class);
+                .map(responseRegistWeeklyScheduleVO, ResponseRegistWeeklyScheduleVO.class);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registSchedule);
     }
