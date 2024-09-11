@@ -1,8 +1,8 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
-import com.intbyte.wizbuddy.employeeworkingpart.command.application.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
@@ -28,17 +28,18 @@ class EmployeeWorkingPartServiceImplTests {
     @DisplayName("직원 근무배치 성공")
     void registSchedulePerEmployee() {
         // given
-        List<EmployeeWorkingPart> currentEmployeeWorkingPartList = employeeWorkingPartRepository.findAll();
-        int currentSize = currentEmployeeWorkingPartList.size();
+        List<EmployeeWorkingPart> currentEmployeeWorkingPart = employeeWorkingPartRepository.findAll();
+        int currentSize = currentEmployeeWorkingPart.size();
 
-        EmployeeWorkingPartDTO employeeWorkingPart = new EmployeeWorkingPartDTO(19,
+        ResponseRegistEmployeeVO responseRegistEmployeeWorkingPartVO =
+                new ResponseRegistEmployeeVO(19,
                 "20240831-cc00-4288-b2a6-2f864ddbf6b5",
                 1,
                 LocalDateTime.now(),
                 "1T");
 
         // when
-        employeeWorkingPartService.registSchedulePerEmployee(employeeWorkingPart);
+        employeeWorkingPartService.registSchedulePerEmployee(responseRegistEmployeeWorkingPartVO);
 
         // then
         List<EmployeeWorkingPart> newEmployeeWorkingPartList = employeeWorkingPartRepository.findAll();

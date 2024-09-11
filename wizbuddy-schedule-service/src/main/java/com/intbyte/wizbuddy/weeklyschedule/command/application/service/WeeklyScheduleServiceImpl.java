@@ -2,6 +2,8 @@ package com.intbyte.wizbuddy.weeklyschedule.command.application.service;
 
 import com.intbyte.wizbuddy.weeklyschedule.command.application.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.entity.WeeklySchedule;
+import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.request.RequestRegistWeeklyScheduleVO;
+import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.response.ResponseRegistWeeklyScheduleVO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.repository.WeeklyScheduleRepository;
 import com.intbyte.wizbuddy.weeklyschedule.common.exception.ScheduleCodeDuplicateException;
 import com.intbyte.wizbuddy.weeklyschedule.query.repository.WeeklyScheduleMapper;
@@ -20,21 +22,22 @@ public class WeeklyScheduleServiceImpl implements WeeklyScheduleService {
 
     @Override
     @Transactional
-    public WeeklyScheduleDTO registSchedule(WeeklyScheduleDTO weeklySchedule)  {
+    public ResponseRegistWeeklyScheduleVO registSchedule
+            (ResponseRegistWeeklyScheduleVO responseRegistWeeklyScheduleVO)  {
 
         WeeklySchedule insertWeeklySchedule =
                 new WeeklySchedule(
-                          weeklySchedule.getScheduleCode()
-                        , weeklySchedule.isScheduleFlag()
-                        , weeklySchedule.getScheduleStartDate()
-                        , weeklySchedule.getCreatedAt()
-                        , weeklySchedule.getUpdatedAt());
+                          responseRegistWeeklyScheduleVO.getScheduleCode()
+                        , responseRegistWeeklyScheduleVO.isScheduleFlag()
+                        , responseRegistWeeklyScheduleVO.getScheduleStartDate()
+                        , responseRegistWeeklyScheduleVO.getCreatedAt()
+                        , responseRegistWeeklyScheduleVO.getUpdatedAt());
 
-        if (weeklyScheduleMapper.findScheduleByStartDate(weeklySchedule.getScheduleStartDate()) != null)
+        if (weeklyScheduleMapper.findScheduleByStartDate(responseRegistWeeklyScheduleVO.getScheduleStartDate()) != null)
             throw new ScheduleCodeDuplicateException();
 
         weeklyScheduleRepository.save(insertWeeklySchedule);
 
-        return weeklySchedule;
+        return responseRegistWeeklyScheduleVO;
     }
 }

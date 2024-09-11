@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.weeklyschedule.command.application.service;
 
 import com.intbyte.wizbuddy.weeklyschedule.command.application.dto.WeeklyScheduleDTO;
+import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.response.ResponseRegistWeeklyScheduleVO;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,15 +24,16 @@ class WeeklyScheduleServiceImplTest {
     @DisplayName("스케줄 등록 성공")
     void registSchedule() {
         // given
-        WeeklyScheduleDTO weeklyScheduleDTO =
-                new WeeklyScheduleDTO(1,
+        ResponseRegistWeeklyScheduleVO responseRegistWeeklyScheduleVO =
+                new ResponseRegistWeeklyScheduleVO(1,
                         true,
                         LocalDate.of(2024,9,26),
                         LocalDateTime.now(),
                         LocalDateTime.now());
 
         // when
-        WeeklyScheduleDTO savedSchedule = weeklyScheduleService.registSchedule(weeklyScheduleDTO);
+        ResponseRegistWeeklyScheduleVO savedSchedule = weeklyScheduleService
+                .registSchedule(responseRegistWeeklyScheduleVO);
 
         // then
         assertNotNull(savedSchedule);
