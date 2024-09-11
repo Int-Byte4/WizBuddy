@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.employeeworkingpart.query.repository.EmployeeWorkingPartMapper">
+    <resultMap id="EmployeeAndScheduleResultMap" type="com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO">
+        <id property="workingPartCode" column="working_part_code"/>
+        <result property="employeeCode" column="employee_code"/>
+        <result property="workingDate" column="working_date"/>
+        <result property="workingPartTime" column="working_part_time"/>
+        <result property="scheduleCode" column="schedule_code"/>
+    </resultMap>
+
+    <select id="findEmployeeByEmployeeCode" resultMap="EmployeeAndScheduleResultMap" parameterType="String">
+        SELECT
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
+             , A.working_date
+             , A.working_part_time
+          FROM employee_working_part A
+         WHERE A.employee_code = #{employeeCode}
+    </select>
+
+    <select id="selectScheduleByScheduleCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+        SELECT
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
+             , A.working_date
+             , A.working_part_time
+          FROM employee_working_part A
+          JOIN weekly_schedule B ON A.schedule_code = B.schedule_code
+         WHERE B.schedule_code = #{scheduleCode}
+    </select>
+
+    <select id="selectScheduleByWorkingPartCode" resultMap="EmployeeAndScheduleResultMap" parameterType="int">
+        SELECT
+               A.working_part_code
+             , A.employee_code
+             , A.schedule_code
+             , A.working_date
+             , A.working_part_time
+          FROM employee_working_part A
+          JOIN employee B ON A.employee_code = B.employee_code
+         WHERE A.working_part_code = #{workingPartCode}
+    </select>
+
+
+</mapper>
+

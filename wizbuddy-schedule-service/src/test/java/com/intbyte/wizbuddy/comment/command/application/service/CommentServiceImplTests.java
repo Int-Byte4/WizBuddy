@@ -4,8 +4,6 @@ import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentInfo;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
-
-import com.intbyte.wizbuddy.comment.query.domain.repository.CommentMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +92,6 @@ class CommentServiceImplTests {
 
     }
 
-
 }
+
+

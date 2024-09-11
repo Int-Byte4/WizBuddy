@@ -5,11 +5,10 @@ import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.user.command.domain.repository.EmployerRepository;
 import com.intbyte.wizbuddy.user.query.repository.EmployerMapper;
-import com.intbyte.wizbuddy.user.command.domain.entity.Employer;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.Employer;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -19,23 +18,24 @@ public class EmployerService {
 
     private final EmployerRepository employerRepository;
     private final EmployerMapper employerMapper;
-    private final ModelMapper mapper;
 
     @Transactional
-    public void modifyEmployer(String employerCode, RequestEditEmployerDTO employerDTO) {
+    public void modifyEmployer(String employerCode, RequestEditEmployerDTO employerDTO, String authEmployerCode) {
         Employer employer = employerMapper.getEmployer(employerCode);
 
         if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
         employer.modify(employerDTO);
         employerRepository.save(employer);
     }
 
     @Transactional
-    public void deleteEmployer(String employerCode) {
+    public void deleteEmployer(String employerCode, String authEmployerCode) {
         Employer employer = employerMapper.getEmployer(employerCode);
 
         if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
         employer.removeRequest(employer);
         employerRepository.save(employer);
