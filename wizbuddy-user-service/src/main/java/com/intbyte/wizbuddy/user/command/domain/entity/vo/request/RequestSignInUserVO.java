@@ -1,0 +1,16 @@
+package com.intbyte.wizbuddy.user.command.domain.entity.vo.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class RequestSignInUserVO {
+    private String userCode;
+    private String userType;
+    private String userEmail;
+    private String userPassword;
+}

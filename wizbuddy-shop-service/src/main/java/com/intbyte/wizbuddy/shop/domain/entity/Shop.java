@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.shop.domain.entity;
 
-import com.intbyte.wizbuddy.shop.domain.DeleteShopInfo;
-import com.intbyte.wizbuddy.shop.domain.EditShopInfo;
+import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
+import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -49,17 +49,17 @@ public class Shop {
     @Column(nullable = false)
     private String employerCode;
 
-    public void modify(@Valid EditShopInfo editShopInfo) {
-        this.shopName = editShopInfo.getShopName();
-        this.shopLocation = editShopInfo.getShopLocation();
-        this.shopOpenTime = editShopInfo.getShopOpenTime();
-        this.updatedAt = editShopInfo.getUpdatedAt();
+    public void modify(@Valid RequestEditShopDTO requestEditShopDTO) {
+        this.shopName = requestEditShopDTO.getShopName();
+        this.shopLocation = requestEditShopDTO.getShopLocation();
+        this.shopOpenTime = requestEditShopDTO.getShopOpenTime();
+        this.updatedAt = requestEditShopDTO.getUpdatedAt();
     }
 
-    public void removeRequest(@Valid DeleteShopInfo deleteShopInfo) {
-        this.shopCode = deleteShopInfo.getShopCode();
-        this.employerCode = deleteShopInfo.getEmployerCode();
-        this.shopFlag = deleteShopInfo.isShopFlag();
-        this.updatedAt = deleteShopInfo.getUpdatedAt();
+    public void removeRequest(@Valid RequestDeleteShopDTO requestDeleteShopDTO) {
+        this.shopCode = requestDeleteShopDTO.getShopCode();
+        this.employerCode = requestDeleteShopDTO.getEmployerCode();
+        this.shopFlag = requestDeleteShopDTO.isShopFlag();
+        this.updatedAt = requestDeleteShopDTO.getUpdatedAt();
     }
 }

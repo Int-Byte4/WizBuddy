@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.weeklyschedule.query.repository.WeeklyScheduleMapper">
+    <resultMap id="scheduleResultMap" type="com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.entity.WeeklySchedule">
+        <id property="scheduleCode" column="schedule_code"/>
+        <result property="scheduleFlag" column="schedule_flag"/>
+        <result property="scheduleStartDate" column="schedule_start_date"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectAllSchedules" resultMap="scheduleResultMap">
+        SELECT
+               A.schedule_code
+             , A.schedule_flag
+             , A.schedule_start_date
+             , A.created_at
+             , A.updated_at
+          FROM weekly_schedule A
+    </select>
+
+    <select id="findScheduleByStartDate" resultMap="scheduleResultMap" parameterType="java.time.LocalDate">
+        SELECT
+             A.schedule_code
+           , A.schedule_flag
+           , A.schedule_start_date
+           , A.created_at
+           , A.updated_at
+        FROM weekly_schedule A
+        WHERE A.schedule_start_date = #{scheduleStartDate}
+          AND A.schedule_flag=true
+    </select>
+</mapper>
