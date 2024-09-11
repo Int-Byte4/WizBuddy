@@ -37,7 +37,7 @@ class EmployerServiceTests {
                 .build();
 
         //when
-        employerService.modifyEmployer(employerCode, requestEditEmployerDTO);
+        employerService.modifyEmployer(employerCode, requestEditEmployerDTO, employerCode);
 
         //then
         List<Employer> newEmployers = employerRepository.findAll();
@@ -53,7 +53,7 @@ class EmployerServiceTests {
         String employerCode = employers.get(0).getEmployerCode();
 
         //when
-        employerService.deleteEmployer(employerCode);
+        employerService.deleteEmployer(employerCode, employerCode);
 
         //then
         List<Employer> newEmployers = employerRepository.findAll();

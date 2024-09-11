@@ -20,20 +20,22 @@ public class EmployerService {
     private final EmployerMapper employerMapper;
 
     @Transactional
-    public void modifyEmployer(String employerCode, RequestEditEmployerDTO employerDTO) {
+    public void modifyEmployer(String employerCode, RequestEditEmployerDTO employerDTO, String authEmployerCode) {
         Employer employer = employerMapper.getEmployer(employerCode);
 
         if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
         employer.modify(employerDTO);
         employerRepository.save(employer);
     }
 
     @Transactional
-    public void deleteEmployer(String employerCode) {
+    public void deleteEmployer(String employerCode, String authEmployerCode) {
         Employer employer = employerMapper.getEmployer(employerCode);
 
         if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
         employer.removeRequest(employer);
         employerRepository.save(employer);

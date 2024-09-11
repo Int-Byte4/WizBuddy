@@ -39,7 +39,7 @@ class EmployeeServiceTests {
                 .build();
 
         //when
-        employeeService.modifyEmployee(employeeCode, requestEditEmployeeDTO);
+        employeeService.modifyEmployee(employeeCode, requestEditEmployeeDTO, employeeCode);
 
         //then
         List<Employee> newEmployees = employeeRepository.findAll();
@@ -55,7 +55,7 @@ class EmployeeServiceTests {
         String employeeCode = employees.get(0).getEmployeeCode();
 
         //when
-        employeeService.deleteEmployee(employeeCode);
+        employeeService.deleteEmployee(employeeCode, employeeCode);
 
         //then
         List<Employee> newEmployees = employeeRepository.findAll();
