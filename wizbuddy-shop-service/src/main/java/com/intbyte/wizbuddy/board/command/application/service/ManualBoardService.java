@@ -2,13 +2,13 @@ package com.intbyte.wizbuddy.board.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.application.dto.RequestEditManualBoardDTO;
 import com.intbyte.wizbuddy.board.command.domain.entity.ManualBoard;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.request.RequestInsertManualBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.ManualBoardRepository;
 import com.intbyte.wizbuddy.board.common.exception.CommonException;
 import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.repository.ManualBoardMapper;
-import com.intbyte.wizbuddy.board.vo.request.RequestInsertManualBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseInsertManualBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateManualBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseInsertManualBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseUpdateManualBoardVO;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class ManualBoardService {
         this.modelMapper = modelMapper;
     }
 
-    /* 기능. 1. 매뉴얼 게시판 게시글 등록 */
+    // 매뉴얼 게시판 게시글 등록
     @Transactional
     public ResponseInsertManualBoardVO registerManualBoard(RequestInsertManualBoardVO requestInsertManualBoardVO) {
         ManualBoard manualBoard = modelMapper.map(requestInsertManualBoardVO, ManualBoard.class);
@@ -36,7 +36,7 @@ public class ManualBoardService {
         return modelMapper.map(manualBoard, ResponseInsertManualBoardVO.class);
     }
 
-    /* 기능. 2. 매뉴얼 게시판 게시글 수정 */
+    // 매뉴얼 게시판 게시글 수정
     @Transactional
     public ResponseUpdateManualBoardVO modifyManualBoard(int manualCode, RequestEditManualBoardDTO requestEditManualBoardDTO) {
         String writerCode = manualBoardMapper.findUserCodeByManualCode(manualCode);
@@ -52,7 +52,7 @@ public class ManualBoardService {
         return modelMapper.map(manualBoard, ResponseUpdateManualBoardVO.class);
     }
 
-    /* 기능. 3. 매뉴얼 게시판 게시글 삭제 */
+    // 매뉴얼 게시판 게시글 삭제
     @Transactional
     public void deleteManualBoard(int manualCode, String userCode) {
         String writerCode = manualBoardMapper.findUserCodeByManualCode(manualCode);

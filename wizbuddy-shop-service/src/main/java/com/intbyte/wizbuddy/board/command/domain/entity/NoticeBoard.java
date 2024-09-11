@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.board.command.domain.entity;
 
-import com.intbyte.wizbuddy.board.domain.DeleteNoticeBoardInfo;
-import com.intbyte.wizbuddy.board.domain.EditNoticeBoardInfo;
+import com.intbyte.wizbuddy.board.command.application.dto.RequestEditNoticeBoardDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -46,15 +45,15 @@ public class NoticeBoard {
     @Column(name="employer_code")
     private String employerCode;
 
-    public void modify(EditNoticeBoardInfo modifyNoticeBoardInfo) {
+    public void modify(RequestEditNoticeBoardDTO modifyNoticeBoardInfo) {
         this.noticeTitle = modifyNoticeBoardInfo.getNoticeTitle();
         this.noticeContent = modifyNoticeBoardInfo.getNoticeContent();
         this.imageUrl = modifyNoticeBoardInfo.getImageUrl();
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void delete(DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
-        this.noticeFlag = deleteNoticeBoardInfo.isNoticeFlag();
-        this.updatedAt = deleteNoticeBoardInfo.getUpdatedAt();
+    public void delete() {
+        this.noticeFlag = false;
+        this.updatedAt = LocalDateTime.now();
     }
 }
