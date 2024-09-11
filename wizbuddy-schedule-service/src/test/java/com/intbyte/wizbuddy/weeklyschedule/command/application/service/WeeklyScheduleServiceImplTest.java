@@ -35,6 +35,5 @@ class WeeklyScheduleServiceImplTest {
 
         // then
         assertNotNull(savedSchedule);
-
     }
 }

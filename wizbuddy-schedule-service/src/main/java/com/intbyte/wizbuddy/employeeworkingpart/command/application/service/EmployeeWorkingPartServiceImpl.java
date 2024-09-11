@@ -4,9 +4,9 @@ import com.intbyte.wizbuddy.employeeworkingpart.command.application.dto.Employee
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
-import com.intbyte.wizbuddy.employeeworkingpart.common.EmployeeCodeNotFoundException;
-import com.intbyte.wizbuddy.employeeworkingpart.common.WorkingDateAndTimeEqualsException;
-import com.intbyte.wizbuddy.employeeworkingpart.common.ScheduleNotFoundException;
+import com.intbyte.wizbuddy.employeeworkingpart.common.exception.EmployeeCodeNotFoundException;
+import com.intbyte.wizbuddy.employeeworkingpart.common.exception.WorkingDateAndTimeEqualsException;
+import com.intbyte.wizbuddy.employeeworkingpart.common.exception.ScheduleNotFoundException;
 import com.intbyte.wizbuddy.employeeworkingpart.query.repository.EmployeeWorkingPartMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +25,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
     private final EmployeeWorkingPartMapper employeeWorkingPartMapper;
     private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
 
+    @Override
     @Transactional
     public EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart) {
 
@@ -41,10 +42,10 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
                 .findEmployeeByEmployeeCode(employeeCode) == null)
             throw new EmployeeCodeNotFoundException();
 
-        if(Objects.equals(insertSchedulePerEmployee.getWorkingDate()
-                ,employeeWorkingPart.getWorkingDate())
-        && Objects.equals(insertSchedulePerEmployee.getWorkingPartTime()
-                , employeeWorkingPart.getWorkingPartTime()))
+        if(employeeWorkingPartRepository
+                .existsByWorkingDateAndWorkingPartTime(insertSchedulePerEmployee
+                        .getWorkingDate(),insertSchedulePerEmployee
+                        .getWorkingPartTime()))
             throw new WorkingDateAndTimeEqualsException();
 
         employeeWorkingPartRepository.save(insertSchedulePerEmployee);
@@ -52,21 +53,22 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         return employeeWorkingPart;
     }
 
+    @Override
     @Transactional
     public void editSchedule(int workingPartCode, ResponseModifyScheduleVO responseModifyScheduleVO) {
 
-        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartMapper
-                .selectScheduleByWorkingPartCode(workingPartCode);
+        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
+                .findByWorkingPartCode(workingPartCode);
 
         if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
 
         List<EmployeeWorkingPart> actualSchedule = employeeWorkingPartRepository
                 .findByEmployeeCode(responseModifyScheduleVO.getEmployeeCode());
         actualSchedule.stream()
-                .filter(schedule -> Objects.equals(schedule.getWorkingDate()
-                        , employeeWorkingPart.getWorkingDate())
-                        && Objects.equals(schedule.getWorkingPartTime()
-                        ,employeeWorkingPart.getWorkingPartTime()))
+                .filter(schedule -> employeeWorkingPartRepository
+                        .existsByWorkingDateAndWorkingPartTime(schedule
+                                .getWorkingDate(),schedule
+                                .getWorkingPartTime()))
                 .findFirst()
                 .orElseThrow(WorkingDateAndTimeEqualsException::new);
 
@@ -75,11 +77,12 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         employeeWorkingPartRepository.save(employeeWorkingPart);
     }
 
+    @Override
     @Transactional
     public void deleteSchedule(int workingPartCode) {
 
-        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartMapper
-                .selectScheduleByWorkingPartCode(workingPartCode);
+        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
+                .findByWorkingPartCode(workingPartCode);
 
         if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
 

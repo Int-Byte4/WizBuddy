@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeeworkingpart.common;
+package com.intbyte.wizbuddy.employeeworkingpart.common.exception;
 
 public class EmployeeCodeNotFoundException extends IllegalArgumentException {
 
