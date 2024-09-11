@@ -32,4 +32,15 @@
         WHERE A.schedule_start_date = #{scheduleStartDate}
           AND A.schedule_flag=true
     </select>
+
+    <select id="selectScheduleByScheduleCode" resultMap="scheduleResultMap" parameterType="int">
+        SELECT
+        A.schedule_code
+        , A.schedule_flag
+        , A.schedule_start_date
+        , A.created_at
+        , A.updated_at
+        FROM weekly_schedule A
+        WHERE A.schedule_code = #{scheduleCode}
+    </select>
 </mapper>

@@ -32,6 +32,7 @@ public class WeeklyScheduleServiceImpl implements WeeklyScheduleService {
                         , responseRegistWeeklyScheduleVO.getCreatedAt()
                         , responseRegistWeeklyScheduleVO.getUpdatedAt());
 
+        // 예외처리1. 이미 등록된 스케줄일 경우
         if (weeklyScheduleMapper.findScheduleByStartDate(responseRegistWeeklyScheduleVO.getScheduleStartDate()) != null)
             throw new CommonException(StatusEnum.SCHEDULE_CODE_DUPLICATE);
 

@@ -12,4 +12,5 @@ public interface WeeklyScheduleMapper {
     List<WeeklyScheduleDTO> selectAllSchedules();
 
     WeeklyScheduleDTO findScheduleByStartDate(LocalDate scheduleStartDate);
+    WeeklyScheduleDTO selectScheduleByScheduleCode(int scheduleCode);
 }
