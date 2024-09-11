@@ -91,7 +91,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void modifyCheckList(int checkListCode, CheckListDTO checkListDTO){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();//.orElseThrow(CheckListNotFoundException::new);
+        CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(IllegalArgumentException::new);
 
         checkList.modify(checkListDTO);
         checkListRepository.save(checkList);
@@ -103,7 +103,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void deleteCheckList(int checkListCode){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();//.orElseThrow(CheckListNotFoundException::new);
+        CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(IllegalArgumentException::new);
         CheckListDTO checkListDTO = modelMapper.map(checkList, CheckListDTO.class);
         checkList.modify(checkListDTO);
 

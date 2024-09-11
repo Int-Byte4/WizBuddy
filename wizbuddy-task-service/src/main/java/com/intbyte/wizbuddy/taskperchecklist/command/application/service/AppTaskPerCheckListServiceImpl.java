@@ -79,6 +79,7 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
     @Override
     @Transactional
     public void deleteTaskPerCheckListByCheckListCode(int checkListCode){
+        // 유효성 검사 필요없음
 
         taskPerCheckListRepository.deleteByCheckListCode(checkListCode);
     }
@@ -97,7 +98,8 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
     @Transactional
     public void modifyTaskPerCheckList(TaskPerCheckListDTO dto){
 
-        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode())).get();//.orElseThrow(TaskPerCheckListNotFoundException::new);
+        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById
+                (new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode())).orElseThrow(IllegalArgumentException::new);
 
         taskPerCheckList.modify(dto, dto.getEmployeeCode());
 
