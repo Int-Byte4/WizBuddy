@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.intbyte.wizbuddy.mapper.SubsBoardMapper">
-    <resultMap id="SubsBoardResultMap" type="com.intbyte.wizbuddy.board.domain.entity.SubsBoard">
+<mapper namespace="com.intbyte.wizbuddy.board.query.domain.repository.SubsBoardMapper">
+    <resultMap id="SubsBoardResultMap" type="com.intbyte.wizbuddy.board.query.domain.aggregate.SubsBoard">
         <id property="subsCode" column="SUBS_CODE"/>
         <result property="subsTitle" column="SUBS_TITLE"/>
         <result property="subsContent" column="SUBS_CONTENT"/>

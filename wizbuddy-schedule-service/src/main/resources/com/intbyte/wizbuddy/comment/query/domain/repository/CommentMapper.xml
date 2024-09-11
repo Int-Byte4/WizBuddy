@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.intbyte.wizbuddy.mapper.CommentMapper">
-    <resultMap id="CommentResultMap" type="com.intbyte.wizbuddy.comment.domain.Entity.Comment">
+<mapper namespace="com.intbyte.wizbuddy.comment.query.domain.repository.CommentMapper">
+    <resultMap id="CommentResultMap" type="com.intbyte.wizbuddy.comment.query.domain.aggregate.Comment">
         <id property="commentCode" column="COMMENT_CODE"/>
         <result property="commentContent" column="COMMENT_CONTENTS"/>
         <result property="commentFlag" column="COMMENT_FLAG"/>

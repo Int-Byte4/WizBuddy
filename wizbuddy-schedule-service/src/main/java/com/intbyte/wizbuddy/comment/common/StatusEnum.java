@@ -1,12 +1,11 @@
-package com.intbyte.wizbuddy.employeeworkingpart.common;
+package com.intbyte.wizbuddy.comment.common;
 
 import lombok.Getter;
 
 @Getter
 public enum StatusEnum {
 
-    EMPLOYEE_CODE_NOT_FOUND(404, "EMPLOYEE_CODE_NOT_FOUND"),
-    WORKINGDATE_AND_TIME_EQUALS(409, "WORKINGDATE_AND_TIME_EQUALS");
+    COMMENT_NOT_FOUND(404, "COMMENT_NOT_FOUND");
 
     private final int statusCode;
     private final String code;

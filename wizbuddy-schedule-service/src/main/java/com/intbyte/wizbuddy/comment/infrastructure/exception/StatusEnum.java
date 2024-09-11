@@ -1,12 +1,13 @@
-package com.intbyte.wizbuddy.employeeworkingpart.common;
+package com.intbyte.wizbuddy.comment.infrastructure.exception;
 
 import lombok.Getter;
 
 @Getter
 public enum StatusEnum {
 
-    EMPLOYEE_CODE_NOT_FOUND(404, "EMPLOYEE_CODE_NOT_FOUND"),
-    WORKINGDATE_AND_TIME_EQUALS(409, "WORKINGDATE_AND_TIME_EQUALS");
+    SCHEDULE_NOT_FOUND(404, "SCHEDULE_NOT_FOUND"),
+    WORKINGPART_NOT_EQUALS(409,"WORKINGPART_NOT_EQUALS"),
+    ALREADY_ADOPTED(403,"ALREADY_ADOPTED");
 
     private final int statusCode;
     private final String code;
