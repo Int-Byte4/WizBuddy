@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class CheckListDTO {
+public class CheckListQueryDTO {
 
     private int checkListCode;
     private String checkListTitle;
