@@ -70,8 +70,7 @@ public class InfraAdoptServiceImpl implements InfraAdoptService {
 
 
         return commentAuthorParts.stream()
-                .filter(author -> Objects.equals(author.getWorkingPartTime(), writer.getWorkingPartTime())
-                        && Objects.equals(author.getWorkingDate(), writer.getWorkingDate()))
+                .filter(author -> employeeWorkingPartRepository.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
                 .findFirst()
                 .orElseThrow(WorkingDateAndTimeEqualsException::new);
     }
