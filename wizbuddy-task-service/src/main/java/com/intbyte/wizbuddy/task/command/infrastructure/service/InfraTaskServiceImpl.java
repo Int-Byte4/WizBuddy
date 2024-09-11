@@ -16,6 +16,7 @@ public class InfraTaskServiceImpl implements InfraTaskService {
     }
 
     // command 3. task 삭제
+    @Override
     @Transactional
     public void deleteTaskPerCheckListByTaskCode(int taskCode){
         appTaskPerCheckListService.deleteTaskPerCheckListByTaskCode(taskCode);
