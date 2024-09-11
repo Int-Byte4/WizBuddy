@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.like.query.repository.NoticeBoardLikedMapper">
+    <resultMap id="noticeBoardLikedResultMap" type="com.intbyte.wizbuddy.like.command.domain.entity.NoticeBoardLiked">
+        <id property="noticeLikedCode" column="notice_liked_code"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="shopCode" column="shop_code"/>
+        <result property="noticeCode" column="notice_code"/>
+        <result property="employeeCode" column="employee_code"/>
+    </resultMap>
+    <select id="getNoticeBoardLikedByUserCode" parameterType="map" resultMap="noticeBoardLikedResultMap">
+        SELECT
+               notice_liked_code
+             , created_at
+             , notice_code
+             , shop_code
+             , employee_code
+        FROM noticeboardliked
+        WHERE employee_code = #{ employeeCode }
+          AND notice_code = #{ noticeCode }
+    </select>
+</mapper>
