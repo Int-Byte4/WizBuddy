@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.board.query.application.service;
 
-import com.intbyte.wizbuddy.board.common.exception.SubsBoardNotFoundException;
 import com.intbyte.wizbuddy.board.query.application.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.board.query.domain.aggregate.SubsBoard;
 import com.intbyte.wizbuddy.board.query.domain.repository.SubsBoardMapper;

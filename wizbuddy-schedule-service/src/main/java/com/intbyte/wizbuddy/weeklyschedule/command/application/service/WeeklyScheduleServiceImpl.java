@@ -2,12 +2,9 @@ package com.intbyte.wizbuddy.weeklyschedule.command.application.service;
 
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
-import com.intbyte.wizbuddy.weeklyschedule.command.application.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.entity.WeeklySchedule;
-import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.request.RequestRegistWeeklyScheduleVO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.response.ResponseRegistWeeklyScheduleVO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.repository.WeeklyScheduleRepository;
-import com.intbyte.wizbuddy.weeklyschedule.common.exception.ScheduleCodeDuplicateException;
 import com.intbyte.wizbuddy.weeklyschedule.query.repository.WeeklyScheduleMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
