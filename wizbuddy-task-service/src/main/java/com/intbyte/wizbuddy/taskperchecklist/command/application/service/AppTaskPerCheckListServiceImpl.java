@@ -1,10 +1,11 @@
 package com.intbyte.wizbuddy.taskperchecklist.command.application.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.taskperchecklist.command.application.dto.TaskPerCheckListDTO;
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.aggregate.entity.TaskPerCheckList;
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.aggregate.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.repository.TaskPerCheckListRepository;
-import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,7 +70,8 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
         TaskPerCheckListId id = new TaskPerCheckListId(checkListCode, taskCode);
 
         // DB에 없는경우 예외처리
-        taskPerCheckListRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).get();
+        if(taskPerCheckList == null) throw new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND);
 
         taskPerCheckListRepository.deleteById(id);
     }
@@ -79,7 +81,6 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
     @Override
     @Transactional
     public void deleteTaskPerCheckListByCheckListCode(int checkListCode){
-        // 유효성 검사 필요없음
 
         taskPerCheckListRepository.deleteByCheckListCode(checkListCode);
     }
@@ -99,7 +100,9 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
     public void modifyTaskPerCheckList(TaskPerCheckListDTO dto){
 
         TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById
-                (new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode())).orElseThrow(IllegalArgumentException::new);
+                (new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode())).get();
+
+        if(taskPerCheckList == null) throw new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND);
 
         taskPerCheckList.modify(dto, dto.getEmployeeCode());
 

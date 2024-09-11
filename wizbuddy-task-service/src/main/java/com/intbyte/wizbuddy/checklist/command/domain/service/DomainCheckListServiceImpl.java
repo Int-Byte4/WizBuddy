@@ -3,6 +3,8 @@ package com.intbyte.wizbuddy.checklist.command.domain.service;
 import com.intbyte.wizbuddy.checklist.command.domain.repository.CheckListRepository;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.service.InfraCheckListService;
 import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,21 +35,18 @@ public class DomainCheckListServiceImpl implements DomainCheckListService{
         Integer shopCodeByTaskCode = taskById.getShopCode();
 
         // 유효성 검사
-        if (shopCodeByCheckListCode == null || shopCodeByTaskCode == null) {
-            throw new IllegalArgumentException("Shop code is null");
-        }
-
-        if (shopCodeByCheckListCode == 0 || shopCodeByTaskCode == 0) {
-            throw new IllegalArgumentException("Invalid shop code");
+        if (shopCodeByCheckListCode == null || shopCodeByTaskCode == null
+            || shopCodeByCheckListCode == 0 || shopCodeByTaskCode == 0) {
+            throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }
 
         if (!shopCodeByCheckListCode.equals(shopCodeByTaskCode)) {
-            throw new IllegalArgumentException("Shop codes do not match");
+            throw new CommonException(StatusEnum.SHOP_IS_NOT_EQUAL);
         }
 
         // 이미 존재하는 TaskPerCheckList인지 확인
         if (infraCheckListService.isTaskAlreadyInCheckList(checkListCode, taskCode)) {
-            throw new IllegalArgumentException("Task is already in the checklist");
+            throw new CommonException(StatusEnum.TASK_PER_CHECKLIST_DUPLICATE);
         }
     }
 }

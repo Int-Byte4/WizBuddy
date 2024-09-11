@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.task.query.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.query.repository.TaskMapper;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public TaskDTO findTaskById(int taskCode){
-        return taskMapper.findTaskByTaskCode(taskCode);
+        TaskDTO taskDTO = taskMapper.findTaskByTaskCode(taskCode);
+        if(taskDTO == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
+
+        return taskDTO;
     }
 
     // query 2. 특정 shop의 모든 task 조회

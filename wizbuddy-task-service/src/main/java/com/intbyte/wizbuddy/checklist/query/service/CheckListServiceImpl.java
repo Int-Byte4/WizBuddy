@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.checklist.query.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.checklist.query.dto.CheckListQueryDTO;
 import com.intbyte.wizbuddy.checklist.query.repository.CheckListMapper;
 import org.modelmapper.ModelMapper;
@@ -22,7 +24,6 @@ public class CheckListServiceImpl implements CheckListService {
     }
 
 
-//    쿼리 ㅇ{ㅖ외처리!!!!!!!!!!!!
     // 1. 특정 체크리스트 조회
     @Override
     @Transactional
@@ -30,8 +31,7 @@ public class CheckListServiceImpl implements CheckListService {
 
         CheckListQueryDTO checkList = checkListMapper.findCheckListById(checkListCode);
 
-        if(checkList == null) return null;
-//            throw new CheckListNotFoundException();
+        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
 
         return checkList;
     }
@@ -42,8 +42,5 @@ public class CheckListServiceImpl implements CheckListService {
     public List<CheckListQueryDTO> findCheckListByIdByShop(int shopCode){
 
         return checkListMapper.findAllCheckListByShopId(shopCode);
-
-//        if(checkListList == null || checkListList.isEmpty())
-//            throw new CheckListNotFoundException();
     }
 }

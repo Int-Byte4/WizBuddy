@@ -6,9 +6,9 @@ import com.intbyte.wizbuddy.checklist.command.domain.repository.CheckListReposit
 import com.intbyte.wizbuddy.checklist.command.domain.service.DomainCheckListService;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.client.ShopServiceClient;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.service.InfraCheckListServiceImpl;
-import com.intbyte.wizbuddy.checklist.query.dto.CheckListQueryDTO;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.checklist.query.service.CheckListService;
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.common.exception.CommonException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,13 +47,9 @@ public class AppCheckListServiceImpl implements AppCheckListService {
                 .shopCode(checkListDTO.getShopCode())
                 .build();
 
-        try{
             checkListRepository.save(checkList);
+
             infraCheckListService.insertFixedTaskAndTaskPerCheckList(checkListDTO);
-            // 유효성검사를 해줄 필요성을 잘 모르겠음. -> 더 생각해보기
-        }catch (Exception e){
-            e.printStackTrace(); // 수정해야함. -> 저장 실패라고 말해야함.
-        }
     }
 
 
@@ -65,11 +61,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
         // domain service에서 유효성검사 진행
         domainCheckListService.validateAndAddTaskToCheckList(checkListCode, taskCode);
 
-        try{
-            infraCheckListService.insertTaskPerCheckList(checkListCode, taskCode);
-        } catch (Exception e){
-            e.printStackTrace();  // 수정필요 -> taskPerCheckList 등록 실패라고 말해줘야함.
-        }
+        infraCheckListService.insertTaskPerCheckList(checkListCode, taskCode);
     }
 
 
@@ -78,11 +70,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void deleteTaskFromCheckList(int checkListCode, int taskCode){
         // infra 부르고 거기서 taskperchecklist 부르기
-        try{
-            infraCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(checkListCode, taskCode);
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+
+        infraCheckListService.deleteTaskPerCheckListByCheckListCodeAndTaskCode(checkListCode, taskCode);
     }
 
 
@@ -91,7 +80,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void modifyCheckList(int checkListCode, CheckListDTO checkListDTO){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(IllegalArgumentException::new);
+        CheckList checkList = checkListRepository.findById(checkListCode).get();
+        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
 
         checkList.modify(checkListDTO);
         checkListRepository.save(checkList);
@@ -103,17 +93,14 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void deleteCheckList(int checkListCode){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).orElseThrow(IllegalArgumentException::new);
+        CheckList checkList = checkListRepository.findById(checkListCode).get();
+        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
+
         CheckListDTO checkListDTO = modelMapper.map(checkList, CheckListDTO.class);
         checkList.modify(checkListDTO);
 
-        try{
-            // 1. checklist flag 바꾸기
-            checkListRepository.save(checkList);
-            infraCheckListService.deleteTaskPerCheckListByCheckListCode(checkListCode);
+        checkListRepository.save(checkList);
 
-        } catch (Exception e){
-            e.printStackTrace(); // 수정해야함.
-        }
+        infraCheckListService.deleteTaskPerCheckListByCheckListCode(checkListCode);
     }
 }

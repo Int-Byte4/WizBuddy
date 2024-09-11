@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.task.command.application.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.task.command.application.dto.TaskDTO;
 import com.intbyte.wizbuddy.task.command.domain.aggregate.entity.Task;
 import com.intbyte.wizbuddy.task.command.domain.repository.TaskRepository;
@@ -44,8 +46,8 @@ public class AppTaskServiceImpl implements AppTaskService {
     @Transactional
     public void modifyTask(int taskCode, TaskDTO taskDTO){
 
-        Task task = taskRepository.findById(taskCode)
-                .orElseThrow(IllegalArgumentException::new);
+        Task task = taskRepository.findById(taskCode).get();
+        if(task == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
 
         task.modify(taskDTO);
 
@@ -57,17 +59,15 @@ public class AppTaskServiceImpl implements AppTaskService {
     @Transactional
     public void deleteTask(int taskCode, TaskDTO taskDTO){
 
-        Task task = taskRepository.findById(taskCode).orElseThrow(IllegalArgumentException::new);
+        Task task = taskRepository.findById(taskCode).get();
+        if(task == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
+
         task.modify(taskDTO);
 
-        try{
-            // 1. task flag가 false로 된거 저장하기
-            taskRepository.save(task);
+        // 1. task flag가 false로 된거 저장하기
+        taskRepository.save(task);
 
-            // 2. tpcs에서 없애야 하므로 없애기 infra 호출하기 -> find니까 없으면 안하면 됨. (추가에서 진짜 먾네)
-            infraTaskService.deleteTaskPerCheckListByTaskCode(taskCode);
-        }catch (Exception e){
-            e.printStackTrace(); // 추후 수정 필요
-        }
+        // 2. tpcs에서 없애야 하므로 없애기 infra 호출하기 -> find니까 없으면 안하면 됨. (추가에서 진짜 먾네)
+        infraTaskService.deleteTaskPerCheckListByTaskCode(taskCode);
     }
 }
