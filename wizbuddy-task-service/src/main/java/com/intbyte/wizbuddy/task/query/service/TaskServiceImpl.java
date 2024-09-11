@@ -22,7 +22,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public TaskDTO findTaskById(int taskCode){
-        TaskDTO taskDTO = taskMapper.findTaskByTaskCode(taskCode);
+        TaskDTO taskDTO = taskMapper.findTaskById(taskCode);
         if(taskDTO == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
 
         return taskDTO;
