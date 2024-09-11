@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.taskperchecklist.command.application.service;
 
 import com.intbyte.wizbuddy.taskperchecklist.command.application.dto.TaskPerCheckListDTO;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,4 +22,6 @@ public interface AppTaskPerCheckListService {
 
     // command 1. 특정 체크리스트에 특정 업무 완료표시
     void modifyTaskPerCheckList(TaskPerCheckListDTO dto);
+
+    boolean findById(int checkListCode, int taskCode);
 }

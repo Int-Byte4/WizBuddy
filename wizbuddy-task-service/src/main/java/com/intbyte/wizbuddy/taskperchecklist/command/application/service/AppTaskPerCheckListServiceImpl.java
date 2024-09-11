@@ -4,6 +4,7 @@ import com.intbyte.wizbuddy.taskperchecklist.command.application.dto.TaskPerChec
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.aggregate.entity.TaskPerCheckList;
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.aggregate.entity.TaskPerCheckListId;
 import com.intbyte.wizbuddy.taskperchecklist.command.domain.repository.TaskPerCheckListRepository;
+import org.hibernate.boot.model.naming.IllegalIdentifierException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,9 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
 
         TaskPerCheckListId id = new TaskPerCheckListId(checkListCode, taskCode);
 
+        // DB에 없는경우 예외처리
+        taskPerCheckListRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
         taskPerCheckListRepository.deleteById(id);
     }
 
@@ -99,4 +103,13 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
 
         taskPerCheckListRepository.save(taskPerCheckList);
     }
+
+    // id와 repository로 존재하는지 유효성검사
+    @Override
+    @Transactional
+    public boolean findById(int checkListCode, int taskCode){
+        if(taskPerCheckListRepository.findById(new TaskPerCheckListId(checkListCode, taskCode)) != null) return true;
+        else return false;
+    }
+
 }

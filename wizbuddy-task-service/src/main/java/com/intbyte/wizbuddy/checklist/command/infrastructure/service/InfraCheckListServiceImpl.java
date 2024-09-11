@@ -59,4 +59,17 @@ public class InfraCheckListServiceImpl implements InfraCheckListService {
     public void deleteTaskPerCheckListByCheckListCode(int checkListCode) {
         appTaskPerCheckListService.deleteTaskPerCheckListByCheckListCode(checkListCode);
     }
+
+    @Override
+    @Transactional
+    public TaskDTO findShopCodeByTaskCode(int taskCode){
+        return taskService.findTaskById(taskCode);
+    }
+
+    @Override
+    @Transactional
+    public boolean isTaskAlreadyInCheckList(int checkListCode, int taskCode){
+        return appTaskPerCheckListService.findById(checkListCode, taskCode);
+    }
+
 }
