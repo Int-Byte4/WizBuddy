@@ -9,7 +9,7 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
 import com.intbyte.wizbuddy.comment.common.exception.CommentNotFoundException;
-//import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
+import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
-//    private final InfraAdoptServiceImpl infraAdoptService;
+    private final InfraAdoptServiceImpl infraAdoptService;
 
     @Transactional
     @Override
@@ -67,7 +67,7 @@ public class CommentServiceImpl implements CommentService {
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
         Comment comment = commentRepository.findById(adoptComment.getCommentCode())
                 .orElseThrow(CommentNotFoundException::new);
-//        infraAdoptService.handleAdoptProcess(comment);
+        infraAdoptService.handleAdoptProcess(comment);
         comment.toAdopt();
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
