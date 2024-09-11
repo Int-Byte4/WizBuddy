@@ -21,4 +21,9 @@ public class WeeklyScheduleServiceImpl implements WeeklyScheduleService {
     public List<WeeklyScheduleDTO> findAllSchedules() {
         return weeklyScheduleMapper.selectAllSchedules();
     }
+
+    @Override
+    public WeeklyScheduleDTO findScheduleByScheduleCode(int scheduleCode) {
+        return weeklyScheduleMapper.selectScheduleByScheduleCode(scheduleCode);
+    }
 }

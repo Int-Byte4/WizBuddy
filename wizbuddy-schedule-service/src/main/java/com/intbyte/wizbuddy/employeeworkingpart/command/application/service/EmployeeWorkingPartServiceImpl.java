@@ -6,6 +6,9 @@ import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.client.UserServiceClient;
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.dto.EmployeeDTO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.service.ScheduleInfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -19,16 +22,22 @@ import java.util.List;
 public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartService{
 
     private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
+    private final UserServiceClient userServiceClient;
+    private final ScheduleInfraService scheduleInfraService;
 
     @Override
     @Transactional
     public ResponseRegistEmployeeVO registSchedulePerEmployee
             (ResponseRegistEmployeeVO responseRegistEmployeeVO) {
 
+        EmployeeDTO employeeDTO = userServiceClient.getEmployee(responseRegistEmployeeVO.getEmployeeCode()).getBody();
+        int scheduleCode = scheduleInfraService.findScheduleByScheduleCode(responseRegistEmployeeVO
+                .getScheduleCode()).getScheduleCode();
+
         EmployeeWorkingPart insertSchedulePerEmployee =
                 new EmployeeWorkingPart(responseRegistEmployeeVO.getWorkingPartCode()
-                , responseRegistEmployeeVO.getEmployeeCode()
-                , responseRegistEmployeeVO.getScheduleCode()
+                , employeeDTO.getEmployeeCode()
+                , scheduleCode
                 , responseRegistEmployeeVO.getWorkingDate()
                 , responseRegistEmployeeVO.getWorkingPartTime());
 
@@ -83,6 +92,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
                 .findByWorkingPartCode(workingPartCode);
 
+        // 예외처리1. 존재하지 않는 스케줄일 경우
         if (employeeWorkingPart == null) throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
 
         employeeWorkingPartRepository.delete(employeeWorkingPart);
