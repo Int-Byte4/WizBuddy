@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.weeklyschedule.command.application.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.weeklyschedule.command.application.dto.WeeklyScheduleDTO;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.entity.WeeklySchedule;
 import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.request.RequestRegistWeeklyScheduleVO;
@@ -34,7 +36,7 @@ public class WeeklyScheduleServiceImpl implements WeeklyScheduleService {
                         , responseRegistWeeklyScheduleVO.getUpdatedAt());
 
         if (weeklyScheduleMapper.findScheduleByStartDate(responseRegistWeeklyScheduleVO.getScheduleStartDate()) != null)
-            throw new ScheduleCodeDuplicateException();
+            throw new CommonException(StatusEnum.SCHEDULE_CODE_DUPLICATE);
 
         weeklyScheduleRepository.save(insertWeeklySchedule);
 
