@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.board.query.domain.repository.SubsBoardMapper">
+    <resultMap id="SubsBoardResultMap" type="com.intbyte.wizbuddy.board.query.domain.aggregate.SubsBoard">
+        <id property="subsCode" column="SUBS_CODE"/>
+        <result property="subsTitle" column="SUBS_TITLE"/>
+        <result property="subsContent" column="SUBS_CONTENT"/>
+        <result property="createdAt" column="CREATED_AT"/>
+        <result property="updatedAt" column="UPDATED_AT"/>
+        <result property="subsFlag" column="SUBS_FLAG"/>
+        <result property="employeeWorkingPartCode" column="WORKING_PART_CODE"/>
+        <result property="shopCode" column="SHOP_CODE"/>
+    </resultMap>
+
+    <select id="selectAllSubsBoard" resultMap="SubsBoardResultMap" >
+        SELECT
+        S.SUBS_CODE
+        , S.SUBS_TITLE
+        , S.SUBS_CONTENT
+        , S.CREATED_AT
+        , S.UPDATED_AT
+        , S.SUBS_FLAG
+        , S.WORKING_PART_CODE
+        , S.SHOP_CODE
+        FROM SUBSTITUTION_BOARD S
+        ORDER BY S.CREATED_AT DESC
+    </select>
+
+    <select id="selectSubsBoardById" resultMap="SubsBoardResultMap" parameterType="int">
+        SELECT
+        S.SUBS_CODE
+        , S.SUBS_TITLE
+        , S.SUBS_CONTENT
+        , S.CREATED_AT
+        , S.UPDATED_AT
+        , S.SUBS_FLAG
+        , S.WORKING_PART_CODE
+        , S.SHOP_CODE
+        FROM SUBSTITUTION_BOARD S
+        WHERE S.SUBS_CODE = #{ subsCode }
+    </select>
+
+    <select id="selectSubsBoardByShopCode" resultMap="SubsBoardResultMap" parameterType="int">
+        SELECT
+        S.SUBS_CODE
+        , S.SUBS_TITLE
+        , S.SUBS_CONTENT
+        , S.CREATED_AT
+        , S.UPDATED_AT
+        , S.SUBS_FLAG
+        , S.WORKING_PART_CODE
+        , S.SHOP_CODE
+        FROM SUBSTITUTION_BOARD S
+        JOIN SHOP P ON S.SHOP_CODE = P.SHOP_CODE
+        WHERE  P.SHOP_CODE = #{shopCode}
+        AND S.SUBS_FLAG = TRUE
+        ORDER BY S.SHOP_CODE ASC
+    </select>
+
+</mapper>

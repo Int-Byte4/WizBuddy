@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.employeeworkingpart.common.exception;
 
+
 public class EmployeeCodeNotFoundException extends IllegalArgumentException {
 
     private final StatusEnum status;

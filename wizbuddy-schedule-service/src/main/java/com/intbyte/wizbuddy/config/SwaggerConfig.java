@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /* 설명. http://localhost:8080/swagger-ui/index.html */
 @OpenAPIDefinition(
-        info = @Info(title = "WizBuddy 유저 API 명세서",
+        info = @Info(title = "WizBuddy API 명세서",
                 description = "WizBuddy 기능별 API 명세서"))
 @Configuration
 public class SwaggerConfig {

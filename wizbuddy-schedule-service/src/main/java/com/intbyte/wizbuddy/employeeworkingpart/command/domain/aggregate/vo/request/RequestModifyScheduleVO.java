@@ -1,3 +1,4 @@
+
 package com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.request;
 
 import lombok.AllArgsConstructor;

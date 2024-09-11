@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.user.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intbyte.wizbuddy.user.command.application.service.UserService;
-import com.intbyte.wizbuddy.user.command.domain.entity.vo.request.RequestLoginVO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.RequestLoginVO;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
