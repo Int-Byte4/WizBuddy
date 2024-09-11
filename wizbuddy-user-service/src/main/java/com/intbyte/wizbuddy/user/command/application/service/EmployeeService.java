@@ -5,7 +5,7 @@ import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployeeDTO;
 import com.intbyte.wizbuddy.user.command.domain.repository.EmployeeRepository;
 import com.intbyte.wizbuddy.user.query.repository.EmployeeMapper;
-import com.intbyte.wizbuddy.user.command.domain.entity.Employee;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.Employee;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

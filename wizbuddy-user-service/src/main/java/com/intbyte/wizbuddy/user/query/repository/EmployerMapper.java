@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.user.query.repository;
 
-import com.intbyte.wizbuddy.user.command.domain.entity.Employer;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.Employer;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
