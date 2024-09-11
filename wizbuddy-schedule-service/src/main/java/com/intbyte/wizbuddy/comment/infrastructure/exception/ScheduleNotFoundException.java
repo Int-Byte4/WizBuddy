@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.comment.infrastructure.exception;
 
-import com.intbyte.wizbuddy.comment.infrastructure.exception.StatusEnum;
 
 public class ScheduleNotFoundException extends IllegalArgumentException {
 

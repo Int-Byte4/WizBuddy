@@ -1,6 +1,5 @@
 package com.intbyte.wizbuddy.comment.infrastructure.exception;
 
-import com.intbyte.wizbuddy.comment.infrastructure.exception.StatusEnum;
 public class WorkingPartCodeNotEqualsException extends IllegalArgumentException {
     private final StatusEnum status;
 
