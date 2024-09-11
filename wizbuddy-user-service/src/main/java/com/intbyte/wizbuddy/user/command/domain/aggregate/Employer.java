@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.user.command.domain.entity;
+package com.intbyte.wizbuddy.user.command.domain.aggregate;
 
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployerDTO;
 import jakarta.persistence.*;
@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity(name = "employer")
 @Table(name = "employer")
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class Employer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employer_code")
     private String employerCode;
 

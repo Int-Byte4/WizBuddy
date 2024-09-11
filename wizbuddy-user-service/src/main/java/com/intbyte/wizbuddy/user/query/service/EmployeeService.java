@@ -3,7 +3,7 @@ package com.intbyte.wizbuddy.user.query.service;
 import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.user.query.repository.EmployeeMapper;
-import com.intbyte.wizbuddy.user.command.domain.entity.Employee;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.Employee;
 import com.intbyte.wizbuddy.user.query.dto.EmployeeDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
