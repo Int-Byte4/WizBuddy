@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.checklist.common.exception;
+package com.intbyte.wizbuddy.common.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
