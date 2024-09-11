@@ -8,8 +8,9 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
-import com.intbyte.wizbuddy.comment.common.exception.CommentNotFoundException;
 import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseModifyCommentVO modifyComment(int commentCode, EditCommentInfo modifyCommentInfo) {
-        Comment modifycomment = commentRepository.findById(commentCode)
-                .orElseThrow(CommentNotFoundException::new);
+        Comment modifycomment = commentRepository.findById(commentCode).orElseThrow(IllegalArgumentException::new);
         modifycomment.toUpdate(modifyCommentInfo);
         commentRepository.save(modifycomment);
         return modelMapper.map(modifycomment, ResponseModifyCommentVO.class);
@@ -55,8 +55,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseDeleteCommentVO removeComment(CommentDTO deleteComment) {
-        Comment comment = commentRepository.findById(deleteComment.getCommentCode())
-                .orElseThrow(CommentNotFoundException::new);
+        Comment comment = commentRepository.findById(deleteComment.getCommentCode()).orElseThrow(IllegalArgumentException::new);
         comment.toDelete();
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseDeleteCommentVO.class);
@@ -65,8 +64,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
-        Comment comment = commentRepository.findById(adoptComment.getCommentCode())
-                .orElseThrow(CommentNotFoundException::new);
+        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(IllegalArgumentException::new);
         infraAdoptService.handleAdoptProcess(comment);
         comment.toAdopt();
         commentRepository.save(comment);

@@ -11,8 +11,6 @@ import java.util.List;
 public interface EmployeeWorkingPartRepository extends JpaRepository<EmployeeWorkingPart, Integer> {
 
     List<EmployeeWorkingPart> findByEmployeeCode(String employeeCode);
-
     boolean existsByWorkingDateAndWorkingPartTime(LocalDateTime workingDate, String workingPartTime);
-
     EmployeeWorkingPart findByWorkingPartCode(int workingPartCode);
 }
