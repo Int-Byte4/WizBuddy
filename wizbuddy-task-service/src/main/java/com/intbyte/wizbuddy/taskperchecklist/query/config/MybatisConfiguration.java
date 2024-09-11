@@ -5,6 +5,6 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 
 @MapperScan(basePackages = "com.intbyte.wizbuddy.taskperchecklist.query.repository", annotationClass = Mapper.class)
-@Configuration("checkListMybatisConfiguration")
+@Configuration("taskPerCheckListMybatisConfiguration")
 public class MybatisConfiguration {
 }

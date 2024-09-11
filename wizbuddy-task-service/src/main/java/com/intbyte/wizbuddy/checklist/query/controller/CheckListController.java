@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
+@RestController("checkListQueryController")
 public class CheckListController {
 
     private final CheckListService checkListService;
