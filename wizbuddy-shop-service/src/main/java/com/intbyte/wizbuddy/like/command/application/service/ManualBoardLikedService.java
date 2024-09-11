@@ -21,7 +21,9 @@ public class ManualBoardLikedService {
 
 
     @Autowired
-    public ManualBoardLikedService(ManualBoardLikedMapper manualBoardLikedMapper, ManualBoardLikedRepository manualBoardLikedRepository, ManualBoardLikedInfraStructureService manualBoardQueryService) {
+    public ManualBoardLikedService(ManualBoardLikedMapper manualBoardLikedMapper,
+                                   ManualBoardLikedRepository manualBoardLikedRepository,
+                                   ManualBoardLikedInfraStructureService manualBoardQueryService) {
         this.manualBoardLikedMapper = manualBoardLikedMapper;
         this.manualBoardLikedRepository = manualBoardLikedRepository;
         this.manualBoardQueryService = manualBoardQueryService;

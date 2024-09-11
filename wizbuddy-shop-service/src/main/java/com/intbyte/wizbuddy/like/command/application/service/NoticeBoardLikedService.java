@@ -20,7 +20,9 @@ public class NoticeBoardLikedService {
     private final NoticeBoardLikedInfraStructureService noticeBoardQueryService;
 
     @Autowired
-    public NoticeBoardLikedService(NoticeBoardLikedRepository noticeBoardLikedRepository, NoticeBoardLikedMapper noticeBoardLikedMapper, NoticeBoardLikedInfraStructureService noticeBoardQueryService) {
+    public NoticeBoardLikedService(NoticeBoardLikedRepository noticeBoardLikedRepository,
+                                   NoticeBoardLikedMapper noticeBoardLikedMapper,
+                                   NoticeBoardLikedInfraStructureService noticeBoardQueryService) {
         this.noticeBoardLikedRepository = noticeBoardLikedRepository;
         this.noticeBoardLikedMapper = noticeBoardLikedMapper;
         this.noticeBoardQueryService = noticeBoardQueryService;

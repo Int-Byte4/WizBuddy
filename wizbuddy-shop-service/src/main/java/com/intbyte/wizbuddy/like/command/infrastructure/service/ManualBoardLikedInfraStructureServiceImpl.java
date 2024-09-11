@@ -5,10 +5,10 @@ import com.intbyte.wizbuddy.board.query.service.ManualBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("manualBoardLikedInfraStructureService")
 public class ManualBoardLikedInfraStructureServiceImpl implements ManualBoardLikedInfraStructureService {
 
-    private ManualBoardService manualBoardService;
+    private final ManualBoardService manualBoardService;
 
     @Autowired
     public ManualBoardLikedInfraStructureServiceImpl(ManualBoardService manualBoardService) {

@@ -5,10 +5,10 @@ import com.intbyte.wizbuddy.board.query.service.NoticeBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service("noticeBoardLikedInfraStructureService")
 public class NoticeBoardLikedInfraStructureServiceImpl implements NoticeBoardLikedInfraStructureService {
 
-    private NoticeBoardService noticeBoardService;
+    private final NoticeBoardService noticeBoardService;
 
     @Autowired
     public NoticeBoardLikedInfraStructureServiceImpl(NoticeBoardService noticeBoardService) {
