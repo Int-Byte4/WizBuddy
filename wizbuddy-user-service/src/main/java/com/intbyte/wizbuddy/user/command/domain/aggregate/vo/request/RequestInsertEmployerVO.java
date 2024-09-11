@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.user.command.domain.entity.vo.request;
+package com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class RequestInsertEmployeeVO {
+public class RequestInsertEmployerVO {
     private RequestSignInUserVO newUser;
-    private RequestRegisterEmployeeVO newEmployee;
+    private RequestRegisterEmployerVO newEmployer;
 }

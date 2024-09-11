@@ -1,11 +1,11 @@
-package com.intbyte.wizbuddy.user.command.domain.entity;
+package com.intbyte.wizbuddy.user.command.domain.aggregate;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity(name = "users")
 @Table(name = "users")
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -13,7 +13,6 @@ import lombok.*;
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_code", nullable = false, unique = true)
     private String userCode;
 

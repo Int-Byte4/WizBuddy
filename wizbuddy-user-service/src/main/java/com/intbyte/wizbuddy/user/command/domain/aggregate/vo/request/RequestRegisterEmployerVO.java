@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.user.command.domain.entity.vo.request;
+package com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestRegisterEmployerVO {
-    private String employerCode;
     private String employerName;
     private String employerEmail;
     private String employerPassword;
