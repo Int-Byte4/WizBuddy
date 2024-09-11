@@ -1,18 +1,18 @@
 package com.intbyte.wizbuddy.board.command.application.service;
 
+import com.intbyte.wizbuddy.board.command.application.dto.RequestEditNoticeBoardDTO;
 import com.intbyte.wizbuddy.board.command.domain.entity.NoticeBoard;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.request.RequestInsertNoticeBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.NoticeBoardRepository;
-import com.intbyte.wizbuddy.board.vo.request.RequestInsertNoticeBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseInsertNoticeBoardVO;
-import com.intbyte.wizbuddy.board.vo.response.ResponseUpdateNoticeBoardVO;
+import com.intbyte.wizbuddy.board.common.exception.CommonException;
+import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseInsertNoticeBoardVO;
+import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseUpdateNoticeBoardVO;
 import com.intbyte.wizbuddy.board.query.repository.NoticeBoardMapper;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service("noticeBoardCommandService")
 public class NoticeBoardService {
@@ -28,72 +28,42 @@ public class NoticeBoardService {
         this.modelMapper = modelMapper;
     }
 
+    // 공지사항 게시판 게시글 등록
     @Transactional
-    public ResponseInsertNoticeBoardVO registerNoticeBoard(RequestInsertNoticeBoardVO noticeBoardInfo) {
-        NoticeBoard noticeBoard = NoticeBoard.builder()
-                .noticeTitle(noticeBoardInfo.getNoticeTitle())
-                .noticeContent(noticeBoardInfo.getNoticeContent())
-                .noticeFlag(noticeBoardInfo.isNoticeFlag())
-                .imageUrl(noticeBoardInfo.getImageUrl())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .shopCode(noticeBoardInfo.getShopCode())
-                .employerCode(noticeBoardInfo.getEmployerCode())
-                .build();
+    public ResponseInsertNoticeBoardVO registerNoticeBoard(RequestInsertNoticeBoardVO requestInsertNoticeBoardVO) {
+        NoticeBoard noticeBoard = modelMapper.map(requestInsertNoticeBoardVO, NoticeBoard.class);
 
-        NoticeBoard savedNoticeBoard = noticeBoardRepository.save(noticeBoard);
+        noticeBoardRepository.save(noticeBoard);
 
-        ResponseInsertNoticeBoardVO vo = ResponseInsertNoticeBoardVO.builder()
-                .noticeTitle(savedNoticeBoard.getNoticeTitle())
-                .noticeContent(savedNoticeBoard.getNoticeContent())
-                .noticeFlag(savedNoticeBoard.isNoticeFlag())
-                .imageUrl(savedNoticeBoard.getImageUrl())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .shopCode(savedNoticeBoard.getShopCode())
-                .employerCode(savedNoticeBoard.getEmployerCode())
-                .build();
-
-        return vo;
+        return modelMapper.map(noticeBoard, ResponseInsertNoticeBoardVO.class);
     }
 
+    // 공지사항 게시판 게시글 수정
     @Transactional
-    public ResponseUpdateNoticeBoardVO modifyNoticeBoard(int noticeCode, EditNoticeBoardInfo modifyNoticeBoardInfo) {
+    public ResponseUpdateNoticeBoardVO modifyNoticeBoard(int noticeCode, RequestEditNoticeBoardDTO requestEditNoticeBoardDTO) {
         String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
+        String employerCode = requestEditNoticeBoardDTO.getEmployerCode();
+        NoticeBoard noticeBoard = noticeBoardMapper.findNoticeBoardByNoticeCode(noticeCode);
 
-        if (writerCode != null && writerCode.equals(modifyNoticeBoardInfo.getEmployerCode())) {
-            NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
+        if(noticeBoard == null) throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
+        if(!employerCode.equals(writerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
-            noticeBoard.modify(modifyNoticeBoardInfo);
+        noticeBoard.modify(requestEditNoticeBoardDTO);
+        noticeBoardRepository.save(noticeBoard);
 
-            noticeBoardRepository.save(noticeBoard);
-            ResponseUpdateNoticeBoardVO vo = ResponseUpdateNoticeBoardVO.builder()
-                    .noticeTitle(noticeBoard.getNoticeTitle())
-                    .noticeContent(noticeBoard.getNoticeContent())
-                    .noticeFlag(noticeBoard.isNoticeFlag())
-                    .imageUrl(noticeBoard.getImageUrl())
-                    .updatedAt(LocalDateTime.now())
-                    .build();
-            return vo;
-        } else {
-            throw new NoticeBoardModifyOtherUserException();
-        }
+        return modelMapper.map(noticeBoard, ResponseUpdateNoticeBoardVO.class);
     }
 
+    // 공지사항 게시판 게시글 삭제
     @Transactional
-    public void deleteNoticeBoard(int noticeCode, DeleteNoticeBoardInfo deleteNoticeBoardInfo) {
-
+    public void deleteNoticeBoard(int noticeCode, String employerCode) {
         String writerCode = noticeBoardMapper.findEmployerCodeByNoticeCode(noticeCode);
+        NoticeBoard noticeBoard = noticeBoardMapper.findNoticeBoardByNoticeCode(noticeCode);
 
-        if(writerCode != null && writerCode.equals(deleteNoticeBoardInfo.getEmployerCode())) {
-            NoticeBoard noticeBoard = noticeBoardRepository.findById(noticeCode).orElseThrow(NoticeBoardNotFoundException::new);
+        if(!employerCode.equals(writerCode)) throw new CommonException(StatusEnum.RESTRICTED);
 
-            noticeBoard.delete(deleteNoticeBoardInfo);
+        noticeBoard.delete();
 
-            noticeBoardRepository.save(noticeBoard);
-
-        } else {
-            throw new NoticeBoardModifyOtherUserException();
-        }
+        noticeBoardRepository.save(noticeBoard);
     }
 }

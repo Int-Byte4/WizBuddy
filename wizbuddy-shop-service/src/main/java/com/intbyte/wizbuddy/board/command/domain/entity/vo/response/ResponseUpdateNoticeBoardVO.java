@@ -1,18 +1,18 @@
-package com.intbyte.wizbuddy.board.command.application.dto;
+package com.intbyte.wizbuddy.board.command.domain.entity.vo.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
 @Getter
-@Setter
 @Builder
-public class RequestEditNoticeBoardDTO {
+public class ResponseUpdateNoticeBoardVO {
     private String noticeTitle;
     private String noticeContent;
+    private boolean noticeFlag;
     private String imageUrl;
     private LocalDateTime updatedAt;
-    private String employerCode;
 }
