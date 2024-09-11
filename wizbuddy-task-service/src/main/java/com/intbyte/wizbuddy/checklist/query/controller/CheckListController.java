@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.checklist.query.controller;
 
-import com.intbyte.wizbuddy.checklist.query.dto.CheckListDTO;
+import com.intbyte.wizbuddy.checklist.query.dto.CheckListQueryDTO;
 import com.intbyte.wizbuddy.checklist.query.service.CheckListService;
 import com.intbyte.wizbuddy.checklist.query.vo.ResponseFindCheckListVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,7 +30,7 @@ public class CheckListController {
     public ResponseEntity<ResponseFindCheckListVO> getCheckListById(
             @PathVariable("checkListcode") int checkListCode) {
 
-        CheckListDTO checkListDTO = checkListService.findCheckListById(checkListCode);
+        CheckListQueryDTO checkListDTO = checkListService.findCheckListById(checkListCode);
 
         ResponseFindCheckListVO checkListVO = ResponseFindCheckListVO.builder()
                 .checkListCode(checkListDTO.getCheckListCode())
@@ -50,7 +50,7 @@ public class CheckListController {
     public ResponseEntity<List<ResponseFindCheckListVO>> getAllCheckListByShop(
             @PathVariable("shopcode") int shopCode){
 
-        List<CheckListDTO> checkListDTOList = checkListService.findCheckListByIdByShop(shopCode);
+        List<CheckListQueryDTO> checkListDTOList = checkListService.findCheckListByIdByShop(shopCode);
 
         List<ResponseFindCheckListVO> checkListVOList = checkListDTOList
                 .stream()

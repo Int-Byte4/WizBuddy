@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.checklist.query.repository;
 
-import com.intbyte.wizbuddy.checklist.query.dto.CheckListDTO;
+import com.intbyte.wizbuddy.checklist.query.dto.CheckListQueryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface CheckListMapper {
 
-    CheckListDTO findCheckListById(int checkListCode);
+    CheckListQueryDTO findCheckListById(int checkListCode);
 
-    List<CheckListDTO> findAllCheckListByShopId(int shopCode);
+    List<CheckListQueryDTO> findAllCheckListByShopId(int shopCode);
 }
