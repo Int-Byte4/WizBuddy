@@ -70,8 +70,8 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
         TaskPerCheckListId id = new TaskPerCheckListId(checkListCode, taskCode);
 
         // DB에 없는경우 예외처리
-        TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById(id).get();
-        if(taskPerCheckList == null) throw new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND);
+        taskPerCheckListRepository.findById(id)
+                .orElseThrow(() -> new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND));
 
         taskPerCheckListRepository.deleteById(id);
     }

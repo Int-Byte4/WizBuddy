@@ -80,8 +80,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void modifyCheckList(int checkListCode, CheckListDTO checkListDTO){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();
-        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
+        CheckList checkList = checkListRepository.findById(checkListCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND))
 
         checkList.modify(checkListDTO);
         checkListRepository.save(checkList);
@@ -93,8 +93,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void deleteCheckList(int checkListCode){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();
-        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
+        CheckList checkList = checkListRepository.findById(checkListCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND));
 
         CheckListDTO checkListDTO = modelMapper.map(checkList, CheckListDTO.class);
         checkList.modify(checkListDTO);

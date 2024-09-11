@@ -27,7 +27,7 @@ public class DomainCheckListServiceImpl implements DomainCheckListService{
 
         // 체크리스트의 ShopCode 조회
         Integer shopCodeByCheckListCode = checkListRepository.findById(checkListCode)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid checklist code"))
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND))
                 .getShopCode();
 
         // Task의 ShopCode 조회
