@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.shop.domain.entity.vo.response;
+package com.intbyte.wizbuddy.shop.command.domain.entity.vo.response;
 
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
 import lombok.AllArgsConstructor;

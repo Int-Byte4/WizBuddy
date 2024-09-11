@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.shop.domain.entity;
+package com.intbyte.wizbuddy.shop.command.domain.entity;
 
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;

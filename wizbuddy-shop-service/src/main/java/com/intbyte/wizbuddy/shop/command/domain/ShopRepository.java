@@ -1,6 +1,6 @@
-package com.intbyte.wizbuddy.shop.domain;
+package com.intbyte.wizbuddy.shop.command.domain;
 
-import com.intbyte.wizbuddy.shop.domain.entity.Shop;
+import com.intbyte.wizbuddy.shop.command.domain.entity.Shop;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

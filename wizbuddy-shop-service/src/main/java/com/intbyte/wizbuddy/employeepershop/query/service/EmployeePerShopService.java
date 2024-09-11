@@ -4,7 +4,7 @@ import com.intbyte.wizbuddy.employeepershop.command.domain.EmployeePerShopReposi
 import com.intbyte.wizbuddy.employeepershop.query.dto.EmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.query.repository.EmployeePerShopMapper;
 import com.intbyte.wizbuddy.shop.query.repository.ShopMapper;
-import com.intbyte.wizbuddy.shop.domain.ShopRepository;
+import com.intbyte.wizbuddy.shop.command.domain.ShopRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

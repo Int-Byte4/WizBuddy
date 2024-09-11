@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.shop.query.repository;
 
-import com.intbyte.wizbuddy.shop.domain.entity.Shop;
+import com.intbyte.wizbuddy.shop.command.domain.entity.Shop;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
