@@ -100,9 +100,8 @@ public class AppTaskPerCheckListServiceImpl implements AppTaskPerCheckListServic
     public void modifyTaskPerCheckList(TaskPerCheckListDTO dto){
 
         TaskPerCheckList taskPerCheckList = taskPerCheckListRepository.findById
-                (new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode())).get();
-
-        if(taskPerCheckList == null) throw new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND);
+                (new TaskPerCheckListId(dto.getCheckListCode(), dto.getTaskCode()))
+                .orElseThrow(() -> new CommonException(StatusEnum.TASK_PER_CHECKLIST_NOT_FOUND));
 
         taskPerCheckList.modify(dto, dto.getEmployeeCode());
 
