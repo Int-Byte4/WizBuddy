@@ -1,9 +1,8 @@
-package com.intbyte.wizbuddy.shop.command.service;
+package com.intbyte.wizbuddy.shop.command.application.service;
 
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
-import com.intbyte.wizbuddy.shop.command.application.service.ShopService;
 import com.intbyte.wizbuddy.shop.domain.ShopRepository;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import jakarta.transaction.Transactional;

@@ -1,8 +1,8 @@
 package com.intbyte.wizbuddy.board.query.service;
 
 import com.intbyte.wizbuddy.board.command.domain.entity.NoticeBoard;
-import com.intbyte.wizbuddy.board.common.exception.CommonException;
-import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.dto.NoticeBoardDTO;
 import com.intbyte.wizbuddy.board.query.repository.NoticeBoardMapper;
 import org.modelmapper.ModelMapper;

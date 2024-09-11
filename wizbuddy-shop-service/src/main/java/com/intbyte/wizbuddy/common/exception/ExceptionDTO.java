@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeepershop.common.exception;
+package com.intbyte.wizbuddy.common.exception;
 
 import lombok.Getter;
 //필기. 에러 응답 형식(코드,메시지)

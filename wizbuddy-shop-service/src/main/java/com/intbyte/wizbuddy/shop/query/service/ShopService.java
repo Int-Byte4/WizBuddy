@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.shop.query.service;
 
-import com.intbyte.wizbuddy.employeepershop.common.exception.CommonException;
-import com.intbyte.wizbuddy.employeepershop.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.shop.query.repository.ShopMapper;
 import com.intbyte.wizbuddy.shop.domain.entity.Shop;
 import com.intbyte.wizbuddy.shop.query.dto.ShopDTO;

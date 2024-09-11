@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeepershop.command.service;
+package com.intbyte.wizbuddy.employeepershop.command.application.service;
 
 import com.intbyte.wizbuddy.employeepershop.command.application.dto.RequestEditEmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.command.application.service.EmployeePerShopService;

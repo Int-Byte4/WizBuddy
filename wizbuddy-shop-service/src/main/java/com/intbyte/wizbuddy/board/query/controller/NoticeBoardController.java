@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("noticeBoardQueryService")
+@RestController("noticeBoardQueryController")
 @RequestMapping("/noticeBoard")
 public class NoticeBoardController {
 
