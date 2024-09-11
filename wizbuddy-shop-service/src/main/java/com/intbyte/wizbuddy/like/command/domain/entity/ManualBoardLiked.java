@@ -31,3 +31,5 @@ public class ManualBoardLiked {
     @Column(name = "employee_code")
     private String employeeCode;
 }
+
+
