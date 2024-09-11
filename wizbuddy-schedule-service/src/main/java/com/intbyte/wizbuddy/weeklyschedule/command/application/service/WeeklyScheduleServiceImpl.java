@@ -18,8 +18,9 @@ public class WeeklyScheduleServiceImpl implements WeeklyScheduleService {
     private final WeeklyScheduleMapper weeklyScheduleMapper;
     private final WeeklyScheduleRepository weeklyScheduleRepository;
 
+    @Override
     @Transactional
-    public WeeklyScheduleDTO registSchedule(WeeklyScheduleDTO weeklySchedule) {
+    public WeeklyScheduleDTO registSchedule(WeeklyScheduleDTO weeklySchedule)  {
 
         WeeklySchedule insertWeeklySchedule =
                 new WeeklySchedule(

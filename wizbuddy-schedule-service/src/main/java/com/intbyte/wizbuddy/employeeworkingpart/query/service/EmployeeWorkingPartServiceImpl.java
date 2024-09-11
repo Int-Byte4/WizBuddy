@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.employeeworkingpart.query.service;
 
-import com.intbyte.wizbuddy.employeeworkingpart.common.EmployeeCodeNotFoundException;
-import com.intbyte.wizbuddy.employeeworkingpart.common.ScheduleNotFoundException;
+import com.intbyte.wizbuddy.employeeworkingpart.common.exception.EmployeeCodeNotFoundException;
+import com.intbyte.wizbuddy.employeeworkingpart.common.exception.ScheduleNotFoundException;
 import com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.query.repository.EmployeeWorkingPartMapper;
 import com.intbyte.wizbuddy.employeeworkingpart.query.vo.EmployeeWorkingPartVO;
@@ -22,6 +22,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
     private final EmployeeWorkingPartMapper employeeWorkingPartMapper;
     private final ModelMapper modelMapper;
 
+    @Override
     @Transactional
     public List<EmployeeWorkingPartVO> findSchedule(int scheduleCode) {
 
@@ -35,6 +36,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
                 .collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<EmployeeWorkingPartVO> findScheduleByEmployeeCode(String employeeCode) {
 
