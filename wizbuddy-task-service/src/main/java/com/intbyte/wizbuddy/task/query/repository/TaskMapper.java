@@ -1,21 +1,21 @@
 package com.intbyte.wizbuddy.task.query.repository;
 
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.task.query.dto.TaskQueryDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface TaskMapper {
-    List<TaskDTO> findAllTask();
+    List<TaskQueryDTO> findAllTask();
 
-    TaskDTO findTaskById(int taskCode);
+    TaskQueryDTO findTaskById(int taskCode);
 
-    List<TaskDTO> findAllTasksByTaskFlag();
+    List<TaskQueryDTO> findAllTasksByTaskFlag();
 
-    List<TaskDTO> findAllTaskByFixedState();
+    List<TaskQueryDTO> findAllTaskByFixedState();
 
-    List<TaskDTO> findAllTaskByShopCode(int shopCode);
-    List<TaskDTO> findAllTaskByShopCodeByFixedState(int shopCode);
-    List<TaskDTO> findAllTaskByShopCodeByNonFixedState(int shopCode);
+    List<TaskQueryDTO> findAllTaskByShopCode(int shopCode);
+    List<TaskQueryDTO> findAllTaskByShopCodeByFixedState(int shopCode);
+    List<TaskQueryDTO> findAllTaskByShopCodeByNonFixedState(int shopCode);
 }

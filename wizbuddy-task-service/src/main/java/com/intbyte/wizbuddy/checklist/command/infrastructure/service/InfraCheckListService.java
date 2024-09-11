@@ -1,8 +1,7 @@
 package com.intbyte.wizbuddy.checklist.command.infrastructure.service;
 
 import com.intbyte.wizbuddy.checklist.command.application.dto.CheckListDTO;
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
-import org.springframework.transaction.annotation.Transactional;
+import com.intbyte.wizbuddy.task.query.dto.TaskQueryDTO;
 
 public interface InfraCheckListService {
 
@@ -18,7 +17,7 @@ public interface InfraCheckListService {
     // command 5. 체크리스트 삭제시 해당 체크리스트와 관련된 task도 모두 삭제해주는 메서드
     void deleteTaskPerCheckListByCheckListCode(int checkListCode);
 
-    TaskDTO findShopCodeByTaskCode(int taskCode);
+    TaskQueryDTO findShopCodeByTaskCode(int taskCode);
 
     boolean isTaskAlreadyInCheckList(int checkListCode, int taskCode);
 }

@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.checklist.command.infrastructure.service;
 
 import com.intbyte.wizbuddy.checklist.command.application.dto.CheckListDTO;
 import com.intbyte.wizbuddy.checklist.command.domain.repository.CheckListRepository;
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.task.query.dto.TaskQueryDTO;
 import com.intbyte.wizbuddy.task.query.service.TaskService;
 import com.intbyte.wizbuddy.taskperchecklist.command.application.service.AppTaskPerCheckListService;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class InfraCheckListServiceImpl implements InfraCheckListService {
     public void insertFixedTaskAndTaskPerCheckList(CheckListDTO checkListDTO){
 
         // 1. taskMapper를 통해 task를 다 찾아와야함. (query) -> shopCode를 통해서 찾아옴.
-        List<TaskDTO> allTaskDTOByShopCode = taskService.findAllTaskByShopCode(checkListDTO.getShopCode());
+        List<TaskQueryDTO> allTaskDTOByShopCode = taskService.findAllTaskByShopCode(checkListDTO.getShopCode());
         List<Integer> taskCodeList = new ArrayList<>();
         for (int i = 0; i <allTaskDTOByShopCode.size(); i++) taskCodeList.add(allTaskDTOByShopCode.get(i).getTaskCode());
 
@@ -62,7 +62,7 @@ public class InfraCheckListServiceImpl implements InfraCheckListService {
 
     @Override
     @Transactional
-    public TaskDTO findShopCodeByTaskCode(int taskCode){
+    public TaskQueryDTO findShopCodeByTaskCode(int taskCode){
         return taskService.findTaskById(taskCode);
     }
 

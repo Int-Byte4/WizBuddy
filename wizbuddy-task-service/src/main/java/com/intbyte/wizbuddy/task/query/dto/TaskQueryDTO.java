@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class TaskDTO {
+public class TaskQueryDTO {
 
     private int taskCode;
     private String taskContents;

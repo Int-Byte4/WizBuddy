@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.task.query.controller;
 
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.task.query.dto.TaskQueryDTO;
 import com.intbyte.wizbuddy.task.query.service.TaskServiceImpl;
 import com.intbyte.wizbuddy.task.query.vo.ResponseFindTaskVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,7 +31,7 @@ public class TaskController {
     @Operation(summary = "특정 업무 조회")
     public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskcode") int taskCode){
 
-        TaskDTO taskDTO = taskService.findTaskById(taskCode);
+        TaskQueryDTO taskDTO = taskService.findTaskById(taskCode);
 
         ResponseFindTaskVO findTask = ResponseFindTaskVO.builder()
                 .taskCode(taskDTO.getTaskCode())
@@ -54,7 +54,7 @@ public class TaskController {
             @PathVariable("shopcode") int shopCode,
             @RequestParam(name = "fixed", required = false) Boolean fixed) {
 
-        List<TaskDTO> taskDTOList;
+        List<TaskQueryDTO> taskDTOList;
 
         if (fixed == null) {
             // fixed 파라미터가 없을 경우, 모든 Task를 반환
