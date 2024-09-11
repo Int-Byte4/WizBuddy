@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.intbyte.wizbuddy.mapper.ManualBoardMapper">
+<mapper namespace="com.intbyte.wizbuddy.board.query.repository.ManualBoardMapper">
     <resultMap id="manualBoardResultMap" type="com.intbyte.wizbuddy.board.command.domain.entity.ManualBoard">
         <id property="manualCode" column="manual_code"/>
         <result property="manualTitle" column="manual_title"/>

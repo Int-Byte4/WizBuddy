@@ -4,8 +4,8 @@ import com.intbyte.wizbuddy.board.command.application.dto.RequestEditManualBoard
 import com.intbyte.wizbuddy.board.command.domain.entity.ManualBoard;
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.request.RequestInsertManualBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.ManualBoardRepository;
-import com.intbyte.wizbuddy.board.common.exception.CommonException;
-import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.repository.ManualBoardMapper;
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseInsertManualBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseUpdateManualBoardVO;

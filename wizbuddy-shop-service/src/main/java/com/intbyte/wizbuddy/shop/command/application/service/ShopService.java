@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.shop.command.application.service;
 
-import com.intbyte.wizbuddy.employeepershop.common.exception.CommonException;
-import com.intbyte.wizbuddy.employeepershop.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
 import com.intbyte.wizbuddy.shop.command.infrastructure.dto.EmployerDTO;
 import com.intbyte.wizbuddy.shop.command.infrastructure.client.UserServiceClient;

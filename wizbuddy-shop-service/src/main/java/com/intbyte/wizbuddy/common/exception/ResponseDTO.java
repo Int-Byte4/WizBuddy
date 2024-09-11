@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like.common.exception;
+package com.intbyte.wizbuddy.common.exception;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
