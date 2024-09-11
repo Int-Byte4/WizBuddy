@@ -1,14 +1,14 @@
 package com.intbyte.wizbuddy.user.command.application.controller;
 
 import com.intbyte.wizbuddy.user.command.application.service.EmployeeService;
-import com.intbyte.wizbuddy.user.command.domain.entity.vo.request.*;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.*;
 import com.intbyte.wizbuddy.user.security.JwtUtil;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployeeDTO;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployerDTO;
 import com.intbyte.wizbuddy.user.command.application.service.EmployerService;
 import com.intbyte.wizbuddy.user.command.application.service.UserService;
-import com.intbyte.wizbuddy.user.command.domain.entity.vo.response.ResponseInsertEmployeeVO;
-import com.intbyte.wizbuddy.user.command.domain.entity.vo.response.ResponseInsertEmployerVO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertEmployeeVO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertEmployerVO;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
