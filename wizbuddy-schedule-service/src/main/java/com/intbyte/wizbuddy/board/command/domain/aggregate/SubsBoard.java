@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.board.command.domain.aggregate;
 
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardInfo;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;

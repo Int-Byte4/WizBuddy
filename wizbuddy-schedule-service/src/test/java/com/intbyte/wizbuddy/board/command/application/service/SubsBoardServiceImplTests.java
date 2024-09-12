@@ -3,8 +3,8 @@ package com.intbyte.wizbuddy.board.command.application.service;
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
 
 import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.command.domain.repository.SubsBoardRepository;
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

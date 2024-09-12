@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.domain;
+package com.intbyte.wizbuddy.board.command.domain.aggregate.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,8 +2,9 @@ package com.intbyte.wizbuddy.board.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.command.domain.repository.SubsBoardRepository;
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
+
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
@@ -26,6 +27,12 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Transactional
     @Override
     public ResponseInsertSubsBoardVO registSubsBoard(SubsBoardDTO subsBoardDTO) {
+
+        if (subsBoardDTO.getSubsTitle() == null || subsBoardDTO.getSubsTitle().isEmpty()
+                || subsBoardDTO.getSubsContent() == null || subsBoardDTO.getSubsContent().isEmpty()) {
+            throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
+        }
+
         SubsBoard subsBoard = SubsBoard.builder()
                 .subsTitle(subsBoardDTO.getSubsTitle())
                 .subsContent(subsBoardDTO.getSubsContent())
@@ -36,10 +43,6 @@ public class SubsBoardServiceImpl implements SubsBoardService {
                 .shopCode(subsBoardDTO.getShopCode())
                 .build();
 
-        if (subsBoardDTO.getSubsTitle() == null || subsBoardDTO.getSubsTitle().isEmpty()) {
-            throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
-        }
-
         subsBoardRepository.save(subsBoard);
 
         return modelMapper.map(subsBoard, ResponseInsertSubsBoardVO.class);
@@ -48,8 +51,15 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Transactional
     @Override
     public ResponseModifySubsBoardVO modifySubsBoards(int subsCode, EditSubsBoardInfo modifySubsBoardInfo) {
+
         SubsBoard subsBoard = subsBoardRepository.findById(subsCode)
                 .orElseThrow(() -> new CommonException(StatusEnum.BOARD_NOT_FOUND));
+
+        if (modifySubsBoardInfo.getSubsTitle() == null || modifySubsBoardInfo.getSubsTitle().isEmpty()
+                || modifySubsBoardInfo.getSubsContent() == null || modifySubsBoardInfo.getSubsContent().isEmpty()) {
+            throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
+        }
+
         subsBoard.toUpdate(modifySubsBoardInfo);
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseModifySubsBoardVO.class);
