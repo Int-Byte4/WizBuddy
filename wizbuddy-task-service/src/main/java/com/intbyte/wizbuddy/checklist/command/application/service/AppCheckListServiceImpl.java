@@ -81,7 +81,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     public void modifyCheckList(int checkListCode, CheckListDTO checkListDTO){
 
         CheckList checkList = checkListRepository.findById(checkListCode)
-                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND))
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND));
 
         checkList.modify(checkListDTO);
         checkListRepository.save(checkList);
