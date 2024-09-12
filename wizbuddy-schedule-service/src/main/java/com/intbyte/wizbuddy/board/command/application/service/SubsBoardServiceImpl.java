@@ -7,7 +7,6 @@ import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
-import com.intbyte.wizbuddy.board.common.exception.SubsBoardNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -44,7 +43,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Override
     public ResponseModifySubsBoardVO modifySubsBoards(int subsCode, EditSubsBoardInfo modifySubsBoardInfo) {
         SubsBoard subsBoard = subsBoardRepository.findById(subsCode)
-                .orElseThrow(SubsBoardNotFoundException::new);
+                .orElseThrow(IllegalArgumentException::new);
         subsBoard.toUpdate(modifySubsBoardInfo);
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseModifySubsBoardVO.class);
@@ -54,7 +53,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Override
     public ResponseDeleteSubsBoardVO deleteSubsBoard(SubsBoardDTO deleteSubsBoardDTO) {
         SubsBoard subsBoard = subsBoardRepository.findById(deleteSubsBoardDTO.getSubsCode())
-                .orElseThrow(SubsBoardNotFoundException::new);
+                .orElseThrow(IllegalArgumentException::new);
         subsBoard.toDelete();
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);

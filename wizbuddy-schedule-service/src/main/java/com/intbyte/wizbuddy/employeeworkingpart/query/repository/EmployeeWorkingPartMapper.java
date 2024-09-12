@@ -1,7 +1,5 @@
 package com.intbyte.wizbuddy.employeeworkingpart.query.repository;
 
-
-import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,7 +12,7 @@ public interface EmployeeWorkingPartMapper {
 
     List<EmployeeWorkingPartDTO> selectScheduleByScheduleCode(int scheduleCode);
 
-    EmployeeWorkingPart selectScheduleByWorkingPartCode(int workingPartCode);
+    EmployeeWorkingPartDTO selectScheduleByWorkingPartCode(int workingPartCode);
 
     void editSchedule(int workingPartCode, String employeeCode);
 }

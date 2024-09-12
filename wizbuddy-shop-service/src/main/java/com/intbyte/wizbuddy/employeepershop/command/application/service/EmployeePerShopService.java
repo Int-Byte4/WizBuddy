@@ -1,15 +1,15 @@
 package com.intbyte.wizbuddy.employeepershop.command.application.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.employeepershop.command.application.dto.RequestEditEmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.command.infrastructure.service.EmployeePerShopInfraStructureService;
-import com.intbyte.wizbuddy.employeepershop.common.exception.CommonException;
-import com.intbyte.wizbuddy.employeepershop.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.employeepershop.command.domain.EmployeePerShopRepository;
 import com.intbyte.wizbuddy.employeepershop.command.domain.entity.EmployeePerShop;
 import com.intbyte.wizbuddy.employeepershop.command.domain.entity.EmployeePerShopId;
 import com.intbyte.wizbuddy.employeepershop.query.dto.EmployeePerShopDTO;
 import com.intbyte.wizbuddy.employeepershop.query.repository.EmployeePerShopMapper;
-import com.intbyte.wizbuddy.shop.domain.ShopRepository;
+import com.intbyte.wizbuddy.shop.command.domain.ShopRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -4,8 +4,8 @@ import com.intbyte.wizbuddy.board.command.application.dto.RequestEditNoticeBoard
 import com.intbyte.wizbuddy.board.command.domain.entity.NoticeBoard;
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.request.RequestInsertNoticeBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.NoticeBoardRepository;
-import com.intbyte.wizbuddy.board.common.exception.CommonException;
-import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseInsertNoticeBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.entity.vo.response.ResponseUpdateNoticeBoardVO;

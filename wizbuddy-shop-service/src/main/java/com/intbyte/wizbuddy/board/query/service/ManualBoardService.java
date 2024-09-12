@@ -1,8 +1,8 @@
 package com.intbyte.wizbuddy.board.query.service;
 
 import com.intbyte.wizbuddy.board.command.domain.entity.ManualBoard;
-import com.intbyte.wizbuddy.board.common.exception.CommonException;
-import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.board.query.dto.ManualBoardDTO;
 import com.intbyte.wizbuddy.board.query.repository.ManualBoardMapper;
 import org.modelmapper.ModelMapper;

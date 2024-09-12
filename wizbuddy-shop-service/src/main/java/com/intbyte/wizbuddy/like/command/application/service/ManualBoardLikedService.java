@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.like.command.application.service;
 
-import com.intbyte.wizbuddy.board.common.exception.CommonException;
-import com.intbyte.wizbuddy.board.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.like.command.domain.entity.ManualBoardLiked;
 import com.intbyte.wizbuddy.like.command.domain.repository.ManualBoardLikedRepository;
 import com.intbyte.wizbuddy.like.command.infrastructure.service.ManualBoardLikedInfraStructureService;

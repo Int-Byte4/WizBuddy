@@ -1,10 +1,11 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
-import com.intbyte.wizbuddy.employeeworkingpart.command.application.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 
 public interface EmployeeWorkingPartService {
-    EmployeeWorkingPartDTO registSchedulePerEmployee(EmployeeWorkingPartDTO employeeWorkingPart);
+    ResponseRegistEmployeeVO registSchedulePerEmployee(
+            ResponseRegistEmployeeVO responseRegistEmployeeWorkingPartVO);
     void editSchedule(int workingPartCode, ResponseModifyScheduleVO responseModifyScheduleVO);
     void deleteSchedule(int workingPartCode);
 }

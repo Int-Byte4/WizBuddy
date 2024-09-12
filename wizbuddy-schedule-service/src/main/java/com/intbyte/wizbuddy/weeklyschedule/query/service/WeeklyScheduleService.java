@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface WeeklyScheduleService {
     List<WeeklyScheduleDTO> findAllSchedules();
+    WeeklyScheduleDTO findScheduleByScheduleCode(int scheduleCode);
 }

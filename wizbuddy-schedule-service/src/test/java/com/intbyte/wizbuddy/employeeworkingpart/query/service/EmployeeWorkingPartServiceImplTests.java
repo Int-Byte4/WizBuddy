@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EmployeeWorkingPartServiceImplTests {
 
     @Autowired
+    @Qualifier("queryEmployeeWorkingPartService")
     private EmployeeWorkingPartService employeeWorkingPartService;
 
     @Test

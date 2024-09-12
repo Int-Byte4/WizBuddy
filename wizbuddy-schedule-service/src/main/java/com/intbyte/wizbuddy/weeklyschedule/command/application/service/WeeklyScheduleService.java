@@ -1,8 +1,7 @@
 package com.intbyte.wizbuddy.weeklyschedule.command.application.service;
 
-
-import com.intbyte.wizbuddy.weeklyschedule.command.application.dto.WeeklyScheduleDTO;
+import com.intbyte.wizbuddy.weeklyschedule.command.domain.aggregate.vo.response.ResponseRegistWeeklyScheduleVO;
 
 public interface WeeklyScheduleService {
-    WeeklyScheduleDTO registSchedule(WeeklyScheduleDTO weeklySchedule);
+    ResponseRegistWeeklyScheduleVO registSchedule(ResponseRegistWeeklyScheduleVO responseRegistWeeklyScheduleVO);
 }

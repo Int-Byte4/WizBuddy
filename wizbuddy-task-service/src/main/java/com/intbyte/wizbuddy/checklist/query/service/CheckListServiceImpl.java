@@ -1,6 +1,8 @@
 package com.intbyte.wizbuddy.checklist.query.service;
 
-import com.intbyte.wizbuddy.checklist.query.dto.CheckListDTO;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.checklist.query.dto.CheckListQueryDTO;
 import com.intbyte.wizbuddy.checklist.query.repository.CheckListMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,27 +24,23 @@ public class CheckListServiceImpl implements CheckListService {
     }
 
 
-//    쿼리 ㅇ{ㅖ외처리!!!!!!!!!!!!
     // 1. 특정 체크리스트 조회
+    @Override
     @Transactional
-    public CheckListDTO findCheckListById(int checkListCode){
+    public CheckListQueryDTO findCheckListById(int checkListCode){
 
-        CheckListDTO checkList = checkListMapper.findCheckListById(checkListCode);
+        CheckListQueryDTO checkList = checkListMapper.findCheckListById(checkListCode);
 
-        if(checkList == null) return null;
-//            throw new CheckListNotFoundException();
+        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
 
         return checkList;
     }
 
     // 2. flag가 true 인 특정 매장의 모든 체크리스트 조회
+    @Override
     @Transactional
-    public List<CheckListDTO> findCheckListByIdByShop(int shopCode){
+    public List<CheckListQueryDTO> findCheckListByIdByShop(int shopCode){
 
         return checkListMapper.findAllCheckListByShopId(shopCode);
-
-//        if(checkListList == null || checkListList.isEmpty())
-//            throw new CheckListNotFoundException();
     }
-
 }

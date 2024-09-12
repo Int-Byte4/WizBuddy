@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 class WeeklyScheduleServiceImplTest {
 
     @Autowired
+    @Qualifier("queryWeeklyScheduleService")
     private WeeklyScheduleServiceImpl weeklyScheduleService;
 
     @Test
