@@ -7,7 +7,6 @@ import com.intbyte.wizbuddy.checklist.command.domain.service.DomainCheckListServ
 import com.intbyte.wizbuddy.checklist.command.infrastructure.client.ShopServiceClient;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.service.InfraCheckListServiceImpl;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
-import com.intbyte.wizbuddy.checklist.query.service.CheckListService;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     private final DomainCheckListService domainCheckListService;
 
     @Autowired
-    public AppCheckListServiceImpl(CheckListRepository checkListRepository, ModelMapper modelMapper, InfraCheckListServiceImpl infraCheckListService, ShopServiceClient shopServiceClient, CheckListService checkListService, DomainCheckListService domainCheckListService) {
+    public AppCheckListServiceImpl(CheckListRepository checkListRepository, ModelMapper modelMapper, InfraCheckListServiceImpl infraCheckListService, ShopServiceClient shopServiceClient, DomainCheckListService domainCheckListService) {
         this.checkListRepository = checkListRepository;
         this.modelMapper = modelMapper;
         this.infraCheckListService = infraCheckListService;

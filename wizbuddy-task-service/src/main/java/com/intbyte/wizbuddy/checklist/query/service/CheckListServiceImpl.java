@@ -22,7 +22,6 @@ public class CheckListServiceImpl implements CheckListService {
         this.modelMapper = modelMapper;
     }
 
-
     // 1. 특정 체크리스트 조회
     @Override
     public CheckListQueryDTO findCheckListById(int checkListCode){
