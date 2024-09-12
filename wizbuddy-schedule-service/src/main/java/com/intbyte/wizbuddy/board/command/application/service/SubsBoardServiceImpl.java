@@ -7,6 +7,8 @@ import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,10 @@ public class SubsBoardServiceImpl implements SubsBoardService {
                 .shopCode(subsBoardDTO.getShopCode())
                 .build();
 
+        if (subsBoardDTO.getSubsTitle() == null || subsBoardDTO.getSubsTitle().isEmpty()) {
+            throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
+        }
+
         subsBoardRepository.save(subsBoard);
 
         return modelMapper.map(subsBoard, ResponseInsertSubsBoardVO.class);
@@ -43,7 +49,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Override
     public ResponseModifySubsBoardVO modifySubsBoards(int subsCode, EditSubsBoardInfo modifySubsBoardInfo) {
         SubsBoard subsBoard = subsBoardRepository.findById(subsCode)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CommonException(StatusEnum.BOARD_NOT_FOUND));
         subsBoard.toUpdate(modifySubsBoardInfo);
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseModifySubsBoardVO.class);
@@ -53,7 +59,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     @Override
     public ResponseDeleteSubsBoardVO deleteSubsBoard(SubsBoardDTO deleteSubsBoardDTO) {
         SubsBoard subsBoard = subsBoardRepository.findById(deleteSubsBoardDTO.getSubsCode())
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CommonException(StatusEnum.BOARD_NOT_FOUND));
         subsBoard.toDelete();
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);

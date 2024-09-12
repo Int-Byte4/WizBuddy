@@ -31,6 +31,7 @@ public enum StatusEnum {
     COMMENT_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 댓글이 존재하지 않습니다."),
     SCHEDULE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 스케줄이 존재하지 않습니다."),
     EMPLOYEE_CODE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 코드를 가진 직원이 존재하지 않습니다."),
+    INVALID_SUBS_BOARD_DATA(404, HttpStatus.NOT_FOUND, "잘못된 형식입니다. 옳바른 형식으로 제목과 내용을 입력해주세요."),
 
     INTERNAL_SERVER_ERROR(500, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다");
     private final int statusCode;
