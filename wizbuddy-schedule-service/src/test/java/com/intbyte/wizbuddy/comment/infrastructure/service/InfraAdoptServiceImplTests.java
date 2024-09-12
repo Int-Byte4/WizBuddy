@@ -48,7 +48,6 @@ class InfraAdoptServiceImplTests {
                 "20240831-cc00-4288-b2a6-2f864ddbf6b5");
         Comment updatedComment = commentRepository.findById(modifycomment.getCommentCode()).orElse(null);
         infraAdoptService.handleAdoptProcess(updatedComment);
-        System.out.println("updatedComment = " + updatedComment);
 
         EmployeeWorkingPart updatedWorkingPart = employeeWorkingPartRepository.findByWorkingPartCode(2);
         assertNotNull(updatedWorkingPart);
