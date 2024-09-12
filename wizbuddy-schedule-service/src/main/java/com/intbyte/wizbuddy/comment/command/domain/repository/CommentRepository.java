@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository("commandCommentRepository")
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
+    Comment findBySubsCodeAndCommentAdoptedState(int subsCode, boolean commentAdoptedState);
 
 }

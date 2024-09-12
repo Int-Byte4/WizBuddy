@@ -71,4 +71,12 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
+
+    @Override
+    public void validateAlreadyAdoptedComment(Comment comment) {
+        Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState(comment.getSubsCode(), true);
+        if (existingComment != null) {
+            throw new CommonException(StatusEnum.ALREADY_ADOPTED);
+        }
+    }
 }

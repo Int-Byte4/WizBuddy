@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.comment.command.application.service;
 
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseAdoptCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseDeleteCommentVO;
@@ -16,4 +17,6 @@ public interface CommentService {
     ResponseDeleteCommentVO removeComment(CommentDTO deleteComment);
 
     ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment);
+
+    void validateAlreadyAdoptedComment(Comment comment);
 }
