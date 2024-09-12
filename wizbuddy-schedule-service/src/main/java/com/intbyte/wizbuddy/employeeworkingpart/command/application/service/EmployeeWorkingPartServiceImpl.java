@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
+import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
@@ -79,7 +81,7 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
                                 schedule.getWorkingDate(),
                                 schedule.getWorkingPartTime()))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
 
         employeeWorkingPart.modify(responseModifyScheduleVO);
 
@@ -96,5 +98,34 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         if (employeeWorkingPart == null) throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
 
         employeeWorkingPartRepository.delete(employeeWorkingPart);
+    }
+
+    @Override
+    public EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard) {
+        EmployeeWorkingPart writer = employeeWorkingPartRepository.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
+        if (writer == null) {
+            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+        }
+        return writer;
+    }
+
+    @Override
+    public EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer) {
+        List<EmployeeWorkingPart> commentAuthorParts = employeeWorkingPartRepository.findByEmployeeCode(comment.getEmployeeCode());
+        if (commentAuthorParts == null || commentAuthorParts.isEmpty()) {
+            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+        }
+
+
+        return commentAuthorParts.stream()
+                .filter(author -> employeeWorkingPartRepository.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
+                .findFirst()
+                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
+    }
+
+    @Override
+    public void updateWorkingPart(EmployeeWorkingPart writer, EmployeeWorkingPart matchingCommentAuthor) {
+        writer.modifyWorkingPart(matchingCommentAuthor.getEmployeeCode());
+        employeeWorkingPartRepository.save(writer);
     }
 }
