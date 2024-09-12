@@ -8,6 +8,7 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
+import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import java.time.LocalDateTime;
 public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
+    private final InfraAdoptServiceImpl infraAdoptService;
 
     @Transactional
     @Override
@@ -68,6 +70,7 @@ public class CommentServiceImpl implements CommentService {
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
         Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
         comment.toAdopt();
+        infraAdoptService.handleAdoptProcess(comment);
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
