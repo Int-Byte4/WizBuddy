@@ -70,8 +70,8 @@ public class CommentServiceImpl implements CommentService {
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
         Comment comment = commentRepository.findById(adoptComment.getCommentCode())
                 .orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
-
-        Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState(comment.getSubsCode(), true);
+        Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState
+                (comment.getSubsCode(), true);
         if (existingComment != null) {
             throw new CommonException(StatusEnum.ALREADY_ADOPTED);
         }
