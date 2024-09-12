@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.like.command.application.dto;
+package com.intbyte.wizbuddy.like.query.dto;
 
 import lombok.*;
 
@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @ToString
 public class ManualBoardLikedDTO {
     private int manualLikedCode;
-    private LocalDateTime createdAt;
-    private int manualCode;
-    private int shopCode;
+//    private LocalDateTime createdAt;
+//    private int manualCode;
+//    private int shopCode;
     private String employeeCode;
 }
