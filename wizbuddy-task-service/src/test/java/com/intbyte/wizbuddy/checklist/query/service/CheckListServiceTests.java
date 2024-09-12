@@ -20,9 +20,7 @@ public class CheckListServiceTests {
 
         int shopCode = 1;
 
-        Assertions.assertDoesNotThrow(() -> {
-            checkListService.findCheckListByIdByShop(shopCode);
-        });
+        Assertions.assertNotNull(checkListService.findCheckListByIdByShop(shopCode));
     }
 
     @Test
@@ -31,8 +29,6 @@ public class CheckListServiceTests {
 
         int checkListCode = 1;
 
-        Assertions.assertDoesNotThrow(() -> {
-            checkListService.findCheckListById(checkListCode);
-        });
+        Assertions.assertNotNull(checkListService.findCheckListById(checkListCode));
     }
 }
