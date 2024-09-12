@@ -74,4 +74,13 @@ public class SubsBoardServiceImpl implements SubsBoardService {
         subsBoardRepository.save(subsBoard);
         return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);
     }
+
+    @Override
+    public SubsBoard validateSubsBoard(int subsCode) {
+        SubsBoard subsBoard = subsBoardRepository.findBySubsCode(subsCode);
+        if (subsBoard == null) {
+            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
+        }
+        return subsBoard;
+    }
 }
