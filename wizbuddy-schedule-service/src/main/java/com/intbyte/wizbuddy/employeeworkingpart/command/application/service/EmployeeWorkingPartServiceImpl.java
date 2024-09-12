@@ -1,13 +1,14 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
+import com.intbyte.wizbuddy.common.exception.CommonException;
+import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
-import com.intbyte.wizbuddy.employeeworkingpart.common.exception.EmployeeCodeNotFoundException;
-import com.intbyte.wizbuddy.employeeworkingpart.common.exception.WorkingDateAndTimeEqualsException;
-import com.intbyte.wizbuddy.employeeworkingpart.common.exception.ScheduleNotFoundException;
-
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.client.UserServiceClient;
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.dto.EmployeeDTO;
+import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.service.ScheduleInfraService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,29 +22,36 @@ import java.util.List;
 public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartService{
 
     private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
+    private final UserServiceClient userServiceClient;
+    private final ScheduleInfraService scheduleInfraService;
 
     @Override
     @Transactional
     public ResponseRegistEmployeeVO registSchedulePerEmployee
             (ResponseRegistEmployeeVO responseRegistEmployeeVO) {
 
+        EmployeeDTO employeeDTO = userServiceClient.getEmployee(responseRegistEmployeeVO.getEmployeeCode()).getBody();
+        int scheduleCode = scheduleInfraService.findScheduleByScheduleCode(responseRegistEmployeeVO
+                .getScheduleCode()).getScheduleCode();
+
         EmployeeWorkingPart insertSchedulePerEmployee =
                 new EmployeeWorkingPart(responseRegistEmployeeVO.getWorkingPartCode()
-                , responseRegistEmployeeVO.getEmployeeCode()
-                , responseRegistEmployeeVO.getScheduleCode()
+                , employeeDTO.getEmployeeCode()
+                , scheduleCode
                 , responseRegistEmployeeVO.getWorkingDate()
                 , responseRegistEmployeeVO.getWorkingPartTime());
 
-        String employeeCode = responseRegistEmployeeVO.getEmployeeCode();
+        // 예외처리1. 존재하지 않는 직원일 경우
+        if(employeeWorkingPartRepository
+                .findByEmployeeCode(responseRegistEmployeeVO.getEmployeeCode())==null)
+            throw new CommonException(StatusEnum.EMPLOYEE_CODE_NOT_FOUND);
 
-        if(employeeWorkingPartRepository.findByEmployeeCode(employeeCode)==null)
-            throw new EmployeeCodeNotFoundException();
-
+        // 예외처리2. 같은날, 같은 시간(예 - 월요일 2타임에 2명(A,B)의 알바생이 근무하는 경우) A의 대타로 B를 지정하려는 경우
         if(employeeWorkingPartRepository
                 .existsByWorkingDateAndWorkingPartTime(insertSchedulePerEmployee
                         .getWorkingDate(),insertSchedulePerEmployee
                         .getWorkingPartTime()))
-            throw new WorkingDateAndTimeEqualsException();
+            throw new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS);
 
         employeeWorkingPartRepository.save(insertSchedulePerEmployee);
 
@@ -56,18 +64,22 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
 
         EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
                 .findByWorkingPartCode(workingPartCode);
+        // 예외처리1. 존재하지 않는 스케줄일 경우
+        if(employeeWorkingPart==null) throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
 
-        if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
+        // 예외처리2. 존재하지 않는 직원일 경우
+        if (employeeWorkingPart.getEmployeeCode() == null) throw new CommonException(StatusEnum.EMPLOYEE_CODE_NOT_FOUND);
 
-        List<EmployeeWorkingPart> actualSchedule = employeeWorkingPartRepository
+        // 예외처리3. 같은날, 같은 시간(예 - 월요일 2타임에 2명(A,B)의 알바생이 근무하는 경우)에 근무하는 직원으로 수정하려는 경우
+        List<EmployeeWorkingPart> subsSchedule = employeeWorkingPartRepository
                 .findByEmployeeCode(responseModifyScheduleVO.getEmployeeCode());
-        actualSchedule.stream()
+        subsSchedule.stream()
                 .filter(schedule -> employeeWorkingPartRepository
-                        .existsByWorkingDateAndWorkingPartTime(schedule
-                                .getWorkingDate(),schedule
-                                .getWorkingPartTime()))
+                        .existsByWorkingDateAndWorkingPartTime(
+                                schedule.getWorkingDate(),
+                                schedule.getWorkingPartTime()))
                 .findFirst()
-                .orElseThrow(WorkingDateAndTimeEqualsException::new);
+                .orElseThrow(IllegalArgumentException::new);
 
         employeeWorkingPart.modify(responseModifyScheduleVO);
 
@@ -77,11 +89,11 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
     @Override
     @Transactional
     public void deleteSchedule(int workingPartCode) {
-
         EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
                 .findByWorkingPartCode(workingPartCode);
 
-        if (employeeWorkingPart == null) throw new ScheduleNotFoundException();
+        // 예외처리1. 존재하지 않는 스케줄일 경우
+        if (employeeWorkingPart == null) throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
 
         employeeWorkingPartRepository.delete(employeeWorkingPart);
     }
