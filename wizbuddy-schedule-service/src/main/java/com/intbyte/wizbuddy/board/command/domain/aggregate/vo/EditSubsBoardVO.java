@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EditSubsBoardInfo {
+public class EditSubsBoardVO {
     private String subsTitle;
     private String subsContent;
     private LocalDateTime updatedAt;

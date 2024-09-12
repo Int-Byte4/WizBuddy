@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.board.command.application.controller;
 
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.board.command.application.service.SubsBoardService;
-import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardInfo;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.request.RequestDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.request.RequestInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.request.RequestModifySubsBoardVO;
@@ -37,8 +37,8 @@ public class SubsBoardController {
     public ResponseEntity<ResponseModifySubsBoardVO> updateSubsBoard(
             @PathVariable("subsCode") int subsCode,
             @RequestBody RequestModifySubsBoardVO requestModify) {
-        EditSubsBoardInfo editSubsBoardInfo = modelMapper.map(requestModify, EditSubsBoardInfo.class);
-        ResponseModifySubsBoardVO responseBoard = subsBoardService.modifySubsBoards(subsCode, editSubsBoardInfo);
+        EditSubsBoardVO editSubsBoardVO = modelMapper.map(requestModify, EditSubsBoardVO.class);
+        ResponseModifySubsBoardVO responseBoard = subsBoardService.modifySubsBoards(subsCode, editSubsBoardVO);
         return  ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
 
