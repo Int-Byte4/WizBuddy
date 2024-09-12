@@ -6,52 +6,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
-public class TaskServicesTests {
+@Transactional
+public class TaskServiceTests {
 
     @Autowired
     private TaskService taskService;
 
     @Test
-    @Transactional // 1번
     public void id로_업무_1개_조회_테스트(){
 
         int taskCode = 1;
 
-        TaskQueryDTO taskById = taskService.findTaskById(taskCode);
-        System.out.println("taskById = " + taskById);
+        assertNotNull(taskService.findTaskById(taskCode));
     }
 
     // 2-1번
     @Test
-    @Transactional
     public void 매장_id로_모든_업무_조회(){
 
         int shopCode = 1;
+        List<TaskQueryDTO> taskQueryDTOS = taskService.findAllTaskByShopCode(shopCode);
 
-        List<TaskQueryDTO> allTaskByShopCode = taskService.findAllTaskByShopCode(shopCode);
-        System.out.println(allTaskByShopCode.toString());
+        for (int i = 0; i < taskQueryDTOS.size(); i++) {
+            assertEquals(shopCode, taskQueryDTOS.get(i).getShopCode());
+        }
     }
 
     // 2-2번
     @Test
-    @Transactional
     public void 매장_id로_고정된_모든_업무_조회(){
 
         int shopCode = 1;
-        List<TaskQueryDTO> allTask = taskService.findAllTaskByShopCodeByFixedState(shopCode);
-        System.out.println(allTask.toString());
+        List<TaskQueryDTO> fixedDTOs = taskService.findAllTaskByShopCodeByFixedState(shopCode);
+
+        for (int i = 0; i < fixedDTOs.size(); i++) {
+            assertEquals(true, fixedDTOs.get(i).isTaskFixedState());
+        }
     }
 
     // 2-3번
     @Test
-    @Transactional
     public void 매장_id로_고정_안된_모든_업무_조회(){
 
         int shopCode = 1;
-        List<TaskQueryDTO> allTask = taskService.findAllTaskByShopCodeByNonFixedState(shopCode);
-        System.out.println(allTask.toString());
+        List<TaskQueryDTO> nonFixedDTOs = taskService.findAllTaskByShopCodeByNonFixedState(shopCode);
+
+        for (int i = 0; i < nonFixedDTOs.size(); i++) {
+            assertEquals(false, nonFixedDTOs.get(i).isTaskFixedState());
+        }
     }
 }
