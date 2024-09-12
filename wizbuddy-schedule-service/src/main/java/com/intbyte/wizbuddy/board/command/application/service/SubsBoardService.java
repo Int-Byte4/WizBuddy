@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.board.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardInfo;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
