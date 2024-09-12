@@ -45,6 +45,7 @@ public class CommentServiceImpl implements CommentService {
         if (comments == null || comments.isEmpty()) {
             throw new CommonException(StatusEnum.COMMENT_NOT_FOUND);
         }
+
         return comments.stream()
                 .map(comment -> modelMapper.map(comment, CommentDTO.class))
                 .collect(Collectors.toList());
