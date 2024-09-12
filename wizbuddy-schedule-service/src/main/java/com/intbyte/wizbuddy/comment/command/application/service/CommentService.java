@@ -17,6 +17,4 @@ public interface CommentService {
     ResponseDeleteCommentVO removeComment(CommentDTO deleteComment);
 
     ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment);
-
-    void validateAlreadyAdoptedComment(Comment comment);
 }

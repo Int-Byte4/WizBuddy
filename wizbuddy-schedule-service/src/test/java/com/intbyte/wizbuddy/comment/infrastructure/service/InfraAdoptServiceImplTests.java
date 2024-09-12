@@ -36,7 +36,7 @@ class InfraAdoptServiceImplTests {
 
 
     @Test
-    @DisplayName("댓글 채택해서 스케줄 수정")
+    @DisplayName("댓글_채택_후_스케줄_수정")
     @Transactional
     public void testScheduleService_update_schedule_SuccessTest() {
 

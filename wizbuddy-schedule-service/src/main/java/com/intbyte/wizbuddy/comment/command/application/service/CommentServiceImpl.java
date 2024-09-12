@@ -68,18 +68,17 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
-        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
-        comment.toAdopt();
-        infraAdoptService.handleAdoptProcess(comment);
-        commentRepository.save(comment);
-        return modelMapper.map(comment, ResponseAdoptCommentVO.class);
-    }
+        Comment comment = commentRepository.findById(adoptComment.getCommentCode())
+                .orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
 
-    @Override
-    public void validateAlreadyAdoptedComment(Comment comment) {
         Comment existingComment = commentRepository.findBySubsCodeAndCommentAdoptedState(comment.getSubsCode(), true);
         if (existingComment != null) {
             throw new CommonException(StatusEnum.ALREADY_ADOPTED);
         }
+        comment.toAdopt();
+        commentRepository.save(comment);
+        infraAdoptService.handleAdoptProcess(comment);
+        return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
+
 }
