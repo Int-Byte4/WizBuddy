@@ -17,6 +17,8 @@ public enum StatusEnum {
     TASK_PER_CHECKLIST_DUPLICATE(400, HttpStatus.BAD_REQUEST, "이미 체크리스트에 해당 업무가 등록되어 있습니다."),
     WORKING_DATE_AND_TIME_EQUALS(400, HttpStatus.BAD_REQUEST, "이미 같은 시간에 근무하는 직원입니다."),
     SCHEDULE_CODE_DUPLICATE(400, HttpStatus.BAD_REQUEST, "이미 등록된 스케줄입니다."),
+    INVALID_SUBS_BOARD_DATA(400, HttpStatus.NOT_FOUND, "잘못된 형식입니다. 옳바른 형식으로 제목과 내용을 입력해주세요."),
+
 
     RESTRICTED(403, HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
 
@@ -31,7 +33,8 @@ public enum StatusEnum {
     COMMENT_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 댓글이 존재하지 않습니다."),
     SCHEDULE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 스케줄이 존재하지 않습니다."),
     EMPLOYEE_CODE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 코드를 가진 직원이 존재하지 않습니다."),
-    INVALID_SUBS_BOARD_DATA(404, HttpStatus.NOT_FOUND, "잘못된 형식입니다. 옳바른 형식으로 제목과 내용을 입력해주세요."),
+    ALREADY_ADOPTED(404, HttpStatus.NOT_FOUND, "해당 대타 게시글이 존재하지 않습니다"),
+
 
     INTERNAL_SERVER_ERROR(500, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다");
     private final int statusCode;
