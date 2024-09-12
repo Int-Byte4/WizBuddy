@@ -8,7 +8,6 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
-import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +22,6 @@ import java.time.LocalDateTime;
 public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
-    private final InfraAdoptServiceImpl infraAdoptService;
 
     @Transactional
     @Override
@@ -39,6 +37,10 @@ public class CommentServiceImpl implements CommentService {
                 .employeeCode(comments.getEmployeeCode())
                 .build();
 
+        if(false) {
+            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
+        }
+
         commentRepository.save(comment);
         return modelMapper.map(comments, ResponseInsertCommentVO.class);
     }
@@ -46,7 +48,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseModifyCommentVO modifyComment(int commentCode, EditCommentInfo modifyCommentInfo) {
-        Comment modifycomment = commentRepository.findById(commentCode).orElseThrow(IllegalArgumentException::new);
+        Comment modifycomment = commentRepository.findById(commentCode).orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
         modifycomment.toUpdate(modifyCommentInfo);
         commentRepository.save(modifycomment);
         return modelMapper.map(modifycomment, ResponseModifyCommentVO.class);
@@ -55,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseDeleteCommentVO removeComment(CommentDTO deleteComment) {
-        Comment comment = commentRepository.findById(deleteComment.getCommentCode()).orElseThrow(IllegalArgumentException::new);
+        Comment comment = commentRepository.findById(deleteComment.getCommentCode()).orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
         comment.toDelete();
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseDeleteCommentVO.class);
@@ -64,8 +66,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     @Override
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
-        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(IllegalArgumentException::new);
-        infraAdoptService.handleAdoptProcess(comment);
+        Comment comment = commentRepository.findById(adoptComment.getCommentCode()).orElseThrow(() -> new CommonException(StatusEnum.COMMENT_NOT_FOUND));
         comment.toAdopt();
         commentRepository.save(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
