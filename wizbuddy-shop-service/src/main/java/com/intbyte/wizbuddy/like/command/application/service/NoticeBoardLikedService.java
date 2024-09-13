@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
+@Service("noticeBoardLikedCommandService")
 public class NoticeBoardLikedService {
 
     private final NoticeBoardLikedRepository noticeBoardLikedRepository;
