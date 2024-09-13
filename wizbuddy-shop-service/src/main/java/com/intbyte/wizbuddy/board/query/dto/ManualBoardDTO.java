@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@Builder
 public class ManualBoardDTO {
     private int manualCode;
     private String manualTitle;
