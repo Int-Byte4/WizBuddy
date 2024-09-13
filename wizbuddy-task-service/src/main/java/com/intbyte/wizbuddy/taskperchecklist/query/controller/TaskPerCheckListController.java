@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.taskperchecklist.query.controller;
 
-import com.intbyte.wizbuddy.taskperchecklist.query.dto.TaskPerCheckListDTO;
+import com.intbyte.wizbuddy.taskperchecklist.query.dto.TaskPerCheckListQueryDTO;
 import com.intbyte.wizbuddy.taskperchecklist.query.service.TaskPerCheckListServiceImpl;
 import com.intbyte.wizbuddy.taskperchecklist.query.vo.ResponseFindTaskPerCheckListVO;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +32,7 @@ public class TaskPerCheckListController {
             @PathVariable("checkListCode") int checkListCode,
             @RequestParam(value = "finished", required = false) Boolean finished) {
 
-        List<TaskPerCheckListDTO> dtoList;
+        List<TaskPerCheckListQueryDTO> dtoList;
 
         if(finished == null)
             dtoList = taskPerCheckListService.findAllTaskPerCheckListByCheckListCode(checkListCode);

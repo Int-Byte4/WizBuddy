@@ -7,7 +7,6 @@ import com.intbyte.wizbuddy.checklist.query.repository.CheckListMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,10 +22,8 @@ public class CheckListServiceImpl implements CheckListService {
         this.modelMapper = modelMapper;
     }
 
-
     // 1. 특정 체크리스트 조회
     @Override
-    @Transactional
     public CheckListQueryDTO findCheckListById(int checkListCode){
 
         CheckListQueryDTO checkList = checkListMapper.findCheckListById(checkListCode);
@@ -38,7 +35,6 @@ public class CheckListServiceImpl implements CheckListService {
 
     // 2. flag가 true 인 특정 매장의 모든 체크리스트 조회
     @Override
-    @Transactional
     public List<CheckListQueryDTO> findCheckListByIdByShop(int shopCode){
 
         return checkListMapper.findAllCheckListByShopId(shopCode);

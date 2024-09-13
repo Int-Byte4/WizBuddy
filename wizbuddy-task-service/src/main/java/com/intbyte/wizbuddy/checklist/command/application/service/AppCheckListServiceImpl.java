@@ -7,7 +7,6 @@ import com.intbyte.wizbuddy.checklist.command.domain.service.DomainCheckListServ
 import com.intbyte.wizbuddy.checklist.command.infrastructure.client.ShopServiceClient;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.service.InfraCheckListServiceImpl;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
-import com.intbyte.wizbuddy.checklist.query.service.CheckListService;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     private final DomainCheckListService domainCheckListService;
 
     @Autowired
-    public AppCheckListServiceImpl(CheckListRepository checkListRepository, ModelMapper modelMapper, InfraCheckListServiceImpl infraCheckListService, ShopServiceClient shopServiceClient, CheckListService checkListService, DomainCheckListService domainCheckListService) {
+    public AppCheckListServiceImpl(CheckListRepository checkListRepository, ModelMapper modelMapper, InfraCheckListServiceImpl infraCheckListService, ShopServiceClient shopServiceClient, DomainCheckListService domainCheckListService) {
         this.checkListRepository = checkListRepository;
         this.modelMapper = modelMapper;
         this.infraCheckListService = infraCheckListService;
@@ -80,8 +79,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void modifyCheckList(int checkListCode, CheckListDTO checkListDTO){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();
-        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
+        CheckList checkList = checkListRepository.findById(checkListCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND));
 
         checkList.modify(checkListDTO);
         checkListRepository.save(checkList);
@@ -93,8 +92,8 @@ public class AppCheckListServiceImpl implements AppCheckListService {
     @Transactional
     public void deleteCheckList(int checkListCode){
 
-        CheckList checkList = checkListRepository.findById(checkListCode).get();
-        if(checkList == null) throw new CommonException(StatusEnum.CHECKLIST_NOT_FOUND);
+        CheckList checkList = checkListRepository.findById(checkListCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND));
 
         CheckListDTO checkListDTO = modelMapper.map(checkList, CheckListDTO.class);
         checkList.modify(checkListDTO);

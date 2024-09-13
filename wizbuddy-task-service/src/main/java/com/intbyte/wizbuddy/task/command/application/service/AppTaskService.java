@@ -5,7 +5,7 @@ import com.intbyte.wizbuddy.task.command.application.dto.TaskDTO;
 public interface AppTaskService {
 
     // command 1. task 최초 추가
-    void insertTask(TaskDTO taskInfo);
+    void insertTask(TaskDTO taskDTO);
 
     // command 2. task 자체 수정
     void modifyTask(int taskCode, TaskDTO taskDTO);

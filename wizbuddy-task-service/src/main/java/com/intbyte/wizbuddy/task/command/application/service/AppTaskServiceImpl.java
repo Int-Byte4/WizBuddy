@@ -46,8 +46,8 @@ public class AppTaskServiceImpl implements AppTaskService {
     @Transactional
     public void modifyTask(int taskCode, TaskDTO taskDTO){
 
-        Task task = taskRepository.findById(taskCode).get();
-        if(task == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
+        Task task = taskRepository.findById(taskCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.TASK_NOT_FOUND));
 
         task.modify(taskDTO);
 
@@ -59,8 +59,8 @@ public class AppTaskServiceImpl implements AppTaskService {
     @Transactional
     public void deleteTask(int taskCode, TaskDTO taskDTO){
 
-        Task task = taskRepository.findById(taskCode).get();
-        if(task == null) throw new CommonException(StatusEnum.TASK_NOT_FOUND);
+        Task task = taskRepository.findById(taskCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.TASK_NOT_FOUND));
 
         task.modify(taskDTO);
 

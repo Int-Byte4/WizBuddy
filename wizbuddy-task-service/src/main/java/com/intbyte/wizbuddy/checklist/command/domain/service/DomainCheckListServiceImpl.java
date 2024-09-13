@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.checklist.command.domain.service;
 
 import com.intbyte.wizbuddy.checklist.command.domain.repository.CheckListRepository;
 import com.intbyte.wizbuddy.checklist.command.infrastructure.service.InfraCheckListService;
-import com.intbyte.wizbuddy.task.query.dto.TaskDTO;
+import com.intbyte.wizbuddy.task.query.dto.TaskQueryDTO;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,11 @@ public class DomainCheckListServiceImpl implements DomainCheckListService{
 
         // 체크리스트의 ShopCode 조회
         Integer shopCodeByCheckListCode = checkListRepository.findById(checkListCode)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid checklist code"))
+                .orElseThrow(() -> new CommonException(StatusEnum.CHECKLIST_NOT_FOUND))
                 .getShopCode();
 
         // Task의 ShopCode 조회
-        TaskDTO taskById = infraCheckListService.findShopCodeByTaskCode(taskCode);
+        TaskQueryDTO taskById = infraCheckListService.findShopCodeByTaskCode(taskCode);
         Integer shopCodeByTaskCode = taskById.getShopCode();
 
         // 유효성 검사
