@@ -8,7 +8,7 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
-import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptServiceImpl;
+import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptService;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +17,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("commandCommentService")
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
-    private final InfraAdoptServiceImpl infraAdoptService;
+    private final InfraAdoptService infraAdoptService;
 
     @Transactional
     @Override
@@ -39,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
                 .employeeCode(comments.getEmployeeCode())
                 .build();
 
-        if(false) {
+        if (false) {
             throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
         }
 
@@ -80,5 +82,15 @@ public class CommentServiceImpl implements CommentService {
         infraAdoptService.handleAdoptProcess(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
+
+
+    @Override
+    public List<CommentDTO> findCommentsBySubsCode(int subsCode) {
+        List<Comment> comments = commentRepository.findBySubsCode(subsCode);
+        return comments.stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .collect(Collectors.toList());
+    }
+
 
 }
