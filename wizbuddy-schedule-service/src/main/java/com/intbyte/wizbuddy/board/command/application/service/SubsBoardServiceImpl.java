@@ -5,6 +5,7 @@ import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
 import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.SubsBoardRepository;
 
+import com.intbyte.wizbuddy.board.infrastructure.event.SubsBoardDeletedEvent;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
@@ -12,6 +13,7 @@ import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
 
     private final ModelMapper modelMapper;
     private final SubsBoardRepository subsBoardRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     @Override
@@ -72,6 +75,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
                 .orElseThrow(() -> new CommonException(StatusEnum.BOARD_NOT_FOUND));
         subsBoard.toDelete();
         subsBoardRepository.save(subsBoard);
+        eventPublisher.publishEvent(new SubsBoardDeletedEvent(subsBoard.getSubsCode()));
         return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);
     }
 
