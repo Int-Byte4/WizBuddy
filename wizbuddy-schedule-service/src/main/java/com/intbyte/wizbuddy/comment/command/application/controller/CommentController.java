@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.comment.command.application.controller;
 
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.application.service.CommentService;
-import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentInfo;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.request.RequestAdoptCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.request.RequestDeleteCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.request.RequestInsertCommentVO;
@@ -36,8 +36,8 @@ public class CommentController {
     @PatchMapping("/update/{commentCode}")
     @Operation(summary = "댓글 수정")
     public ResponseEntity<ResponseModifyCommentVO> modifyComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestModifyCommentVO request) {
-        EditCommentInfo editCommentInfo = modelMapper.map(request, EditCommentInfo.class);
-        ResponseModifyCommentVO responseComment = commentService.modifyComment(commentCode, editCommentInfo);
+        EditCommentVO editCommentVO = modelMapper.map(request, EditCommentVO.class);
+        ResponseModifyCommentVO responseComment = commentService.modifyComment(commentCode, editCommentVO);
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 

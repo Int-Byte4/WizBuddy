@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository("commandSubsBoardRepository")
 public interface SubsBoardRepository extends JpaRepository<SubsBoard, Integer> {
+    SubsBoard findBySubsCode(int subsCode);
 
 }
 

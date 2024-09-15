@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EditCommentInfo {
+public class EditCommentVO {
     private String commentContent;
     private boolean commentAdoptedState;
     private LocalDateTime updatedAt;

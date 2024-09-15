@@ -3,8 +3,8 @@ package com.intbyte.wizbuddy.board.command.application.service;
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
 
 import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.SubsBoardRepository;
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -53,7 +53,7 @@ class SubsBoardServiceImplTests {
     void modifySubsBoardTest() {
 
         int subsCode = 1;
-        EditSubsBoardInfo updateSubsBoard = new EditSubsBoardInfo(
+        EditSubsBoardVO updateSubsBoard = new EditSubsBoardVO(
                 "9월 1일 내 생일 같이 보낼 직원분 구함", "제목이 곧 내용ㄱㄱ",
                 LocalDateTime.now(), 2);
         subsBoardService.modifySubsBoards(subsCode, updateSubsBoard);

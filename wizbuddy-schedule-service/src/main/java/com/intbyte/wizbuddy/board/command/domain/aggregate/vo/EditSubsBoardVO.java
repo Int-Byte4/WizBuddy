@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.domain;
+package com.intbyte.wizbuddy.board.command.domain.aggregate.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EditSubsBoardInfo {
+public class EditSubsBoardVO {
     private String subsTitle;
     private String subsContent;
     private LocalDateTime updatedAt;

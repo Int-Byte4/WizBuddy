@@ -2,7 +2,7 @@ package com.intbyte.wizbuddy.comment.command.application.service;
 
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
-import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentInfo;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,7 +50,7 @@ class CommentServiceImplTests {
     public void modifyCommentTest() {
 
         int commentCode = 1;
-        EditCommentInfo updateComment = new EditCommentInfo( "사장님 ㅋㅋ 저할거랑께요?",
+        EditCommentVO updateComment = new EditCommentVO( "사장님 ㅋㅋ 저할거랑께요?",
                 false, LocalDateTime.now());
         commentService.modifyComment(commentCode, updateComment);
         Comment newcomment = commentRepository.findById(commentCode).orElse(null);

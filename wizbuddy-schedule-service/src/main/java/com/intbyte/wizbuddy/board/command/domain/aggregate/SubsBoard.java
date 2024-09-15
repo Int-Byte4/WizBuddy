@@ -1,6 +1,6 @@
 package com.intbyte.wizbuddy.board.command.domain.aggregate;
 
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
+import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -44,11 +44,11 @@ public class SubsBoard {
     private int shopCode;
 
 
-    public void toUpdate(@Valid EditSubsBoardInfo editSubsBoardInfo) {
-        this.subsTitle = editSubsBoardInfo.getSubsTitle();
-        this.subsContent = editSubsBoardInfo.getSubsContent();
+    public void toUpdate(@Valid EditSubsBoardVO editSubsBoardVO) {
+        this.subsTitle = editSubsBoardVO.getSubsTitle();
+        this.subsContent = editSubsBoardVO.getSubsContent();
         this.updatedAt = LocalDateTime.now();
-        this.employeeWorkingPartCode = editSubsBoardInfo.getEmployeeWorkingPartCode();
+        this.employeeWorkingPartCode = editSubsBoardVO.getEmployeeWorkingPartCode();
     }
 
     public void toDelete() {

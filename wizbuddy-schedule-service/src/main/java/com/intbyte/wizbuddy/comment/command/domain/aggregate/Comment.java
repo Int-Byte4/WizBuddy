@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.comment.command.domain.aggregate;
 
 
-import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentInfo;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.*;
@@ -47,10 +47,10 @@ public class Comment {
     @Column(name = "employee_code")
     private String employeeCode;
 
-    public void toUpdate(@Valid EditCommentInfo editCommentInfo) {
-        this.commentContent = editCommentInfo.getCommentContent();
-        this.commentAdoptedState = editCommentInfo.isCommentAdoptedState();
-        this.updatedAt = editCommentInfo.getUpdatedAt();
+    public void toUpdate(@Valid EditCommentVO editCommentVO) {
+        this.commentContent = editCommentVO.getCommentContent();
+        this.commentAdoptedState = editCommentVO.isCommentAdoptedState();
+        this.updatedAt = editCommentVO.getUpdatedAt();
     }
 
     public void toDelete() {

@@ -1,8 +1,6 @@
 package com.intbyte.wizbuddy.board.query.domain.aggregate;
 
-import com.intbyte.wizbuddy.board.domain.EditSubsBoardInfo;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.*;
 
 import java.time.LocalDateTime;
