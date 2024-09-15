@@ -14,7 +14,7 @@
         SELECT
                employee_code
           FROM manualboardliked
-         WHERE manual_code = # { manualCode }
+         WHERE manual_code = #{ manualCode }
     </select>
     <select id="findLikesByManualCode" resultMap="manualBoardLikedResultMap">
         SELECT
