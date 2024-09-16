@@ -11,7 +11,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Slf4j
 //필기. 해당 패키지에서 에러 발생시 작동하는 Handler
-@RestControllerAdvice(basePackages = "com.springcooler.sgma.user")
+@RestControllerAdvice(basePackages = "com.intbyte.wizbuddy.user")
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {NoHandlerFoundException.class, HttpRequestMethodNotSupportedException.class})
