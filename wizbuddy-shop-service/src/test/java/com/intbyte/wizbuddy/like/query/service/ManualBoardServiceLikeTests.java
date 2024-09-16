@@ -9,6 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 public class ManualBoardServiceLikeTests {
 
@@ -23,7 +25,9 @@ public class ManualBoardServiceLikeTests {
 
         List<ManualBoardLikedDTO> manualBoardLikedList = manualBoardLikedService.findLikesByManualCode(manualCode);
 
-        manualBoardLikedList.forEach(System.out::println);
+        int result = (int)(manualBoardLikedList.stream().count());
+
+        assertThat(result).isEqualTo(1);
     }
 
 }
