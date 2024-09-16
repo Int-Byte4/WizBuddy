@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@RestController("manualBoardLikedQueryController")
 @RequestMapping("/manualboardlike")
 public class ManualBoardLikeController {
 

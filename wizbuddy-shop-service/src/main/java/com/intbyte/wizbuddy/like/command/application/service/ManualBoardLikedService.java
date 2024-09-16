@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
-@Service
+@Service("manualBoardLikedCommandService")
 public class ManualBoardLikedService {
 
     private final ManualBoardLikedRepository manualBoardLikedRepository;
