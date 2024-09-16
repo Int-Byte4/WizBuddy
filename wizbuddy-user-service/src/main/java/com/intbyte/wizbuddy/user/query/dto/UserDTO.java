@@ -2,6 +2,8 @@ package com.intbyte.wizbuddy.user.query.dto;
 
 import lombok.*;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Builder
 public class UserDTO {

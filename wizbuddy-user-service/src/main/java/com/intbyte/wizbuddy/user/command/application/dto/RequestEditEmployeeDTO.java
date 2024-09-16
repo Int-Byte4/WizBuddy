@@ -1,12 +1,12 @@
 package com.intbyte.wizbuddy.user.command.application.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Builder
 public class RequestEditEmployeeDTO {
