@@ -4,7 +4,6 @@ import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployeeDTO;
 import com.intbyte.wizbuddy.user.command.domain.repository.EmployeeRepository;
-import com.intbyte.wizbuddy.user.query.repository.EmployeeMapper;
 import com.intbyte.wizbuddy.user.command.domain.aggregate.Employee;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +16,10 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final EmployeeMapper employeeMapper;
 
     @Transactional
     public void modifyEmployee(String employeeCode, RequestEditEmployeeDTO employeeDTO, String authEmployeeCode) {
-        Employee employee = employeeMapper.getEmployee(employeeCode);
-
-        if (employee == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
-        if (!employeeCode.equals(authEmployeeCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        Employee employee = getEmployee(employeeCode, authEmployeeCode);
 
         employee.modify(employeeDTO);
         employeeRepository.save(employee);
@@ -32,12 +27,17 @@ public class EmployeeService {
 
     @Transactional
     public void deleteEmployee(String employeeCode, String authEmployeeCode) {
-        Employee employee = employeeMapper.getEmployee(employeeCode);
-
-        if (employee == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
-        if (!employeeCode.equals(authEmployeeCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        Employee employee = getEmployee(employeeCode, authEmployeeCode);
 
         employee.removeRequest(employee);
         employeeRepository.save(employee);
+    }
+
+    private Employee getEmployee(String employeeCode, String authEmployeeCode) {
+        Employee employee = employeeRepository.findById(employeeCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
+
+        if (!employeeCode.equals(authEmployeeCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        return employee;
     }
 }
