@@ -31,22 +31,6 @@
            AND e.employer_flag = 1
     </select>
 
-    <select id="getEmployerByEmail" resultMap="employerResultMap" parameterType="string">
-        SELECT
-        e.employer_code
-        , e.employer_name
-        , e.employer_email
-        , e.employer_password
-        , e.employer_phone
-        , e.employer_flag
-        , e.employer_black_state
-        , e.created_at
-        , e.updated_at
-        FROM employer e
-        WHERE e.employer_email = #{ employerEmail }
-        AND e.employer_flag = true
-    </select>
-
     <select id="getAllEmployer" resultMap="employerResultMap">
         SELECT
         e.employer_code

@@ -17,14 +17,10 @@ import org.springframework.stereotype.Service;
 public class EmployerService {
 
     private final EmployerRepository employerRepository;
-    private final EmployerMapper employerMapper;
 
     @Transactional
     public void modifyEmployer(String employerCode, RequestEditEmployerDTO employerDTO, String authEmployerCode) {
-        Employer employer = employerMapper.getEmployer(employerCode);
-
-        if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
-        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        Employer employer = getEmployer(employerCode, authEmployerCode);
 
         employer.modify(employerDTO);
         employerRepository.save(employer);
@@ -32,12 +28,17 @@ public class EmployerService {
 
     @Transactional
     public void deleteEmployer(String employerCode, String authEmployerCode) {
-        Employer employer = employerMapper.getEmployer(employerCode);
-
-        if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
-        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        Employer employer = getEmployer(employerCode, authEmployerCode);
 
         employer.removeRequest(employer);
         employerRepository.save(employer);
+    }
+
+    private Employer getEmployer(String employerCode, String authEmployerCode) {
+        Employer employer = employerRepository.findById(employerCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
+
+        if (!employerCode.equals(authEmployerCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        return employer;
     }
 }

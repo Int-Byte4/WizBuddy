@@ -38,7 +38,7 @@
            AND e.employee_flag = true
     </select>
 
-    <select id="getEmployeeByEmail" resultMap="employeeResultMap" parameterType="string">
+    <select id="getAllEmployee" resultMap="employeeResultMap">
         SELECT
         e.employee_code
         , e.employee_name
@@ -53,8 +53,7 @@
         , e.created_at
         , e.updated_at
         FROM employee e
-        WHERE e.employee_email = #{ employeeEmail }
-        AND e.employee_flag = 1
+        WHERE e.employee_flag = true
     </select>
 
 </mapper>

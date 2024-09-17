@@ -9,7 +9,5 @@ import java.util.List;
 public interface EmployerMapper {
     Employer getEmployer(String employerCode);
 
-//    Employer getEmployerByEmail(String employerEmail);
-
     List<Employer> getAllEmployer();
 }
