@@ -1,10 +1,12 @@
 package com.intbyte.wizbuddy.user.query.service;
 
+import com.intbyte.wizbuddy.user.command.domain.aggregate.UserEntity;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.UserTypeEnum;
 import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import com.intbyte.wizbuddy.user.query.repository.EmployerMapper;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.Employer;
-import com.intbyte.wizbuddy.user.query.dto.EmployerDTO;
+import com.intbyte.wizbuddy.user.query.repository.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -19,27 +21,26 @@ import java.util.List;
 public class EmployerService {
 
     private final EmployerMapper employerMapper;
+    private final UserMapper userMapper;
     private final ModelMapper mapper;
 
-    public EmployerDTO getByEmployerCode(String employerCode) {
-        Employer employer = employerMapper.getEmployer(employerCode);
+    public List<UserDTO> findAllEmployerUser() {
+        List<UserDTO> employerQueryDTOList = new ArrayList<>();
 
-        if (employer == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
-
-        EmployerDTO employerQueryDTO = mapper.map(employer, EmployerDTO.class);
-
-        return employerQueryDTO;
-    }
-
-    public List<EmployerDTO> findAllEmployer() {
-        List<EmployerDTO> employerQueryDTOList = new ArrayList<>();
-
-        for (Employer employer : employerMapper.getAllEmployer()) {
-            EmployerDTO employerQueryDTO = mapper.map(employer, EmployerDTO.class);
+        for (UserEntity employer : employerMapper.getAllEmployer()) {
+            UserDTO employerQueryDTO = mapper.map(employer, UserDTO.class);
 
             employerQueryDTOList.add(employerQueryDTO);
         }
 
         return employerQueryDTOList;
+    }
+
+    public UserDTO getByEmployerCode(String userCode) {
+        UserDTO userDTO = userMapper.getEmployer(userCode, UserTypeEnum.EMPLOYER.name());
+
+        if (userDTO == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
+
+        return userDTO;
     }
 }

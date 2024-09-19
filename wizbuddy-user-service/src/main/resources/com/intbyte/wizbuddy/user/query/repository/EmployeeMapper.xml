@@ -3,57 +3,21 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.user.query.repository.EmployeeMapper">
-    <resultMap id="employeeResultMap" type="com.intbyte.wizbuddy.user.command.domain.aggregate.Employee">
-        <id property="employeeCode" column="employee_code"/>
-        <result property="employeeName" column="employee_name"/>
-        <result property="employeeEmail" column="employee_email"/>
-        <result property="employeePassword" column="employee_password"/>
-        <result property="employeePhone" column="employee_phone"/>
-        <result property="employeeFlag" column="employee_flag"/>
+    <resultMap id="employeeResultMap" type="com.intbyte.wizbuddy.user.command.domain.aggregate.EmployeeAdditional">
+        <id property="userCode" column="employee_code"/>
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
         <result property="employeeWage" column="employee_wage"/>
         <result property="employeeHealthDate" column="employee_health_date"/>
-        <result property="employeeBlackState" column="employee_black_state"/>
-        <result property="createdAt" column="created_at"/>
-        <result property="updatedAt" column="updated_at"/>
     </resultMap>
-
-    <select id="getEmployee" resultMap="employeeResultMap" parameterType="string">
-        SELECT
-               e.employee_code
-             , e.employee_name
-             , e.employee_email
-             , e.employee_password
-             , e.employee_phone
-             , e.employee_flag
-             , e.latitude
-             , e.longitude
-             , e.employee_health_date
-             , e.employee_black_state
-             , e.created_at
-             , e.updated_at
-          FROM employee e
-         WHERE e.employee_code = #{ employeeCode }
-           AND e.employee_flag = true
-    </select>
 
     <select id="getAllEmployee" resultMap="employeeResultMap">
         SELECT
-        e.employee_code
-        , e.employee_name
-        , e.employee_email
-        , e.employee_password
-        , e.employee_phone
-        , e.employee_flag
-        , e.latitude
-        , e.longitude
-        , e.employee_health_date
-        , e.employee_black_state
-        , e.created_at
-        , e.updated_at
-        FROM employee e
-        WHERE e.employee_flag = true
+               employee_code
+             , latitude
+             , longitude
+             , employee_wage
+             , employee_health_date
+          FROM employeeAdditional
     </select>
-
 </mapper>
