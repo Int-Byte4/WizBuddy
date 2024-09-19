@@ -1,49 +1,60 @@
 package com.intbyte.wizbuddy.user.command.application.service;
 
-import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployeeDTO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.Employee;
-import com.intbyte.wizbuddy.user.command.domain.repository.EmployeeRepository;
+import com.intbyte.wizbuddy.user.command.application.dto.RequestEditUserDTO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.UserEntity;
+import com.intbyte.wizbuddy.user.command.domain.repository.UserRepository;
+import com.intbyte.wizbuddy.user.query.dto.UserDTO;
+import com.intbyte.wizbuddy.user.query.service.EmployeeService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 class EmployeeServiceTests {
-    @Autowired
-    private EmployeeRepository employeeRepository;
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @DisplayName("직원 정보 수정 성공")
     @Transactional
     void updateEmployerSuccess() {
         //given
-        List<Employee> employees = employeeRepository.findAll();
-        String employeeCode = employees.get(0).getEmployeeCode();
+        List<Map<String, Object>> employeeList = employeeService.findAllEmployeeUser();
 
-        RequestEditEmployeeDTO requestEditEmployeeDTO = RequestEditEmployeeDTO.builder()
-                .employeePassword("test")
-                .employeePhone("010-9999-9998")
-                .employeeHealthDate(LocalDate.now())
+        Map<String, Object> employee = employeeList.get(0);
+        Map<String, Object> employeeData = (Map<String, Object>) employee.get("employeeData");
+        UserDTO employeeUser = (UserDTO) employeeData.get("user");
+
+        String employeeUserCode = employeeUser.getUserCode();
+
+        RequestEditUserDTO requestEditUserDTO = RequestEditUserDTO.builder()
+                .userPassword("test")
+                .userPhone("010-9999-9998")
                 .updatedAt(LocalDateTime.now())
                 .build();
 
         //when
-        employeeService.modifyEmployee(employeeCode, requestEditEmployeeDTO, employeeCode);
+        userService.modifyUser(employeeUserCode, requestEditUserDTO, employeeUserCode);
 
         //then
-        List<Employee> newEmployees = employeeRepository.findAll();
-        assertEquals(newEmployees.get(0).getEmployeePhone(), requestEditEmployeeDTO.getEmployeePhone());
+        List<UserEntity> newEmployees = userRepository.findAll();
+        assertEquals(newEmployees.get(0).getUserPhone(), requestEditUserDTO.getUserPhone());
     }
 
     @Test
@@ -51,14 +62,19 @@ class EmployeeServiceTests {
     @Transactional
     void testDeleteEmployeeSuccess() {
         //given
-        List<Employee> employees = employeeRepository.findAll();
-        String employeeCode = employees.get(0).getEmployeeCode();
+        List<Map<String, Object>> employeeList = employeeService.findAllEmployeeUser();
+
+        Map<String, Object> employee = employeeList.get(0);
+        Map<String, Object> employeeData = (Map<String, Object>) employee.get("employeeData");
+        UserDTO employeeUser = (UserDTO) employeeData.get("user");
+
+        String employeeUserCode = employeeUser.getUserCode();
 
         //when
-        employeeService.deleteEmployee(employeeCode, employeeCode);
+        userService.deleteUser(employeeUserCode, employeeUserCode);
 
         //then
-        List<Employee> newEmployees = employeeRepository.findAll();
-        assertEquals(false, newEmployees.get(0).isEmployeeFlag());
+        List<UserEntity> newEmployees = userRepository.findAll();
+        assertFalse(newEmployees.get(0).isUserFlag());
     }
 }

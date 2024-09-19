@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.intbyte.wizbuddy.user.query.repository.UserMapper">
+    <resultMap id="userResultMap" type="com.intbyte.wizbuddy.user.query.dto.UserDTO">
+        <id property="userCode" column="user_code"/>
+        <result property="userType" column="user_type"/>
+        <result property="userName" column="user_name"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="userPassword" column="user_password"/>
+        <result property="userPhone" column="user_phone"/>
+        <result property="userFlag" column="user_flag"/>
+        <result property="userBlackState" column="user_black_state"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="getEmployer" resultMap="userResultMap" parameterType="string">
+        SELECT
+               user_code
+             , user_type
+             , user_name
+             , user_email
+             , user_password
+             , user_phone
+             , user_flag
+             , user_black_state
+             , created_at
+             , updated_at
+          FROM users
+         WHERE user_code = #{ userCode }
+           AND user_flag = true
+           AND user_type = #{ userType }
+    </select>
+
+    <select id="getEmployee" resultMap="userResultMap" parameterType="string">
+        SELECT
+        user_code
+        , user_type
+        , user_name
+        , user_email
+        , user_password
+        , user_phone
+        , user_flag
+        , user_black_state
+        , created_at
+        , updated_at
+        FROM users
+        WHERE user_code = #{ userCode }
+        AND user_flag = true
+        AND user_type = #{ userType }
+    </select>
+</mapper>
