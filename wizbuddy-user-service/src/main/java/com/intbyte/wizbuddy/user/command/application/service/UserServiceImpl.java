@@ -1,20 +1,16 @@
 package com.intbyte.wizbuddy.user.command.application.service;
 
+import com.intbyte.wizbuddy.user.command.application.dto.RequestEditUserDTO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.EmployeeAdditional;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.UserTypeEnum;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.RequestRegisterUserVO;
+import com.intbyte.wizbuddy.user.command.domain.repository.EmployeeAdditionalRepository;
 import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.Employee;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.Employer;
 import com.intbyte.wizbuddy.user.command.domain.aggregate.UserEntity;
-import com.intbyte.wizbuddy.user.command.domain.repository.EmployeeRepository;
-import com.intbyte.wizbuddy.user.command.domain.repository.EmployerRepository;
 import com.intbyte.wizbuddy.user.command.domain.repository.UserRepository;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.RequestRegisterEmployeeVO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.RequestRegisterEmployerVO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.RequestSignInUserVO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertEmployeeVO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertEmployerVO;
-import com.intbyte.wizbuddy.user.query.dto.EmployeeDTO;
-import com.intbyte.wizbuddy.user.query.dto.EmployerDTO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertUserVO;
+import com.intbyte.wizbuddy.user.query.dto.EmployeeAdditionalDTO;
 import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,64 +34,73 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final EmployerRepository employerRepository;
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeAdditionalRepository employeeAdditionalRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
 
     @Transactional
     @Override
-    public ResponseInsertEmployerVO signInEmployer(RequestSignInUserVO requestSignInUserVO, RequestRegisterEmployerVO requestRegisterEmployerVO) {
+    public ResponseInsertUserVO signInUser(RequestRegisterUserVO requestRegisterUserVO) {
         String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String uuid = UUID.randomUUID().toString();
         String customUserCode = currentDate + uuid.substring(8);
 
-        if (userRepository.findByUserEmail(requestSignInUserVO.getUserEmail()) != null) throw new CommonException(StatusEnum.EMAIL_DUPLICATE);
+        if (userRepository.findByUserEmail(requestRegisterUserVO.getUserEmail()) != null) throw new CommonException(StatusEnum.EMAIL_DUPLICATE);
 
-        requestSignInUserVO.setUserPassword(bCryptPasswordEncoder.encode(requestSignInUserVO.getUserPassword()));
-        requestRegisterEmployerVO.setEmployerPassword(bCryptPasswordEncoder.encode(requestRegisterEmployerVO.getEmployerPassword()));
+        requestRegisterUserVO.setUserPassword(bCryptPasswordEncoder.encode(requestRegisterUserVO.getUserPassword()));
 
-        if (requestSignInUserVO.getUserType().equals("EMPLOYER")) requestSignInUserVO.setUserType("Employer");
-
-        UserDTO userDTO = userDTOBuild(requestSignInUserVO);
+        UserDTO userDTO = userDTOBuild(requestRegisterUserVO);
         userDTO.setUserCode(customUserCode);
-        EmployerDTO employerQueryDTO = employerDTOBuild(userDTO, requestRegisterEmployerVO);
 
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
-        Employer employer = modelMapper.map(employerQueryDTO, Employer.class);
 
-        userRepository.save(userEntity);
-        employerRepository.save(employer);
+        if (requestRegisterUserVO.getUserType().equals(UserTypeEnum.EMPLOYER)) {
+            userRepository.save(userEntity);
+        }
+        else {
+            userRepository.save(userEntity);
 
-        return new ResponseInsertEmployerVO(userDTO, employerQueryDTO);
+            EmployeeAdditionalDTO employeeAdditionalDTO = EmployeeAdditionalDTO.builder()
+                    .userCode(userEntity.getUserCode())
+                    .latitude(null)
+                    .longitude(null)
+                    .employeeHealthDate(null)
+                    .employeeWage(0)
+                    .build();
+            EmployeeAdditional employeeAdditional = modelMapper.map(employeeAdditionalDTO, EmployeeAdditional.class);
+
+            employeeAdditionalRepository.save(employeeAdditional);
+        }
+        return new ResponseInsertUserVO(userDTO);
     }
 
     @Transactional
     @Override
-    public ResponseInsertEmployeeVO signInEmployee(RequestSignInUserVO requestSignInUserVO, RequestRegisterEmployeeVO requestRegisterEmployeeVO) {
-        String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-        String uuid = UUID.randomUUID().toString();
-        String customUserCode = currentDate + uuid.substring(8);
+    public void modifyUser(String userCode, RequestEditUserDTO userDTO, String authUserCode) {
+        UserEntity user = validUser(userCode, authUserCode);
 
-        if (userRepository.findByUserEmail(requestSignInUserVO.getUserEmail()) != null) throw new CommonException(StatusEnum.EMAIL_DUPLICATE);
-
-        requestSignInUserVO.setUserPassword(bCryptPasswordEncoder.encode(requestSignInUserVO.getUserPassword()));
-        requestRegisterEmployeeVO.setEmployeePassword(bCryptPasswordEncoder.encode(requestRegisterEmployeeVO.getEmployeePassword()));
-
-        if (requestSignInUserVO.getUserType().equals("EMPLOYEE")) requestSignInUserVO.setUserType("Employee");
-
-        UserDTO userDTO = userDTOBuild(requestSignInUserVO);
-        userDTO.setUserCode(customUserCode);
-        EmployeeDTO employeeDTO = employeeDTOBuild(userDTO, requestRegisterEmployeeVO);
-
-        UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
-        Employee employee = modelMapper.map(employeeDTO, Employee.class);
-
-        userRepository.save(userEntity);
-        employeeRepository.save(employee);
-
-        return new ResponseInsertEmployeeVO(userDTO, employeeDTO);
+        user.modify(userDTO);
+        userRepository.save(user);
     }
+
+    @Transactional
+    @Override
+    public void deleteUser(String userCode, String authUserCode) {
+        UserEntity user = validUser(userCode, authUserCode);
+
+        user.removeRequest(user);
+        userRepository.save(user);
+    }
+
+    @Override
+    public UserEntity validUser(String userCode, String authUserCode) {
+        UserEntity user = userRepository.findById(userCode)
+                .orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
+
+        if (!userCode.equals(authUserCode)) throw new CommonException(StatusEnum.RESTRICTED);
+        return user;
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
@@ -106,9 +111,9 @@ public class UserServiceImpl implements UserService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
         switch (loginUserEntity.getUserType()) {
-            case "Employee" -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
-            case "Employer" -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
-            case "Admin" -> {
+            case EMPLOYEE -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+            case EMPLOYER -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
+            case ADMIN -> {
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
                 grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
@@ -118,42 +123,17 @@ public class UserServiceImpl implements UserService {
         return new User(loginUserEntity.getUserEmail(), loginUserEntity.getUserPassword(), true, true, true, true, grantedAuthorities);
     }
 
-    private UserDTO userDTOBuild(RequestSignInUserVO requestSignInUserVO) {
+    private UserDTO userDTOBuild(RequestRegisterUserVO requestSignInUserVO) {
         return UserDTO.builder()
                 .userType(requestSignInUserVO.getUserType())
+                .userName(requestSignInUserVO.getUserName())
                 .userEmail(requestSignInUserVO.getUserEmail())
                 .userPassword(requestSignInUserVO.getUserPassword())
-                .build();
-    }
-
-    private EmployerDTO employerDTOBuild(UserDTO userDTO, RequestRegisterEmployerVO requestRegisterEmployerVO) {
-        return EmployerDTO.builder()
-                .employerCode(userDTO.getUserCode())
-                .employerName(requestRegisterEmployerVO.getEmployerName())
-                .employerEmail(userDTO.getUserEmail())
-                .employerPassword(userDTO.getUserPassword())
-                .employerPhone(requestRegisterEmployerVO.getEmployerPhone())
-                .employerFlag(true)
-                .employerBlackState(false)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
-    }
-
-    private EmployeeDTO employeeDTOBuild(UserDTO userDTO, RequestRegisterEmployeeVO requestRegisterEmployeeVO) {
-        return EmployeeDTO.builder()
-                .employeeCode(userDTO.getUserCode())
-                .employeeName(requestRegisterEmployeeVO.getEmployeeName())
-                .employeeEmail(userDTO.getUserEmail())
-                .employeePassword(userDTO.getUserPassword())
-                .employeePhone(requestRegisterEmployeeVO.getEmployeePhone())
-                .employeeFlag(true)
-                .latitude(null)
-                .longitude(null)
-                .employeeHealthDate(null)
-                .employeeBlackState(false)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .userPhone(requestSignInUserVO.getUserPhone())
+                .userFlag(requestSignInUserVO.isUserFlag())
+                .userBlackState(requestSignInUserVO.isUserBlackState())
+                .createdAt(requestSignInUserVO.getCreatedAt())
+                .updatedAt(requestSignInUserVO.getUpdatedAt())
                 .build();
     }
 }

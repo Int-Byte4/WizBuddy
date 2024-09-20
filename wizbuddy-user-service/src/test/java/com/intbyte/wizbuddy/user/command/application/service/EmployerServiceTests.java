@@ -1,8 +1,9 @@
 package com.intbyte.wizbuddy.user.command.application.service;
 
-import com.intbyte.wizbuddy.user.command.application.dto.RequestEditEmployerDTO;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.Employer;
-import com.intbyte.wizbuddy.user.command.domain.repository.EmployerRepository;
+import com.intbyte.wizbuddy.user.command.application.dto.RequestEditUserDTO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.UserEntity;
+import com.intbyte.wizbuddy.user.command.domain.repository.UserRepository;
+import com.intbyte.wizbuddy.user.query.service.EmployerService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,36 +13,38 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest
 class EmployerServiceTests {
-    @Autowired
-    private EmployerRepository employerRepository;
 
     @Autowired
-    private EmployerService employerService;
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     @DisplayName("사장 정보 수정 성공")
     @Transactional
     void updateEmployerSuccess() {
         //given
-        List<Employer> employers = employerRepository.findAll();
-        String employerCode = employers.get(0).getEmployerCode();
+        List<UserEntity> employers = userRepository.findAll();
+        String employerCode = employers.get(0).getUserCode();
 
-        RequestEditEmployerDTO requestEditEmployerDTO = RequestEditEmployerDTO.builder()
-                .employerPassword("test")
-                .employerPhone("010-9999-9998")
+        RequestEditUserDTO requestEditUserDTO = RequestEditUserDTO.builder()
+                .userPassword("test")
+                .userPhone("010-9999-9998")
                 .updatedAt(LocalDateTime.now())
                 .build();
 
         //when
-        employerService.modifyEmployer(employerCode, requestEditEmployerDTO, employerCode);
+        userService.modifyUser(employerCode, requestEditUserDTO, employerCode);
 
         //then
-        List<Employer> newEmployers = employerRepository.findAll();
-        assertEquals(newEmployers.get(0).getEmployerPhone(), requestEditEmployerDTO.getEmployerPhone());
+        List<UserEntity> newEmployers = userRepository.findAll();
+        assertEquals(newEmployers.get(0).getUserPhone(), requestEditUserDTO.getUserPhone());
     }
 
     @Test
@@ -49,14 +52,14 @@ class EmployerServiceTests {
     @Transactional
     void testDeleteEmployerSuccess() {
         //given
-        List<Employer> employers = employerRepository.findAll();
-        String employerCode = employers.get(0).getEmployerCode();
+        List<UserEntity> employers = userRepository.findAll();
+        String employerCode = employers.get(0).getUserCode();
 
         //when
-        employerService.deleteEmployer(employerCode, employerCode);
+        userService.deleteUser(employerCode, employerCode);
 
         //then
-        List<Employer> newEmployers = employerRepository.findAll();
-        assertEquals(false, newEmployers.get(0).isEmployerFlag());
+        List<UserEntity> newEmployees = userRepository.findAll();
+        assertFalse(newEmployees.get(0).isUserFlag());
     }
 }

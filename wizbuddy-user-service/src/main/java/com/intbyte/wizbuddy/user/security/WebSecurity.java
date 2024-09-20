@@ -38,6 +38,8 @@ public class WebSecurity {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.csrf((csrf) -> csrf.disable());
+        http.formLogin((auth) -> auth.disable());
+        http.httpBasic((auth) -> auth.disable());
 
         /* 로그인 시 추가할 authenticationManager */
         AuthenticationManagerBuilder authenticationManagerBuilder =
@@ -78,7 +80,7 @@ public class WebSecurity {
 //                                .requestMatchers(new AntPathRequestMatcher("/schedule/regist", "POST")).hasRole("EMPLOYER")
 //                                .requestMatchers(new AntPathRequestMatcher("/schedule/regist/employee", "POST")).hasRole("EMPLOYER")
 //                                .requestMatchers(new AntPathRequestMatcher("/schedule/modify/*", "PATCH")).hasRole("EMPLOYER")
-////                                .requestMatchers(new AntPathRequestMatcher("/schedule/modify", "PATCH")).hasRole("EMPLOYER")
+//                                .requestMatchers(new AntPathRequestMatcher("/schedule/modify", "PATCH")).hasRole("EMPLOYER")
 //                                .requestMatchers(new AntPathRequestMatcher("/schedule/delete/*", "DELETE")).hasRole("EMPLOYER")
 //                                .requestMatchers(new AntPathRequestMatcher("/subsboards", "GET")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/subsboards/*", "GET")).permitAll()
