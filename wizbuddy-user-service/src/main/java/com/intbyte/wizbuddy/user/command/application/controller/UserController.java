@@ -1,6 +1,12 @@
 package com.intbyte.wizbuddy.user.command.application.controller;
 
+import com.intbyte.wizbuddy.user.command.application.service.EmailVerificationService;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.EmailVerificationVO;
+import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.ResponseEmailMessageVO;
 import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.*;
+import com.intbyte.wizbuddy.user.common.exception.CommonException;
+import com.intbyte.wizbuddy.user.common.exception.ResponseDTO;
+import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.user.security.JwtUtil;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditUserDTO;
 import com.intbyte.wizbuddy.user.command.application.service.UserService;
@@ -12,6 +18,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("userCommandController")
@@ -22,6 +29,10 @@ public class UserController {
     private Environment env;
     private ModelMapper modelMapper;
     private UserService userService;
+
+    @Autowired
+    private EmailVerificationService emailVerificationService;
+
 
     @Autowired
     public UserController(JwtUtil jwtUtil, Environment env, ModelMapper modelMapper, UserService userService) {
@@ -62,4 +73,39 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+
+
+
+
+
+    //설명. 이메일 전송 API (회원가입전 실행)
+    @PostMapping("/verification-email")
+    public ResponseDTO<?> sendVerificationEmail(@RequestBody @Validated EmailVerificationVO request) {
+        try {
+            emailVerificationService.sendVerificationEmail(request.getEmail());
+
+            ResponseEmailMessageVO responseEmailMessageVO =new ResponseEmailMessageVO();
+            responseEmailMessageVO.setMessage("인증 코드가 이메일로 전송되었습니다.");
+            return ResponseDTO.ok(responseEmailMessageVO);
+        } catch (Exception e) {
+            return ResponseDTO.fail(new CommonException(StatusEnum.INTERNAL_SERVER_ERROR));
+        }
+    }
+
+    //설명. 이메일 인증번호 검증 API (회원가입전 실행)
+    @PostMapping("/verification-email/confirmation")
+    public ResponseDTO<?> verifyEmail(@RequestBody @Validated EmailVerificationVO request) {
+        boolean isVerified = emailVerificationService.verifyCode(request.getEmail(), request.getCode());
+
+        ResponseEmailMessageVO responseEmailMessageVO =new ResponseEmailMessageVO();
+        responseEmailMessageVO.setMessage("이메일 인증이 완료되었습니다.");
+        if (isVerified) {
+            return ResponseDTO.ok(responseEmailMessageVO);
+        } else {
+            return ResponseDTO.fail(new CommonException(StatusEnum.INVALID_VERIFICATION_CODE));
+        }
+    }
+
+
 }
