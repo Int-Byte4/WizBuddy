@@ -15,6 +15,7 @@ import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -37,10 +38,20 @@ public class UserServiceImpl implements UserService {
     private final EmployeeAdditionalRepository employeeAdditionalRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ModelMapper modelMapper;
+    private StringRedisTemplate stringRedisTemplate;  // StringRedisTemplate 사용
 
     @Transactional
     @Override
     public ResponseInsertUserVO signInUser(RequestRegisterUserVO requestRegisterUserVO) {
+
+        // Redis에서 이메일 인증 여부 확인
+        String emailVerificationStatus = stringRedisTemplate.opsForValue().get(requestRegisterUserVO.getUserEmail());
+
+        if (!"True".equals(emailVerificationStatus)) {
+            log.error("이메일 인증이 완료되지 않았습니다: {}", requestRegisterUserVO.getUserEmail());
+            throw new CommonException(StatusEnum.EMAIL_VERIFICATION_REQUIRED); // 이메일 인증이 필요하다는 커스텀 예외 던지기
+        }
+
         String currentDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         String uuid = UUID.randomUUID().toString();
         String customUserCode = currentDate + uuid.substring(8);
