@@ -59,6 +59,14 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // bootstrap.yml을 인지시키기 위한 dependency
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation("org.springframework.cloud:spring-cloud-starter-bootstrap")
+
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 dependencyManagement {
