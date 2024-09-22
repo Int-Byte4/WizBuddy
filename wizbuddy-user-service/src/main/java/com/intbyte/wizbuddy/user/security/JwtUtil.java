@@ -1,6 +1,7 @@
 package com.intbyte.wizbuddy.user.security;
 
-import com.intbyte.wizbuddy.user.command.application.service.UserService;
+import com.intbyte.wizbuddy.user.query.dto.KakaoUserDTO;
+import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -10,31 +11,31 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Component
 public class JwtUtil {
 
-    private final Key key;
-    private final UserService userService;
+    private final Key secretKey;
+    private long expirationTime;
 
-    public JwtUtil(@Value("${token.secret}") String secretKey, UserService userService) {
+    public JwtUtil(@Value("${token.secret}") String secretKey, @Value("${token.expiration_time}") long expirationTime) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
-        this.userService = userService;
+        this.secretKey = Keys.hmacShaKeyFor(keyBytes);
+        this.expirationTime = expirationTime;
     }
 
     /* 설명. Token 검증(Bearer 토큰이 넘어왔고, 우리 사이트의 secret key로 만들어 졌는가, 만료되었는지와 내용이 비어있진 않은지) */
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("Invalid JWT Token {}", e);
@@ -53,7 +54,6 @@ public class JwtUtil {
     public Authentication getAuthentication(String token) {
 
         /* 설명. 토큰을 들고 왔던 들고 오지 않았던(로그인 시) 동일하게 security가 관리 할 UserDetails 타입을 정의 */
-        UserDetails userDetails = userService.loadUserByUsername(this.getUserId(token));
 
         /* 설명. 토큰에서 claim들 추출 */
         Claims claims = parseClaims(token);
@@ -73,12 +73,15 @@ public class JwtUtil {
                             .collect(Collectors.toList());
         }
 
-        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
+        org.springframework.security.core.userdetails.User principal =
+                new org.springframework.security.core.userdetails.User(claims.getSubject(), "", authorities);
+
+        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
     }
 
     /* 설명. Token에서 Claims 추출 */
     public Claims parseClaims(String token) {
-        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        return Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
     }
 
     /* 설명. Token에서 사용자의 id(subject 클레임) 추출 */
@@ -86,4 +89,29 @@ public class JwtUtil {
         return parseClaims(token).getSubject();
     }
 
+    public String generateToken(UserDTO userDTO) {
+        Claims claims = Jwts.claims().setSubject(userDTO.getUserCode());
+        claims.put("email", userDTO.getUserEmail());
+        claims.put("name", userDTO.getUserName());
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+    }
+
+    public String kakaoGenerateToken(KakaoUserDTO userDTO) {
+        Claims claims = Jwts.claims().setSubject(userDTO.getUserCode());
+        claims.put("email", userDTO.getUserEmail());
+        claims.put("name", userDTO.getUserName());
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
+                .signWith(SignatureAlgorithm.HS512, secretKey)
+                .compact();
+    }
 }
