@@ -7,11 +7,13 @@ import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.request.*;
 import com.intbyte.wizbuddy.user.common.exception.CommonException;
 import com.intbyte.wizbuddy.user.common.exception.ResponseDTO;
 import com.intbyte.wizbuddy.user.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.user.query.dto.KakaoUserDTO;
 import com.intbyte.wizbuddy.user.security.JwtUtil;
 import com.intbyte.wizbuddy.user.command.application.dto.RequestEditUserDTO;
 import com.intbyte.wizbuddy.user.command.application.service.UserService;
 import com.intbyte.wizbuddy.user.command.domain.aggregate.vo.response.ResponseInsertUserVO;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,8 +23,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController("userCommandController")
 @RequestMapping("users")
+@Slf4j
 public class UserController {
 
     private JwtUtil jwtUtil;
@@ -74,11 +80,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-
-
-
-
-
     //설명. 이메일 전송 API (회원가입전 실행)
     @PostMapping("/verification-email")
     public ResponseDTO<?> sendVerificationEmail(@RequestBody @Validated EmailVerificationVO request) {
@@ -107,5 +108,21 @@ public class UserController {
         }
     }
 
+    @GetMapping("/oauth2/kakao")
+    public ResponseEntity<Map<String, Object>> handleKakaoLogin(@RequestParam String code) {
 
+        log.info("넘어온 카카오 코드 값 확인: {}", code);
+
+        KakaoUserDTO userDTO = userService.processKakaoUser(code);
+
+        log.info("결과적으로 user에 담긴 값: {}", userDTO);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("userCode", userDTO.getUserCode());
+        response.put("email", userDTO.getUserEmail());
+        response.put("name", userDTO.getUserName());
+        response.put("jwtToken", userDTO.getJwtToken());
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

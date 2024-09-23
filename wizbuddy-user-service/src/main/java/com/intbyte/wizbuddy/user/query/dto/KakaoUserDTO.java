@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.user.query.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.intbyte.wizbuddy.user.command.domain.aggregate.UserTypeEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -11,12 +10,12 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @Builder
 @ToString
-public class UserDTO {
+public class KakaoUserDTO {
     @JsonProperty("user_code")
     private String userCode;
 
-    @JsonProperty("user_type")
-    private UserTypeEnum userType;
+//    @JsonProperty("user_type")
+//    private UserTypeEnum userType;
 
     @JsonProperty("user_name")
     private String userName;
@@ -27,8 +26,8 @@ public class UserDTO {
     @JsonProperty("user_password")
     private String userPassword;
 
-    @JsonProperty("user_phone")
-    private String userPhone;
+//    @JsonProperty("user_phone")
+//    private String userPhone;
 
     @JsonProperty("user_flag")
     private boolean userFlag;

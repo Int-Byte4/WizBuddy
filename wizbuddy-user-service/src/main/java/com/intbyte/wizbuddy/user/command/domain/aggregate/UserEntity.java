@@ -20,32 +20,35 @@ public class UserEntity {
     private String userCode;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_type", nullable = false)
+    @Column(name = "user_type")
     private UserTypeEnum userType;
 
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable = false)
     private String userEmail;
 
-    @Column(name = "user_password")
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
-    @Column(nullable = false, name = "user_phone")
+    @Column(name = "user_phone")
     private String userPhone;
 
-    @Column(nullable = false, name = "user_flag")
+    @Column(name = "user_flag")
     private boolean userFlag;
 
-    @Column(nullable = false, name = "user_black_state")
+    @Column(name = "user_black_state")
     private boolean userBlackState;
 
-    @Column(nullable = false, name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false, name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @Column(unique = true)
+    private String kakaoId;
 
     public void modify(RequestEditUserDTO userDTO) {
         this.userPassword = userDTO.getUserPassword();

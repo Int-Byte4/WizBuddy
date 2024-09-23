@@ -38,8 +38,6 @@ public class WebSecurity {
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
         http.csrf((csrf) -> csrf.disable());
-        http.formLogin((auth) -> auth.disable());
-        http.httpBasic((auth) -> auth.disable());
 
         /* 로그인 시 추가할 authenticationManager */
         AuthenticationManagerBuilder authenticationManagerBuilder =
