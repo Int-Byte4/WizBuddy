@@ -1,7 +1,7 @@
 package com.intbyte.wizbuddy.shop.command.infrastructure.client;
 
 import com.intbyte.wizbuddy.config.FeignClientConfig;
-import com.intbyte.wizbuddy.shop.command.infrastructure.dto.EmployerDTO;
+import com.intbyte.wizbuddy.shop.command.infrastructure.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,5 +11,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface UserServiceClient {
 
     @GetMapping("employer/{employerCode}")
-    ResponseEntity<EmployerDTO> getEmployer(@PathVariable("employerCode") String employerCode);
+    ResponseEntity<UserDTO> getEmployer(@PathVariable("employerCode") String employerCode);
 }

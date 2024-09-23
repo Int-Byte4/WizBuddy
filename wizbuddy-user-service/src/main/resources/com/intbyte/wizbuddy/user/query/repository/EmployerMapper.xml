@@ -18,16 +18,17 @@
 
     <select id="getAllEmployer" resultMap="employerResultMap">
         SELECT
-        e.employer_code
-        , e.employer_name
-        , e.employer_email
-        , e.employer_password
-        , e.employer_phone
-        , e.employer_flag
-        , e.employer_black_state
-        , e.created_at
-        , e.updated_at
-        FROM user
-        WHERE e.employer_flag = true
+               user_code
+             , user_name
+             , user_email
+             , user_password
+             , user_phone
+             , user_flag
+             , user_black_state
+             , created_at
+             , updated_at
+             , kakao_id
+          FROM users
+         WHERE e.employer_flag = true
     </select>
 </mapper>

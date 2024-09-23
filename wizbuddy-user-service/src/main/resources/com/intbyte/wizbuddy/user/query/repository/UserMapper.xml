@@ -14,6 +14,7 @@
         <result property="userBlackState" column="user_black_state"/>
         <result property="createdAt" column="created_at"/>
         <result property="updatedAt" column="updated_at"/>
+        <result property="kakaoId" column="kakao_id"/>
     </resultMap>
 
     <select id="getEmployer" resultMap="userResultMap" parameterType="string">
@@ -28,6 +29,7 @@
              , user_black_state
              , created_at
              , updated_at
+             , kakao_id
           FROM users
          WHERE user_code = #{ userCode }
            AND user_flag = true
@@ -36,19 +38,20 @@
 
     <select id="getEmployee" resultMap="userResultMap" parameterType="string">
         SELECT
-        user_code
-        , user_type
-        , user_name
-        , user_email
-        , user_password
-        , user_phone
-        , user_flag
-        , user_black_state
-        , created_at
-        , updated_at
-        FROM users
-        WHERE user_code = #{ userCode }
-        AND user_flag = true
-        AND user_type = #{ userType }
+               user_code
+             , user_type
+             , user_name
+             , user_email
+             , user_password
+             , user_phone
+             , user_flag
+             , user_black_state
+             , created_at
+             , updated_at
+             , kakao_id
+          FROM users
+         WHERE user_code = #{ userCode }
+           AND user_flag = true
+           AND user_type = #{ userType }
     </select>
 </mapper>

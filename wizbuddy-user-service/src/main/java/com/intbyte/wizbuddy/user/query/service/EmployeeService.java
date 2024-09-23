@@ -28,7 +28,7 @@ public class EmployeeService {
     public List<Map<String, Object>> findAllEmployeeUser() {
         List<Map<String, Object>> employeeUserList = new ArrayList<>();
 
-        for (EmployeeAdditional employeeAdditional : employeeMapper.getAllEmployee()) {
+        for (EmployeeAdditional employeeAdditional : employeeMapper.getAllEmployeeDetail()) {
             Map<String, Object> combinedData = new HashMap<>();
             Map<String, Object> employeeUserMap = new HashMap<>();
 

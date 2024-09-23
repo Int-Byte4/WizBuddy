@@ -11,7 +11,17 @@
         <result property="employeeHealthDate" column="employee_health_date"/>
     </resultMap>
 
-    <select id="getAllEmployee" resultMap="employeeResultMap">
+    <select id="getAllEmployeeDetail" resultMap="employeeResultMap">
+        SELECT
+               employee_code
+             , latitude
+             , longitude
+             , employee_wage
+             , employee_health_date
+          FROM employeeAdditional
+    </select>
+
+    <select id="getEmployeeDetail" resultMap="employeeResultMap" parameterType="string">
         SELECT
                employee_code
              , latitude
