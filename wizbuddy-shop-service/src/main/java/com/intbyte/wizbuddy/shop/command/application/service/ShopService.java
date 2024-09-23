@@ -3,9 +3,9 @@ package com.intbyte.wizbuddy.shop.command.application.service;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
-import com.intbyte.wizbuddy.shop.command.infrastructure.dto.EmployerDTO;
 import com.intbyte.wizbuddy.shop.command.infrastructure.client.UserServiceClient;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.response.ResponseRegisterShopVO;
+import com.intbyte.wizbuddy.shop.command.infrastructure.dto.UserDTO;
 import com.intbyte.wizbuddy.shop.query.repository.ShopMapper;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
@@ -35,7 +35,7 @@ public class ShopService {
     @Transactional
     public ResponseRegisterShopVO registerShop(String employerCode, RequestRegisterShopDTO shopInfo) {
         if (shopMapper.findByBusinessNum(shopInfo.getBusinessNum()) != null) throw new CommonException(StatusEnum.BUSINESS_NUM_DUPLICATE);
-        EmployerDTO employerDTO = userServiceClient.getEmployer(employerCode).getBody();
+        UserDTO employerDTO = userServiceClient.getEmployer(employerCode).getBody();
 
         Shop shop = Shop.builder()
                 .shopName(shopInfo.getShopName())
@@ -45,7 +45,7 @@ public class ShopService {
                 .businessNum(shopInfo.getBusinessNum())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .employerCode(employerDTO.getEmployerCode())
+                .employerCode(employerDTO.getUserCode())
                 .build();
 
         shopRepository.save(shop);

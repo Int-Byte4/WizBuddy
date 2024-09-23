@@ -1,23 +1,22 @@
-package com.intbyte.wizbuddy.employeepershop.command.infrastructure.dto;
+package com.intbyte.wizbuddy.user.command.infrastructure.shop.vo.request;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter @Setter
-@Builder
-@ToString
-public class ShopDTO {
+@Getter
+public class RequestRegisterShopVO {
     private int shopCode;
     private String shopName;
     private String shopLocation;
-    private Boolean shopFlag;
+    private boolean shopFlag;
     private LocalTime shopOpenTime;
     private String businessNum;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private String employerCode;
 }

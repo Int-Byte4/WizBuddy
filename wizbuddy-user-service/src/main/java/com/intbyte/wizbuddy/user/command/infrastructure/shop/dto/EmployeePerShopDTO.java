@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeepershop.query.dto;
+package com.intbyte.wizbuddy.user.command.infrastructure.shop.dto;
 
 import lombok.*;
 

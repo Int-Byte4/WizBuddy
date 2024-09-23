@@ -15,13 +15,9 @@ import java.util.List;
 @RequestMapping("shop")
 public class ShopController {
 
-    private Environment env;
-    private ModelMapper modelMapper;
-    private ShopService shopService;
+    private final ShopService shopService;
 
-    public ShopController(Environment env, ModelMapper modelMapper, ShopService shopService) {
-        this.env = env;
-        this.modelMapper = modelMapper;
+    public ShopController(ShopService shopService) {
         this.shopService = shopService;
     }
 

@@ -1,14 +1,15 @@
 package com.intbyte.wizbuddy.employeepershop.command.infrastructure.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Builder
+@ToString
 public class EmployeeDTO {
     private String employeeCode;
     private String employeeName;
