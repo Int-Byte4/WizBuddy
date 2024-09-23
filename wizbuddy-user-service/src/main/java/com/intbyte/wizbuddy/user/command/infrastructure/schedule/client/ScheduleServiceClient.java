@@ -1,5 +1,5 @@
-//package com.intbyte.wizbuddy.user.command.infrastructure.client;
-//
+package com.intbyte.wizbuddy.user.command.infrastructure.schedule.client;
+
 //import com.intbyte.wizbuddy.board.vo.request.RequestDeleteSubsBoardVO;
 //import com.intbyte.wizbuddy.board.vo.request.RequestInsertSubsBoardVO;
 //import com.intbyte.wizbuddy.board.vo.request.RequestModifySubsBoardVO;
@@ -12,26 +12,24 @@
 //import com.intbyte.wizbuddy.comment.vo.request.RequestInsertCommentVO;
 //import com.intbyte.wizbuddy.comment.vo.request.RequestModifyCommentVO;
 //import com.intbyte.wizbuddy.comment.vo.response.*;
-//import com.intbyte.wizbuddy.user.config.FeignClientConfig;
-//import com.intbyte.wizbuddy.schedule.dto.WeeklyScheduleDTO;
-//import com.intbyte.wizbuddy.schedule.info.EditScheduleInfo;
-//import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleByCommentVO;
-//import com.intbyte.wizbuddy.schedule.vo.request.RequestModifyScheduleVO;
-//import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistEmployeeWorkingPartVO;
-//import com.intbyte.wizbuddy.schedule.vo.request.RequestRegistScheduleVO;
-//import com.intbyte.wizbuddy.schedule.vo.response.ResponseFindEmployeeWorkingPartVO;
-//import com.intbyte.wizbuddy.schedule.vo.response.ResponseModifyScheduleByCommentVO;
-//import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistEmployeeWorkingPartVO;
-//import com.intbyte.wizbuddy.schedule.vo.response.ResponseRegistWeeklyScheduleVO;
-//import io.swagger.v3.oas.annotations.Operation;
-//import org.springframework.cloud.openfeign.FeignClient;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//
-//@FeignClient(name="intbyte-schedule-service", configuration = FeignClientConfig.class)
-//public interface ScheduleServiceClient {
-//
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.dto.WeeklyScheduleDTO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.request.RequestModifyScheduleVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.request.RequestRegistEmployeeWorkingPartVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.request.RequestRegistWeeklyScheduleVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.response.ResponseFindEmployeeWorkingPartVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.response.ResponseModifyScheduleVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.response.ResponseRegistEmployeeVO;
+import com.intbyte.wizbuddy.user.command.infrastructure.schedule.vo.response.ResponseRegistWeeklyScheduleVO;
+import com.intbyte.wizbuddy.user.config.FeignClientConfig;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@FeignClient(name="intbyte-schedule-service", configuration = FeignClientConfig.class)
+public interface ScheduleServiceClient {
+
 //    @GetMapping("/schedule-service/subsboards")
 //    @Operation(summary = "대타게시글 전체 조회")
 //    List<ResponseFindSubsBoardVO> getAllSubsBoards();
@@ -94,44 +92,44 @@
 //    @Operation(summary = "댓글 채택")
 //    ResponseAdoptCommentVO adoptComment(@PathVariable("commentCode") int commentCode,
 //                                        @RequestBody RequestAdoptCommentVO request);
-//
-//    @GetMapping("/schedule-service/schedule/schedules")
-//    @Operation(summary = "전체 스케줄 조회")
-//    List<WeeklyScheduleDTO> findAllSchedules();
-//
-//    @GetMapping("/schedule-service/schedule/schedules/{scheduleCode}")
-//    @Operation(summary = "한주의 스케줄 상세 조회")
-//    List<ResponseFindEmployeeWorkingPartVO> findSchedule(
-//            @PathVariable("scheduleCode") int scheduleCode);
-//
-//    @GetMapping("/schedule-service/schedule/schedules/users/{employeeCode}")
-//    @Operation(summary = "직원 별 한주의 스케줄 상세 조회")
-//    List<ResponseFindEmployeeWorkingPartVO> findScheduleByEmployeeCode(
-//            @PathVariable("employeeCode") String employeeCode);
-//
-//    @PostMapping("/schedule-service/schedule/regist")
-//    @Operation(summary = "한주의 스케줄 - 스케줄 등록")
-//    ResponseRegistWeeklyScheduleVO registSchedule(
-//            @RequestBody RequestRegistScheduleVO request);
-//
-//    @PostMapping("/schedule-service/schedule/regist/employee")
-//    @Operation(summary = "한주의 스케줄 - 직원 등록")
-//    ResponseRegistEmployeeWorkingPartVO registSchedulePerEmployee(
-//            @RequestBody RequestRegistEmployeeWorkingPartVO request);
-//
-//    @PatchMapping("/schedule-service/schedule/modify/{workingPartCode}")
-//    @Operation(summary = "스케줄 수정")
-//    EditScheduleInfo editSchedule(
-//            @PathVariable("workingPartCode") int workingPartCode,
-//            @RequestBody RequestModifyScheduleVO request);
-//
+
+    @GetMapping("/schedule-service/schedule/schedules")
+    @Operation(summary = "전체 스케줄 조회")
+    List<WeeklyScheduleDTO> findAllSchedules();
+
+    @GetMapping("/schedule-service/schedule/schedules/{scheduleCode}")
+    @Operation(summary = "한주의 스케줄 상세 조회")
+    List<ResponseFindEmployeeWorkingPartVO> findSchedule(
+            @PathVariable("scheduleCode") int scheduleCode);
+
+    @GetMapping("/schedule-service/schedule/schedules/users/{employeeCode}")
+    @Operation(summary = "직원 별 한주의 스케줄 상세 조회")
+    List<ResponseFindEmployeeWorkingPartVO> findScheduleByEmployeeCode(
+            @PathVariable("employeeCode") String employeeCode);
+
+    @PostMapping("/schedule-service/schedule/regist")
+    @Operation(summary = "한주의 스케줄 - 스케줄 등록")
+    ResponseRegistWeeklyScheduleVO registSchedule(
+            @RequestBody RequestRegistWeeklyScheduleVO request);
+
+    @PostMapping("/schedule-service/schedule/regist/employee")
+    @Operation(summary = "한주의 스케줄 - 직원 등록")
+    ResponseRegistEmployeeVO registSchedulePerEmployee(
+            @RequestBody RequestRegistEmployeeWorkingPartVO request);
+
+    @PatchMapping("/schedule-service/schedule/modify/{workingPartCode}")
+    @Operation(summary = "스케줄 수정")
+    ResponseModifyScheduleVO editSchedule(
+            @PathVariable("workingPartCode") int workingPartCode,
+            @RequestBody RequestModifyScheduleVO request);
+
 //    @PatchMapping("/schedule-service/schedule/modify")
 //    @Operation(summary = "댓글 채택으로 스케줄 수정")
 //    ResponseModifyScheduleByCommentVO editScheduleByComment(
 //            @RequestBody RequestModifyScheduleByCommentVO request);
-//
-//    @DeleteMapping("/schedule-service/schedule/delete/{workingPartCode}")
-//    @Operation(summary = "스케줄 삭제")
-//    void deleteSchedule(@PathVariable("workingPartCode") int workingPartCode);
-//
-//}
+
+    @DeleteMapping("/schedule-service/schedule/delete/{workingPartCode}")
+    @Operation(summary = "스케줄 삭제")
+    void deleteSchedule(@PathVariable("workingPartCode") int workingPartCode);
+
+}
