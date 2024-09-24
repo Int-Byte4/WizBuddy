@@ -5,7 +5,6 @@ import com.intbyte.wizbuddy.like.command.domain.entity.NoticeBoardLiked;
 import com.intbyte.wizbuddy.like.query.dto.NoticeBoardLikedDTO;
 import com.intbyte.wizbuddy.like.query.repository.NoticeBoardLikedMapper;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
