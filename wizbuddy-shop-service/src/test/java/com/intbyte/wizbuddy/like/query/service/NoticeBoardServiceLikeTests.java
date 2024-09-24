@@ -1,7 +1,5 @@
 package com.intbyte.wizbuddy.like.query.service;
 
-import com.intbyte.wizbuddy.client.dto.UserDTO;
-import com.intbyte.wizbuddy.like.query.dto.NoticeBoardLikedDTO;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
