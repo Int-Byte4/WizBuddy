@@ -14,6 +14,8 @@ import com.intbyte.wizbuddy.comment.command.infrastructure.dto.EmployeePerShopDT
 import com.intbyte.wizbuddy.comment.command.infrastructure.service.InfraCommentService;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
+import com.intbyte.wizbuddy.infrastructure.dto.EmployeeDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
