@@ -18,7 +18,7 @@ public class NoticeBoardLikedService {
     private final ModelMapper mapper;
     private final UserServiceClient userServiceClient;
 
-    public NoticeBoardLikedService(NoticeBoardLikedMapper noticeBoardLikedMapper, ModelMapper mapper, @Qualifier("com.intbyte.wizbuddy.infrastructure.client.UserServiceClient") UserServiceClient userServiceClient) {
+    public NoticeBoardLikedService(NoticeBoardLikedMapper noticeBoardLikedMapper, ModelMapper mapper, UserServiceClient userServiceClient) {
         this.noticeBoardLikedMapper = noticeBoardLikedMapper;
         this.mapper = mapper;
         this.userServiceClient = userServiceClient;
