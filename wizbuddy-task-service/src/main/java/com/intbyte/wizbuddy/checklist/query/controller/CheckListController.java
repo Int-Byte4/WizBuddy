@@ -9,12 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController("checkListQueryController")
+@RequestMapping("/checklist")
 public class CheckListController {
 
     private final CheckListService checkListService;
@@ -25,7 +27,7 @@ public class CheckListController {
     }
 
     // 1. 특정 checkList 조회
-    @GetMapping("/checklist/{checkListcode}")
+    @GetMapping("/{checkListcode}")
     @Operation(summary = "특정 체크리스트 조회")
     public ResponseEntity<ResponseFindCheckListVO> getCheckListById(
             @PathVariable("checkListcode") int checkListCode) {
@@ -45,7 +47,7 @@ public class CheckListController {
     }
 
     // 2. 특정 매장의 flag가 ture인 모든 checklist 조회
-    @GetMapping("/shop/{shopcode}/checklist")
+    @GetMapping("/shop/{shopcode}")
     @Operation(summary = "특정 매장의 모든 체크리스트 조회")
     public ResponseEntity<List<ResponseFindCheckListVO>> getAllCheckListByShop(
             @PathVariable("shopcode") int shopCode){

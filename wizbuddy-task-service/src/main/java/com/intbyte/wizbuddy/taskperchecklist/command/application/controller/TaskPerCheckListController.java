@@ -8,12 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("TaskPerCheckListCommandController")
+@RequestMapping("/taskperchecklist")
 public class TaskPerCheckListController {
 
     private final AppTaskPerCheckListServiceImpl taskPerCheckListService;
@@ -26,7 +24,7 @@ public class TaskPerCheckListController {
     }
 
     // command 1. 특정 매장의 특정 체크리스트에 특정 업무 완료표시(체크리스트, 업무, 직원)(수정)
-    @PutMapping("/taskperchecklist/checklist/{checkListCode}/task/{taskCode}")
+    @PutMapping("/checklist/{checkListCode}/task/{taskCode}")
     @Operation(summary = "특정 체크리스트의 특정 업무 완료 표시")
     public ResponseEntity<String> modifyTaskPerCheckList(
             @PathVariable("checkListCode") int checkListCode,
