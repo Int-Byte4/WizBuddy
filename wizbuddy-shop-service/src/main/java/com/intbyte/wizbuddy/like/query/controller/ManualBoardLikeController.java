@@ -1,7 +1,5 @@
 package com.intbyte.wizbuddy.like.query.controller;
 
-
-import com.intbyte.wizbuddy.like.query.dto.ManualBoardLikedDTO;
 import com.intbyte.wizbuddy.like.query.service.ManualBoardLikedService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.like.query.service;
 
+import com.intbyte.wizbuddy.client.dto.UserDTO;
 import com.intbyte.wizbuddy.like.query.dto.NoticeBoardLikedDTO;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +25,7 @@ public class NoticeBoardServiceLikeTests {
     public void testFindNoticeBoardLike() {
         int noticeCode = 1;
 
-        List<NoticeBoardLikedDTO> noticeBoardLikedList = noticeBoardLikedService.findLikesByNoticeCode(noticeCode);
+        List<Map<String, Object>> noticeBoardLikedList = noticeBoardLikedService.findLikesByNoticeCode(noticeCode);
 
         int result = (int)(noticeBoardLikedList.stream().count());
 
