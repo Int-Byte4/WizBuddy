@@ -7,15 +7,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController("TaskQueryController")
+@RequestMapping("/task")
 public class TaskController {
     // 1. 모든 조회 담당
 
@@ -27,7 +25,7 @@ public class TaskController {
     }
 
     // query 1. 특정 task 조회
-    @GetMapping("/task/{taskcode}")
+    @GetMapping("/{taskcode}")
     @Operation(summary = "특정 업무 조회")
     public ResponseEntity<ResponseFindTaskVO> getTask(@PathVariable("taskcode") int taskCode){
 
@@ -48,7 +46,7 @@ public class TaskController {
 
 
     // query 2, 3, 4. fixed에 따른 모든 task 조회
-    @GetMapping("/task/{shopcode}") // url 수정 필요하면 수정하기
+    @GetMapping("/shop/{shopcode}") // url 수정 필요하면 수정하기
     @Operation(summary = "특정 매장의 고정 상태에 따른 모든 업무 조회")
     public ResponseEntity<List<ResponseFindTaskVO>> getAllTaskByShopByFixedState(
             @PathVariable("shopcode") int shopCode,

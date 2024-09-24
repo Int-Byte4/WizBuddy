@@ -48,10 +48,18 @@ public class WebSecurity {
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 
         http.authorizeHttpRequests((authz) ->
-                        authz
-                                .requestMatchers(new AntPathRequestMatcher("/users/**", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/users/**", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/users/**", "PATCH")).permitAll()
+                                authz
+                                        .requestMatchers(new AntPathRequestMatcher("/users/**", "POST")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/users/**", "GET")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/users/**", "PATCH")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/checklist/**", "GET")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/checklist/**", "POST")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/checklist/**", "DELETE")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/checklist/**", "PUT")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/task/**", "GET")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/task/**", "POST")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/**", "GET")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/taskperchecklist/**", "PUT")).permitAll()
 
 //                                .requestMatchers(new AntPathRequestMatcher("/users/employee", "POST")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/users/employer", "POST")).permitAll()
@@ -122,9 +130,9 @@ public class WebSecurity {
 //                                .requestMatchers(new AntPathRequestMatcher("/noticeboard/shop/*", "GET")).permitAll()
 //                                .requestMatchers(new AntPathRequestMatcher("/noticeboard/register", "POST")).hasRole("EMPLOYER")
 //                                .requestMatchers(new AntPathRequestMatcher("/noticeboard/update/*", "PATCH")).hasRole("EMPLOYER")
-                                .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
-                                .anyRequest().authenticated()
+                                        .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                                        .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                                        .anyRequest().authenticated()
                 )
                 /* UserDetails를 상속받는 Service 계층 + BCrypt 암호화 */
                 .authenticationManager(authenticationManager)
@@ -143,3 +151,4 @@ public class WebSecurity {
     }
 
 }
+//// 시큐리티
