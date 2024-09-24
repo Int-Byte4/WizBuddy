@@ -17,7 +17,9 @@ public enum StatusEnum {
     TASK_PER_CHECKLIST_DUPLICATE(400, HttpStatus.BAD_REQUEST, "이미 체크리스트에 해당 업무가 등록되어 있습니다."),
     WORKING_DATE_AND_TIME_EQUALS(400, HttpStatus.BAD_REQUEST, "이미 같은 시간에 근무하는 직원입니다."),
     SCHEDULE_CODE_DUPLICATE(400, HttpStatus.BAD_REQUEST, "이미 등록된 스케줄입니다."),
-    INVALID_SUBS_BOARD_DATA(400, HttpStatus.NOT_FOUND, "잘못된 형식입니다. 옳바른 형식으로 제목과 내용을 입력해주세요."),
+    INVALID_SUBS_BOARD_DATA(400, HttpStatus.BAD_REQUEST, "잘못된 형식입니다. 옳바른 형식으로 제목과 내용을 입력해주세요."),
+    INVALID_EMPLOYEE_WORKING_PART_DATA(400, HttpStatus.BAD_REQUEST, "유효하지 않은 근무 파트 입니다."),
+
 
 
     RESTRICTED(403, HttpStatus.UNAUTHORIZED, "권한이 없습니다."),

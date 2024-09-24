@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.board.infrastructure.event;
+package com.intbyte.wizbuddy.board.command.infrastructure.event;
 
 public class SubsBoardDeletedEvent {
     private final int subsCode;

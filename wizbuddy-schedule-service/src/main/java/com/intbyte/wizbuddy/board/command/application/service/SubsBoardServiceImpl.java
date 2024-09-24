@@ -5,15 +5,20 @@ import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
 import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import com.intbyte.wizbuddy.board.command.domain.repository.SubsBoardRepository;
 
-import com.intbyte.wizbuddy.board.infrastructure.event.SubsBoardDeletedEvent;
+import com.intbyte.wizbuddy.board.command.infrastructure.client.ShopServiceClient;
+import com.intbyte.wizbuddy.board.command.infrastructure.dto.ShopDTO;
+import com.intbyte.wizbuddy.board.command.infrastructure.event.SubsBoardDeletedEvent;
+import com.intbyte.wizbuddy.board.command.infrastructure.service.InfraSubsBoardService;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +31,8 @@ public class SubsBoardServiceImpl implements SubsBoardService {
     private final ModelMapper modelMapper;
     private final SubsBoardRepository subsBoardRepository;
     private final ApplicationEventPublisher eventPublisher;
+    private final ShopServiceClient shopServiceClient;
+    private final InfraSubsBoardService infraSubsBoardService;
 
     @Transactional
     @Override
@@ -36,20 +43,35 @@ public class SubsBoardServiceImpl implements SubsBoardService {
             throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
         }
 
+        ResponseEntity<ShopDTO> response = shopServiceClient.getShop(subsBoardDTO.getShopCode());
+        if (response == null || response.getBody() == null) {
+            throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
+        }
+
+        ShopDTO shopDTO = response.getBody();
+
+        LocalDateTime now = LocalDateTime.now();
+
+        EmployeeWorkingPart employeeWorkingPart = infraSubsBoardService.getEmployeeWorkingPartCode(subsBoardDTO.getEmployeeWorkingPartCode());
+        if (employeeWorkingPart == null || employeeWorkingPart.getWorkingPartCode() == 0) {
+            throw new CommonException(StatusEnum.INVALID_EMPLOYEE_WORKING_PART_DATA);
+        }
+
         SubsBoard subsBoard = SubsBoard.builder()
                 .subsTitle(subsBoardDTO.getSubsTitle())
                 .subsContent(subsBoardDTO.getSubsContent())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(now)
+                .updatedAt(now)
                 .subsFlag(true)
-                .employeeWorkingPartCode(subsBoardDTO.getEmployeeWorkingPartCode())
-                .shopCode(subsBoardDTO.getShopCode())
+                .employeeWorkingPartCode(employeeWorkingPart.getWorkingPartCode())
+                .shopCode(shopDTO.getShopCode())
                 .build();
 
         subsBoardRepository.save(subsBoard);
 
         return modelMapper.map(subsBoard, ResponseInsertSubsBoardVO.class);
     }
+
 
     @Transactional
     @Override
