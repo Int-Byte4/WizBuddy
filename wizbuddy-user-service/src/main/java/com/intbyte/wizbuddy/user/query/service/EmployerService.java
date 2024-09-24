@@ -27,7 +27,7 @@ public class EmployerService {
     public List<UserDTO> findAllEmployerUser() {
         List<UserDTO> employerQueryDTOList = new ArrayList<>();
 
-        for (UserEntity employer : employerMapper.getAllEmployer()) {
+        for (UserEntity employer : employerMapper.getAllEmployer(UserTypeEnum.EMPLOYER.getUserType())) {
             UserDTO employerQueryDTO = mapper.map(employer, UserDTO.class);
 
             employerQueryDTOList.add(employerQueryDTO);

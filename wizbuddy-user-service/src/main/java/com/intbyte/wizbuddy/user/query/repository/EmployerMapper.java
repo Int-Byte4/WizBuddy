@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface EmployerMapper {
-    List<UserEntity> getAllEmployer();
+    List<UserEntity> getAllEmployer(String employer);
 }

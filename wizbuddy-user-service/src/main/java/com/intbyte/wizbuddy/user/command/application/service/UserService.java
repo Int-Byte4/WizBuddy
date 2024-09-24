@@ -16,12 +16,10 @@ public interface UserService extends UserDetailsService {
     void registerKakaoUser(RequestRegisterKakaoUserVO requestRegisterUserVO);
 
     @Transactional
-    void modifyUser(String userCode, RequestEditUserDTO userDTO, String authUserCode);
+    void modifyUser(String userCode, RequestEditUserDTO userDTO);
 
     @Transactional
-    void deleteUser(String userCode, String authUserCode);
-
-    UserEntity validUser(String userCode, String authEmployerCode);
+    void deleteUser(String userCode);
 
     KakaoUserDTO processKakaoUser(String code);
 }
