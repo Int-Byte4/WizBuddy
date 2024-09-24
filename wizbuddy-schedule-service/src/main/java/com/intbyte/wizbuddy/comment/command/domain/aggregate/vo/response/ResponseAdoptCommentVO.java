@@ -14,4 +14,5 @@ public class ResponseAdoptCommentVO {
     private LocalDateTime updatedAt;
     private int subsCode;
     private String employeeCode;
+    private int shopCode;
 }

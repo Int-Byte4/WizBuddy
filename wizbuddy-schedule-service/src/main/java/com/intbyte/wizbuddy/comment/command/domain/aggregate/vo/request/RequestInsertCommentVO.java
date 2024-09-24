@@ -17,4 +17,5 @@ public class RequestInsertCommentVO {
     private LocalDateTime updatedAt;
     private int subsCode;
     private String employeeCode;
+    private int shopCode;
 }

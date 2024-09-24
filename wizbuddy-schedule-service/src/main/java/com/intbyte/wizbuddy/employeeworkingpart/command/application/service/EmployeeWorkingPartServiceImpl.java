@@ -8,9 +8,9 @@ import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
-import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.client.UserServiceClient;
-import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.dto.EmployeeDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.service.ScheduleInfraService;
+import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
+import com.intbyte.wizbuddy.infrastructure.dto.EmployeeDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -128,4 +128,15 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         writer.modifyWorkingPart(matchingCommentAuthor.getEmployeeCode());
         employeeWorkingPartRepository.save(writer);
     }
+
+    @Override
+    public EmployeeWorkingPart findEmployeeWorkingPartCode(int workingPartCode ) {
+        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
+                .findByWorkingPartCode(workingPartCode);
+        if (employeeWorkingPart == null) {
+            throw new CommonException(StatusEnum.INVALID_EMPLOYEE_WORKING_PART_DATA);
+        }
+        return employeeWorkingPart;
+    }
+
 }

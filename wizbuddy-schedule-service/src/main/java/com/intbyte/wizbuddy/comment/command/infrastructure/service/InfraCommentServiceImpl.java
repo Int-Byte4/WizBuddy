@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.comment.infrastructure.service;
+package com.intbyte.wizbuddy.comment.command.infrastructure.service;
 
 import com.intbyte.wizbuddy.board.command.application.service.SubsBoardService;
 import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service("InfraAdoptService")
 @RequiredArgsConstructor
-public class InfraAdoptServiceImpl implements InfraAdoptService {
+public class InfraCommentServiceImpl implements InfraCommentService {
 
     private final SubsBoardService subsBoardService;
     private final EmployeeWorkingPartService employeeWorkingPartService;
@@ -21,6 +21,11 @@ public class InfraAdoptServiceImpl implements InfraAdoptService {
         EmployeeWorkingPart writer = employeeWorkingPartService.validateWriterWorkingPart(subsBoard);
         EmployeeWorkingPart matchingCommentAuthor = employeeWorkingPartService.validateCommentAuthorWorkingPart(comment, writer);
         employeeWorkingPartService.updateWorkingPart(writer, matchingCommentAuthor);
+    }
+
+    @Override
+    public SubsBoard getBySubsCode(int SubsCode){
+        return subsBoardService.validateSubsBoard(SubsCode);
     }
 
 }
