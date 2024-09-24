@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.shop.command.infrastructure;
+package com.intbyte.wizbuddy.infrastructure;
 
 import lombok.Getter;
 
