@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.dto;
+package com.intbyte.wizbuddy.infrastructure.dto;
 
 import lombok.Builder;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.intbyte.wizbuddy.board.infrastructure.event;
+package com.intbyte.wizbuddy.board.command.infrastructure.event;
 
-import com.intbyte.wizbuddy.board.infrastructure.service.InfraSubsBoardService;
+import com.intbyte.wizbuddy.board.command.infrastructure.service.InfraSubsBoardService;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 

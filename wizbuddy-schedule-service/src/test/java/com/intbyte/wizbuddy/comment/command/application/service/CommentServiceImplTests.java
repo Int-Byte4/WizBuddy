@@ -35,7 +35,7 @@ class CommentServiceImplTests {
         CommentDTO comment = new CommentDTO(commentList.size() +1,
                 "사장님 저 믿으시죠 저 가능합니다.",true,
                 false, LocalDateTime.now(), LocalDateTime.now(),1,
-                "20240831-f409-40b1-a03d-4d14d52fa13a");
+                "20240831-f409-40b1-a03d-4d14d52fa13a",1);
         commentService.registerComment(comment);
         List<Comment> newcomments = commentRepository.findAll();
         Comment newcomment = newcomments.get(newcomments.size()-1);
@@ -67,7 +67,7 @@ class CommentServiceImplTests {
         CommentDTO comment = new CommentDTO(subsCode,
                 "캬 퍄 ㅋㅋ 저 대타 가능합니다",true,
                 false, LocalDateTime.now(), LocalDateTime.now(),2,
-                "20240831-471e-4fde-9c53-4b76b34777fd");
+                "20240831-471e-4fde-9c53-4b76b34777fd",1);
         commentService.removeComment(comment);
         Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
         assertThat(updatedComment).isNotNull();
@@ -84,7 +84,7 @@ class CommentServiceImplTests {
         CommentDTO comment = new CommentDTO(subsCode,
                 "캬 퍄 ㅋㅋ 저 대타 가능합니다",true,
                 false, LocalDateTime.now(), LocalDateTime.now(),2,
-                "20240831-471e-4fde-9c53-4b76b34777fd");
+                "20240831-471e-4fde-9c53-4b76b34777fd",1);
         commentService.adoptComment(comment);
         Comment updatedComment = commentRepository.findById(subsCode).orElse(null);
         assertThat(updatedComment).isNotNull();

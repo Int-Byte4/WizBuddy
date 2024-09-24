@@ -17,4 +17,6 @@ public interface EmployeeWorkingPartService {
     EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer);
 
     void updateWorkingPart(EmployeeWorkingPart writer, EmployeeWorkingPart matchingCommentAuthor);
+
+    EmployeeWorkingPart findEmployeeWorkingPartCode(int workingPartCode);
 }

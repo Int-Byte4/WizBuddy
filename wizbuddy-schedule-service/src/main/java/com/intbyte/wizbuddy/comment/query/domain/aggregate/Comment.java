@@ -44,4 +44,8 @@ public class Comment {
     @Column(name = "employee_code")
     private String employeeCode;
 
+    @Column(name = "shop_code")
+    private int shopCode;
+
+
 }

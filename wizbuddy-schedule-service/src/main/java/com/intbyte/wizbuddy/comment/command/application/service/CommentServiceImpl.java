@@ -1,5 +1,7 @@
 package com.intbyte.wizbuddy.comment.command.application.service;
 
+import com.intbyte.wizbuddy.board.command.infrastructure.client.ShopServiceClient;
+import com.intbyte.wizbuddy.board.command.infrastructure.dto.ShopDTO;
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
@@ -8,11 +10,13 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.repository.CommentRepository;
-import com.intbyte.wizbuddy.comment.infrastructure.service.InfraAdoptService;
+import com.intbyte.wizbuddy.comment.command.infrastructure.dto.EmployeePerShopDTO;
+import com.intbyte.wizbuddy.comment.command.infrastructure.service.InfraCommentService;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,29 +29,58 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
-    private final InfraAdoptService infraAdoptService;
+    private final InfraCommentService infraCommentService;
+    private final UserServiceClient userServiceClient;
+    private final ShopServiceClient shopServiceClient;
 
     @Transactional
     @Override
     public ResponseInsertCommentVO registerComment(CommentDTO comments) {
 
+        ResponseEntity<EmployeeDTO> responseEmployee = userServiceClient.getEmployee(comments.getEmployeeCode());
+        if (responseEmployee == null || responseEmployee.getBody() == null) {
+            throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        }
+
+        ResponseEntity<ShopDTO> responseShop = shopServiceClient.getShop(comments.getShopCode());
+        if (responseShop == null || responseShop.getBody() == null) {
+            throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
+        }
+
+        ResponseEntity<EmployeePerShopDTO> responseEmployeePerShop = shopServiceClient.getShopByEmployeeCode(comments.getShopCode(), comments.getEmployeeCode());
+        if (responseEmployeePerShop == null || responseEmployeePerShop.getBody() == null) {
+            throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        }
+
+        EmployeeDTO employeeDTO = responseEmployee.getBody();
+        ShopDTO shopDTO = responseShop.getBody();
+        EmployeePerShopDTO employeePerShopDTO = responseEmployeePerShop.getBody();
+        LocalDateTime now = LocalDateTime.now();
+
+        if (employeePerShopDTO.getShopCode() != shopDTO.getShopCode()) {
+            throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
+        }
+
+        if (!employeePerShopDTO.getEmployeeCode().equals(employeeDTO.getEmployeeCode())) {
+            throw new CommonException(StatusEnum.USER_NOT_FOUND);
+        }
+
         Comment comment = Comment.builder()
                 .commentContent(comments.getCommentContent())
                 .commentFlag(true)
                 .commentAdoptedState(false)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
+                .createdAt(now)
+                .updatedAt(now)
                 .subsCode(comments.getSubsCode())
-                .employeeCode(comments.getEmployeeCode())
+                .employeeCode(employeePerShopDTO.getEmployeeCode())
+                .shopCode(employeePerShopDTO.getShopCode())
                 .build();
 
-        if (false) {
-            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
-        }
-
         commentRepository.save(comment);
-        return modelMapper.map(comments, ResponseInsertCommentVO.class);
+
+        return modelMapper.map(comment, ResponseInsertCommentVO.class);
     }
+
 
     @Transactional
     @Override
@@ -79,7 +112,7 @@ public class CommentServiceImpl implements CommentService {
         }
         comment.toAdopt();
         commentRepository.save(comment);
-        infraAdoptService.handleAdoptProcess(comment);
+        infraCommentService.handleAdoptProcess(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
     }
 
