@@ -1,7 +1,7 @@
-package com.intbyte.wizbuddy.shop.command.infrastructure.dto;
+package com.intbyte.wizbuddy.infrastructure.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.intbyte.wizbuddy.shop.command.infrastructure.UserTypeEnum;
+import com.intbyte.wizbuddy.infrastructure.UserTypeEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
