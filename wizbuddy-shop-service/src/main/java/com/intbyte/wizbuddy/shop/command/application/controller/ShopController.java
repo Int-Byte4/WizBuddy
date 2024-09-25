@@ -1,10 +1,10 @@
 package com.intbyte.wizbuddy.shop.command.application.controller;
 
+import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
 import com.intbyte.wizbuddy.shop.command.application.service.ShopService;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
-import com.intbyte.wizbuddy.shop.command.infrastructure.client.UserServiceClient;
 import com.intbyte.wizbuddy.shop.command.domain.ShopRepository;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.request.RequestDeleteShopVO;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.request.RequestEditShopVO;
