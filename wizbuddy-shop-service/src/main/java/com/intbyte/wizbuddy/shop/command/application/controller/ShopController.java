@@ -4,14 +4,11 @@ import com.intbyte.wizbuddy.shop.command.application.service.ShopService;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
-import com.intbyte.wizbuddy.shop.command.infrastructure.client.UserServiceClient;
-import com.intbyte.wizbuddy.shop.command.domain.ShopRepository;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.request.RequestDeleteShopVO;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.request.RequestEditShopVO;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.request.RequestRegisterShopVO;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.response.ResponseEditShopVO;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.response.ResponseRegisterShopVO;
-import com.intbyte.wizbuddy.shop.query.repository.ShopMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.env.Environment;
@@ -26,15 +23,11 @@ public class ShopController {
     private final Environment env;
     private final ModelMapper modelMapper;
     private final ShopService shopService;
-    private final ShopRepository shopRepository;
-    private final ShopMapper shopMapper;
 
-    public ShopController(Environment env, ModelMapper modelMapper, ShopService shopService, UserServiceClient userServiceClient, ShopRepository shopRepository, ShopMapper shopMapper) {
+    public ShopController(Environment env, ModelMapper modelMapper, ShopService shopService) {
         this.env = env;
         this.modelMapper = modelMapper;
         this.shopService = shopService;
-        this.shopRepository = shopRepository;
-        this.shopMapper = shopMapper;
     }
 
     @Operation(summary = "사장 - 매장 등록")

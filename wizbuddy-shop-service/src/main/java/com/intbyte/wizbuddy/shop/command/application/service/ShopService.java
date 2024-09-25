@@ -2,10 +2,10 @@ package com.intbyte.wizbuddy.shop.command.application.service;
 
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
+import com.intbyte.wizbuddy.infrastructure.dto.UserDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestRegisterShopDTO;
-import com.intbyte.wizbuddy.shop.command.infrastructure.client.UserServiceClient;
 import com.intbyte.wizbuddy.shop.command.domain.entity.vo.response.ResponseRegisterShopVO;
-import com.intbyte.wizbuddy.shop.command.infrastructure.dto.UserDTO;
 import com.intbyte.wizbuddy.shop.query.repository.ShopMapper;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestDeleteShopDTO;
 import com.intbyte.wizbuddy.shop.command.application.dto.RequestEditShopDTO;

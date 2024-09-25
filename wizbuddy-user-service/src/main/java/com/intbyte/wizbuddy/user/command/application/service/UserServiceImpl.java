@@ -87,9 +87,6 @@ public class UserServiceImpl implements UserService {
         UserDTO userDTO = userDTOBuild(requestRegisterUserVO);
         userDTO.setUserCode(customUserCode);
 
-        String jwtToken = jwtUtil.generateToken(userDTO);
-        userDTO.setJwtToken(jwtToken);
-
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
 
         if (requestRegisterUserVO.getUserType().equals(UserTypeEnum.EMPLOYER)) {
