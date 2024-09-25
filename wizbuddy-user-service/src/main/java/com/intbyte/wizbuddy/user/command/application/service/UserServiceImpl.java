@@ -86,6 +86,8 @@ public class UserServiceImpl implements UserService {
 
         UserDTO userDTO = userDTOBuild(requestRegisterUserVO);
         userDTO.setUserCode(customUserCode);
+        userDTO.setCreatedAt(LocalDateTime.now());
+        userDTO.setUpdatedAt(LocalDateTime.now());
 
         UserEntity userEntity = modelMapper.map(userDTO, UserEntity.class);
 
@@ -117,6 +119,8 @@ public class UserServiceImpl implements UserService {
 
         KakaoUserDTO userDTO = kakaoUserDTOBuild(requestRegisterUserVO);
         userDTO.setUserCode(customUserCode);
+        userDTO.setCreatedAt(LocalDateTime.now());
+        userDTO.setUpdatedAt(LocalDateTime.now());
 
         requestRegisterUserVO.setUserPassword(bCryptPasswordEncoder.encode(requestRegisterUserVO.getUserPassword()));
 
@@ -285,8 +289,6 @@ public class UserServiceImpl implements UserService {
                 .userPhone(requestSignInUserVO.getUserPhone())
                 .userFlag(requestSignInUserVO.isUserFlag())
                 .userBlackState(requestSignInUserVO.isUserBlackState())
-                .createdAt(requestSignInUserVO.getCreatedAt())
-                .updatedAt(requestSignInUserVO.getUpdatedAt())
                 .build();
     }
 

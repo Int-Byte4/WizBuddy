@@ -25,11 +25,17 @@ public class WebSecurity {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authz) ->
                         authz
-                                .requestMatchers(new AntPathRequestMatcher("/shop/register/", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/shop/register/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/shops", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/edit", "PATCH")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/delete", "PATCH")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/shop/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/shop/edit/**", "PATCH")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/shop/delete/**", "PATCH")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/register/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/modify/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/delete/**", "POST")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/list", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/**", "GET")).permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/employeepershop/shop/**/employee/**", "GET")).permitAll()
                         .anyRequest().authenticated()  // 모든 요청에 인증 요구
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // 세션을 사용하지 않음

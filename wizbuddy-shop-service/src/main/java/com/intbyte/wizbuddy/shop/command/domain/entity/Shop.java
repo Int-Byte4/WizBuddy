@@ -12,7 +12,7 @@ import java.time.LocalTime;
 
 @Entity(name = "shop")
 @Table(name = "shop")
-@Getter
+@Getter @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,13 +53,10 @@ public class Shop {
         this.shopName = requestEditShopDTO.getShopName();
         this.shopLocation = requestEditShopDTO.getShopLocation();
         this.shopOpenTime = requestEditShopDTO.getShopOpenTime();
-        this.updatedAt = requestEditShopDTO.getUpdatedAt();
     }
 
     public void removeRequest(@Valid RequestDeleteShopDTO requestDeleteShopDTO) {
         this.shopCode = requestDeleteShopDTO.getShopCode();
         this.employerCode = requestDeleteShopDTO.getEmployerCode();
-        this.shopFlag = requestDeleteShopDTO.isShopFlag();
-        this.updatedAt = requestDeleteShopDTO.getUpdatedAt();
     }
 }

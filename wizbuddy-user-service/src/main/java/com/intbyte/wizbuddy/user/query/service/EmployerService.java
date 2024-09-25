@@ -37,7 +37,7 @@ public class EmployerService {
     }
 
     public UserDTO getByEmployerCode(String userCode) {
-        UserDTO userDTO = userMapper.getEmployer(userCode, UserTypeEnum.EMPLOYER.name());
+        UserDTO userDTO = userMapper.getEmployer(userCode, UserTypeEnum.EMPLOYER.getUserType());
 
         if (userDTO == null) throw new CommonException(StatusEnum.USER_NOT_FOUND);
 
