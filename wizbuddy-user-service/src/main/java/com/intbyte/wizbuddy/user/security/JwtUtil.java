@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.user.security;
 
+import com.intbyte.wizbuddy.user.command.application.service.UserService;
 import com.intbyte.wizbuddy.user.query.dto.KakaoUserDTO;
 import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import io.jsonwebtoken.*;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -25,6 +27,7 @@ public class JwtUtil {
 
     private final Key secretKey;
     private long expirationTime;
+    private UserService userService;
 
     public JwtUtil(@Value("${token.secret}") String secretKey, @Value("${token.expiration_time}") long expirationTime) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
@@ -54,6 +57,7 @@ public class JwtUtil {
     public Authentication getAuthentication(String token) {
 
         /* 설명. 토큰을 들고 왔던 들고 오지 않았던(로그인 시) 동일하게 security가 관리 할 UserDetails 타입을 정의 */
+        UserDetails userDetails = userService.loadUserByUsername(this.getUserId(token));
 
         /* 설명. 토큰에서 claim들 추출 */
         Claims claims = parseClaims(token);
@@ -73,10 +77,7 @@ public class JwtUtil {
                             .collect(Collectors.toList());
         }
 
-        org.springframework.security.core.userdetails.User principal =
-                new org.springframework.security.core.userdetails.User(claims.getSubject(), "", authorities);
-
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
     }
 
     /* 설명. Token에서 Claims 추출 */
@@ -87,19 +88,6 @@ public class JwtUtil {
     /* 설명. Token에서 사용자의 id(subject 클레임) 추출 */
     public String getUserId(String token) {
         return parseClaims(token).getSubject();
-    }
-
-    public String generateToken(UserDTO userDTO) {
-        Claims claims = Jwts.claims().setSubject(userDTO.getUserCode());
-        claims.put("email", userDTO.getUserEmail());
-        claims.put("name", userDTO.getUserName());
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
     }
 
     public String kakaoGenerateToken(KakaoUserDTO userDTO) {
