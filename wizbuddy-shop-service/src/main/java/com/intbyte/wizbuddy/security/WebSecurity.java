@@ -30,10 +30,6 @@ public class WebSecurity {
                                 .requestMatchers(new AntPathRequestMatcher("/shop/", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/edit", "PATCH")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/shop/delete", "PATCH")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/checklist/*", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist", "GET")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist", "POST")).permitAll()
-                                .requestMatchers(new AntPathRequestMatcher("/shop/*/checklist/*", "POST")).permitAll()
                         .anyRequest().authenticated()  // 모든 요청에 인증 요구
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // 세션을 사용하지 않음

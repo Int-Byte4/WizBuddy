@@ -264,12 +264,12 @@ public class UserServiceImpl implements UserService {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
         switch (loginUserEntity.getUserType()) {
-            case EMPLOYEE -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
-            case EMPLOYER -> grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
+            case EMPLOYEE -> grantedAuthorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
+            case EMPLOYER -> grantedAuthorities.add(new SimpleGrantedAuthority("EMPLOYER"));
             case ADMIN -> {
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYER"));
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("ADMIN"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("EMPLOYER"));
+                grantedAuthorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
             }
         }
 
