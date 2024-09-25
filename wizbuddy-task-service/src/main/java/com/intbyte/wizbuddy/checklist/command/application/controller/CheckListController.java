@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController("checkListCommandController")
+@RequestMapping("/checklist")
 public class CheckListController {
 
     private final AppCheckListService appCheckListService;
@@ -24,7 +25,7 @@ public class CheckListController {
     }
 
     // command 1. 특정 체크리스트 등록
-    @PostMapping("/checklist")
+    @PostMapping
 //    @PostMapping("/shop/{shopCode}/checklist")
     @Operation(summary = "특정 매장에 체크리스트 등록")
     public ResponseEntity<String> insertCheckList(
@@ -39,7 +40,7 @@ public class CheckListController {
     }
 
     // command 2. 특정 체크리스트에 특정 업무 추가
-    @PostMapping("/checklist/{checkListcode}/{taskcode}")
+    @PostMapping("/{checkListcode}/{taskcode}")
     @Operation(summary = "특정 체크리스트에 업무 추가")
     public ResponseEntity<String> insertTaskToCheckList(
             @PathVariable("checkListcode") int checkListCode,
@@ -52,7 +53,7 @@ public class CheckListController {
     }
 
     // command 3. 특정 체크리스트에 특정 업무 삭제 // 신규
-    @DeleteMapping("/checklist/{checkListcode}/{taskcode}")
+    @DeleteMapping("/{checkListcode}/{taskcode}")
     @Operation(summary = "특정 체크리스트의 업무 삭제")
     public ResponseEntity<String> deleteTaskFromCheckList(
             @PathVariable("checkListcode") int checkListCode,
@@ -66,7 +67,7 @@ public class CheckListController {
 
 
     // command 4, 5. 특정 체크리스트 자체 수정, 완전 삭제
-    @PutMapping("/checklist/{checkListcode}")
+    @PutMapping("/{checkListcode}")
 //    @PostMapping("/shop/{shopCode}/checklist/{checkListCode}")
     @Operation(summary = "특정 체크리스트 수정, 삭제")
     public ResponseEntity<String> modifyCheckList(

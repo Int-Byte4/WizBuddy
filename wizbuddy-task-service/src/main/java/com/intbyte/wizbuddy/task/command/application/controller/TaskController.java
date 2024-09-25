@@ -9,12 +9,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController("TaskCommandController")
+@RequestMapping("/task")
 public class TaskController {
 
     private final AppTaskServiceImpl taskService;
@@ -27,7 +25,7 @@ public class TaskController {
     }
 
     // command 1. task 최초 추가
-    @PostMapping("/task")
+    @PostMapping
     @Operation(summary = "특정 매장에 업무 추가")
     public ResponseEntity<String> insertTask(
             @RequestBody RequestInsertTaskVO request
@@ -41,7 +39,7 @@ public class TaskController {
     }
 
     // command 2, 3. 특정 task 자체 수정, 삭제
-    @PostMapping("/task/{taskcode}")
+    @PostMapping("/{taskcode}")
     @Operation(summary = "특정 매장에 특정 업무 수정(삭제)")
     public ResponseEntity<String> modifyTask(
             @PathVariable("taskcode") int taskCode,
