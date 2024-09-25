@@ -1,4 +1,4 @@
-package com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository;
+package com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.repository;
 
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import org.springframework.data.jpa.repository.JpaRepository;

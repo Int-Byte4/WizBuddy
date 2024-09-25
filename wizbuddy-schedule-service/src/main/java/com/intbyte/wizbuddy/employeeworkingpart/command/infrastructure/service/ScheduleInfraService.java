@@ -7,5 +7,5 @@ public interface ScheduleInfraService {
 
     WeeklyScheduleDTO findScheduleByScheduleCode(int scheduleCode);
 
-    EmployeeWorkingPart getEmployeeWorkingPartCode(int workingPartCode);
+//    EmployeeWorkingPart getEmployeeWorkingPartCode(int workingPartCode);
 }

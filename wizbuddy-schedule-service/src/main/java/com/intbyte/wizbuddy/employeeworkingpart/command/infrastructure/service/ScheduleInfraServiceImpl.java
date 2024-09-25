@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class ScheduleInfraServiceImpl implements ScheduleInfraService{
 
     private final WeeklyScheduleService weeklyScheduleService;
-    private final EmployeeWorkingPartService employeeWorkingPartService;
+//    private final EmployeeWorkingPartService employeeWorkingPartService;
 
 
     @Override
@@ -21,8 +21,8 @@ public class ScheduleInfraServiceImpl implements ScheduleInfraService{
         return weeklyScheduleService.findScheduleByScheduleCode(scheduleCode);
     }
 
-    @Override
-    public EmployeeWorkingPart getEmployeeWorkingPartCode(int workingPartCode) {
-        return employeeWorkingPartService.findEmployeeWorkingPartCode(workingPartCode);
-    }
+//    @Override
+//    public EmployeeWorkingPart getEmployeeWorkingPartCode(int workingPartCode) {
+//        return employeeWorkingPartService.findEmployeeWorkingPartCode(workingPartCode);
+//    }
 }

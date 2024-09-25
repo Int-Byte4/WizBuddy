@@ -1,22 +1,24 @@
 package com.intbyte.wizbuddy.employeeworkingpart.command.application.service;
 
-import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
-import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
+//import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
+//import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseModifyScheduleVO;
 import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.vo.response.ResponseRegistEmployeeVO;
-import com.intbyte.wizbuddy.employeeworkingpart.command.domain.repository.EmployeeWorkingPartRepository;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.repository.EmployeeWorkingPartRepository;
 import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.service.ScheduleInfraService;
 import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
-import com.intbyte.wizbuddy.infrastructure.dto.EmployeeDTO;
+import com.intbyte.wizbuddy.infrastructure.dto.UserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,26 +28,33 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
     private final EmployeeWorkingPartRepository employeeWorkingPartRepository;
     private final UserServiceClient userServiceClient;
     private final ScheduleInfraService scheduleInfraService;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional
-    public ResponseRegistEmployeeVO registSchedulePerEmployee
-            (ResponseRegistEmployeeVO responseRegistEmployeeVO) {
+    public ResponseRegistEmployeeVO registSchedulePerEmployee (ResponseRegistEmployeeVO responseRegistEmployeeVO) {
 
-        EmployeeDTO employeeDTO = userServiceClient.getEmployee(responseRegistEmployeeVO.getEmployeeCode()).getBody();
+        Map<String, Object> employeeDTO = userServiceClient.getEmployee(responseRegistEmployeeVO.getEmployeeCode()).getBody();
+        Map<String, Object> employeeData = (Map<String, Object>) employeeDTO.get(responseRegistEmployeeVO.getEmployeeCode());
+
+        Map<String, Object> userMap = (Map<String, Object>) employeeData.get("user");
+        String userDetail = (String) userMap.get("user_code");
+
         int scheduleCode = scheduleInfraService.findScheduleByScheduleCode(responseRegistEmployeeVO
                 .getScheduleCode()).getScheduleCode();
 
         EmployeeWorkingPart insertSchedulePerEmployee =
                 new EmployeeWorkingPart(responseRegistEmployeeVO.getWorkingPartCode()
-                , employeeDTO.getEmployeeCode()
+                , userDetail
                 , scheduleCode
                 , responseRegistEmployeeVO.getWorkingDate()
                 , responseRegistEmployeeVO.getWorkingPartTime());
 
+        log.info(insertSchedulePerEmployee.toString());
+
         // 예외처리1. 존재하지 않는 직원일 경우
         if(employeeWorkingPartRepository
-                .findByEmployeeCode(responseRegistEmployeeVO.getEmployeeCode())==null)
+                .findByEmployeeCode(insertSchedulePerEmployee.getEmployeeCode()) == null)
             throw new CommonException(StatusEnum.EMPLOYEE_CODE_NOT_FOUND);
 
         // 예외처리2. 같은날, 같은 시간(예 - 월요일 2타임에 2명(A,B)의 알바생이 근무하는 경우) A의 대타로 B를 지정하려는 경우
@@ -100,28 +109,28 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         employeeWorkingPartRepository.delete(employeeWorkingPart);
     }
 
-    @Override
-    public EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard) {
-        EmployeeWorkingPart writer = employeeWorkingPartRepository.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
-        if (writer == null) {
-            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
-        }
-        return writer;
-    }
-
-    @Override
-    public EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer) {
-        List<EmployeeWorkingPart> commentAuthorParts = employeeWorkingPartRepository.findByEmployeeCode(comment.getEmployeeCode());
-        if (commentAuthorParts == null || commentAuthorParts.isEmpty()) {
-            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
-        }
-
-
-        return commentAuthorParts.stream()
-                .filter(author -> employeeWorkingPartRepository.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
-                .findFirst()
-                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
-    }
+//    @Override
+//    public EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard) {
+//        EmployeeWorkingPart writer = employeeWorkingPartRepository.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
+//        if (writer == null) {
+//            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+//        }
+//        return writer;
+//    }
+//
+//    @Override
+//    public EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer) {
+//        List<EmployeeWorkingPart> commentAuthorParts = employeeWorkingPartRepository.findByEmployeeCode(comment.getEmployeeCode());
+//        if (commentAuthorParts == null || commentAuthorParts.isEmpty()) {
+//            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+//        }
+//
+//
+//        return commentAuthorParts.stream()
+//                .filter(author -> employeeWorkingPartRepository.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
+//                .findFirst()
+//                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
+//    }
 
     @Override
     public void updateWorkingPart(EmployeeWorkingPart writer, EmployeeWorkingPart matchingCommentAuthor) {

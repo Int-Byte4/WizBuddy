@@ -30,10 +30,7 @@ public class EmployeeWorkingPartController {
         ResponseRegistEmployeeVO responseRegistEmployeeWorkingPartVO = modelMapper
                 .map(request, ResponseRegistEmployeeVO.class);
 
-        employeeWorkingPartService.registSchedulePerEmployee(responseRegistEmployeeWorkingPartVO);
-
-        ResponseRegistEmployeeVO registEmployee = modelMapper
-                .map(responseRegistEmployeeWorkingPartVO, ResponseRegistEmployeeVO.class);
+        ResponseRegistEmployeeVO registEmployee = employeeWorkingPartService.registSchedulePerEmployee(responseRegistEmployeeWorkingPartVO);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registEmployee);
     }
