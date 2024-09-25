@@ -45,4 +45,5 @@ public class SubsBoardServiceImpl implements SubsBoardService {
                 .map(subsBoard -> modelMapper.map(subsBoard, SubsBoardDTO.class))
                 .collect(Collectors.toList());
     }
+
 }

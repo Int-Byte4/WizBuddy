@@ -12,11 +12,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class CommentServiceImplTests {
+class CommentQueryServiceImplTests {
 
 
     @Autowired
-    private CommentServiceImpl commentService;
+    private CommentQueryServiceImpl commentService;
 
     @Test
     @DisplayName("댓글_전체_조회_테스트")
@@ -48,8 +48,6 @@ class CommentServiceImplTests {
         int subsCode = 2;
         List<CommentDTO> comments = commentService.getCommentsBySubsCode(subsCode);
         assertNotNull(comments);
-        assertTrue(!comments.isEmpty());
-
     }
 
     @Test

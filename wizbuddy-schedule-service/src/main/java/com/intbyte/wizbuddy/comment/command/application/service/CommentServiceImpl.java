@@ -2,6 +2,8 @@ package com.intbyte.wizbuddy.comment.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.infrastructure.client.ShopServiceClient;
 import com.intbyte.wizbuddy.board.command.infrastructure.dto.ShopDTO;
+import com.intbyte.wizbuddy.board.command.infrastructure.service.InfraSubsBoardService;
+import com.intbyte.wizbuddy.board.query.application.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.EditCommentVO;
@@ -44,8 +46,8 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.USER_NOT_FOUND);
         }
 
-        ResponseEntity<ShopDTO> responseShop = shopServiceClient.getShop(comments.getShopCode());
-        if (responseShop == null || responseShop.getBody() == null) {
+        ShopDTO shop = shopServiceClient.getShop(comments.getShopCode()).getBody();
+        if (shop == null || shop.getShopCode() == 0) {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }
 
@@ -54,12 +56,16 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.USER_NOT_FOUND);
         }
 
+        SubsBoardDTO subsBoard = infraCommentService.findSubsBoardById(comments.getSubsCode());
+        if (subsBoard == null || subsBoard.getSubsCode() == 0) {
+            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
+        }
+
         EmployeeDTO employeeDTO = responseEmployee.getBody();
-        ShopDTO shopDTO = responseShop.getBody();
         EmployeePerShopDTO employeePerShopDTO = responseEmployeePerShop.getBody();
         LocalDateTime now = LocalDateTime.now();
 
-        if (employeePerShopDTO.getShopCode() != shopDTO.getShopCode()) {
+        if (employeePerShopDTO.getShopCode() != shop.getShopCode()) {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }
 
@@ -67,13 +73,14 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.USER_NOT_FOUND);
         }
 
+
         Comment comment = Comment.builder()
                 .commentContent(comments.getCommentContent())
                 .commentFlag(true)
                 .commentAdoptedState(false)
                 .createdAt(now)
                 .updatedAt(now)
-                .subsCode(comments.getSubsCode())
+                .subsCode(subsBoard.getSubsCode())
                 .employeeCode(employeePerShopDTO.getEmployeeCode())
                 .shopCode(employeePerShopDTO.getShopCode())
                 .build();
@@ -102,6 +109,14 @@ public class CommentServiceImpl implements CommentService {
         return modelMapper.map(comment, ResponseDeleteCommentVO.class);
     }
 
+    @Override
+    public List<CommentDTO> findCommentsBySubsCode(int subsCode) {
+        List<Comment> comments = commentRepository.findBySubsCode(subsCode);
+        return comments.stream()
+                .map(comment -> modelMapper.map(comment, CommentDTO.class))
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     @Override
     public ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment) {
@@ -116,15 +131,6 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.save(comment);
         infraCommentService.handleAdoptProcess(comment);
         return modelMapper.map(comment, ResponseAdoptCommentVO.class);
-    }
-
-
-    @Override
-    public List<CommentDTO> findCommentsBySubsCode(int subsCode) {
-        List<Comment> comments = commentRepository.findBySubsCode(subsCode);
-        return comments.stream()
-                .map(comment -> modelMapper.map(comment, CommentDTO.class))
-                .collect(Collectors.toList());
     }
 
 

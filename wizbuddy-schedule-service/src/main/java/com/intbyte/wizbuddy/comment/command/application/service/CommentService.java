@@ -6,6 +6,7 @@ import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.Respons
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseDeleteCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseInsertCommentVO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.vo.response.ResponseModifyCommentVO;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface CommentService {
 
     ResponseDeleteCommentVO removeComment(CommentDTO deleteComment);
 
-    ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment);
-
     List<CommentDTO> findCommentsBySubsCode(int subsCode);
+
+    ResponseAdoptCommentVO adoptComment(CommentDTO adoptComment);
 }

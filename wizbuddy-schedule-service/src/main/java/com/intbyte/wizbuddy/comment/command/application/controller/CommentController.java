@@ -33,7 +33,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    @PatchMapping("/update/{commentCode}")
+    @PatchMapping("/{commentCode}")
     @Operation(summary = "댓글 수정")
     public ResponseEntity<ResponseModifyCommentVO> modifyComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestModifyCommentVO request) {
         EditCommentVO editCommentVO = modelMapper.map(request, EditCommentVO.class);
@@ -41,7 +41,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    @PatchMapping("/delete/{commentCode}")
+    @PatchMapping("/{commentCode}/status")
     @Operation(summary = "댓글 삭제")
     public ResponseEntity<ResponseDeleteCommentVO> removeComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestDeleteCommentVO request) {
         CommentDTO deleteComment = modelMapper.map(request, CommentDTO.class);
@@ -50,7 +50,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    @PatchMapping("/adopt/{commentCode}")
+    @PatchMapping("/{commentCode}/adoption")
     @Operation(summary = "댓글 채택")
     public ResponseEntity<ResponseAdoptCommentVO> adoptComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestAdoptCommentVO request) {
         CommentDTO adoptComment = modelMapper.map(request, CommentDTO.class);

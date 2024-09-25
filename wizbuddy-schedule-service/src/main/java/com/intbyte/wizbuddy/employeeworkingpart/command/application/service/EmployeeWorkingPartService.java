@@ -11,12 +11,5 @@ public interface EmployeeWorkingPartService {
             ResponseRegistEmployeeVO responseRegistEmployeeWorkingPartVO);
     void editSchedule(int workingPartCode, ResponseModifyScheduleVO responseModifyScheduleVO);
     void deleteSchedule(int workingPartCode);
-
-    EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard);
-
-    EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer);
-
     void updateWorkingPart(EmployeeWorkingPart writer, EmployeeWorkingPart matchingCommentAuthor);
-
-    EmployeeWorkingPart findEmployeeWorkingPartCode(int workingPartCode);
 }

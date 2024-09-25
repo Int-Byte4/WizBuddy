@@ -1,7 +1,10 @@
 package com.intbyte.wizbuddy.employeeworkingpart.query.service;
 
+import com.intbyte.wizbuddy.board.query.application.dto.SubsBoardDTO;
+import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
+import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
 import com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO;
 import com.intbyte.wizbuddy.employeeworkingpart.query.repository.EmployeeWorkingPartMapper;
 import com.intbyte.wizbuddy.employeeworkingpart.query.vo.EmployeeWorkingPartVO;
@@ -50,5 +53,39 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         return employeeWorkingPartDTO.stream()
                 .map(employeeWorkingPart -> modelMapper.map(employeeWorkingPart, EmployeeWorkingPartVO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public EmployeeWorkingPartDTO findEmployeeWorkingPartCode(int workingPartCode) { // 워킹파트코드 조회
+        EmployeeWorkingPartDTO employeeWorkingPart = employeeWorkingPartMapper
+                .selectScheduleByWorkingPartCode(workingPartCode);
+        if (employeeWorkingPart == null) {
+            throw new CommonException(StatusEnum.INVALID_EMPLOYEE_WORKING_PART_DATA);
+        }
+        return employeeWorkingPart;
+    }
+
+    @Override
+    public EmployeeWorkingPart validateWriterWorkingPart(SubsBoardDTO subsBoard) {
+        EmployeeWorkingPart writer = employeeWorkingPartMapper.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
+        if (writer == null) {
+            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+        }
+        return writer;
+    }
+
+    @Override
+    public EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer) {
+        List<EmployeeWorkingPart> commentAuthorParts = employeeWorkingPartMapper.findByEmployeeCode(comment.getEmployeeCode());
+        if (commentAuthorParts == null || commentAuthorParts.isEmpty()) {
+            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
+        }
+
+
+        return commentAuthorParts.stream()
+                .filter(author -> employeeWorkingPartMapper.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
+                .findFirst()
+                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
     }
 }

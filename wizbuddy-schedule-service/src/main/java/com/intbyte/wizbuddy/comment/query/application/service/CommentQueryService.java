@@ -4,7 +4,7 @@ import com.intbyte.wizbuddy.comment.query.application.dto.CommentDTO;
 
 import java.util.List;
 
-public interface CommentService {
+public interface CommentQueryService {
     List<CommentDTO> findAllComment();
 
     CommentDTO findCommentById(int code);

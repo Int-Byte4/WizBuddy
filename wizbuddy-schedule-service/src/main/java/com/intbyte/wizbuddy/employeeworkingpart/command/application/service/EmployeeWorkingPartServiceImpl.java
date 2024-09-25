@@ -100,43 +100,11 @@ public class EmployeeWorkingPartServiceImpl implements EmployeeWorkingPartServic
         employeeWorkingPartRepository.delete(employeeWorkingPart);
     }
 
-    @Override
-    public EmployeeWorkingPart validateWriterWorkingPart(SubsBoard subsBoard) {
-        EmployeeWorkingPart writer = employeeWorkingPartRepository.findByWorkingPartCode(subsBoard.getEmployeeWorkingPartCode());
-        if (writer == null) {
-            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
-        }
-        return writer;
-    }
-
-    @Override
-    public EmployeeWorkingPart validateCommentAuthorWorkingPart(Comment comment, EmployeeWorkingPart writer) {
-        List<EmployeeWorkingPart> commentAuthorParts = employeeWorkingPartRepository.findByEmployeeCode(comment.getEmployeeCode());
-        if (commentAuthorParts == null || commentAuthorParts.isEmpty()) {
-            throw new CommonException(StatusEnum.SCHEDULE_NOT_FOUND);
-        }
-
-
-        return commentAuthorParts.stream()
-                .filter(author -> employeeWorkingPartRepository.existsByWorkingDateAndWorkingPartTime(author.getWorkingDate(),author.getWorkingPartTime()))
-                .findFirst()
-                .orElseThrow(() -> new CommonException(StatusEnum.WORKING_DATE_AND_TIME_EQUALS));
-    }
 
     @Override
     public void updateWorkingPart(EmployeeWorkingPart writer, EmployeeWorkingPart matchingCommentAuthor) {
         writer.modifyWorkingPart(matchingCommentAuthor.getEmployeeCode());
         employeeWorkingPartRepository.save(writer);
-    }
-
-    @Override
-    public EmployeeWorkingPart findEmployeeWorkingPartCode(int workingPartCode ) {
-        EmployeeWorkingPart employeeWorkingPart = employeeWorkingPartRepository
-                .findByWorkingPartCode(workingPartCode);
-        if (employeeWorkingPart == null) {
-            throw new CommonException(StatusEnum.INVALID_EMPLOYEE_WORKING_PART_DATA);
-        }
-        return employeeWorkingPart;
     }
 
 }

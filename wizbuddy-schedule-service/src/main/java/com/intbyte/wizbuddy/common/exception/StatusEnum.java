@@ -36,6 +36,7 @@ public enum StatusEnum {
     SCHEDULE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 스케줄이 존재하지 않습니다."),
     EMPLOYEE_CODE_NOT_FOUND(404, HttpStatus.NOT_FOUND, "해당 코드를 가진 직원이 존재하지 않습니다."),
     ALREADY_ADOPTED(404, HttpStatus.NOT_FOUND, "해당 대타 게시글이 존재하지 않습니다"),
+    NO_COMMENTS_FOR_SUBS_CODE(404, HttpStatus.NOT_FOUND, "해당 게시글에 댓글이 존재하지 않습니다."),
 
 
     INTERNAL_SERVER_ERROR(500, HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다");
