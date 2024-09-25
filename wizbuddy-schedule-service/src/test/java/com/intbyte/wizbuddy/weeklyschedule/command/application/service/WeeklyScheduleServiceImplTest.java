@@ -30,6 +30,7 @@ class WeeklyScheduleServiceImplTest {
                         LocalDate.of(2024,9,26),
                         LocalDateTime.now(),
                         LocalDateTime.now());
+        System.out.println(responseRegistWeeklyScheduleVO);
 
         // when
         ResponseRegistWeeklyScheduleVO savedSchedule = weeklyScheduleService

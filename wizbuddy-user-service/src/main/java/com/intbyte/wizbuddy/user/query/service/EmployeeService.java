@@ -54,7 +54,7 @@ public class EmployeeService {
 
         combinedData.put("employeeAdditional", employeeAdditionalDTO);
         combinedData.put("user", userDTO);
-        employeeUserMap.put(userDTO.getUserName(), combinedData);
+        employeeUserMap.put(userDTO.getUserCode(), combinedData);
 
         return employeeUserMap;
     }
