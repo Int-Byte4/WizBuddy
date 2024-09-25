@@ -14,11 +14,10 @@ import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseModifySubsBoardVO;
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
-import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
+import com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,16 +42,14 @@ public class SubsBoardServiceImpl implements SubsBoardService {
             throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
         }
 
-        ResponseEntity<ShopDTO> response = shopServiceClient.getShop(subsBoardDTO.getShopCode());
-        if (response == null || response.getBody() == null) {
+        ShopDTO shop = shopServiceClient.getShop(subsBoardDTO.getShopCode());
+        if (shop == null || shop.getShopCode() == 0) {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }
 
-        ShopDTO shopDTO = response.getBody();
-
         LocalDateTime now = LocalDateTime.now();
 
-        EmployeeWorkingPart employeeWorkingPart = infraSubsBoardService.getEmployeeWorkingPartCode(subsBoardDTO.getEmployeeWorkingPartCode());
+        EmployeeWorkingPartDTO employeeWorkingPart = infraSubsBoardService.getEmployeeWorkingPartCode(subsBoardDTO.getEmployeeWorkingPartCode());
         if (employeeWorkingPart == null || employeeWorkingPart.getWorkingPartCode() == 0) {
             throw new CommonException(StatusEnum.INVALID_EMPLOYEE_WORKING_PART_DATA);
         }
@@ -64,7 +61,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
                 .updatedAt(now)
                 .subsFlag(true)
                 .employeeWorkingPartCode(employeeWorkingPart.getWorkingPartCode())
-                .shopCode(shopDTO.getShopCode())
+                .shopCode(shop.getShopCode())
                 .build();
 
         subsBoardRepository.save(subsBoard);
@@ -101,12 +98,5 @@ public class SubsBoardServiceImpl implements SubsBoardService {
         return modelMapper.map(subsBoard, ResponseDeleteSubsBoardVO.class);
     }
 
-    @Override
-    public SubsBoard validateSubsBoard(int subsCode) {
-        SubsBoard subsBoard = subsBoardRepository.findBySubsCode(subsCode);
-        if (subsBoard == null) {
-            throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
-        }
-        return subsBoard;
-    }
+
 }

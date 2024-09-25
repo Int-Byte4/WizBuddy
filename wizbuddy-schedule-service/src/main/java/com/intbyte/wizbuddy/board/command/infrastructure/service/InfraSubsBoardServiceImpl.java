@@ -1,9 +1,13 @@
 package com.intbyte.wizbuddy.board.command.infrastructure.service;
 
+
+import com.intbyte.wizbuddy.board.query.application.dto.SubsBoardDTO;
+import com.intbyte.wizbuddy.board.query.application.service.SubsBoardService;
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.application.service.CommentService;
-import com.intbyte.wizbuddy.employeeworkingpart.command.domain.aggregate.entity.EmployeeWorkingPart;
+import com.intbyte.wizbuddy.comment.command.infrastructure.service.InfraCommentService;
 import com.intbyte.wizbuddy.employeeworkingpart.command.infrastructure.service.ScheduleInfraService;
+import com.intbyte.wizbuddy.employeeworkingpart.query.dto.EmployeeWorkingPartDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +28,9 @@ public class InfraSubsBoardServiceImpl implements InfraSubsBoardService {
     }
 
     @Override
-    public EmployeeWorkingPart getEmployeeWorkingPartCode(int workingPartCode) {
+    public EmployeeWorkingPartDTO getEmployeeWorkingPartCode(int workingPartCode) {
         return scheduleInfraService.getEmployeeWorkingPartCode(workingPartCode);
     }
+
+
 }

@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service("queryCommentService")
 @RequiredArgsConstructor
-public class CommentServiceImpl implements CommentService {
+public class CommentQueryServiceImpl implements CommentQueryService {
 
     private final CommentMapper commentMapper;
     private final ModelMapper modelMapper;
@@ -45,7 +45,6 @@ public class CommentServiceImpl implements CommentService {
         if (comments == null || comments.isEmpty()) {
             throw new CommonException(StatusEnum.COMMENT_NOT_FOUND);
         }
-
         return comments.stream()
                 .map(comment -> modelMapper.map(comment, CommentDTO.class))
                 .collect(Collectors.toList());

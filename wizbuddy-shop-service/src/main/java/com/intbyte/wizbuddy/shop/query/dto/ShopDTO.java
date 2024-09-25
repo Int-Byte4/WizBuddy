@@ -5,6 +5,8 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Builder
 public class ShopDTO {

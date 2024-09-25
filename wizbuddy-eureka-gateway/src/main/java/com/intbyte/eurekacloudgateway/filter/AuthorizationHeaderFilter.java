@@ -1,5 +1,6 @@
 package com.intbyte.eurekacloudgateway.filter;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Date;
 import java.util.Set;
 
 @Component
@@ -50,6 +52,11 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
             /* "Authorization"이라는 키 값으로 request header에 담긴 것 추출(사용자가 요청할 때 온 JWT 토큰) */
             String BearerToken = request.getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+
+            if (BearerToken == null || !BearerToken.startsWith("Bearer ")) {
+                return onError(exchange, "JWT token is missing or invalid format", HttpStatus.UNAUTHORIZED);
+            }
+
             String jwt = BearerToken.replace("Bearer ", "");
 
             /* JWT 검증 후 실패한다면 */
@@ -75,21 +82,29 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
 
         String subject = null;
         try {
-            subject = Jwts.parser()
+            Claims claims = Jwts.parser()
                     .setSigningKey(env.getProperty("token.secret"))
                     .parseClaimsJws(jwt)
-                    .getBody()
-                    .getSubject();
+                    .getBody();
+
+            subject = claims.getSubject();
+
+            // JWT 만료 시간 확인
+            Date expiration = claims.getExpiration();
+            if (expiration.before(new Date())) {
+                log.error("JWT token has expired");
+                return false;
+            }
+
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("JWT validation failed", e);  // 에러 메시지를 로그로 출력
             returnValue = false;
         }
 
-        if(subject == null || subject.isEmpty()) {
+        if (subject == null || subject.isEmpty()) {
             returnValue = false;
         }
 
         return returnValue;
     }
-
 }

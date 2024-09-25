@@ -1,7 +1,6 @@
 package com.intbyte.wizbuddy.board.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.application.dto.SubsBoardDTO;
-import com.intbyte.wizbuddy.board.command.domain.aggregate.SubsBoard;
 import com.intbyte.wizbuddy.board.command.domain.aggregate.vo.EditSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseDeleteSubsBoardVO;
 import com.intbyte.wizbuddy.board.vo.response.ResponseInsertSubsBoardVO;
@@ -15,5 +14,4 @@ public interface SubsBoardService {
 
     ResponseDeleteSubsBoardVO deleteSubsBoard(SubsBoardDTO deleteSubsBoardDTO);
 
-    SubsBoard validateSubsBoard(int subsCode);
 }

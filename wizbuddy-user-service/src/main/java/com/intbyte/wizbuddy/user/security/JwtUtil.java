@@ -1,5 +1,6 @@
 package com.intbyte.wizbuddy.user.security;
 
+import com.intbyte.wizbuddy.user.command.application.service.UserService;
 import com.intbyte.wizbuddy.user.query.dto.KakaoUserDTO;
 import com.intbyte.wizbuddy.user.query.dto.UserDTO;
 import io.jsonwebtoken.*;
@@ -11,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -53,31 +55,30 @@ public class JwtUtil {
     /* 설명. 넘어온 AccessToken으로 인증 객체 추출 */
     public Authentication getAuthentication(String token) {
 
-        /* 설명. 토큰을 들고 왔던 들고 오지 않았던(로그인 시) 동일하게 security가 관리 할 UserDetails 타입을 정의 */
-
         /* 설명. 토큰에서 claim들 추출 */
         Claims claims = parseClaims(token);
         log.info("넘어온 AccessToken claims 확인: {}", claims);
 
+        // JWT 토큰에서 subject를 가져와 사용자 ID로 사용
+        String userId = claims.getSubject();
+
         Collection<? extends GrantedAuthority> authorities = null;
-        if(claims.get("auth") == null) {
+        if (claims.get("auth") == null) {
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         } else {
             /* 설명. 클레임에서 권한 정보들 가져오기 */
-            authorities =
-                    Arrays.stream(claims.get("auth").toString()
-                                    .replace("[", "")
-                                    .replace("]", "")
-                                    .split(", "))
-                            .map(role -> new SimpleGrantedAuthority(role))
-                            .collect(Collectors.toList());
+            authorities = Arrays.stream(claims.get("auth").toString()
+                            .replace("[", "")
+                            .replace("]", "")
+                            .split(", "))
+                    .map(role -> new SimpleGrantedAuthority(role))
+                    .collect(Collectors.toList());
         }
 
-        org.springframework.security.core.userdetails.User principal =
-                new org.springframework.security.core.userdetails.User(claims.getSubject(), "", authorities);
-
-        return new UsernamePasswordAuthenticationToken(principal, token, authorities);
+        // SecurityContext에 인증 정보를 저장하기 위해 Authentication 객체 반환
+        return new UsernamePasswordAuthenticationToken(userId, "", authorities);
     }
+
 
     /* 설명. Token에서 Claims 추출 */
     public Claims parseClaims(String token) {
@@ -87,19 +88,6 @@ public class JwtUtil {
     /* 설명. Token에서 사용자의 id(subject 클레임) 추출 */
     public String getUserId(String token) {
         return parseClaims(token).getSubject();
-    }
-
-    public String generateToken(UserDTO userDTO) {
-        Claims claims = Jwts.claims().setSubject(userDTO.getUserCode());
-        claims.put("email", userDTO.getUserEmail());
-        claims.put("name", userDTO.getUserName());
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(SignatureAlgorithm.HS512, secretKey)
-                .compact();
     }
 
     public String kakaoGenerateToken(KakaoUserDTO userDTO) {
