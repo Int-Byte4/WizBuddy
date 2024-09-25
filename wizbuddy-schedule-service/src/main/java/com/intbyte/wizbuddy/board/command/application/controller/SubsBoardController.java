@@ -32,7 +32,7 @@ public class SubsBoardController {
         return ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
 
-    @PatchMapping("/update/{subsCode}")
+    @PatchMapping("/{subsCode}")
     @Operation(summary = "대타게시글 수정")
     public ResponseEntity<ResponseModifySubsBoardVO> updateSubsBoard(
             @PathVariable("subsCode") int subsCode,
@@ -42,7 +42,7 @@ public class SubsBoardController {
         return  ResponseEntity.status(HttpStatus.OK).body(responseBoard);
     }
 
-    @PatchMapping("/delete/{subsCode}")
+    @PatchMapping("/{subsCode}/deletion")
     @Operation(summary = "대타게시글 삭제")
     public ResponseEntity<ResponseDeleteSubsBoardVO> deleteSubsBoard(
             @PathVariable("subsCode") int subsCode,

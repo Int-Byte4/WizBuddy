@@ -41,7 +41,7 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(responseComment);
     }
 
-    @PatchMapping("/{commentCode}/status")
+    @PatchMapping("/{commentCode}/deletion")
     @Operation(summary = "댓글 삭제")
     public ResponseEntity<ResponseDeleteCommentVO> removeComment(@PathVariable("commentCode") int commentCode, @RequestBody RequestDeleteCommentVO request) {
         CommentDTO deleteComment = modelMapper.map(request, CommentDTO.class);

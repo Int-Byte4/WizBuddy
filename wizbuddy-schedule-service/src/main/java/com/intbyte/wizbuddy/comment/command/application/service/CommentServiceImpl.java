@@ -2,7 +2,6 @@ package com.intbyte.wizbuddy.comment.command.application.service;
 
 import com.intbyte.wizbuddy.board.command.infrastructure.client.ShopServiceClient;
 import com.intbyte.wizbuddy.board.command.infrastructure.dto.ShopDTO;
-import com.intbyte.wizbuddy.board.command.infrastructure.service.InfraSubsBoardService;
 import com.intbyte.wizbuddy.board.query.application.dto.SubsBoardDTO;
 import com.intbyte.wizbuddy.comment.command.application.dto.CommentDTO;
 import com.intbyte.wizbuddy.comment.command.domain.aggregate.Comment;
@@ -17,7 +16,6 @@ import com.intbyte.wizbuddy.comment.command.infrastructure.service.InfraCommentS
 import com.intbyte.wizbuddy.common.exception.CommonException;
 import com.intbyte.wizbuddy.common.exception.StatusEnum;
 import com.intbyte.wizbuddy.infrastructure.client.UserServiceClient;
-import com.intbyte.wizbuddy.infrastructure.dto.EmployeeDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service("commandCommentService")
@@ -41,10 +40,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseInsertCommentVO registerComment(CommentDTO comments) {
 
-        ResponseEntity<EmployeeDTO> responseEmployee = userServiceClient.getEmployee(comments.getEmployeeCode());
-        if (responseEmployee == null || responseEmployee.getBody() == null) {
-            throw new CommonException(StatusEnum.USER_NOT_FOUND);
-        }
+        Map<String, Object> employeeDTO = userServiceClient.getEmployee(comments.getEmployeeCode()).getBody();
+        Map<String, Object> employeeData = (Map<String, Object>) employeeDTO.get(comments.getEmployeeCode());
+
+        Map<String, Object> userMap = (Map<String, Object>) employeeData.get("user");
+        String userDetail = (String) userMap.get("user_code");
 
         ShopDTO shop = shopServiceClient.getShop(comments.getShopCode());
         if (shop == null || shop.getShopCode() == 0) {
@@ -61,7 +61,6 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.BOARD_NOT_FOUND);
         }
 
-        EmployeeDTO employeeDTO = responseEmployee.getBody();
         EmployeePerShopDTO employeePerShopDTO = responseEmployeePerShop.getBody();
         LocalDateTime now = LocalDateTime.now();
 
@@ -69,7 +68,7 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }
 
-        if (!employeePerShopDTO.getEmployeeCode().equals(employeeDTO.getEmployeeCode())) {
+        if (!employeePerShopDTO.getEmployeeCode().equals(userDetail)) {
             throw new CommonException(StatusEnum.USER_NOT_FOUND);
         }
 
@@ -81,7 +80,7 @@ public class CommentServiceImpl implements CommentService {
                 .createdAt(now)
                 .updatedAt(now)
                 .subsCode(subsBoard.getSubsCode())
-                .employeeCode(employeePerShopDTO.getEmployeeCode())
+                .employeeCode(userDetail)
                 .shopCode(employeePerShopDTO.getShopCode())
                 .build();
 
