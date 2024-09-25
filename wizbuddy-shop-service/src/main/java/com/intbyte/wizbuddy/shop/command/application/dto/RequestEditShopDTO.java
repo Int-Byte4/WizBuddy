@@ -1,12 +1,12 @@
 package com.intbyte.wizbuddy.shop.command.application.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter @Setter
 @Builder
 public class RequestEditShopDTO {
@@ -14,6 +14,5 @@ public class RequestEditShopDTO {
     private String shopName;
     private String shopLocation;
     private LocalTime shopOpenTime;
-    private LocalDateTime updatedAt;
     private String employerCode;
 }

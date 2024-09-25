@@ -1,17 +1,14 @@
 package com.intbyte.wizbuddy.shop.command.application.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
 @Builder
 public class RequestDeleteShopDTO {
     private int shopCode;
     private String employerCode;
-    private boolean shopFlag;
-    private LocalDateTime updatedAt;
 }

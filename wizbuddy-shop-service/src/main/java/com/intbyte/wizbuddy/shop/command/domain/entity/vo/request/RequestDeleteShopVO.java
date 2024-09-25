@@ -12,6 +12,4 @@ import java.time.LocalDateTime;
 public class RequestDeleteShopVO {
     private int shopCode;
     private String employerCode;
-    private boolean shopFlag;
-    private LocalDateTime updatedAt;
 }

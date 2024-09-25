@@ -12,9 +12,9 @@ import java.util.Map;
 @FeignClient(name="intbyte-user-service", url="localhost:8000", configuration = FeignClientConfig.class)
 public interface UserServiceClient {
 
-    @GetMapping("employer/{employerCode}")
+    @GetMapping("user-service/users/employer/{employerCode}")
     ResponseEntity<UserDTO> getEmployer(@PathVariable("employerCode") String employerCode);
 
-    @GetMapping("employee/{employeeCode}")
+    @GetMapping("user-service/users/employee/{employeeCode}")
     ResponseEntity<Map<String, Object>> getEmployee(@PathVariable("employeeCode") String employeeCode);
 }

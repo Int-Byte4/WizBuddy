@@ -3,6 +3,8 @@ package com.intbyte.wizbuddy.shop.query.repository;
 import com.intbyte.wizbuddy.shop.command.domain.entity.Shop;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ShopMapper {
     String findByBusinessNum(String businessNum);
@@ -11,5 +13,5 @@ public interface ShopMapper {
 
     int findByShopCode(int shopCode);
 
-    String getEmployerCode(String employerCode);
+    List<String> getEmployerCode(String employerCode);
 }

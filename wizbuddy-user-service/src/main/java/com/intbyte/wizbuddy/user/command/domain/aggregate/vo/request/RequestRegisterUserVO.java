@@ -19,6 +19,4 @@ public class RequestRegisterUserVO {
     private String userPhone;
     private boolean userFlag;
     private boolean userBlackState;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }

@@ -15,6 +15,5 @@ public class RequestEditShopVO {
     private String shopName;
     private String shopLocation;
     private LocalTime shopOpenTime;
-    private LocalDateTime updatedAt;
     private String employerCode;
 }
