@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface EmployeeMapper {
-    List<EmployeeAdditional> getAllEmployeeDetail();
+    List<EmployeeAdditionalDTO> getAllEmployeeDetail();
 
     EmployeeAdditionalDTO getEmployeeDetail(String employeeCode);
 }

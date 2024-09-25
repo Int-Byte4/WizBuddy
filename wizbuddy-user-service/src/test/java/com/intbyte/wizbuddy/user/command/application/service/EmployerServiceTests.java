@@ -40,7 +40,7 @@ class EmployerServiceTests {
                 .build();
 
         //when
-        userService.modifyUser(employerCode, requestEditUserDTO, employerCode);
+        userService.modifyUser(employerCode, requestEditUserDTO);
 
         //then
         List<UserEntity> newEmployers = userRepository.findAll();
@@ -56,7 +56,7 @@ class EmployerServiceTests {
         String employerCode = employers.get(0).getUserCode();
 
         //when
-        userService.deleteUser(employerCode, employerCode);
+        userService.deleteUser(employerCode);
 
         //then
         List<UserEntity> newEmployees = userRepository.findAll();

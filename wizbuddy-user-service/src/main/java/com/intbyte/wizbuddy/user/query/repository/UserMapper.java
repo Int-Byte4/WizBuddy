@@ -8,4 +8,6 @@ public interface UserMapper {
     UserDTO getEmployer(String userCode, String userType);
 
     UserDTO getEmployee(String userCode, String userType);
+
+    UserDTO getEmployeeByEmployeeCode(String employeeCode);
 }

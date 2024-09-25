@@ -54,4 +54,22 @@
            AND user_flag = true
            AND user_type = #{ userType }
     </select>
+
+    <select id="getEmployeeByEmployeeCode" resultMap="userResultMap" parameterType="string">
+        SELECT
+        user_code
+        , user_type
+        , user_name
+        , user_email
+        , user_password
+        , user_phone
+        , user_flag
+        , user_black_state
+        , created_at
+        , updated_at
+        , kakao_id
+        FROM users
+        WHERE user_code = #{ userCode }
+        AND user_flag = true
+    </select>
 </mapper>

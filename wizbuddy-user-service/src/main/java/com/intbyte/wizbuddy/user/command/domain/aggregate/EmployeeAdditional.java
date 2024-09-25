@@ -15,7 +15,7 @@ import java.time.LocalDate;
 public class EmployeeAdditional {
 
     @Id
-    @Column(name = "employee_code")
+    @Column(name = "user_code")
     private String userCode;
 
     @Column(name = "latitude")

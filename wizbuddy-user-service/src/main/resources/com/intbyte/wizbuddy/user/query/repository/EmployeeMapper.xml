@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.intbyte.wizbuddy.user.query.repository.EmployeeMapper">
-    <resultMap id="employeeResultMap" type="com.intbyte.wizbuddy.user.command.domain.aggregate.EmployeeAdditional">
-        <id property="userCode" column="employee_code"/>
+    <resultMap id="employeeResultMap" type="com.intbyte.wizbuddy.user.query.dto.EmployeeAdditionalDTO">
+        <id property="userCode" column="user_code"/>
         <result property="latitude" column="latitude"/>
         <result property="longitude" column="longitude"/>
         <result property="employeeWage" column="employee_wage"/>
@@ -13,7 +13,7 @@
 
     <select id="getAllEmployeeDetail" resultMap="employeeResultMap">
         SELECT
-               employee_code
+               user_code
              , latitude
              , longitude
              , employee_wage
@@ -23,11 +23,12 @@
 
     <select id="getEmployeeDetail" resultMap="employeeResultMap" parameterType="string">
         SELECT
-               employee_code
+               user_code
              , latitude
              , longitude
              , employee_wage
              , employee_health_date
           FROM employeeAdditional
+         WHERE user_code = #{ userCode }
     </select>
 </mapper>

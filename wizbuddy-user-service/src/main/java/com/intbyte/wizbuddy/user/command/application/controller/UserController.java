@@ -50,7 +50,7 @@ public class UserController {
 
     @Operation(summary = "회원가입")
     @PostMapping("/register")
-    public ResponseEntity<ResponseInsertUserVO> registerEmployer(@RequestBody RequestRegisterUserVO request) {
+    public ResponseEntity<ResponseInsertUserVO> registerUser(@RequestBody RequestRegisterUserVO request) {
         ResponseInsertUserVO responseUser = userService.signInUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseUser);
@@ -58,24 +58,20 @@ public class UserController {
 
     @Operation(summary = "회원 정보 수정")
     @PatchMapping("/{userCode}/edit")
-    public ResponseEntity<Void> modifyUser(@PathVariable("userCode") String userCode, @RequestParam String userPassword, @RequestParam String userPhone, Authentication authentication) {
-        String authUserCode = authentication.getName();
-
+    public ResponseEntity<Void> modifyUser(@PathVariable("userCode") String userCode, @RequestParam String userPassword, @RequestParam String userPhone) {
         RequestEditUserDTO userDTO = RequestEditUserDTO.builder()
                 .userPassword(userPassword)
                 .userPhone(userPhone)
                 .build();
 
-        userService.modifyUser(userCode, userDTO, authUserCode);
+        userService.modifyUser(userCode, userDTO);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @Operation(summary = "회원 탈퇴 요청")
     @PatchMapping("/{userCode}/delete")
-    public ResponseEntity<Void> deleteEmployer(@PathVariable("userCode") String userCode, Authentication authentication) {
-        String authUserCode = authentication.getName();
-
-        userService.deleteUser(userCode, authUserCode);
+    public ResponseEntity<Void> deleteEmployer(@PathVariable("userCode") String userCode) {
+        userService.deleteUser(userCode);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

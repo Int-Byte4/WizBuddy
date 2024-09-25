@@ -134,8 +134,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void modifyUser(String userCode, RequestEditUserDTO userDTO, String authUserCode) {
-        UserEntity user = validUser(userCode, authUserCode);
+    public void modifyUser(String userCode, RequestEditUserDTO userDTO) {
+        UserEntity user = userRepository.findById(userCode).orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
 
         user.modify(userDTO);
         userRepository.save(user);
@@ -143,20 +143,11 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void deleteUser(String userCode, String authUserCode) {
-        UserEntity user = validUser(userCode, authUserCode);
+    public void deleteUser(String userCode) {
+        UserEntity user = userRepository.findById(userCode).orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
 
         user.removeRequest(user);
         userRepository.save(user);
-    }
-
-    @Override
-    public UserEntity validUser(String userCode, String authUserCode) {
-        UserEntity user = userRepository.findById(userCode)
-                .orElseThrow(() -> new CommonException(StatusEnum.USER_NOT_FOUND));
-
-        if (!userCode.equals(authUserCode)) throw new CommonException(StatusEnum.RESTRICTED);
-        return user;
     }
 
     @Override

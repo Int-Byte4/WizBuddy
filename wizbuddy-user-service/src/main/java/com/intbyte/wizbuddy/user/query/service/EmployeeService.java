@@ -28,12 +28,11 @@ public class EmployeeService {
     public List<Map<String, Object>> findAllEmployeeUser() {
         List<Map<String, Object>> employeeUserList = new ArrayList<>();
 
-        for (EmployeeAdditional employeeAdditional : employeeMapper.getAllEmployeeDetail()) {
+        for (EmployeeAdditionalDTO employeeAdditionalDTO : employeeMapper.getAllEmployeeDetail()) {
             Map<String, Object> combinedData = new HashMap<>();
             Map<String, Object> employeeUserMap = new HashMap<>();
 
-            EmployeeAdditionalDTO employeeAdditionalDTO = mapper.map(employeeAdditional, EmployeeAdditionalDTO.class);
-            UserDTO userDTO = userMapper.getEmployee(employeeAdditionalDTO.getUserCode(), UserTypeEnum.EMPLOYEE.name());
+            UserDTO userDTO = userMapper.getEmployee(employeeAdditionalDTO.getUserCode(), UserTypeEnum.EMPLOYEE.getUserType());
 
             combinedData.put("employeeAdditional", employeeAdditionalDTO);
             combinedData.put("user", userDTO);
@@ -51,11 +50,11 @@ public class EmployeeService {
         Map<String, Object> combinedData = new HashMap<>();
 
         EmployeeAdditionalDTO employeeAdditionalDTO = employeeMapper.getEmployeeDetail(employeeCode);
-        UserDTO userDTO = userMapper.getEmployee(employeeCode, UserTypeEnum.EMPLOYEE.name());
+        UserDTO userDTO = userMapper.getEmployeeByEmployeeCode(employeeCode);
 
         combinedData.put("employeeAdditional", employeeAdditionalDTO);
         combinedData.put("user", userDTO);
-        employeeUserMap.put(employeeCode, combinedData);
+        employeeUserMap.put(userDTO.getUserName(), combinedData);
 
         return employeeUserMap;
     }
