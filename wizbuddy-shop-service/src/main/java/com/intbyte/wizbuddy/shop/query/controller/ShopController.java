@@ -3,8 +3,6 @@ package com.intbyte.wizbuddy.shop.query.controller;
 import com.intbyte.wizbuddy.shop.query.dto.ShopDTO;
 import com.intbyte.wizbuddy.shop.query.service.ShopService;
 import io.swagger.v3.oas.annotations.Operation;
-import org.modelmapper.ModelMapper;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
