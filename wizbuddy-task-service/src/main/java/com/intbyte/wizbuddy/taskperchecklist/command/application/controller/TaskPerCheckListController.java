@@ -38,6 +38,6 @@ public class TaskPerCheckListController {
 
         taskPerCheckListService.modifyTaskPerCheckList(dto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(checkListCode + "번 업무 완료표시" + request.getEmployeeCode() + "가 수정 성공");
+        return ResponseEntity.status(HttpStatus.OK).body(checkListCode + "번 업무 완료표시 " + request.getEmployeeCode() + "가 수정 성공");
     }
 }

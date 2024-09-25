@@ -25,7 +25,7 @@ public class WebSecurity {
         http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((authz) ->
                         authz
-                                .requestMatchers(new AntPathRequestMatcher("/checklist/**", "GET")).hasRole("EMPLOYER")
+                                .requestMatchers(new AntPathRequestMatcher("/checklist/**", "GET")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/checklist/**", "POST")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/checklist/**", "DELETE")).permitAll()
                                 .requestMatchers(new AntPathRequestMatcher("/checklist/**", "PUT")).permitAll()
