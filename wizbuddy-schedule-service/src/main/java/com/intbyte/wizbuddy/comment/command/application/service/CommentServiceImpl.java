@@ -46,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
             throw new CommonException(StatusEnum.USER_NOT_FOUND);
         }
 
-        ShopDTO shop = shopServiceClient.getShop(comments.getShopCode()).getBody();
+        ShopDTO shop = shopServiceClient.getShop(comments.getShopCode());
         if (shop == null || shop.getShopCode() == 0) {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }

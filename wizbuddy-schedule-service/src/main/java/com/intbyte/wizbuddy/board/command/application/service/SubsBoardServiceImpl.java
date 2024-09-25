@@ -42,7 +42,7 @@ public class SubsBoardServiceImpl implements SubsBoardService {
             throw new CommonException(StatusEnum.INVALID_SUBS_BOARD_DATA);
         }
 
-        ShopDTO shop = shopServiceClient.getShop(subsBoardDTO.getShopCode()).getBody();
+        ShopDTO shop = shopServiceClient.getShop(subsBoardDTO.getShopCode());
         if (shop == null || shop.getShopCode() == 0) {
             throw new CommonException(StatusEnum.SHOP_NOT_FOUND);
         }

@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name="intbyte-shop-service", url="localhost:8000", configuration = FeignClientConfig.class)
 public interface ShopServiceClient {
 
-    @GetMapping("/{shopCode}")
-    ResponseEntity<ShopDTO> getShop(@PathVariable int shopCode);
+    @GetMapping("/shop-service/shop/{shopCode}")
+    ShopDTO getShop(@PathVariable("shopCode") int shopCode);
 
-    @GetMapping("shop/{shopCode}/employee/{employeeCode}")
-    ResponseEntity<EmployeePerShopDTO> getShopByEmployeeCode(@PathVariable int shopCode, @PathVariable String employeeCode);
+    @GetMapping("/shop-service/employeepershop/shop/{shopCode}/employee/{employeeCode}")
+    ResponseEntity<EmployeePerShopDTO> getShopByEmployeeCode(@PathVariable("shopCode") int shopCode, @PathVariable("employeeCode") String employeeCode);
 }
